@@ -7,6 +7,7 @@ import useToken from "../custom-hooks/useToken";
 // import UserLogin from "./users/UserLogin";
 import Header from "./ui/Header";
 import AccountsLedgerLayout from "./ui/Accounts/AccountLedgers/AccountsLedgerLayout";
+import AccountExpenseLayout from "./ui/Accounts/Expenses/AccountExpenseLayout";
 
 function App() {
   const { token, setToken } = useToken();
@@ -32,10 +33,10 @@ function App() {
             <Route path="/accounts/ledgers">
               <AccountsLedgerLayout token={token} />
             </Route>
-            {/* <Route path="/categories">
-              <CategoryLayout token={token} />
+            <Route path="/accounts/expenses">
+              <AccountExpenseLayout token={token} />
             </Route>
-            <Route path="/vendors">
+            {/* <Route path="/vendors">
               <VendorLayout token={token} />
             </Route>
             <Route path="/products">

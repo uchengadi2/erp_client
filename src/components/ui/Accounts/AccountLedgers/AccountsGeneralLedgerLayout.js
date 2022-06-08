@@ -12,6 +12,7 @@ import history from "../../../../history";
 import AccountGeneralLedgerList from "../../../accounts/Ledgers/generalLedger/AccountGeneralLedgerList";
 
 import ServiceOutletFilters from "../../headerFilters/ServiceOutletFilters";
+import GeneralLedgerAndDatesFilter from "../../headerFilters/GeneralLedgerAndDatesFilter";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -263,7 +264,7 @@ function AccountsGeneralLedgerLayout(props) {
     >
       <Grid item container direction="column" sm={width}>
         <Grid item className={classes.selectField}>
-          <ServiceOutletFilters
+          <GeneralLedgerAndDatesFilter
           // token={props.token}
           // sourceCountryList={sourceCountryList}
           // destinationCountryList={destinationCountryList}
