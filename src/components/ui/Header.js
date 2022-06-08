@@ -101,7 +101,7 @@ const useStyles = makeStyles((theme) => ({
     width: "50px",
   },
   drawerIconContainer: {
-    marginLeft: "auto",
+    // marginLeft: "auto",
     "&:hover": {
       backgroundColor: "transparent",
     },
@@ -111,8 +111,8 @@ const useStyles = makeStyles((theme) => ({
   },
   drawerItem: {
     ...theme.typography.tab,
-    color: "blue",
-    opacity: 0.7,
+    color: "white",
+    opacity: 0.8,
   },
   drawerItemEstimate: {
     backgroundColor: theme.palette.common.orange,
@@ -160,24 +160,444 @@ const Header = (props) => {
 
   const menuOptions = [];
 
+  const accountOptions = [
+    {
+      name: "Ledgers",
+      link: "/accounts/ledgers",
+      activeIndex: 0,
+      selectedIndex: 0,
+    },
+    {
+      name: "Expenses",
+      link: "/accounts/expenses",
+      activeIndex: 0,
+      selectedIndex: 1,
+    },
+    {
+      name: "Inflows",
+      link: "/accounts/inflows",
+      activeIndex: 0,
+      selectedIndex: 2,
+    },
+    {
+      name: "Listings",
+      link: "/accounts/listings",
+      activeIndex: 0,
+      selectedIndex: 3,
+    },
+    {
+      name: "Employees",
+      link: "/accounts/employees",
+      activeIndex: 0,
+      selectedIndex: 4,
+    },
+    {
+      name: "Transactions",
+      link: "/accounts/transactions",
+      activeIndex: 0,
+      selectedIndex: 5,
+    },
+    {
+      name: "Bank Deposits",
+      link: "/accounts/bankdeposits",
+      activeIndex: 0,
+      selectedIndex: 6,
+    },
+    {
+      name: "Utilities",
+      link: "/accounts/utilities",
+      activeIndex: 0,
+      selectedIndex: 7,
+    },
+  ];
+
+  const assetsOptions = [
+    {
+      name: "Assets",
+      link: "/assets/assets",
+      activeIndex: 1,
+      selectedIndex: 10,
+    },
+    {
+      name: "Procurement",
+      link: "/assets/procrement",
+      activeIndex: 1,
+      selectedIndex: 11,
+    },
+    {
+      name: "Depreciation",
+      link: "/assets/depreciation",
+      activeIndex: 1,
+      selectedIndex: 12,
+    },
+    {
+      name: "Inventory",
+      link: "/assets/inventory",
+      activeIndex: 1,
+      selectedIndex: 13,
+    },
+    {
+      name: "Maintenances",
+      link: "/assets/maintenances",
+      activeIndex: 1,
+      selectedIndex: 14,
+    },
+    {
+      name: "Supply Chain",
+      link: "/assets/supplychain",
+      activeIndex: 1,
+      selectedIndex: 15,
+    },
+    {
+      name: "Utilities",
+      link: "/assets/utilities",
+      activeIndex: 1,
+      selectedIndex: 16,
+    },
+  ];
+
+  const operationsOptions = [
+    {
+      name: "Projects",
+      link: "/operations/projects",
+      activeIndex: 2,
+      selectedIndex: 20,
+    },
+    {
+      name: "Transformation",
+      link: "/operations/transformation",
+      activeIndex: 2,
+      selectedIndex: 21,
+    },
+    {
+      name: "Maintenances",
+      link: "/operations/maintenances",
+      activeIndex: 2,
+      selectedIndex: 22,
+    },
+    {
+      name: "Quality Assurance",
+      link: "/operations/qualityassurances",
+      activeIndex: 2,
+      selectedIndex: 23,
+    },
+    {
+      name: "Finishings",
+      link: "/operations/finishings",
+      activeIndex: 2,
+      selectedIndex: 24,
+    },
+    {
+      name: "Utilities",
+      link: "/operations/utilities",
+      activeIndex: 2,
+      selectedIndex: 25,
+    },
+  ];
+
+  const crmOptions = [
+    {
+      name: "Users",
+      link: "/crm/users",
+      activeIndex: 3,
+      selectedIndex: 30,
+    },
+    {
+      name: "Contacts",
+      link: "/crm/contacts",
+      activeIndex: 3,
+      selectedIndex: 31,
+    },
+    {
+      name: "Leads",
+      link: "/crm/leads",
+      activeIndex: 3,
+      selectedIndex: 32,
+    },
+    {
+      name: "Opportunities",
+      link: "/crm/opportumities",
+      activeIndex: 3,
+      selectedIndex: 33,
+    },
+    {
+      name: "Social Media",
+      link: "/crm/socialmedia",
+      activeIndex: 3,
+      selectedIndex: 34,
+    },
+    {
+      name: "Utilities",
+      link: "/crm/utilities",
+      activeIndex: 3,
+      selectedIndex: 35,
+    },
+  ];
+
+  const salesOptions = [
+    {
+      name: "Products",
+      link: "/sales/products",
+      activeIndex: 4,
+      selectedIndex: 40,
+    },
+    {
+      name: "Team",
+      link: "/sales/team",
+      activeIndex: 4,
+      selectedIndex: 41,
+    },
+    {
+      name: "Tasks",
+      link: "/sales/tasks",
+      activeIndex: 4,
+      selectedIndex: 42,
+    },
+    {
+      name: "Sales",
+      link: "/sales/sales",
+      activeIndex: 4,
+      selectedIndex: 43,
+    },
+    {
+      name: "Invoices",
+      link: "/sales/invoices",
+      activeIndex: 4,
+      selectedIndex: 44,
+    },
+    {
+      name: "Campaign",
+      link: "/sales/campaign",
+      activeIndex: 4,
+      selectedIndex: 45,
+    },
+    {
+      name: "accounts",
+      link: "/sales/accounts",
+      activeIndex: 4,
+      selectedIndex: 45,
+    },
+    {
+      name: "Utilities",
+      link: "/sales/utilities",
+      activeIndex: 4,
+      selectedIndex: 45,
+    },
+  ];
+
+  const hrOptions = [
+    {
+      name: "Planning",
+      link: "/hr/planning",
+      activeIndex: 6,
+      selectedIndex: 60,
+    },
+    {
+      name: "Recruitments",
+      link: "/hr/recruitments",
+      activeIndex: 6,
+      selectedIndex: 61,
+    },
+    {
+      name: "Compensations",
+      link: "/hr/compensations",
+      activeIndex: 6,
+      selectedIndex: 62,
+    },
+    {
+      name: "Training",
+      link: "/hr/trainings",
+      activeIndex: 6,
+      selectedIndex: 63,
+    },
+    {
+      name: "Performance",
+      link: "/hr/performances",
+      activeIndex: 6,
+      selectedIndex: 64,
+    },
+    {
+      name: "Employee Relations",
+      link: "/hr/employeerelations",
+      activeIndex: 6,
+      selectedIndex: 65,
+    },
+    {
+      name: "Leave",
+      link: "/hr/leave",
+      activeIndex: 6,
+      selectedIndex: 66,
+    },
+
+    {
+      name: "Exit",
+      link: "/hr/Exit",
+      activeIndex: 6,
+      selectedIndex: 68,
+    },
+    {
+      name: "Self Service",
+      link: "/hr/selfservice",
+      activeIndex: 6,
+      selectedIndex: 67,
+    },
+    {
+      name: "Utilities",
+      link: "/hr/utilities",
+      activeIndex: 6,
+      selectedIndex: 68,
+    },
+  ];
+
+  const consoleOptions = [
+    {
+      name: "Roles",
+      link: "/systems/roles",
+      activeIndex: 7,
+      selectedIndex: 70,
+    },
+    {
+      name: "Tasks",
+      link: "/systems/tasks",
+      activeIndex: 7,
+      selectedIndex: 71,
+    },
+    {
+      name: "Privileges",
+      link: "/systems/privileges",
+      activeIndex: 7,
+      selectedIndex: 72,
+    },
+    {
+      name: "Systems",
+      link: "/systems/systems",
+      activeIndex: 7,
+      selectedIndex: 73,
+    },
+    {
+      name: "Utilities",
+      link: "/systems/Utilities",
+      activeIndex: 7,
+      selectedIndex: 74,
+    },
+  ];
+
+  const reportOptions = [
+    {
+      name: "Accounts",
+      link: "/reports/accounts",
+      activeIndex: 8,
+      selectedIndex: 80,
+    },
+    {
+      name: "Assets",
+      link: "/reports/assets",
+      activeIndex: 8,
+      selectedIndex: 81,
+    },
+    {
+      name: "Customer Relationship",
+      link: "/reports/crm",
+      activeIndex: 8,
+      selectedIndex: 82,
+    },
+    {
+      name: "Human Resurces",
+      link: "/reports/hr",
+      activeIndex: 8,
+      selectedIndex: 83,
+    },
+    {
+      name: "Operations",
+      link: "/reports/operations",
+      activeIndex: 8,
+      selectedIndex: 84,
+    },
+    {
+      name: "Sales",
+      link: "/reports/sales",
+      activeIndex: 8,
+      selectedIndex: 85,
+    },
+    {
+      name: "Projects",
+      link: "/reports/projects",
+      activeIndex: 8,
+      selectedIndex: 86,
+    },
+    {
+      name: "General",
+      link: "/reports/general",
+      activeIndex: 8,
+      selectedIndex: 87,
+    },
+  ];
+
+  const projectsOptions = [
+    {
+      name: "Initiation",
+      link: "/projects/initiation",
+      activeIndex: 5,
+      selectedIndex: 50,
+    },
+    {
+      name: "Planning",
+      link: "/projects/planning",
+      activeIndex: 5,
+      selectedIndex: 51,
+    },
+    {
+      name: "Execution",
+      link: "/projects/execution",
+      activeIndex: 5,
+      selectedIndex: 52,
+    },
+    {
+      name: "Monitoring",
+      link: "/projects/monitoring",
+      activeIndex: 5,
+      selectedIndex: 53,
+    },
+    {
+      name: "Closure",
+      link: "/projects/closure",
+      activeIndex: 5,
+      selectedIndex: 54,
+    },
+    {
+      name: "Utilities",
+      link: "/projects/utilities",
+      activeIndex: 5,
+      selectedIndex: 55,
+    },
+  ];
+
+  const profileOptions = [
+    {
+      name: "Account",
+      link: "/profile/account",
+      activeIndex: 9,
+      selectedIndex: 90,
+    },
+  ];
+
   const routes = [
     // { name: "Dashboard", link: "/", activeIndex: 0 },
-    { name: "Categories", link: "/categories", activeIndex: 0 },
-    //{ name: "Categories", link: "/categories/new", activeIndex: 1 },
+
+    { name: "Accounts Management System", link: "/accounts", activeIndex: 0 },
+    { name: "Assets Management System", link: "/assets", activeIndex: 1 },
     {
-      name: "Vendors",
-      link: "/vendors",
-      activeIndex: 1,
+      name: "Operations Management System",
+      link: "/operations",
+      activeIndex: 2,
     },
-    { name: "Vehicles", link: "/products", activeIndex: 2 },
-    { name: "Cities", link: "/cities", activeIndex: 3 },
-    { name: "Users", link: "/users", activeIndex: 4 },
-    { name: "Orders", link: "/orders", activeIndex: 5 },
-    { name: "Trips", link: "/trips", activeIndex: 6 },
-    { name: "Payments", link: "/payments", activeIndex: 7 },
-    { name: "Remittances", link: "/remittances", activeIndex: 8 },
-    { name: "Utilities", link: "/utilities", activeIndex: 9 },
-    { name: "Settings", link: "/policies", activeIndex: 10 },
+    { name: "Customer Relationship Management", link: "/crm", activeIndex: 3 },
+    { name: "Sales Management System", link: "/sales", activeIndex: 4 },
+    { name: "Project Management System", link: "/projects", activeIndex: 5 },
+    { name: "Human Resource Management", link: "/hr", activeIndex: 6 },
+    { name: "Security & Systems", link: "/systems", activeIndex: 7 },
+    { name: "Reports", link: "/reports", activeIndex: 8 },
+    { name: "Profile", link: "/profile", activeIndex: 9 },
     // { name: "Sign Out", link: "/logout" },
   ];
 
@@ -254,7 +674,20 @@ const Header = (props) => {
 
   //this is the refactored version of the hook
   useEffect(() => {
-    [...menuOptions, ...routes].forEach((route) => {
+    [
+      ...operationsOptions,
+      ...assetsOptions,
+      ...salesOptions,
+      ...hrOptions,
+      ...crmOptions,
+      ...reportOptions,
+      ...profileOptions,
+      ...projectsOptions,
+      ...consoleOptions,
+      ...accountOptions,
+      ...menuOptions,
+      ...routes,
+    ].forEach((route) => {
       switch (window.location.pathname) {
         case `${route.link}`:
           if (props.value !== route.activeIndex) {
@@ -274,7 +707,23 @@ const Header = (props) => {
           break;
       }
     });
-  }, [props.value, menuOptions, props.selectedIndex, routes, props]);
+  }, [
+    props.value,
+    accountOptions,
+    salesOptions,
+    crmOptions,
+    hrOptions,
+    assetsOptions,
+    profileOptions,
+    projectsOptions,
+    reportOptions,
+    consoleOptions,
+    operationsOptions,
+    menuOptions,
+    props.selectedIndex,
+    routes,
+    props,
+  ]);
 
   const tabs = (
     <React.Fragment>
@@ -297,16 +746,7 @@ const Header = (props) => {
           />
         ))}
       </Tabs>
-      <Button
-        variant="contained"
-        component={Link}
-        to="/logout"
-        color="secondary"
-        className={classes.button}
-        onClick={() => props.setValue(12)}
-      >
-        Sign Out
-      </Button>
+
       {/* <Menu
         id="simple-menu"
         anchorEl={anchorEl}
@@ -337,6 +777,261 @@ const Header = (props) => {
       </Menu> */}
     </React.Fragment>
   );
+
+  const accountsTabs = (
+    <React.Fragment>
+      <Tabs
+        value={props.value}
+        onChange={handleChange}
+        className={classes.tabContainer}
+        indicatorColor="primary"
+      >
+        {accountOptions.map((route, index) => (
+          <Tab
+            key={`${route}${index}`}
+            className={classes.tab}
+            component={Link}
+            to={route.link}
+            label={route.name}
+            // aria-owns={route.ariaOwns}
+            // aria-haspopup={route.ariaPopup}
+            onMouseOver={route.mouseOver}
+          />
+        ))}
+      </Tabs>
+    </React.Fragment>
+  );
+
+  const assetsTabs = (
+    <React.Fragment>
+      <Tabs
+        value={props.value}
+        onChange={handleChange}
+        className={classes.tabContainer}
+        indicatorColor="primary"
+      >
+        {assetsOptions.map((route, index) => (
+          <Tab
+            key={`${route}${index}`}
+            className={classes.tab}
+            component={Link}
+            to={route.link}
+            label={route.name}
+            // aria-owns={route.ariaOwns}
+            // aria-haspopup={route.ariaPopup}
+            onMouseOver={route.mouseOver}
+          />
+        ))}
+      </Tabs>
+    </React.Fragment>
+  );
+
+  const operationsTabs = (
+    <React.Fragment>
+      <Tabs
+        value={props.value}
+        onChange={handleChange}
+        className={classes.tabContainer}
+        indicatorColor="primary"
+      >
+        {operationsOptions.map((route, index) => (
+          <Tab
+            key={`${route}${index}`}
+            className={classes.tab}
+            component={Link}
+            to={route.link}
+            label={route.name}
+            // aria-owns={route.ariaOwns}
+            // aria-haspopup={route.ariaPopup}
+            onMouseOver={route.mouseOver}
+          />
+        ))}
+      </Tabs>
+    </React.Fragment>
+  );
+
+  const crmTabs = (
+    <React.Fragment>
+      <Tabs
+        value={props.value}
+        onChange={handleChange}
+        className={classes.tabContainer}
+        indicatorColor="primary"
+      >
+        {crmOptions.map((route, index) => (
+          <Tab
+            key={`${route}${index}`}
+            className={classes.tab}
+            component={Link}
+            to={route.link}
+            label={route.name}
+            // aria-owns={route.ariaOwns}
+            // aria-haspopup={route.ariaPopup}
+            onMouseOver={route.mouseOver}
+          />
+        ))}
+      </Tabs>
+    </React.Fragment>
+  );
+
+  const hrTabs = (
+    <React.Fragment>
+      <Tabs
+        value={props.value}
+        onChange={handleChange}
+        className={classes.tabContainer}
+        indicatorColor="primary"
+      >
+        {hrOptions.map((route, index) => (
+          <Tab
+            key={`${route}${index}`}
+            className={classes.tab}
+            component={Link}
+            to={route.link}
+            label={route.name}
+            // aria-owns={route.ariaOwns}
+            // aria-haspopup={route.ariaPopup}
+            onMouseOver={route.mouseOver}
+          />
+        ))}
+      </Tabs>
+    </React.Fragment>
+  );
+
+  const consoleTabs = (
+    <React.Fragment>
+      <Tabs
+        value={props.value}
+        onChange={handleChange}
+        className={classes.tabContainer}
+        indicatorColor="primary"
+      >
+        {consoleOptions.map((route, index) => (
+          <Tab
+            key={`${route}${index}`}
+            className={classes.tab}
+            component={Link}
+            to={route.link}
+            label={route.name}
+            // aria-owns={route.ariaOwns}
+            // aria-haspopup={route.ariaPopup}
+            onMouseOver={route.mouseOver}
+          />
+        ))}
+      </Tabs>
+    </React.Fragment>
+  );
+
+  const salesTabs = (
+    <React.Fragment>
+      <Tabs
+        value={props.value}
+        onChange={handleChange}
+        className={classes.tabContainer}
+        indicatorColor="primary"
+      >
+        {salesOptions.map((route, index) => (
+          <Tab
+            key={`${route}${index}`}
+            className={classes.tab}
+            component={Link}
+            to={route.link}
+            label={route.name}
+            // aria-owns={route.ariaOwns}
+            // aria-haspopup={route.ariaPopup}
+            onMouseOver={route.mouseOver}
+          />
+        ))}
+      </Tabs>
+    </React.Fragment>
+  );
+
+  const reportsTabs = (
+    <React.Fragment>
+      <Tabs
+        value={props.value}
+        onChange={handleChange}
+        className={classes.tabContainer}
+        indicatorColor="primary"
+      >
+        {reportOptions.map((route, index) => (
+          <Tab
+            key={`${route}${index}`}
+            className={classes.tab}
+            component={Link}
+            to={route.link}
+            label={route.name}
+            // aria-owns={route.ariaOwns}
+            // aria-haspopup={route.ariaPopup}
+            onMouseOver={route.mouseOver}
+          />
+        ))}
+      </Tabs>
+    </React.Fragment>
+  );
+
+  const projectsTabs = (
+    <React.Fragment>
+      <Tabs
+        value={props.value}
+        onChange={handleChange}
+        className={classes.tabContainer}
+        indicatorColor="primary"
+      >
+        {projectsOptions.map((route, index) => (
+          <Tab
+            key={`${route}${index}`}
+            className={classes.tab}
+            component={Link}
+            to={route.link}
+            label={route.name}
+            // aria-owns={route.ariaOwns}
+            // aria-haspopup={route.ariaPopup}
+            onMouseOver={route.mouseOver}
+          />
+        ))}
+      </Tabs>
+    </React.Fragment>
+  );
+
+  const profileTabs = (
+    <React.Fragment>
+      <Tabs
+        value={props.value}
+        onChange={handleChange}
+        className={classes.tabContainer}
+        indicatorColor="primary"
+      >
+        {profileOptions.map((route, index) => (
+          <Tab
+            key={`${route}${index}`}
+            className={classes.tab}
+            component={Link}
+            to={route.link}
+            label={route.name}
+            // aria-owns={route.ariaOwns}
+            // aria-haspopup={route.ariaPopup}
+            onMouseOver={route.mouseOver}
+          />
+        ))}
+      </Tabs>
+    </React.Fragment>
+  );
+
+  const renderSignOut = () => {
+    return (
+      <Button
+        variant="contained"
+        component={Link}
+        to="/logout"
+        color="secondary"
+        className={classes.button}
+        onClick={() => props.setValue(12)}
+      >
+        Sign Out
+      </Button>
+    );
+  };
 
   const drawer = (
     <React.Fragment>
@@ -373,7 +1068,7 @@ const Header = (props) => {
             </ListItem>
           ))}
 
-          <ListItem
+          {/* <ListItem
             className={classes.drawerItemEstimate}
             onClick={() => {
               setOpenDrawer(false);
@@ -392,7 +1087,7 @@ const Header = (props) => {
             <ListItemText className={classes.drawerItem} disableTypography>
               Estimate
             </ListItemText>
-          </ListItem>
+          </ListItem> */}
         </List>
       </SwipeableDrawer>
       <IconButton
@@ -404,22 +1099,49 @@ const Header = (props) => {
       </IconButton>
     </React.Fragment>
   );
+
+  const renderTab = () => {
+    if (props.value === 0) {
+      return accountsTabs;
+    } else if (props.value === 1) {
+      return assetsTabs;
+    } else if (props.value === 2) {
+      return operationsTabs;
+    } else if (props.value === 3) {
+      return crmTabs;
+    } else if (props.value === 4) {
+      return salesTabs;
+    } else if (props.value === 5) {
+      return projectsTabs;
+    } else if (props.value === 6) {
+      return hrTabs;
+    } else if (props.value === 7) {
+      return consoleTabs;
+    } else if (props.value === 8) {
+      return reportsTabs;
+    } else if (props.value === 9) {
+      return profileTabs;
+    }
+  };
+
   return (
     <React.Fragment>
       <ElevationScroll>
         <AppBar position="fixed" className={classes.appbar}>
           <Toolbar disableGutters>
             <Button
-              onClick={() => props.setValue(0)}
-              disableRipple
-              component={Link}
-              to="/"
-              className={classes.logoContainer}
+            // onClick={() => props.setValue(0)}
+            // disableRipple
+            // component={Link}
+            // to="/"
+            // className={classes.logoContainer}
             >
               {/* <img alt="company logo" src={logo} className={classes.logo} /> */}
             </Button>
             {/* {matches ? drawer : tabs} */}
-            {tabs}
+            {drawer}
+            {renderTab()}
+            {renderSignOut()}
           </Toolbar>
         </AppBar>
       </ElevationScroll>

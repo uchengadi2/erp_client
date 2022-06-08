@@ -3,33 +3,31 @@ import { Router, Route, Switch, Redirect } from "react-router-dom";
 import { ThemeProvider } from "@material-ui/core/styles";
 import history from "./../history";
 import theme from "./ui/Theme";
-import Dashboard from "./Dashboard/Dashboard";
-import Preferences from "./Preferences/Preferences";
 import useToken from "../custom-hooks/useToken";
-import UserLogin from "./users/UserLogin";
+// import UserLogin from "./users/UserLogin";
 import Header from "./ui/Header";
-import IndexDashboard from "./IndexDashboard";
-import CategoryLayout from "./ui/CategoryLayout";
-import VendorLayout from "./ui/VendorLayout";
-import ProductLayout from "./ui/ProductLayout";
-import CityLayout from "./ui/CityLayout";
-import UsersLayout from "./ui/UsersLayout";
-import OrdersLayout from "./ui/OrdersLayout";
-import PaymentLayout from "./ui/PaymentLayout";
-import RemittanceLayout from "./ui/RemittanceLayout";
-import ReportsLayout from "./ui/ReportsLayout";
-import PoliciesLayout from "./ui/PoliciesLayout";
-import UtilitiesLayout from "./ui/UtilitiesLayout";
-import TripsLayout from "./ui/TripLayout";
+// import IndexDashboard from "./IndexDashboard";
+// import CategoryLayout from "./ui/CategoryLayout";
+// import VendorLayout from "./ui/VendorLayout";
+// import ProductLayout from "./ui/ProductLayout";
+// import CityLayout from "./ui/CityLayout";
+// import UsersLayout from "./ui/UsersLayout";
+// import OrdersLayout from "./ui/OrdersLayout";
+// import PaymentLayout from "./ui/PaymentLayout";
+// import RemittanceLayout from "./ui/RemittanceLayout";
+// import ReportsLayout from "./ui/ReportsLayout";
+// import PoliciesLayout from "./ui/PoliciesLayout";
+// import UtilitiesLayout from "./ui/UtilitiesLayout";
+// import TripsLayout from "./ui/TripLayout";
 
 function App() {
   const { token, setToken } = useToken();
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [value, setValue] = useState(0);
 
-  if (!token) {
-    return <UserLogin setToken={setToken} />;
-  }
+  // if (!token) {
+  //   return <UserLogin setToken={setToken} />;
+  // }
 
   return (
     <div className="wrapper">
@@ -43,7 +41,7 @@ function App() {
           />
           ;
           <Switch>
-            <Route exact path="/">
+            {/* <Route exact path="/">
               <CategoryLayout token={token} />
             </Route>
             <Route path="/categories">
@@ -78,13 +76,7 @@ function App() {
             </Route>
             <Route path="/policies">
               <PoliciesLayout token={token} />
-            </Route>
-            <Route path="/dashboard">
-              <Dashboard />
-            </Route>
-            <Route path="/preferences">
-              <Preferences />
-            </Route>
+            </Route> */}
           </Switch>
         </Router>
       </ThemeProvider>
