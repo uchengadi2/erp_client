@@ -249,10 +249,28 @@ const Header = (props) => {
       selectedIndex: 15,
     },
     {
+      name: "Disposition",
+      link: "/assets/disposition",
+      activeIndex: 1,
+      selectedIndex: 16,
+    },
+    {
+      name: "Locations",
+      link: "/assets/locations",
+      activeIndex: 1,
+      selectedIndex: 17,
+    },
+    {
+      name: "Transfer & Leasing",
+      link: "/assets/transfers",
+      activeIndex: 1,
+      selectedIndex: 18,
+    },
+    {
       name: "Utilities",
       link: "/assets/utilities",
       activeIndex: 1,
-      selectedIndex: 16,
+      selectedIndex: 19,
     },
   ];
 
@@ -433,19 +451,25 @@ const Header = (props) => {
       name: "Exit",
       link: "/hr/Exit",
       activeIndex: 6,
-      selectedIndex: 68,
+      selectedIndex: 67,
     },
+    // {
+    //   name: "Career",
+    //   link: "/hr/career",
+    //   activeIndex: 6,
+    //   selectedIndex: 68,
+    // },
     {
       name: "Self Service",
       link: "/hr/selfservice",
       activeIndex: 6,
-      selectedIndex: 67,
+      selectedIndex: 69,
     },
     {
       name: "Utilities",
       link: "/hr/utilities",
       activeIndex: 6,
-      selectedIndex: 68,
+      selectedIndex: 600,
     },
   ];
 
@@ -496,7 +520,7 @@ const Header = (props) => {
       selectedIndex: 81,
     },
     {
-      name: "Customer Relationship",
+      name: "Customer Relations",
       link: "/reports/crm",
       activeIndex: 8,
       selectedIndex: 82,
@@ -581,8 +605,17 @@ const Header = (props) => {
     },
   ];
 
+  const dashboardOptions = [
+    {
+      name: "Dashboard",
+      link: "/",
+      activeIndex: 100,
+      selectedIndex: 100,
+    },
+  ];
+
   const routes = [
-    // { name: "Dashboard", link: "/", activeIndex: 0 },
+    { name: "Dashboard", link: "/", activeIndex: 100 },
 
     { name: "Accounts Management System", link: "/accounts", activeIndex: 0 },
     { name: "Assets Management System", link: "/assets", activeIndex: 1 },
@@ -680,6 +713,7 @@ const Header = (props) => {
       ...salesOptions,
       ...hrOptions,
       ...crmOptions,
+      ...dashboardOptions,
       ...reportOptions,
       ...profileOptions,
       ...projectsOptions,
@@ -715,6 +749,7 @@ const Header = (props) => {
     hrOptions,
     assetsOptions,
     profileOptions,
+    dashboardOptions,
     projectsOptions,
     reportOptions,
     consoleOptions,
@@ -1018,6 +1053,30 @@ const Header = (props) => {
     </React.Fragment>
   );
 
+  const dashboardTabs = (
+    <React.Fragment>
+      <Tabs
+        value={props.value}
+        onChange={handleChange}
+        className={classes.tabContainer}
+        indicatorColor="primary"
+      >
+        {dashboardOptions.map((route, index) => (
+          <Tab
+            key={`${route}${index}`}
+            className={classes.tab}
+            component={Link}
+            to={route.link}
+            label={route.name}
+            // aria-owns={route.ariaOwns}
+            // aria-haspopup={route.ariaPopup}
+            onMouseOver={route.mouseOver}
+          />
+        ))}
+      </Tabs>
+    </React.Fragment>
+  );
+
   const renderSignOut = () => {
     return (
       <Button
@@ -1121,6 +1180,8 @@ const Header = (props) => {
       return reportsTabs;
     } else if (props.value === 9) {
       return profileTabs;
+    } else if (props.value === 100) {
+      return dashboardTabs;
     }
   };
 
