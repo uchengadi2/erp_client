@@ -6,19 +6,7 @@ import theme from "./ui/Theme";
 import useToken from "../custom-hooks/useToken";
 // import UserLogin from "./users/UserLogin";
 import Header from "./ui/Header";
-// import IndexDashboard from "./IndexDashboard";
-// import CategoryLayout from "./ui/CategoryLayout";
-// import VendorLayout from "./ui/VendorLayout";
-// import ProductLayout from "./ui/ProductLayout";
-// import CityLayout from "./ui/CityLayout";
-// import UsersLayout from "./ui/UsersLayout";
-// import OrdersLayout from "./ui/OrdersLayout";
-// import PaymentLayout from "./ui/PaymentLayout";
-// import RemittanceLayout from "./ui/RemittanceLayout";
-// import ReportsLayout from "./ui/ReportsLayout";
-// import PoliciesLayout from "./ui/PoliciesLayout";
-// import UtilitiesLayout from "./ui/UtilitiesLayout";
-// import TripsLayout from "./ui/TripLayout";
+import AccountsLedgerLayout from "./ui/Accounts/AccountLedgers/AccountsLedgerLayout";
 
 function App() {
   const { token, setToken } = useToken();
@@ -41,10 +29,10 @@ function App() {
           />
           ;
           <Switch>
-            {/* <Route exact path="/">
-              <CategoryLayout token={token} />
+            <Route path="/accounts/ledgers">
+              <AccountsLedgerLayout token={token} />
             </Route>
-            <Route path="/categories">
+            {/* <Route path="/categories">
               <CategoryLayout token={token} />
             </Route>
             <Route path="/vendors">

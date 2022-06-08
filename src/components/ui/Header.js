@@ -390,7 +390,7 @@ const Header = (props) => {
       selectedIndex: 45,
     },
     {
-      name: "accounts",
+      name: "Accounts",
       link: "/sales/accounts",
       activeIndex: 4,
       selectedIndex: 45,
@@ -614,6 +614,57 @@ const Header = (props) => {
     },
   ];
 
+  const policyOptions = [
+    {
+      name: "Accounts",
+      link: "/policies/accounts",
+      activeIndex: 10,
+      selectedIndex: 111,
+    },
+    {
+      name: "Assets",
+      link: "/policies/assets",
+      activeIndex: 10,
+      selectedIndex: 112,
+    },
+    {
+      name: "Customer Relations",
+      link: "/policies/crm",
+      activeIndex: 10,
+      selectedIndex: 113,
+    },
+    {
+      name: "Human Resurces",
+      link: "/policies/hr",
+      activeIndex: 10,
+      selectedIndex: 114,
+    },
+    {
+      name: "Operations",
+      link: "/policies/operations",
+      activeIndex: 10,
+      selectedIndex: 115,
+    },
+    {
+      name: "Sales",
+      link: "/policies/sales",
+      activeIndex: 10,
+      selectedIndex: 116,
+    },
+    {
+      name: "Projects",
+      link: "/policies/projects",
+      activeIndex: 10,
+      selectedIndex: 117,
+    },
+    {
+      name: "General",
+      link: "/policies/general",
+      activeIndex: 10,
+      selectedIndex: 118,
+    },
+  ];
+
   const routes = [
     { name: "Dashboard", link: "/", activeIndex: 100 },
 
@@ -630,6 +681,7 @@ const Header = (props) => {
     { name: "Human Resource Management", link: "/hr", activeIndex: 6 },
     { name: "Security & Systems", link: "/systems", activeIndex: 7 },
     { name: "Reports", link: "/reports", activeIndex: 8 },
+    { name: "Policies & Settings", link: "/policies", activeIndex: 10 },
     { name: "Profile", link: "/profile", activeIndex: 9 },
     // { name: "Sign Out", link: "/logout" },
   ];
@@ -714,6 +766,7 @@ const Header = (props) => {
       ...hrOptions,
       ...crmOptions,
       ...dashboardOptions,
+      ...policyOptions,
       ...reportOptions,
       ...profileOptions,
       ...projectsOptions,
@@ -752,6 +805,7 @@ const Header = (props) => {
     dashboardOptions,
     projectsOptions,
     reportOptions,
+    policyOptions,
     consoleOptions,
     operationsOptions,
     menuOptions,
@@ -1077,6 +1131,30 @@ const Header = (props) => {
     </React.Fragment>
   );
 
+  const policiesTabs = (
+    <React.Fragment>
+      <Tabs
+        value={props.value}
+        onChange={handleChange}
+        className={classes.tabContainer}
+        indicatorColor="primary"
+      >
+        {policyOptions.map((route, index) => (
+          <Tab
+            key={`${route}${index}`}
+            className={classes.tab}
+            component={Link}
+            to={route.link}
+            label={route.name}
+            // aria-owns={route.ariaOwns}
+            // aria-haspopup={route.ariaPopup}
+            onMouseOver={route.mouseOver}
+          />
+        ))}
+      </Tabs>
+    </React.Fragment>
+  );
+
   const renderSignOut = () => {
     return (
       <Button
@@ -1182,6 +1260,8 @@ const Header = (props) => {
       return profileTabs;
     } else if (props.value === 100) {
       return dashboardTabs;
+    } else if (props.value === 10) {
+      return policiesTabs;
     }
   };
 
