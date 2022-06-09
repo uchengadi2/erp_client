@@ -9,6 +9,7 @@ import Header from "./ui/Header";
 import AccountsLedgerLayout from "./ui/Accounts/AccountLedgers/AccountsLedgerLayout";
 import AccountExpenseLayout from "./ui/Accounts/Expenses/AccountExpenseLayout";
 import AccountInflowLayout from "./ui/Accounts/inflows/AccountInflowLayout";
+import AccountListingLayout from "./ui/Accounts/Account Listings/AccountListingLayout";
 
 function App() {
   const { token, setToken } = useToken();
@@ -40,10 +41,10 @@ function App() {
             <Route path="/accounts/inflows">
               <AccountInflowLayout token={token} />
             </Route>
-            {/* <Route path="/products">
-              <ProductLayout token={token} />
+            <Route path="/accounts/listings">
+              <AccountListingLayout token={token} />
             </Route>
-            <Route path="/cities">
+            {/* <Route path="/cities">
               <CityLayout token={token} />
             </Route>
             <Route path="/users">
