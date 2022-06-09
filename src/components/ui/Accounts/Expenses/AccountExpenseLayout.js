@@ -1,150 +1,134 @@
-import React, { useState, useEffect } from "react";
-import Grid from "@material-ui/core/Grid";
-
+import React from "react";
+import PropTypes from "prop-types";
+import { makeStyles } from "@material-ui/core/styles";
+import Tabs from "@material-ui/core/Tabs";
+import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
-import Button from "@material-ui/core/Button";
-import { Toolbar } from "@material-ui/core";
-import Dialog from "@material-ui/core/Dialog";
-import DialogContent from "@material-ui/core/DialogContent";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
-import history from "../../../../history";
-import AccountExpensesList from "../../../accounts/expenses/AccountExpensesList";
-import ServiceOutletFilter from "./../../headerFilters/ServiceOutletFilters";
-import ServiceOutLetsAndDateFilters from "../../headerFilters/ServiceOutLetsAndDateFilters";
+import Box from "@material-ui/core/Box";
+import { Link } from "react-router-dom";
+import history from "./../../../../history";
+import AccountUnapprovedExpenseLayout from "./AccountUnapprovedExpenseLayout";
+import AccountApprovedExpenseLayout from "./AccountApprovedExpenseLayout";
+import AccountDrawnExpenseLayout from "./AccountDrawnExpenseLayout";
+
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
+
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`vertical-tabpanel-${index}`}
+      aria-labelledby={`vertical-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box p={3}>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
+    </div>
+  );
+}
+
+TabPanel.propTypes = {
+  children: PropTypes.node,
+  index: PropTypes.any.isRequired,
+  value: PropTypes.any.isRequired,
+};
+
+function a11yProps(index) {
+  return {
+    id: `vertical-tab-${index}`,
+    "aria-controls": `vertical-tabpanel-${index}`,
+  };
+}
+
+function LinkTab(props) {
+  return (
+    <Tab
+      component={Link}
+      //to={route.link}
+      //label={route.name}
+      onClick={(event) => {
+        event.preventDefault();
+        history.push(`/orders`);
+      }}
+      {...props}
+    />
+  );
+}
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    marginTop: "-80px",
+    flexGrow: 1,
+    backgroundColor: theme.palette.background.paper,
+    display: "flex",
+    //height: 180,
+    marginTop: "-20px",
   },
-  headerContainer: {
-    height: 20,
-    marginTop: 10,
-    height: 40,
+  tabs: {
+    borderRight: `1px solid ${theme.palette.divider}`,
   },
-  secondContainer: {
-    // backgroundColor: "red",
-    marginTop: 30,
-    padding: 10,
-    display: "none",
-  },
-  contentContainer: {
-    // backgroundColor: "#ccab",
-    height: "auto",
-    marginTop: 0,
-    width: 1200,
-    marginLeft: 50,
-  },
-  addButton: {
-    borderRadius: 10,
-    height: 30,
-    width: 130,
-    marginLeft: 10,
-    marginTop: 2,
-    marginBottom: 5,
-    fontSize: "0.75rem",
-    backgroundColor: theme.palette.common.orange,
-    color: "white",
-    "&:hover": {
-      backgroundColor: theme.palette.common.grey,
-    },
-    [theme.breakpoints.down("sm")]: {
-      height: 40,
-      width: 225,
-    },
-  },
-  toolbar: {
-    padding: 5,
-    margin: 25,
-  },
-  selectField: {
-    marginLeft: 50,
+  tab: {
+    borderRight: `1px solid ${theme.palette.divider}`,
   },
 }));
 
 function AccountExpenseLayout({ token }) {
   const classes = useStyles();
-  const [open, setOpen] = useState(false);
-  const theme = useTheme();
-  const matchesMD = useMediaQuery(theme.breakpoints.down("md"));
-  const matchesSM = useMediaQuery(theme.breakpoints.down("sm"));
-  const matchesXS = useMediaQuery(theme.breakpoints.down("xs"));
+  const [value, setValue] = React.useState(0);
 
-  const handleDialogOpenStatus = () => {
-    // history.push("/categories/new");
-    setOpen(false);
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
   };
 
-  const width = 12;
-
   return (
-    <Grid
-      container
-      direction="row"
-      justifyContent="space-between"
-      alignItems="center"
-      className={classes.root}
-      spacing={2}
-    >
-      <Grid item container direction="column" sm={width}>
-        <Grid item className={classes.selectField}>
-          <ServiceOutLetsAndDateFilters
-          // token={props.token}
-          // selectList={countryList}
-          // selectedCountry={selectedCountry}
-          // handleCountryChange={handleCountryChange}
-          />
-        </Grid>
-        <Grid item className={classes.headerContainer}>
-          <Toolbar disableGutters className={classes.toolbar}>
-            {/* <Button
-              variant="contained"
-              className={classes.addButton}
-              onClick={() => [
-                setOpen(true),
-                history.push("/utilities/currencies/new"),
-              ]}
-            >
-              Add Currency
-            </Button> */}
-          </Toolbar>
-        </Grid>
-        <Grid item className={classes.contentContainer}>
-          <AccountExpensesList token={token} />
-        </Grid>
-      </Grid>
-      <Dialog
-        //style={{ zIndex: 1302 }}
-        fullScreen={matchesXS}
-        open={open}
-        onClose={() => [setOpen(false), history.push("/accounts/expenses")]}
+    <div className={classes.root}>
+      <Tabs
+        orientation="vertical"
+        //variant="scrollable"
+        value={value}
+        onChange={handleChange}
+        aria-label="Vertical tabs example"
+        className={classes.tabs}
       >
-        <DialogContent>
-          {/* <CurrencyFormContainer
-            token={token}
-            handleDialogOpenStatus={handleDialogOpenStatus}
-          /> */}
-        </DialogContent>
-      </Dialog>
-      <Grid
-        item
-        container
-        // sm={12 - width}
-        direction="column"
-        className={classes.secondContainer}
-        justifyContent="center"
-      >
-        <Grid item>
-          <Typography>This is the secong Inner Container</Typography>
-        </Grid>
-        <Grid item>
-          <Typography>This is the third Inner Container</Typography>
-        </Grid>
-        <Grid item>
-          <Typography>This is the fourth Inner Container</Typography>
-        </Grid>
-      </Grid>
-    </Grid>
+        <Tab
+          label="Unapproved Expenses"
+          {...a11yProps(0)}
+          onClick={(event) => {
+            event.preventDefault();
+            history.push(`/accounts/expenses/unapprovedexpenses`);
+          }}
+        />
+        <Tab
+          label="Approved Expenses"
+          {...a11yProps(0)}
+          onClick={(event) => {
+            event.preventDefault();
+            history.push(`/accounts/expenses/approvedexpenses`);
+          }}
+        />
+        <Tab
+          label="Drawn Expenses"
+          {...a11yProps(0)}
+          onClick={(event) => {
+            event.preventDefault();
+            history.push(`/accounts/expenses/drawnexpenses`);
+          }}
+        />
+      </Tabs>
+
+      <TabPanel value={value} index={0}>
+        <AccountUnapprovedExpenseLayout token={token} />
+      </TabPanel>
+      <TabPanel value={value} index={1}>
+        <AccountApprovedExpenseLayout token={token} />
+      </TabPanel>
+      <TabPanel value={value} index={2}>
+        <AccountDrawnExpenseLayout token={token} />
+      </TabPanel>
+    </div>
   );
 }
 

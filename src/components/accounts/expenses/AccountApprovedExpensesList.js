@@ -14,7 +14,7 @@ import DataGridContainer from "../../DataGridContainer";
 // import OrdersEdit from "./OrdersEdit";
 // import OrderDelete from "./OrdersDelete";
 
-class AccountExpensesList extends React.Component {
+class AccountApprovedExpensesList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -264,4 +264,4 @@ const mapStateToProps = (state) => {
   return { orders: Object.values(state.order) };
 };
 
-export default connect(null, { fetchOrders })(AccountExpensesList);
+export default connect(null, { fetchOrders })(AccountApprovedExpensesList);
