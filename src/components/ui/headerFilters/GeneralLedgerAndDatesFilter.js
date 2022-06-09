@@ -18,7 +18,6 @@ import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import data from "./../../../apis/local";
-import { SettingsSystemDaydreamTwoTone } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -116,7 +115,7 @@ function GeneralLedgerAndDatesFilter(props) {
             {/* {renderItemList()} */}
           </Select>
           <FormHelperText style={{ marginLeft: 20 }}>
-            Select Outlet
+            Select Service Outlet
           </FormHelperText>
         </FormControl>
       </Box>

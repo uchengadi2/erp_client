@@ -8,6 +8,7 @@ import useToken from "../custom-hooks/useToken";
 import Header from "./ui/Header";
 import AccountsLedgerLayout from "./ui/Accounts/AccountLedgers/AccountsLedgerLayout";
 import AccountExpenseLayout from "./ui/Accounts/Expenses/AccountExpenseLayout";
+import AccountInflowLayout from "./ui/Accounts/inflows/AccountInflowLayout";
 
 function App() {
   const { token, setToken } = useToken();
@@ -36,10 +37,10 @@ function App() {
             <Route path="/accounts/expenses">
               <AccountExpenseLayout token={token} />
             </Route>
-            {/* <Route path="/vendors">
-              <VendorLayout token={token} />
+            <Route path="/accounts/inflows">
+              <AccountInflowLayout token={token} />
             </Route>
-            <Route path="/products">
+            {/* <Route path="/products">
               <ProductLayout token={token} />
             </Route>
             <Route path="/cities">

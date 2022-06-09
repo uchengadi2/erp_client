@@ -115,7 +115,7 @@ function ServiceOutLetsAndDateFilters(props) {
             {/* {renderItemList()} */}
           </Select>
           <FormHelperText style={{ marginLeft: 20 }}>
-            Select Outlet
+            Select Service Outlet
           </FormHelperText>
         </FormControl>
       </Box>
