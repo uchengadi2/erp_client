@@ -10,14 +10,13 @@ import DialogContent from "@material-ui/core/DialogContent";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import history from "../../../../history";
 
-import ServiceOutLetsAndDateFilters from "../../headerFilters/ServiceOutLetsAndDateFilters";
-import AccountUnapprovedBankDepositList from "./../../../accounts/bankDeposits/AccountUnapprovedBankDepositList";
+import GeneralLedgerFilter from "../../headerFilters/GeneralLedgerFilter";
+import AccountUtilitySubLedgerList from "./../../../accounts/utilities/subLedger/AccountUtilitySubLedgerList";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     marginTop: "-80px",
     width: 1100,
-    marginLeft: 50,
   },
   headerContainer: {
     height: 20,
@@ -33,14 +32,13 @@ const useStyles = makeStyles((theme) => ({
   contentContainer: {
     // backgroundColor: "#ccab",
     height: "auto",
-    marginTop: 50,
   },
   addButton: {
     borderRadius: 10,
     height: 30,
-    width: 240,
+    width: 130,
     marginLeft: 10,
-    marginTop: 40,
+    marginTop: 2,
     marginBottom: 5,
     fontSize: "0.75rem",
     backgroundColor: theme.palette.common.orange,
@@ -59,7 +57,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function AccountUnapprovedBankDepositLayout(props) {
+function AccountUtilitySubLedgerLayout(props) {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [selectedSourceCountry, setSelectedSourceCountry] = useState("all");
@@ -265,7 +263,7 @@ function AccountUnapprovedBankDepositLayout(props) {
     >
       <Grid item container direction="column" sm={width}>
         <Grid item className={classes.selectField}>
-          <ServiceOutLetsAndDateFilters
+          <GeneralLedgerFilter
           // token={props.token}
           // sourceCountryList={sourceCountryList}
           // destinationCountryList={destinationCountryList}
@@ -286,24 +284,19 @@ function AccountUnapprovedBankDepositLayout(props) {
         >
           <Toolbar disableGutters className={classes.toolbar}>
             <Grid item>
-              <Button
+              {/* <Button
                 variant="contained"
                 className={classes.addButton}
-                onClick={() => [
-                  setOpen(true),
-                  history.push(
-                    "/accounts/bankdeposits/unapprovedbankdeposits/new"
-                  ),
-                ]}
+                onClick={() => [setOpen(true), history.push("/orders/new")]}
               >
-                Initiate Bank Deposit Request
-              </Button>
+                Add Order
+              </Button> */}
             </Grid>
             <Grid item></Grid>
           </Toolbar>
         </Grid>
         <Grid item className={classes.contentContainer}>
-          <AccountUnapprovedBankDepositList token={props.token} />
+          <AccountUtilitySubLedgerList token={props.token} />
           {/* {renderDataList()} */}
           {/* <DataGridText /> */}
         </Grid>
@@ -343,4 +336,4 @@ function AccountUnapprovedBankDepositLayout(props) {
   );
 }
 
-export default AccountUnapprovedBankDepositLayout;
+export default AccountUtilitySubLedgerLayout;

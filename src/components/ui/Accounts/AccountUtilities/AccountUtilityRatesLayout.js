@@ -10,14 +10,12 @@ import DialogContent from "@material-ui/core/DialogContent";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import history from "../../../../history";
 
-import ServiceOutLetsAndDateFilters from "../../headerFilters/ServiceOutLetsAndDateFilters";
-import AccountUnapprovedBankDepositList from "./../../../accounts/bankDeposits/AccountUnapprovedBankDepositList";
+import AccountUtilityRatesList from "../../../accounts/utilities/rates/AccountUtilityRatesList";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     marginTop: "-80px",
     width: 1100,
-    marginLeft: 50,
   },
   headerContainer: {
     height: 20,
@@ -33,14 +31,13 @@ const useStyles = makeStyles((theme) => ({
   contentContainer: {
     // backgroundColor: "#ccab",
     height: "auto",
-    marginTop: 50,
   },
   addButton: {
     borderRadius: 10,
     height: 30,
-    width: 240,
+    width: 130,
     marginLeft: 10,
-    marginTop: 40,
+    marginTop: 2,
     marginBottom: 5,
     fontSize: "0.75rem",
     backgroundColor: theme.palette.common.orange,
@@ -59,7 +56,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function AccountUnapprovedBankDepositLayout(props) {
+function AccountUtilityRatesLayout(props) {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [selectedSourceCountry, setSelectedSourceCountry] = useState("all");
@@ -136,17 +133,14 @@ function AccountUnapprovedBankDepositLayout(props) {
 
   const handleSourceCountryChange = (value) => {
     setSelectedSourceCountry(value);
-    console.log("the selected country iseeeeeeee:", selectedSourceCountry);
   };
 
   const handleDestinationCountryChange = (value) => {
     setSelectedDestinationCountry(value);
-    console.log("the selected country iseeeeeeee:", selectedDestinationCountry);
   };
 
   const handleCategoryChange = (value) => {
     setSelectedCategory(value);
-    console.log("the selected vendor iseeeeeeee:", selectedCategory);
   };
 
   const status = "pending";
@@ -265,7 +259,7 @@ function AccountUnapprovedBankDepositLayout(props) {
     >
       <Grid item container direction="column" sm={width}>
         <Grid item className={classes.selectField}>
-          <ServiceOutLetsAndDateFilters
+          {/* <GeneralLedgerFilter
           // token={props.token}
           // sourceCountryList={sourceCountryList}
           // destinationCountryList={destinationCountryList}
@@ -276,7 +270,7 @@ function AccountUnapprovedBankDepositLayout(props) {
           // categoryList={categoryList}
           // selectedCategory={selectedCategory}
           // handleCategoryChange={handleCategoryChange}
-          />
+          /> */}
         </Grid>
         <Grid
           item
@@ -286,24 +280,19 @@ function AccountUnapprovedBankDepositLayout(props) {
         >
           <Toolbar disableGutters className={classes.toolbar}>
             <Grid item>
-              <Button
+              {/* <Button
                 variant="contained"
                 className={classes.addButton}
-                onClick={() => [
-                  setOpen(true),
-                  history.push(
-                    "/accounts/bankdeposits/unapprovedbankdeposits/new"
-                  ),
-                ]}
+                onClick={() => [setOpen(true), history.push("/orders/new")]}
               >
-                Initiate Bank Deposit Request
-              </Button>
+                Add Order
+              </Button> */}
             </Grid>
             <Grid item></Grid>
           </Toolbar>
         </Grid>
         <Grid item className={classes.contentContainer}>
-          <AccountUnapprovedBankDepositList token={props.token} />
+          <AccountUtilityRatesList token={props.token} />
           {/* {renderDataList()} */}
           {/* <DataGridText /> */}
         </Grid>
@@ -312,7 +301,10 @@ function AccountUnapprovedBankDepositLayout(props) {
         //style={{ zIndex: 1302 }}
         fullScreen={matchesXS}
         open={open}
-        onClose={() => [setOpen(false), history.push("/orders")]}
+        onClose={() => [
+          setOpen(false),
+          history.push("/accounts/utilities/rates"),
+        ]}
       >
         <DialogContent>
           {/* <OrderFormContainer
@@ -343,4 +335,4 @@ function AccountUnapprovedBankDepositLayout(props) {
   );
 }
 
-export default AccountUnapprovedBankDepositLayout;
+export default AccountUtilityRatesLayout;
