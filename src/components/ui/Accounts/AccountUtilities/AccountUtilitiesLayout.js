@@ -13,6 +13,9 @@ import AccountUtilityGeneralLedgerLayout from "./AccountUtilityGeneralLedgerLayo
 import AccountUtilitySubLedgerLayout from "./AccountUtilitySubLedgerLayout";
 import AccountUtilityTransactionTypeLayout from "./AccountUtilityTransactionTypeLayout";
 import AccountUtilityRatesLayout from "./AccountUtilityRatesLayout";
+import AccountUtilityEquityFundingLayout from "./AccountUtilityEquityFundingLayout";
+import AccountUtilityCashAccountLayout from "./AccountUtilityCashAccountLayout";
+import AccountUtilityStaffAccountFundingLayout from "./AccountUtilityStaffAccountFundingLayout";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -106,7 +109,7 @@ function AccountUtilitiesLayout({ token }) {
         />
         <Tab
           label="Currency Types"
-          {...a11yProps(0)}
+          {...a11yProps(1)}
           onClick={(event) => {
             event.preventDefault();
             history.push(`/accounts/utilities/currencytypes`);
@@ -115,7 +118,7 @@ function AccountUtilitiesLayout({ token }) {
 
         <Tab
           label="General Ledgers"
-          {...a11yProps(0)}
+          {...a11yProps(2)}
           onClick={(event) => {
             event.preventDefault();
             history.push(`/accounts/utilities/gls`);
@@ -123,7 +126,7 @@ function AccountUtilitiesLayout({ token }) {
         />
         <Tab
           label="Subsidiary Ledgers"
-          {...a11yProps(0)}
+          {...a11yProps(3)}
           onClick={(event) => {
             event.preventDefault();
             history.push(`/accounts/utilities/subgls`);
@@ -131,7 +134,7 @@ function AccountUtilitiesLayout({ token }) {
         />
         <Tab
           label="Transaction Types"
-          {...a11yProps(0)}
+          {...a11yProps(4)}
           onClick={(event) => {
             event.preventDefault();
             history.push(`/accounts/utilities/transactiontypes`);
@@ -139,7 +142,7 @@ function AccountUtilitiesLayout({ token }) {
         />
         <Tab
           label="Rates"
-          {...a11yProps(0)}
+          {...a11yProps(5)}
           onClick={(event) => {
             event.preventDefault();
             history.push(`/accounts/utilities/rates`);
@@ -165,7 +168,7 @@ function AccountUtilitiesLayout({ token }) {
         />
         <Tab
           label="Equity Account Funding"
-          {...a11yProps(0)}
+          {...a11yProps(8)}
           onClick={(event) => {
             event.preventDefault();
             history.push(`/accounts/utilities/equityfunding`);
@@ -173,7 +176,7 @@ function AccountUtilitiesLayout({ token }) {
         />
         <Tab
           label="Cash Accounts Funding"
-          {...a11yProps(0)}
+          {...a11yProps(9)}
           onClick={(event) => {
             event.preventDefault();
             history.push(`/accounts/utilities/cashaccounts`);
@@ -181,7 +184,7 @@ function AccountUtilitiesLayout({ token }) {
         />
         <Tab
           label="Staff Accounts Funding"
-          {...a11yProps(0)}
+          {...a11yProps(10)}
           onClick={(event) => {
             event.preventDefault();
             history.push(`/accounts/utilities/staffaccounts`);
@@ -206,6 +209,15 @@ function AccountUtilitiesLayout({ token }) {
       </TabPanel>
       <TabPanel value={value} index={5}>
         <AccountUtilityRatesLayout token={token} />
+      </TabPanel>
+      <TabPanel value={value} index={8}>
+        <AccountUtilityEquityFundingLayout token={token} />
+      </TabPanel>
+      <TabPanel value={value} index={9}>
+        <AccountUtilityCashAccountLayout token={token} />
+      </TabPanel>
+      <TabPanel value={value} index={10}>
+        <AccountUtilityStaffAccountFundingLayout token={token} />
       </TabPanel>
     </div>
   );
