@@ -10,7 +10,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import history from "../../../../history";
 
-import ServiceOutLetsAndDateFilters from "../../headerFilters/ServiceOutLetsAndDateFilters";
+import CurrencyFilter from "./../../headerFilters/CurrencyFilter";
 import AccountEmployeeLoans from "../../../accounts/employees/AccountEmployeeLoans";
 
 const useStyles = makeStyles((theme) => ({
@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
   },
   secondContainer: {
     // backgroundColor: "red",
-    marginTop: 30,
+    marginTop: 10,
     padding: 10,
     display: "none",
   },
@@ -88,12 +88,12 @@ function AccountEmployeeLoansLayout({ token }) {
     >
       <Grid item container direction="column" sm={width}>
         <Grid item className={classes.selectField}>
-          {/* <ServiceOutLetsAndDateFilters
+          <CurrencyFilter
           // token={props.token}
           // selectList={countryList}
           // selectedCountry={selectedCountry}
           // handleCountryChange={handleCountryChange}
-          /> */}
+          />
         </Grid>
         <Grid item className={classes.headerContainer}>
           <Toolbar disableGutters className={classes.toolbar}>

@@ -18,6 +18,7 @@ import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import data from "./../../../apis/local";
+import { SettingsSystemDaydreamTwoTone } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -34,10 +35,10 @@ const useStyles = makeStyles((theme) => ({
 
   submitButton: {
     borderRadius: 10,
-    height: 42,
-    width: 50,
-    marginLeft: 30,
-    marginTop: 15,
+    height: 40,
+    width: 100,
+    marginLeft: 220,
+    //marginTop: 20,
     // marginBottom: 20,
     color: "white",
     backgroundColor: theme.palette.common.blue,
@@ -54,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function ServiceOutLetsAndDateFilters(props) {
+function CurrencyFilter(props) {
   const classes = useStyles();
   const [value, setValue] = useState();
 
@@ -84,41 +85,6 @@ function ServiceOutLetsAndDateFilters(props) {
     });
   };
 
-  const renderSelectField = ({
-    input,
-    label,
-    meta: { touched, error, invalid },
-    type,
-    id,
-    ...custom
-  }) => {
-    return (
-      <Box>
-        <FormControl variant="outlined">
-          {/* <InputLabel id="vendor_city">City</InputLabel> */}
-
-          <Select
-            labelId="value"
-            id="value"
-            value={props.selectedCountry}
-            // onChange={props.handleCountryChange}
-            onChange={handleChange}
-            label="Country"
-            style={{ width: 200, marginLeft: 10, marginTop: 18, height: 40 }}
-          >
-            <MenuItem value={10}>Ten</MenuItem>
-            <MenuItem value={20}>Twenty</MenuItem>
-            <MenuItem value={30}>Thirty</MenuItem>
-            {/* {renderItemList()} */}
-          </Select>
-          <FormHelperText style={{ marginLeft: 20 }}>
-            Select Service Outlet
-          </FormHelperText>
-        </FormControl>
-      </Box>
-    );
-  };
-
   const renderSelectCurrencyField = ({
     input,
     label,
@@ -139,14 +105,14 @@ function ServiceOutLetsAndDateFilters(props) {
             // onChange={props.handleCountryChange}
             onChange={handleChange}
             label="Country"
-            style={{ width: 200, marginLeft: 10, marginTop: 18, height: 40 }}
+            style={{ width: 300, marginLeft: 10, marginTop: 30, height: 40 }}
           >
             <MenuItem value="">
               <em>All</em>
             </MenuItem>
             <MenuItem value="naira">Naira</MenuItem>
-            <MenuItem value="dollars">US Dollars</MenuItem>
-            <MenuItem value="pounds">Pound Sterling</MenuItem>
+            <MenuItem value="usdollars">US Dollars</MenuItem>
+            <MenuItem value="pounds">Pounds Sterling</MenuItem>
             {/* {renderItemList()} */}
           </Select>
           <FormHelperText style={{ marginLeft: 20 }}>
@@ -154,54 +120,6 @@ function ServiceOutLetsAndDateFilters(props) {
           </FormHelperText>
         </FormControl>
       </Box>
-    );
-  };
-
-  const renderStartingDateTextField = ({
-    input,
-    label,
-    meta: { touched, error, invalid },
-    type,
-    id,
-    ...custom
-  }) => {
-    return (
-      <TextField
-        error={touched && invalid}
-        helperText="Starting Date"
-        variant="outlined"
-        label={label}
-        id={input.name}
-        fullWidth
-        type={type}
-        {...custom}
-        {...input}
-        inputProps={{ style: { height: 5 } }}
-      />
-    );
-  };
-
-  const renderEndDateTextField = ({
-    input,
-    label,
-    meta: { touched, error, invalid },
-    type,
-    id,
-    ...custom
-  }) => {
-    return (
-      <TextField
-        error={touched && invalid}
-        helperText="Ending Date"
-        variant="outlined"
-        label={label}
-        id={input.name}
-        fullWidth
-        type={type}
-        {...custom}
-        {...input}
-        inputProps={{ style: { height: 5 } }}
-      />
     );
   };
 
@@ -214,7 +132,7 @@ function ServiceOutLetsAndDateFilters(props) {
       <form id="selectForm" className={classes.formStyles}>
         <Box
           sx={{
-            width: 1000,
+            width: 500,
             height: 50,
           }}
           noValidate
@@ -230,57 +148,22 @@ function ServiceOutLetsAndDateFilters(props) {
             <Grid item>
               <Field
                 label=""
-                id="value"
-                name="value"
-                type="text"
-                component={renderSelectField}
-                autoComplete="off"
-                //style={{ marginTop: 50 }}
-              />
-            </Grid>
-            <Grid item>
-              <Field
-                label=""
                 id="currency"
                 name="currency"
                 type="text"
                 component={renderSelectCurrencyField}
                 autoComplete="off"
-                //style={{ marginTop: 50 }}
+                //style={{ marginTop: 20 }}
               />
-            </Grid>
-            <Grid item>
-              <Field
-                label=""
-                id="startingDate"
-                name="startingDate"
-                type="date"
-                component={renderStartingDateTextField}
-                autoComplete="off"
-                style={{ marginTop: 15, marginLeft: 10 }}
-              />
-            </Grid>
-
-            <Grid item>
-              <Field
-                label=""
-                id="endingDate"
-                name="endingDate"
-                type="date"
-                component={renderEndDateTextField}
-                autoComplete="off"
-                style={{ marginTop: 15, marginLeft: 20 }}
-              />
-            </Grid>
-
-            <Grid item>
-              <Button
-                variant="contained"
-                className={classes.submitButton}
-                onClick={props.handleSubmit(onSubmit)}
-              >
-                Go
-              </Button>
+              {/* <Grid item>
+                <Button
+                  variant="contained"
+                  className={classes.submitButton}
+                  onClick={props.handleSubmit(onSubmit)}
+                >
+                  Submit
+                </Button>
+              </Grid> */}
             </Grid>
           </Grid>
         </Box>
@@ -291,4 +174,4 @@ function ServiceOutLetsAndDateFilters(props) {
 
 export default reduxForm({
   form: "selectForm",
-})(ServiceOutLetsAndDateFilters);
+})(CurrencyFilter);

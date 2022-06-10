@@ -10,7 +10,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import history from "../../../../history";
 
-import ServiceOutLetsAndDateFilters from "../../headerFilters/ServiceOutLetsAndDateFilters";
+import CurrencyFilter from "./../../headerFilters/CurrencyFilter";
 import AccountEmployeeLeaveAllowanceList from "../../../accounts/employees/AccountEmployeeLeaveAllowanceList";
 
 const useStyles = makeStyles((theme) => ({
@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
   },
   addButton: {
     borderRadius: 10,
-    height: 30,
+    height: 10,
     width: 130,
     marginLeft: 10,
     marginTop: 2,
@@ -88,12 +88,12 @@ function AccountEmployeeLeaveAllowancesLayout({ token }) {
     >
       <Grid item container direction="column" sm={width}>
         <Grid item className={classes.selectField}>
-          {/* <ServiceOutLetsAndDateFilters
+          <CurrencyFilter
           // token={props.token}
           // selectList={countryList}
           // selectedCountry={selectedCountry}
           // handleCountryChange={handleCountryChange}
-          /> */}
+          />
         </Grid>
         <Grid item className={classes.headerContainer}>
           <Toolbar disableGutters className={classes.toolbar}>

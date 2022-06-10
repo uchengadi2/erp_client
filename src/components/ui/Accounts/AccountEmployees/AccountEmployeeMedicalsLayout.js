@@ -10,7 +10,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import history from "../../../../history";
 
-import ServiceOutLetsAndDateFilters from "../../headerFilters/ServiceOutLetsAndDateFilters";
+import CurrencyFilter from "./../../headerFilters/CurrencyFilter";
 import AccountEmployeeMedicalList from "./../../../accounts/employees/AccountEmployeeMedicalList";
 
 const useStyles = makeStyles((theme) => ({
@@ -88,12 +88,12 @@ function AccountEmployeeMedicalsLayout({ token }) {
     >
       <Grid item container direction="column" sm={width}>
         <Grid item className={classes.selectField}>
-          {/* <ServiceOutLetsAndDateFilters
+          <CurrencyFilter
           // token={props.token}
           // selectList={countryList}
           // selectedCountry={selectedCountry}
           // handleCountryChange={handleCountryChange}
-          /> */}
+          />
         </Grid>
         <Grid item className={classes.headerContainer}>
           <Toolbar disableGutters className={classes.toolbar}>
