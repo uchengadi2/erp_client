@@ -14,6 +14,7 @@ import AccountEmployeeLayout from "./ui/Accounts/AccountEmployees/AccountEmploye
 import AccountTransactionsLayout from "./ui/Accounts/Account Transactions/AccountTransactionsLayout";
 import AccountBankDepositLayout from "./ui/Accounts/BankDeposit/AccountBankDepositLayout";
 import AccountUtilitiesLayout from "./ui/Accounts/AccountUtilities/AccountUtilitiesLayout";
+import AssetsAssetLayout from "./ui/assets/assets/AssetsAssetLayout";
 
 function App() {
   const { token, setToken } = useToken();
@@ -60,10 +61,10 @@ function App() {
             <Route path="/accounts/utilities">
               <AccountUtilitiesLayout token={token} />
             </Route>
-            {/* <Route path="/payments">
-              <PaymentLayout token={token} />
+            <Route path="/assets/assets">
+              <AssetsAssetLayout token={token} />
             </Route>
-            <Route path="/remittances">
+            {/* <Route path="/remittances">
               <RemittanceLayout token={token} />
             </Route>
             <Route path="/utilities">
