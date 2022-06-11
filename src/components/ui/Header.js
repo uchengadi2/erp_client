@@ -220,19 +220,19 @@ const Header = (props) => {
     },
     {
       name: "Procurement",
-      link: "/assets/procrement",
+      link: "/assets/procurements",
       activeIndex: 1,
       selectedIndex: 11,
     },
     {
       name: "Depreciation",
-      link: "/assets/depreciation",
+      link: "/assets/depreciations",
       activeIndex: 1,
       selectedIndex: 12,
     },
     {
       name: "Inventory",
-      link: "/assets/inventory",
+      link: "/assets/inventories",
       activeIndex: 1,
       selectedIndex: 13,
     },
@@ -244,7 +244,7 @@ const Header = (props) => {
     },
     {
       name: "Supply Chain",
-      link: "/assets/supplychain",
+      link: "/assets/supplychains",
       activeIndex: 1,
       selectedIndex: 15,
     },
