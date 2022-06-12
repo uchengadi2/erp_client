@@ -97,9 +97,7 @@ function ServiceOutletFilters(props) {
       <Box>
         <FormControl variant="outlined">
           {/* <InputLabel id="vendor_city">City</InputLabel> */}
-          <FormHelperText style={{ marginLeft: 20 }}>
-            Select Service Outlet
-          </FormHelperText>
+
           <Select
             labelId="value"
             id="value"
@@ -109,14 +107,14 @@ function ServiceOutletFilters(props) {
             label="Country"
             style={{ width: 300, marginLeft: 10, height: 40 }}
           >
-            <MenuItem value="">
-              <em>None</em>
-            </MenuItem>
             <MenuItem value={10}>Ten</MenuItem>
             <MenuItem value={20}>Twenty</MenuItem>
             <MenuItem value={30}>Thirty</MenuItem>
             {/* {renderItemList()} */}
           </Select>
+          <FormHelperText style={{ marginLeft: 20 }}>
+            Select Service Outlet
+          </FormHelperText>
         </FormControl>
       </Box>
     );

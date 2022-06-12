@@ -18,6 +18,7 @@ import AssetsAssetLayout from "./ui/assets/assets/AssetsAssetLayout";
 import AssetsProcurementLayout from "./ui/assets/procurement/AssetsProcurementLayout";
 import AssetDepreciationLayout from "./ui/assets/depreciation/AssetDepreciationLayout";
 import AssetInventoryLayout from "./ui/assets/inventory/AssetInventoryLayout";
+import AssetMaintenancesLayout from "./ui/assets/maintenances/AssetMaintenancesLayout";
 
 function App() {
   const { token, setToken } = useToken();
@@ -75,6 +76,9 @@ function App() {
             </Route>
             <Route path="/assets/inventories">
               <AssetInventoryLayout token={token} />
+            </Route>
+            <Route path="/assets/maintenances">
+              <AssetMaintenancesLayout token={token} />
             </Route>
           </Switch>
         </Router>
