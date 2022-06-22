@@ -250,7 +250,7 @@ const Header = (props) => {
     },
     {
       name: "Disposition",
-      link: "/assets/disposition",
+      link: "/assets/dispositions",
       activeIndex: 1,
       selectedIndex: 16,
     },
@@ -327,29 +327,47 @@ const Header = (props) => {
       selectedIndex: 31,
     },
     {
+      name: "Suppliers",
+      link: "/crm/suppliers",
+      activeIndex: 3,
+      selectedIndex: 36,
+    },
+    {
+      name: "Partners",
+      link: "/crm/partners",
+      activeIndex: 3,
+      selectedIndex: 37,
+    },
+    {
+      name: "Customers",
+      link: "/crm/customers",
+      activeIndex: 3,
+      selectedIndex: 38,
+    },
+    {
       name: "Leads",
       link: "/crm/leads",
       activeIndex: 3,
       selectedIndex: 32,
     },
-    {
-      name: "Opportunities",
-      link: "/crm/opportumities",
-      activeIndex: 3,
-      selectedIndex: 33,
-    },
-    {
-      name: "Social Media",
-      link: "/crm/socialmedia",
-      activeIndex: 3,
-      selectedIndex: 34,
-    },
-    {
-      name: "Utilities",
-      link: "/crm/utilities",
-      activeIndex: 3,
-      selectedIndex: 35,
-    },
+    // {
+    //   name: "Opportunities",
+    //   link: "/crm/opportumities",
+    //   activeIndex: 3,
+    //   selectedIndex: 33,
+    // },
+    // {
+    //   name: "Social Media",
+    //   link: "/crm/socialmedia",
+    //   activeIndex: 3,
+    //   selectedIndex: 34,
+    // },
+    // {
+    //   name: "Utilities",
+    //   link: "/crm/utilities",
+    //   activeIndex: 3,
+    //   selectedIndex: 35,
+    // },
   ];
 
   const salesOptions = [

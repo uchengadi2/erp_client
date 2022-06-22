@@ -19,6 +19,17 @@ import AssetsProcurementLayout from "./ui/assets/procurement/AssetsProcurementLa
 import AssetDepreciationLayout from "./ui/assets/depreciation/AssetDepreciationLayout";
 import AssetInventoryLayout from "./ui/assets/inventory/AssetInventoryLayout";
 import AssetMaintenancesLayout from "./ui/assets/maintenances/AssetMaintenancesLayout";
+import AssetSupplyChainLayout from "./ui/assets/supplyChain/AssetSupplyChainLayout";
+import AssetDispositionLayout from "./ui/assets/disposition/AssetDispositionLayout";
+import AssetsLocationLayout from "./ui/assets/locations/AssetsLocationLayout";
+import AssetTransferAndLeasingLayout from "./ui/assets/transfer/AssetTransferAndLeasingLayout";
+import AssetUtilityLayout from "./ui/assets/utilities/AssetUtilityLayout";
+import CrmUsersLayout from "./ui/crm/users/CrmUsersLayout";
+import CrmContactsLayout from "./ui/crm/contacts/CrmContactsLayout";
+import CrmSuppliersLayout from "./ui/crm/suppliers/CrmSuppliersLayout";
+import CrmPartnersLayout from "./ui/crm/partners/CrmPartnersLayout";
+import CrmCustomersLayout from "./ui/crm/customers/CrmCustomersLayout";
+import CrmLeadsLayout from "./ui/crm/lead/CrmLeadsLayout";
 
 function App() {
   const { token, setToken } = useToken();
@@ -30,7 +41,7 @@ function App() {
   // }
 
   return (
-    <div className="wrapper">
+    <>
       <ThemeProvider theme={theme}>
         <Router history={history}>
           <Header
@@ -80,10 +91,43 @@ function App() {
             <Route path="/assets/maintenances">
               <AssetMaintenancesLayout token={token} />
             </Route>
+            <Route path="/assets/supplychains">
+              <AssetSupplyChainLayout token={token} />
+            </Route>
+            <Route path="/assets/dispositions">
+              <AssetDispositionLayout token={token} />
+            </Route>
+            <Route path="/assets/locations">
+              <AssetsLocationLayout token={token} />
+            </Route>
+            <Route path="/assets/transfers">
+              <AssetTransferAndLeasingLayout token={token} />
+            </Route>
+            <Route path="/assets/utilities">
+              <AssetUtilityLayout token={token} />
+            </Route>
+            <Route path="/crm/users">
+              <CrmUsersLayout token={token} />
+            </Route>
+            <Route path="/crm/contacts">
+              <CrmContactsLayout token={token} />
+            </Route>
+            <Route path="/crm/suppliers">
+              <CrmSuppliersLayout token={token} />
+            </Route>
+            <Route path="/crm/partners">
+              <CrmPartnersLayout token={token} />
+            </Route>
+            <Route path="/crm/customers">
+              <CrmCustomersLayout token={token} />
+            </Route>
+            <Route path="/crm/leads">
+              <CrmLeadsLayout token={token} />
+            </Route>
           </Switch>
         </Router>
       </ThemeProvider>
-    </div>
+    </>
   );
 }
 
