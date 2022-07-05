@@ -10,9 +10,7 @@ import Typography from "@material-ui/core/Typography";
 import history from "../../../../history";
 import { fetchOrders } from "../../../../actions";
 import DataGridContainer from "../../../DataGridContainer";
-// import OrderAssignmentFormContainer from "./OrderAssignmentFormContainer";
-// import OrdersEdit from "./OrdersEdit";
-// import OrderDelete from "./OrdersDelete";
+import AccountUtilityCurrencyTypeContainerForm from "./AccountUtilityCurrencyTypeContainerForm";
 
 class AccountUtilityCurrencyTypesList extends React.Component {
   constructor(props) {
@@ -27,7 +25,7 @@ class AccountUtilityCurrencyTypesList extends React.Component {
     };
   }
   componentDidMount() {
-    this.props.fetchOrders(this.props.token, this.props.status);
+    // this.props.fetchOrders(this.props.token, this.props.status);
   }
 
   handleDialogOpenStatus = () => {
@@ -121,11 +119,11 @@ class AccountUtilityCurrencyTypesList extends React.Component {
           ]}
         >
           <DialogContent>
-            {/* <OrderAssignmentFormContainer
+            <AccountUtilityCurrencyTypeContainerForm
               token={this.props.token}
               params={this.state.params}
               handleEditDialogOpenStatus={this.handleEditDialogOpenStatus}
-            /> */}
+            />
           </DialogContent>
         </Dialog>
       </>
@@ -272,4 +270,4 @@ const mapStateToProps = (state) => {
   return { orders: Object.values(state.order) };
 };
 
-export default connect(null, { fetchOrders })(AccountUtilityCurrencyTypesList);
+export default connect(null, {})(AccountUtilityCurrencyTypesList);

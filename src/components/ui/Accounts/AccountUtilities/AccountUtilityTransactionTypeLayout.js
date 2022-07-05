@@ -11,10 +11,11 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 import history from "../../../../history";
 
 import AccountUtilityTransactionTypesList from "../../../accounts/utilities/transactionTypes/AccountUtilityTransactionTypesList";
+import AccountUtilityTransactionTypesFormContainer from "../../../accounts/utilities/transactionTypes/AccountUtilityTransactionTypesFormContainer";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    marginTop: "-80px",
+    marginTop: "-50px",
     width: 1100,
   },
   headerContainer: {
@@ -31,13 +32,14 @@ const useStyles = makeStyles((theme) => ({
   contentContainer: {
     // backgroundColor: "#ccab",
     height: "auto",
+    marginTop: 50,
   },
   addButton: {
     borderRadius: 10,
     height: 30,
-    width: 130,
+    width: 170,
     marginLeft: 10,
-    marginTop: 2,
+    marginTop: 20,
     marginBottom: 5,
     fontSize: "0.75rem",
     backgroundColor: theme.palette.common.orange,
@@ -280,13 +282,16 @@ function AccountUtilityTransactionTypeLayout(props) {
         >
           <Toolbar disableGutters className={classes.toolbar}>
             <Grid item>
-              {/* <Button
+              <Button
                 variant="contained"
                 className={classes.addButton}
-                onClick={() => [setOpen(true), history.push("/orders/new")]}
+                onClick={() => [
+                  setOpen(true),
+                  history.push("/accounts/utilities/transactiontypes/new"),
+                ]}
               >
-                Add Order
-              </Button> */}
+                Add Transaction Type
+              </Button>
             </Grid>
             <Grid item></Grid>
           </Toolbar>
@@ -307,10 +312,10 @@ function AccountUtilityTransactionTypeLayout(props) {
         ]}
       >
         <DialogContent>
-          {/* <OrderFormContainer
+          <AccountUtilityTransactionTypesFormContainer
             token={props.token}
             handleDialogOpenStatus={handleDialogOpenStatus}
-          /> */}
+          />
         </DialogContent>
       </Dialog>
       <Grid

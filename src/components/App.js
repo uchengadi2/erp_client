@@ -30,6 +30,30 @@ import CrmSuppliersLayout from "./ui/crm/suppliers/CrmSuppliersLayout";
 import CrmPartnersLayout from "./ui/crm/partners/CrmPartnersLayout";
 import CrmCustomersLayout from "./ui/crm/customers/CrmCustomersLayout";
 import CrmLeadsLayout from "./ui/crm/lead/CrmLeadsLayout";
+import OperationsProjectLayout from "./ui/operations/projects/OperationsProjectLayout";
+import OperationsUtilityLayout from "./ui/operations/utilities/OperationsUtilityLayout";
+import OperationsTransformationLayout from "./ui/operations/transformations/OperationsTransformationLayout";
+import OperationsMaintenancesLayout from "./ui/operations/maintenances/OperationsMaintenancesLayout";
+import OperationsQualityAssuranceLayout from "./ui/operations/qualityAssurance/OperationsQualityAssuranceLayout";
+import OperationsFinishingLayout from "./ui/operations/finishings/OperationsFinishingLayout";
+import SalesProductsLayout from "./ui/sales/product/SalesProductsLayout";
+import SalesTeamLayout from "./ui/sales/team/SalesTeamLayout";
+import SalesTasksLayout from "./ui/sales/task/SalesTasksLayout";
+import SalesSalesLayout from "./ui/sales/sales/SalesSalesLayout";
+import SalesAccountLayout from "./ui/sales/accounts/SalesAccountLayout";
+import HrPlanningLayout from "./ui/hr/planning/HrPlanningLayout";
+import HrRecruitmentLayout from "./ui/hr/recruitments/HrRecruitmentLayout";
+import HrCompensationsLayout from "./ui/hr/compensations/HrCompensationsLayout";
+import HrPerformancesLayout from "./ui/hr/performance/HrPerformancesLayout";
+import HrLeavesLayout from "./ui/hr/leave/HrLeavesLayout";
+import HrExittedLayout from "./ui/hr/exit/HrExittedLayout";
+import HrSelfServicesLayout from "./ui/hr/selfService/HrSelfServicesLayout";
+import HrUtilityLayout from "./ui/hr/utilities/HrUtilityLayout";
+import ConsoleUtilitiesLayout from "./ui/console/utilities/ConsoleUtilitiesLayout";
+import ConsoleUtilityServiceOutletLayout from "./ui/console/utilities/ConsoleUtilityServiceOutletLayout";
+import ConsolePrivilegesLayout from "./ui/console/privileges/ConsolePrivilegesLayout";
+import ConsoleRoleLayout from "./ui/console/roles/ConsoleRoleLayout";
+import ConsoleTasksLayout from "./ui/console/tasks/ConsoleTasksLayout";
 
 function App() {
   const { token, setToken } = useToken();
@@ -123,6 +147,76 @@ function App() {
             </Route>
             <Route path="/crm/leads">
               <CrmLeadsLayout token={token} />
+            </Route>
+
+            <Route path="/operations/projects">
+              <OperationsProjectLayout token={token} />
+            </Route>
+            <Route path="/operations/utilities">
+              <OperationsUtilityLayout token={token} />
+            </Route>
+            <Route path="/operations/transformations">
+              <OperationsTransformationLayout token={token} />
+            </Route>
+            <Route path="/operations/maintenances">
+              <OperationsMaintenancesLayout token={token} />
+            </Route>
+            <Route path="/operations/qualityassurances">
+              <OperationsQualityAssuranceLayout token={token} />
+            </Route>
+            <Route path="/operations/finishings">
+              <OperationsFinishingLayout token={token} />
+            </Route>
+            <Route path="/sales/products">
+              <SalesProductsLayout token={token} />
+            </Route>
+            <Route path="/sales/teams">
+              <SalesTeamLayout token={token} />
+            </Route>
+            <Route path="/sales/tasks">
+              <SalesTasksLayout token={token} />
+            </Route>
+            <Route path="/sales/sales">
+              <SalesSalesLayout token={token} />
+            </Route>
+            <Route path="/sales/accounts">
+              <SalesAccountLayout token={token} />
+            </Route>
+            <Route path="/hr/planning">
+              <HrPlanningLayout token={token} />
+            </Route>
+            <Route path="/hr/recruitments">
+              <HrRecruitmentLayout token={token} />
+            </Route>
+            <Route path="/hr/compensations">
+              <HrCompensationsLayout token={token} />
+            </Route>
+            <Route path="/hr/performances">
+              <HrPerformancesLayout token={token} />
+            </Route>
+            <Route path="/hr/leaves">
+              <HrLeavesLayout token={token} />
+            </Route>
+            <Route path="/hr/exit">
+              <HrExittedLayout token={token} />
+            </Route>
+            <Route path="/hr/selfservices">
+              <HrSelfServicesLayout token={token} />
+            </Route>
+            <Route path="/hr/utilities">
+              <HrUtilityLayout token={token} />
+            </Route>
+            <Route path="/systems/utilities">
+              <ConsoleUtilitiesLayout token={token} />
+            </Route>
+            <Route path="/systems/roles">
+              <ConsoleRoleLayout token={token} />
+            </Route>
+            <Route path="/systems/tasks">
+              <ConsoleTasksLayout token={token} />
+            </Route>
+            <Route path="/systems/privileges">
+              <ConsolePrivilegesLayout token={token} />
             </Route>
           </Switch>
         </Router>

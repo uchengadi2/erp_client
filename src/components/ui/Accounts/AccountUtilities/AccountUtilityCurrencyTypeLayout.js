@@ -8,14 +8,15 @@ import { Toolbar } from "@material-ui/core";
 import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
-import history from "../../../../history";
 
 import AccountTypeFilter from "../../../ui/headerFilters/AccountTypeFilter";
 import AccountUtilityCurrencyTypesList from "../../../accounts/utilities/currencyTypes/AccountUtilityCurrencyTypesList";
+import history from "../../../../history";
+import AccountUtilityCurrencyTypeContainerForm from "../../../accounts/utilities/currencyTypes/AccountUtilityCurrencyTypeContainerForm";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    marginTop: "-80px",
+    marginTop: "-50px",
     width: 1100,
   },
   headerContainer: {
@@ -32,6 +33,7 @@ const useStyles = makeStyles((theme) => ({
   contentContainer: {
     // backgroundColor: "#ccab",
     height: "auto",
+    marginTop: 20,
   },
   addButton: {
     borderRadius: 10,
@@ -263,7 +265,7 @@ function AccountUtilityCurrencyTypeLayout(props) {
     >
       <Grid item container direction="column" sm={width}>
         <Grid item className={classes.selectField}>
-          <AccountTypeFilter
+          {/* <AccountTypeFilter
           // token={props.token}
           // sourceCountryList={sourceCountryList}
           // destinationCountryList={destinationCountryList}
@@ -274,7 +276,7 @@ function AccountUtilityCurrencyTypeLayout(props) {
           // categoryList={categoryList}
           // selectedCategory={selectedCategory}
           // handleCategoryChange={handleCategoryChange}
-          />
+          /> */}
         </Grid>
         <Grid
           item
@@ -284,13 +286,16 @@ function AccountUtilityCurrencyTypeLayout(props) {
         >
           <Toolbar disableGutters className={classes.toolbar}>
             <Grid item>
-              {/* <Button
+              <Button
                 variant="contained"
                 className={classes.addButton}
-                onClick={() => [setOpen(true), history.push("/orders/new")]}
+                onClick={() => [
+                  setOpen(true),
+                  history.push("/accounts/utilities/currencytype/new"),
+                ]}
               >
-                Add Order
-              </Button> */}
+                Add Currency
+              </Button>
             </Grid>
             <Grid item></Grid>
           </Toolbar>
@@ -305,13 +310,16 @@ function AccountUtilityCurrencyTypeLayout(props) {
         //style={{ zIndex: 1302 }}
         fullScreen={matchesXS}
         open={open}
-        onClose={() => [setOpen(false), history.push("/orders")]}
+        onClose={() => [
+          setOpen(false),
+          history.push("/accounts/utilities/currencytype"),
+        ]}
       >
         <DialogContent>
-          {/* <OrderFormContainer
+          <AccountUtilityCurrencyTypeContainerForm
             token={props.token}
             handleDialogOpenStatus={handleDialogOpenStatus}
-          /> */}
+          />
         </DialogContent>
       </Dialog>
       <Grid

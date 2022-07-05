@@ -29,6 +29,13 @@ export default function DataGridContainer({ rows, columns }) {
         onCellDoubleClick={() =>
           console.log("just double clicked this cell now")
         }
+        onSelectionModelChange={(ids) => {
+          const selectedIDs = new Set(ids);
+          const selectedRowData = rows.filter((row) =>
+            selectedIDs.has(row.id.toString())
+          );
+          console.log(selectedRowData);
+        }}
       />
     </Box>
   );

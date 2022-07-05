@@ -110,9 +110,19 @@ function SchemeTypeFilter(props) {
             <MenuItem value="">
               <em>All</em>
             </MenuItem>
-            <MenuItem value="naira">Naira</MenuItem>
-            <MenuItem value="usdollars">US Dollars</MenuItem>
-            <MenuItem value="pounds">Pounds Sterling</MenuItem>
+            <MenuItem value="commodities">Commodities</MenuItem>
+            <MenuItem value="charcoal">Charcoal</MenuItem>
+            <MenuItem value="seafood">Sea Foods</MenuItem>
+            <MenuItem value="processedfoods">Processed Foods</MenuItem>
+            <MenuItem value="plantation">Plantation</MenuItem>
+            <MenuItem value="livestock">Livestock</MenuItem>
+            <MenuItem value="minerals">Minerals</MenuItem>
+            <MenuItem value="headofficeaccounts">Head Office Accounts</MenuItem>
+            <MenuItem value="officeaccountbasic">Office Account Basic</MenuItem>
+            <MenuItem value="loans">Loans</MenuItem>
+            <MenuItem value="ranch">Ranch</MenuItem>
+            <MenuItem value="farmlands">Farmlands</MenuItem>
+            <MenuItem value="realestate">Real Estates</MenuItem>
             {/* {renderItemList()} */}
           </Select>
           <FormHelperText style={{ marginLeft: 20 }}>

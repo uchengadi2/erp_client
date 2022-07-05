@@ -283,7 +283,7 @@ const Header = (props) => {
     },
     {
       name: "Transformation",
-      link: "/operations/transformation",
+      link: "/operations/transformations",
       activeIndex: 2,
       selectedIndex: 21,
     },
@@ -344,12 +344,12 @@ const Header = (props) => {
       activeIndex: 3,
       selectedIndex: 38,
     },
-    {
-      name: "Leads",
-      link: "/crm/leads",
-      activeIndex: 3,
-      selectedIndex: 32,
-    },
+    // {
+    //   name: "Leads",
+    //   link: "/crm/leads",
+    //   activeIndex: 3,
+    //   selectedIndex: 32,
+    // },
     // {
     //   name: "Opportunities",
     //   link: "/crm/opportumities",
@@ -379,7 +379,7 @@ const Header = (props) => {
     },
     {
       name: "Team",
-      link: "/sales/team",
+      link: "/sales/teams",
       activeIndex: 4,
       selectedIndex: 41,
     },
@@ -395,30 +395,30 @@ const Header = (props) => {
       activeIndex: 4,
       selectedIndex: 43,
     },
-    {
-      name: "Invoices",
-      link: "/sales/invoices",
-      activeIndex: 4,
-      selectedIndex: 44,
-    },
-    {
-      name: "Campaign",
-      link: "/sales/campaign",
-      activeIndex: 4,
-      selectedIndex: 45,
-    },
+    // {
+    //   name: "Invoices",
+    //   link: "/sales/invoices",
+    //   activeIndex: 4,
+    //   selectedIndex: 44,
+    // },
+    // {
+    //   name: "Campaign",
+    //   link: "/sales/campaign",
+    //   activeIndex: 4,
+    //   selectedIndex: 45,
+    // },
     {
       name: "Accounts",
       link: "/sales/accounts",
       activeIndex: 4,
       selectedIndex: 45,
     },
-    {
-      name: "Utilities",
-      link: "/sales/utilities",
-      activeIndex: 4,
-      selectedIndex: 45,
-    },
+    // {
+    //   name: "Utilities",
+    //   link: "/sales/utilities",
+    //   activeIndex: 4,
+    //   selectedIndex: 45,
+    // },
   ];
 
   const hrOptions = [
@@ -440,27 +440,27 @@ const Header = (props) => {
       activeIndex: 6,
       selectedIndex: 62,
     },
-    {
-      name: "Training",
-      link: "/hr/trainings",
-      activeIndex: 6,
-      selectedIndex: 63,
-    },
+    // {
+    //   name: "Training",
+    //   link: "/hr/trainings",
+    //   activeIndex: 6,
+    //   selectedIndex: 63,
+    // },
     {
       name: "Performance",
       link: "/hr/performances",
       activeIndex: 6,
       selectedIndex: 64,
     },
-    {
-      name: "Employee Relations",
-      link: "/hr/employeerelations",
-      activeIndex: 6,
-      selectedIndex: 65,
-    },
+    // {
+    //   name: "Employee Relations",
+    //   link: "/hr/employeerelations",
+    //   activeIndex: 6,
+    //   selectedIndex: 65,
+    // },
     {
       name: "Leave",
-      link: "/hr/leave",
+      link: "/hr/leaves",
       activeIndex: 6,
       selectedIndex: 66,
     },
@@ -479,7 +479,7 @@ const Header = (props) => {
     // },
     {
       name: "Self Service",
-      link: "/hr/selfservice",
+      link: "/hr/selfservices",
       activeIndex: 6,
       selectedIndex: 69,
     },

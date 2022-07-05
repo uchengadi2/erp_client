@@ -7,15 +7,17 @@ import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import { Link } from "react-router-dom";
 import history from "./../../../../history";
-import AccountUtilityAccountTypesLayout from "./AccountUtilityAccountTypesLayout";
+import AccountUtilitySchemeCodesLayout from "./AccountUtilitySchemeCodesLayout";
 import AccountUtilityCurrencyTypeLayout from "./AccountUtilityCurrencyTypeLayout";
-import AccountUtilityGeneralLedgerLayout from "./AccountUtilityGeneralLedgerLayout";
-import AccountUtilitySubLedgerLayout from "./AccountUtilitySubLedgerLayout";
+import AccountUtilityGeneralLedgerLayout from "./AccountUtilityGeneralLedgerHeadCodeLayout";
+import AccountUtilityGlSubHeadLedgerCodeLayout from "./AccountUtilityGlSubHeadLedgerCodeLayout";
 import AccountUtilityTransactionTypeLayout from "./AccountUtilityTransactionTypeLayout";
 import AccountUtilityRatesLayout from "./AccountUtilityRatesLayout";
 import AccountUtilityEquityFundingLayout from "./AccountUtilityEquityFundingLayout";
 import AccountUtilityCashAccountLayout from "./AccountUtilityCashAccountLayout";
 import AccountUtilityStaffAccountFundingLayout from "./AccountUtilityStaffAccountFundingLayout";
+import AccountUtilitySubsidiaryLedger from "./AccountUtilitySubsidiaryLedger";
+import AccountUtilityOfficeOperationsAndServicesLayout from "./AccountUtilityOfficeOperationsAndServicesLayout";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -100,11 +102,11 @@ function AccountUtilitiesLayout({ token }) {
         className={classes.tabs}
       >
         <Tab
-          label="Account Types"
+          label="Scheme Codes"
           {...a11yProps(0)}
           onClick={(event) => {
             event.preventDefault();
-            history.push(`/accounts/utilities/accounttypes`);
+            history.push(`/accounts/utilities/schemecodes`);
           }}
         />
         <Tab
@@ -115,23 +117,30 @@ function AccountUtilitiesLayout({ token }) {
             history.push(`/accounts/utilities/currencytypes`);
           }}
         />
-
         <Tab
-          label="General Ledgers"
+          label="General Ledger Codes"
           {...a11yProps(2)}
           onClick={(event) => {
             event.preventDefault();
-            history.push(`/accounts/utilities/gls`);
+            history.push(`/accounts/utilities/glcodes`);
           }}
         />
         <Tab
-          label="Subsidiary Ledgers"
+          label="General Subsidiary Ledger Codes"
           {...a11yProps(3)}
           onClick={(event) => {
             event.preventDefault();
-            history.push(`/accounts/utilities/subgls`);
+            history.push(`/accounts/utilities/subglcodes`);
           }}
         />
+        {/* <Tab
+          label="Subsidiary Ledger"
+          {...a11yProps(4)}
+          onClick={(event) => {
+            event.preventDefault();
+            history.push(`/accounts/utilities/subledgers`);
+          }}
+        /> */}
         <Tab
           label="Transaction Types"
           {...a11yProps(4)}
@@ -140,12 +149,13 @@ function AccountUtilitiesLayout({ token }) {
             history.push(`/accounts/utilities/transactiontypes`);
           }}
         />
+
         <Tab
-          label="Rates"
+          label="Office Operations & Servics"
           {...a11yProps(5)}
           onClick={(event) => {
             event.preventDefault();
-            history.push(`/accounts/utilities/rates`);
+            history.push(`/accounts/utilities/officeoperations`);
           }}
         />
         <Tab
@@ -193,7 +203,7 @@ function AccountUtilitiesLayout({ token }) {
       </Tabs>
 
       <TabPanel value={value} index={0}>
-        <AccountUtilityAccountTypesLayout token={token} />
+        <AccountUtilitySchemeCodesLayout token={token} />
       </TabPanel>
       <TabPanel value={value} index={1}>
         <AccountUtilityCurrencyTypeLayout token={token} />
@@ -202,13 +212,16 @@ function AccountUtilitiesLayout({ token }) {
         <AccountUtilityGeneralLedgerLayout token={token} />
       </TabPanel>
       <TabPanel value={value} index={3}>
-        <AccountUtilitySubLedgerLayout token={token} />
+        <AccountUtilityGlSubHeadLedgerCodeLayout token={token} />
       </TabPanel>
+      {/* <TabPanel value={value} index={4}>
+        <AccountUtilitySubsidiaryLedger token={token} />
+      </TabPanel> */}
       <TabPanel value={value} index={4}>
         <AccountUtilityTransactionTypeLayout token={token} />
       </TabPanel>
       <TabPanel value={value} index={5}>
-        <AccountUtilityRatesLayout token={token} />
+        <AccountUtilityOfficeOperationsAndServicesLayout token={token} />
       </TabPanel>
       <TabPanel value={value} index={8}>
         <AccountUtilityEquityFundingLayout token={token} />

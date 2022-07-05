@@ -7,8 +7,16 @@ import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import { Link } from "react-router-dom";
 import history from "./../../../../history";
-import AccountsGeneralLedgerLayout from "./AccountsGeneralLedgerLayout";
-import AccountsSubLedgerLayout from "./AccountsSubLedgerLayout";
+
+import AccountsAssetSubLedgerLayout from "./AccountsAssetSubLedgerLayout";
+import AccountsStocksSubLedgerLayout from "./AccountsStocksSubLedgerLayout";
+import AccountsLedgerStaffSubLedgerLayout from "./AccountsLedgerStaffSubLedgerLayout";
+import AccountsLedgerPartnersSubledgerLayout from "./AccountsLedgerPartnersSubLedgerLayout";
+import AccountsLedgerVendorSubLedgerLayout from "./AccountsLedgerVendorSubLedgerLayout";
+import AccountsLedgerCustomersSubLayout from "./AccountsLedgerCustomersSubLayout";
+import AccountsLedgerSuppliersSubLedgersLayout from "./AccountsLedgerSuppliersSubLedgersLayout";
+import AccountsLedgerOfficeSubLedgersLayout from "./AccountsLedgerOfficeSubLedgersLayout";
+import AccountsLedgerProductsSubLedgerLayout from "./AccountsLedgerProductsSubLedgerLayout";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -92,29 +100,114 @@ function AccountsLedgerLayout({ token }) {
         aria-label="Vertical tabs example"
         className={classes.tabs}
       >
-        <Tab
+        {/* <Tab
           label="General Ledger"
           {...a11yProps(0)}
           onClick={(event) => {
             event.preventDefault();
             history.push(`/accounts/ledgers/gls`);
           }}
-        />
+        /> */}
         <Tab
-          label="Sub Ledger"
+          label="Assets Sub Ledgers"
           {...a11yProps(0)}
           onClick={(event) => {
             event.preventDefault();
-            history.push(`/accounts/ledgers/subgls`);
+            history.push(`/accounts/ledgers/assetssubledgers`);
+          }}
+        />
+        <Tab
+          label="Stocks Sub Ledgers"
+          {...a11yProps(0)}
+          onClick={(event) => {
+            event.preventDefault();
+            history.push(`/accounts/ledgers/stockssubledgers`);
+          }}
+        />
+        <Tab
+          label="Staff Sub Ledgers"
+          {...a11yProps(0)}
+          onClick={(event) => {
+            event.preventDefault();
+            history.push(`/accounts/ledgers/staffsubledgers`);
+          }}
+        />
+        <Tab
+          label="Partners Sub Ledgers"
+          {...a11yProps(0)}
+          onClick={(event) => {
+            event.preventDefault();
+            history.push(`/accounts/ledgers/partnersubledgers`);
+          }}
+        />
+        <Tab
+          label="Vendors Sub Ledgers"
+          {...a11yProps(0)}
+          onClick={(event) => {
+            event.preventDefault();
+            history.push(`/accounts/ledgers/partnerssubledgers`);
+          }}
+        />
+        <Tab
+          label="Customers Sub Ledgers"
+          {...a11yProps(0)}
+          onClick={(event) => {
+            event.preventDefault();
+            history.push(`/accounts/ledgers/customerssubledgers`);
+          }}
+        />
+        <Tab
+          label="Suppliers Sub Ledgers"
+          {...a11yProps(0)}
+          onClick={(event) => {
+            event.preventDefault();
+            history.push(`/accounts/ledgers/supplierssubledgers`);
+          }}
+        />
+        <Tab
+          label="Office Sub Ledgers"
+          {...a11yProps(0)}
+          onClick={(event) => {
+            event.preventDefault();
+            history.push(`/accounts/ledgers/officesubledgers`);
+          }}
+        />
+        <Tab
+          label="Product Sub Ledgers"
+          {...a11yProps(0)}
+          onClick={(event) => {
+            event.preventDefault();
+            history.push(`/accounts/ledgers/products`);
           }}
         />
       </Tabs>
 
       <TabPanel value={value} index={0}>
-        <AccountsGeneralLedgerLayout token={token} />
+        <AccountsAssetSubLedgerLayout token={token} />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <AccountsSubLedgerLayout token={token} />
+        <AccountsStocksSubLedgerLayout token={token} />
+      </TabPanel>
+      <TabPanel value={value} index={2}>
+        <AccountsLedgerStaffSubLedgerLayout token={token} />
+      </TabPanel>
+      <TabPanel value={value} index={3}>
+        <AccountsLedgerPartnersSubledgerLayout token={token} />
+      </TabPanel>
+      <TabPanel value={value} index={4}>
+        <AccountsLedgerVendorSubLedgerLayout token={token} />
+      </TabPanel>
+      <TabPanel value={value} index={5}>
+        <AccountsLedgerCustomersSubLayout token={token} />
+      </TabPanel>
+      <TabPanel value={value} index={6}>
+        <AccountsLedgerSuppliersSubLedgersLayout token={token} />
+      </TabPanel>
+      <TabPanel value={value} index={7}>
+        <AccountsLedgerOfficeSubLedgersLayout token={token} />
+      </TabPanel>
+      <TabPanel value={value} index={8}>
+        <AccountsLedgerProductsSubLedgerLayout token={token} />
       </TabPanel>
     </div>
   );

@@ -27,7 +27,7 @@ class AccountListingJournalList extends React.Component {
     };
   }
   componentDidMount() {
-    this.props.fetchOrders(this.props.token, this.props.status);
+    //this.props.fetchOrders(this.props.token, this.props.status);
   }
 
   handleDialogOpenStatus = () => {
@@ -264,4 +264,4 @@ const mapStateToProps = (state) => {
   return { orders: Object.values(state.order) };
 };
 
-export default connect(null, { fetchOrders })(AccountListingJournalList);
+export default connect(null, {})(AccountListingJournalList);

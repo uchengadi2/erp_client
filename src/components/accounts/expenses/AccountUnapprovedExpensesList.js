@@ -8,7 +8,7 @@ import CancelRoundedIcon from "@material-ui/icons/CancelRounded";
 import AssignmentIcon from "@material-ui/icons/Assignment";
 import Typography from "@material-ui/core/Typography";
 import history from "../../../history";
-import { fetchOrders } from "../../../actions";
+//import { fetchOrders } from "../../../actions";
 import DataGridContainer from "../../DataGridContainer";
 // import OrderAssignmentFormContainer from "./OrderAssignmentFormContainer";
 // import OrdersEdit from "./OrdersEdit";
@@ -27,7 +27,7 @@ class AccountUnapprovedExpensesList extends React.Component {
     };
   }
   componentDidMount() {
-    this.props.fetchOrders(this.props.token, this.props.status);
+    //this.props.fetchOrders(this.props.token, this.props.status);
   }
 
   handleDialogOpenStatus = () => {
@@ -264,4 +264,4 @@ const mapStateToProps = (state) => {
   return { orders: Object.values(state.order) };
 };
 
-export default connect(null, { fetchOrders })(AccountUnapprovedExpensesList);
+export default connect(null, {})(AccountUnapprovedExpensesList);
