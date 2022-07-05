@@ -13,6 +13,7 @@ import ConsoleUtilitiesCountryLayout from "./ConsoleUtilitiesCountryLayout";
 import ConsoleUtilitiesHeadofficeServiceOutletLayout from "./ConsoleUtilitiesHeadofficeServiceOutletLayout";
 import ConsoleUtilitiesStateLayout from "./ConsoleUtilitiesStateLayout";
 import ConsoleUtilityServiceOutletLayout from "./ConsoleUtilityServiceOutletLayout";
+import ConsoleUtilitiesLocationLayout from "./ConsoleUtilitiesLocationLayout";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -55,7 +56,7 @@ function LinkTab(props) {
       //label={route.name}
       onClick={(event) => {
         event.preventDefault();
-        history.push(`/crm`);
+        history.push(`/systems/utilities`);
       }}
       {...props}
     />
@@ -121,6 +122,14 @@ function ConsoleUtilitiesLayout({ token }) {
           }}
         />
         <Tab
+          label="Location"
+          {...a11yProps(0)}
+          onClick={(event) => {
+            event.preventDefault();
+            history.push(`/systems/utilities/locations`);
+          }}
+        />
+        <Tab
           label="Service Outlet"
           {...a11yProps(0)}
           onClick={(event) => {
@@ -148,9 +157,12 @@ function ConsoleUtilitiesLayout({ token }) {
         <ConsoleUtilitiesCityLayout token={token} />
       </TabPanel>
       <TabPanel value={value} index={3}>
-        <ConsoleUtilityServiceOutletLayout token={token} />
+        <ConsoleUtilitiesLocationLayout token={token} />
       </TabPanel>
       <TabPanel value={value} index={4}>
+        <ConsoleUtilityServiceOutletLayout token={token} />
+      </TabPanel>
+      <TabPanel value={value} index={5}>
         <ConsoleUtilitiesHeadofficeServiceOutletLayout token={token} />
       </TabPanel>
     </div>

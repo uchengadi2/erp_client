@@ -10,8 +10,8 @@ import DialogContent from "@material-ui/core/DialogContent";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import history from "../../../../history";
 
-import StateList from "../../../console/utilities/states/StateList";
-import StateFormContainer from "../../../console/utilities/states/StateFormContainer";
+import LocationList from "../../../console/utilities/locations/LocationList";
+import LocationFormContainer from "../../../console/utilities/locations/LocationFormContainer";
 import CountryFilter from "../../headerFilters/CountryFilter";
 
 const useStyles = makeStyles((theme) => ({
@@ -60,7 +60,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function ConsoleUtilitiesStateLayout({ token, userId }) {
+function ConsoleUtilitiesLocationLayout({ token, userId }) {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const theme = useTheme();
@@ -106,15 +106,15 @@ function ConsoleUtilitiesStateLayout({ token, userId }) {
               className={classes.addButton}
               onClick={() => [
                 setOpen(true),
-                history.push("/systems/utilities/states/new"),
+                history.push("/systems/utilities/locations/new"),
               ]}
             >
-              Add State
+              Add Location
             </Button>
           </Toolbar>
         </Grid>
         <Grid item className={classes.contentContainer}>
-          <StateList token={token} userId={userId} />
+          <LocationList token={token} userId={userId} />
         </Grid>
       </Grid>
       <Dialog
@@ -123,11 +123,11 @@ function ConsoleUtilitiesStateLayout({ token, userId }) {
         open={open}
         onClose={() => [
           setOpen(false),
-          history.push("/systems/utilities/states"),
+          history.push("/systems/utilities/locations"),
         ]}
       >
         <DialogContent>
-          <StateFormContainer
+          <LocationFormContainer
             token={token}
             userId={userId}
             handleDialogOpenStatus={handleDialogOpenStatus}
@@ -156,4 +156,4 @@ function ConsoleUtilitiesStateLayout({ token, userId }) {
   );
 }
 
-export default ConsoleUtilitiesStateLayout;
+export default ConsoleUtilitiesLocationLayout;
