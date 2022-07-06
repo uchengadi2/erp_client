@@ -3,7 +3,7 @@ import { Field, reduxForm } from "redux-form";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
-import { TextField } from "@material-ui/core";
+import { TextField, Typography } from "@material-ui/core";
 import Box from "@material-ui/core/Box";
 import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
@@ -283,7 +283,7 @@ function CountryForm(props) {
           style={{ color: "blue", fontSize: "1.5em" }}
           component="legend"
         >
-          Enter New Country Details
+          <Typography variant="subtitle1">Enter New Country Details</Typography>
         </FormLabel>
       </Grid>
       <Box

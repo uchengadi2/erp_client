@@ -246,7 +246,7 @@ function StateForm(props) {
           style={{ color: "blue", fontSize: "1.5em" }}
           component="legend"
         >
-          <Typography variant="h5">Enter New State Details</Typography>
+          <Typography variant="subtitle1">Enter State Details</Typography>
         </FormLabel>
       </Grid>
       <Box

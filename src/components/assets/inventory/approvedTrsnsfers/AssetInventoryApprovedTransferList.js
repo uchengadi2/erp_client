@@ -27,7 +27,7 @@ class AssetInventoryApprovedTransferList extends React.Component {
     };
   }
   componentDidMount() {
-    this.props.fetchOrders(this.props.token, this.props.status);
+    //this.props.fetchOrders(this.props.token, this.props.status);
   }
 
   handleDialogOpenStatus = () => {

@@ -5,29 +5,24 @@ import DialogContent from "@material-ui/core/DialogContent";
 import EditRoundedIcon from "@material-ui/icons/EditRounded";
 import DeleteRoundedIcon from "@material-ui/icons/DeleteRounded";
 import CancelRoundedIcon from "@material-ui/icons/CancelRounded";
-import AssignmentIcon from "@material-ui/icons/Assignment";
 import Typography from "@material-ui/core/Typography";
 import history from "../../../../history";
-import { fetchOrders } from "../../../../actions";
+import { fetchCities } from "../../../../actions";
 import DataGridContainer from "../../../DataGridContainer";
-// import OrderAssignmentFormContainer from "./OrderAssignmentFormContainer";
-// import OrdersEdit from "./OrdersEdit";
-// import OrderDelete from "./OrdersDelete";
 
-class AssetsStocksList extends React.Component {
+class SupplierList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       editOpen: false,
       deleteOpen: false,
-      cancelOpen: false,
-      assignOpen: false,
+      blacklistOpen: false,
       id: null,
       params: {},
     };
   }
   componentDidMount() {
-    //this.props.fetchOrders(this.props.token, this.props.status);
+    this.props.fetchCities(this.props.token);
   }
 
   handleDialogOpenStatus = () => {
@@ -49,11 +44,11 @@ class AssetsStocksList extends React.Component {
           open={this.state.editOpen}
           onClose={() => [
             this.setState({ editOpen: false }),
-            history.push("/assets/stocks"),
+            history.push("/crm/users/supplierusers"),
           ]}
         >
           <DialogContent>
-            {/* <OrdersEdit
+            {/* <CityEdit
               token={this.props.token}
               params={this.state.params}
               handleEditDialogOpenStatus={this.handleEditDialogOpenStatus}
@@ -73,11 +68,11 @@ class AssetsStocksList extends React.Component {
           open={this.state.deleteOpen}
           onClose={() => [
             this.setState({ deleteOpen: false }),
-            history.push(`/assets/stocks`),
+            history.push(`/crm/users/supplierusers`),
           ]}
         >
           <DialogContent>
-            {/* <OrderDelete
+            {/* <CityDelete
               token={this.props.token}
               id={this.state.id}
               handleDialogOpenStatus={this.handleDialogOpenStatus}
@@ -88,70 +83,34 @@ class AssetsStocksList extends React.Component {
     );
   };
 
-  renderCancelDialogForm = () => {
+  renderBlackListDialogForm = () => {
     //token will be used here
     return (
       <>
         <Dialog
           //style={{ zIndex: 1302 }}
-          open={this.state.cancelOpen}
+          open={this.state.blacklistOpen}
           onClose={() => [
-            this.setState({ cancelOpen: false }),
-            history.push(`/assets/stocks`),
+            this.setState({ blacklistOpen: false }),
+            history.push(`/crm/users/supplierusers`),
           ]}
         >
           <DialogContent>
-            <Typography>This is the cancel dialog</Typography>
+            <Typography>This is the blacklist dialog</Typography>
           </DialogContent>
         </Dialog>
       </>
     );
   };
-
-  renderAssignOrderDialogForm = () => {
-    //token will be used here
-    return (
-      <>
-        <Dialog
-          //style={{ zIndex: 1302 }}
-          open={this.state.assignOpen}
-          onClose={() => [
-            this.setState({ assignOpen: false }),
-            history.push(`/assets/stocks`),
-          ]}
-        >
-          <DialogContent>
-            {/* <OrderAssignmentFormContainer
-              token={this.props.token}
-              params={this.state.params}
-              handleEditDialogOpenStatus={this.handleEditDialogOpenStatus}
-            /> */}
-          </DialogContent>
-        </Dialog>
-      </>
-    );
-  };
-
-  renderOrdersList = () => {
+  renderCitiesList = () => {
     let rows = [];
     let counter = 0;
     const columns = [
-      { field: "numbering", headerName: "S/n", width: 60 },
-      { field: "orderNumber", headerName: "Order Number", width: 150 },
-      { field: "dateOrdered", headerName: "Date Ordered", width: 100 },
-      { field: "orderedQuantity", headerName: "Ordered Quantity", width: 80 },
-      { field: "status", headerName: "Status", width: 100 },
-      { field: "category", headerName: "Category", width: 150 },
-      {
-        field: "consignmentCountry",
-        headerName: "Source Country",
-        width: 150,
-      },
-      {
-        field: "destinationCountry",
-        headerName: "Destination Country",
-        width: 150,
-      },
+      { field: "numbering", headerName: "S/n", width: 100 },
+      { field: "name", headerName: "City Name", width: 300 },
+      { field: "description", headerName: "Description", width: 350 },
+      { field: "country", headerName: "Country", width: 250 },
+      { field: "security", headerName: "Security Status", width: 70 },
       {
         field: "editaction",
         headerName: "",
@@ -167,43 +126,25 @@ class AssetsStocksList extends React.Component {
                   id: params.id,
                   params: params.row,
                 }),
-                history.push(`/assets/stocks/edit/${params.id}`),
+                history.push(`/crm/users/supplierusers/edit/${params.id}`),
               ]}
             />
           </strong>
         ),
       },
       {
-        field: "cancelorder",
+        field: "blacklistaction",
         headerName: "",
         width: 30,
-        description: "Cancel Order",
+        description: "Blacklist city",
         renderCell: (params) => (
           <strong>
             {/* {params.value.getFullYear()} */}
             <CancelRoundedIcon
               style={{ color: "black" }}
               onClick={() => [
-                this.setState({ cancelOpen: true, id: params.id }),
-                history.push(`/assets/stocks/cancel/${params.id}`),
-              ]}
-            />
-          </strong>
-        ),
-      },
-      {
-        field: "assignorder",
-        headerName: "",
-        width: 30,
-        description: "Assign Order",
-        renderCell: (params) => (
-          <strong>
-            {/* {params.value.getFullYear()} */}
-            <AssignmentIcon
-              style={{ color: "black" }}
-              onClick={() => [
-                this.setState({ assignOpen: true, id: params.id }),
-                history.push(`/assets/stocks/assign/${params.id}`),
+                this.setState({ blacklistOpen: true, id: params.id }),
+                history.push(`/crm/users/supplierusers/blacklist/${params.id}`),
               ]}
             />
           </strong>
@@ -221,28 +162,24 @@ class AssetsStocksList extends React.Component {
               style={{ color: "red" }}
               onClick={() => [
                 this.setState({ deleteOpen: true, id: params.id }),
-                history.push(`/assets/stocks/delete/${params.id}`),
+                history.push(`/crm/users/supplierusers/delete/${params.id}`),
               ]}
             />
           </strong>
         ),
       },
     ];
-    // this.props.orders.map((order) => {
-    //   console.log("these are the orderrrrnew:", order);
-    //   let row = {
-    //     numbering: ++counter,
-    //     id: order.id,
-    //     orderNumber: order.orderNumber,
-    //     dateOrdered: order.dateOrdered,
-    //     orderedQuantity: order.orderQuantity,
-    //     status: order.status,
-    //     consignmentCountry: order.consignmentCountry[0],
-    //     destinationCountry: order.destinationCountry[0],
-    //     category: order.category,
-    //   };
-    //   rows.push(row);
-    // });
+    this.props.cities.map((city) => {
+      let row = {
+        numbering: ++counter,
+        id: city.id,
+        name: city.name,
+        description: city.description,
+        country: city.country[0],
+        security: city.securityStatus,
+      };
+      rows.push(row);
+    });
     return <DataGridContainer columns={columns} rows={rows} />;
   };
 
@@ -251,17 +188,15 @@ class AssetsStocksList extends React.Component {
       <>
         {this.renderDeleteDialogForm()}
         {this.renderEditDialogForm()}
-        {this.renderOrdersList()}
-        {this.renderCancelDialogForm()}
-        {this.renderAssignOrderDialogForm()}
+        {this.renderCitiesList()}
+        {this.renderBlackListDialogForm()}
       </>
     );
   }
 }
 
 const mapStateToProps = (state) => {
-  console.log("this is the state:", state);
-  return { orders: Object.values(state.order) };
+  return { cities: Object.values(state.city) };
 };
 
-export default connect(null, { fetchOrders })(AssetsStocksList);
+export default connect(mapStateToProps, { fetchCities })(SupplierList);
