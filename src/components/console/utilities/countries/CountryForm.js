@@ -36,6 +36,123 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const renderCountryNameField = ({
+  input,
+  label,
+  meta: { touched, error, invalid },
+  type,
+  id,
+  ...custom
+}) => {
+  return (
+    <TextField
+      //error={touched && invalid}
+      helperText="Enter Country Name"
+      variant="outlined"
+      //label={label}
+      id={input.name}
+      defaultValue={input.value}
+      fullWidth
+      //required
+      type={type}
+      {...custom}
+      onChange={input.onChange}
+    />
+  );
+};
+
+const renderCountryCodeField = ({
+  input,
+  label,
+  meta: { touched, error, invalid },
+  type,
+  id,
+  ...custom
+}) => {
+  return (
+    <TextField
+      //error={touched && invalid}
+      helperText="Enter Country Code"
+      variant="outlined"
+      //label={label}
+      id={input.name}
+      defaultValue={input.value}
+      fullWidth
+      //required
+      type={type}
+      {...custom}
+      onChange={input.onChange}
+    />
+  );
+};
+
+const renderCountryDescriptionField = ({
+  input,
+  label,
+  meta: { touched, error, invalid },
+  type,
+  id,
+  ...custom
+}) => {
+  return (
+    <TextField
+      //error={touched && invalid}
+      helperText="Provide a description of this country"
+      variant="outlined"
+      //label={label}
+      id={input.name}
+      defaultValue={input.value}
+      fullWidth
+      //required
+      type={type}
+      {...custom}
+      multiline={true}
+      minRows={4}
+      onChange={input.onChange}
+    />
+  );
+};
+
+const renderCountryFlagField = ({
+  floatingLabelText,
+  input,
+  label,
+  meta: { touched, error, invalid },
+  type,
+  id,
+  ...custom
+}) => {
+  // if (input.value && input.value[0] && input.value[0].name) {
+  //   floatingLabelText = input.value[0].name;
+  // }
+  delete input.value;
+  return (
+    <TextField
+      id={input.name}
+      variant="outlined"
+      type={type}
+      fullWidth
+      style={{ marginTop: 20 }}
+      helperText="Upload Country Flag"
+      {...custom}
+      onChange={input.onChange}
+    />
+  );
+};
+
+//script to upload multiple images at once
+let images = [];
+const uploadScreenshotFile = (event) => {
+  for (let size = 0; size < event.target.files.length; size++) {
+    console.log("Selected file:", event.target.files[size]);
+    let file = event.target.files[size];
+    console.log("uploading screenshot file...", file);
+    images.push(file);
+
+    // Do necessary request to upload here.......
+  }
+};
+
 function CountryForm(props) {
   const classes = useStyles();
 
@@ -48,64 +165,6 @@ function CountryForm(props) {
 
   const handleRegionChange = (event) => {
     setRegion(event.target.value);
-  };
-
-  const renderCountryNameField = ({
-    input,
-    label,
-    meta: { touched, error, invalid },
-    type,
-    id,
-    ...custom
-  }) => {
-    return (
-      <TextField
-        //error={touched && invalid}
-        helperText="Enter Country Name"
-        variant="outlined"
-        //label={label}
-        id={input.name}
-        //value={formInput.name}
-        fullWidth
-        //required
-        type={type}
-        {...custom}
-        {...input}
-
-        // style={{ marginTop: 10 }}
-
-        //onChange={handleInput}
-      />
-    );
-  };
-
-  const renderCountryCodeField = ({
-    input,
-    label,
-    meta: { touched, error, invalid },
-    type,
-    id,
-    ...custom
-  }) => {
-    return (
-      <TextField
-        //error={touched && invalid}
-        helperText="Enter Country Code"
-        variant="outlined"
-        //label={label}
-        id={input.name}
-        //value={formInput.name}
-        fullWidth
-        //required
-        type={type}
-        {...custom}
-        {...input}
-
-        // style={{ marginTop: 10 }}
-
-        //onChange={handleInput}
-      />
-    );
   };
 
   const renderContinentField = ({
@@ -186,79 +245,6 @@ function CountryForm(props) {
         </FormControl>
       </Box>
     );
-  };
-
-  const renderCountryDescriptionField = ({
-    input,
-    label,
-    meta: { touched, error, invalid },
-    type,
-    id,
-    ...custom
-  }) => {
-    return (
-      <TextField
-        //error={touched && invalid}
-        helperText="Provide a description of this country"
-        variant="outlined"
-        //label={label}
-        id={input.name}
-        //value={formInput.name}
-        fullWidth
-        //required
-        type={type}
-        {...custom}
-        multiline={true}
-        minRows={4}
-        {...input}
-
-        // style={{ marginTop: 10 }}
-
-        //onChange={handleInput}
-      />
-    );
-  };
-
-  const renderCountryFlagField = ({
-    floatingLabelText,
-    input,
-    label,
-    meta: { touched, error, invalid },
-    type,
-    id,
-    ...custom
-  }) => {
-    // if (input.value && input.value[0] && input.value[0].name) {
-    //   floatingLabelText = input.value[0].name;
-    // }
-    delete input.value;
-    return (
-      <TextField
-        id={input.name}
-        variant="outlined"
-        type={type}
-        fullWidth
-        style={{ marginTop: 20 }}
-        helperText="Upload Country Flag"
-        {...custom}
-        {...input}
-
-        // inputProps={{ type: "file" }}
-      />
-    );
-  };
-
-  //script to upload multiple images at once
-  let images = [];
-  const uploadScreenshotFile = (event) => {
-    for (let size = 0; size < event.target.files.length; size++) {
-      console.log("Selected file:", event.target.files[size]);
-      let file = event.target.files[size];
-      console.log("uploading screenshot file...", file);
-      images.push(file);
-
-      // Do necessary request to upload here.......
-    }
   };
 
   const onSubmit = (formValues) => {

@@ -40,6 +40,90 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const renderDescriptionField = ({
+  input,
+  label,
+  meta: { touched, error, invalid },
+  type,
+  id,
+  ...custom
+}) => {
+  return (
+    <TextField
+      error={touched && invalid}
+      //placeholder="category description"
+      variant="outlined"
+      helperText="Describe the city"
+      label={label}
+      id={input.name}
+      // value={formInput.description}
+      defaultValue={input.value}
+      fullWidth
+      type={type}
+      style={{ marginTop: 20 }}
+      multiline={true}
+      minRows={3}
+      {...custom}
+      // {...input}
+      onChange={input.onChange}
+    />
+  );
+};
+
+const renderNameField = ({
+  input,
+  label,
+  meta: { touched, error, invalid },
+  type,
+  id,
+  ...custom
+}) => {
+  return (
+    <TextField
+      //error={touched && invalid}
+      helperText="Enter the name of the city"
+      variant="outlined"
+      label={label}
+      id={input.name}
+      defaultValue={input.value}
+      fullWidth
+      //required
+      type={type}
+      {...custom}
+      // {...input}
+
+      onChange={input.onChange}
+    />
+  );
+};
+
+const renderCityCodeField = ({
+  input,
+  label,
+  meta: { touched, error, invalid },
+  type,
+  id,
+  ...custom
+}) => {
+  return (
+    <TextField
+      //error={touched && invalid}
+      helperText="Enter the code for this City"
+      variant="outlined"
+      label={label}
+      id={input.name}
+      defaultValue={input.value}
+      fullWidth
+      //required
+      type={type}
+      {...custom}
+      // {...input}
+
+      onChange={input.onChange}
+    />
+  );
+};
+
 function CityForm(props) {
   const classes = useStyles();
   const [state, setState] = useState("");
@@ -118,60 +202,6 @@ function CityForm(props) {
     });
   };
 
-  const renderNameField = ({
-    input,
-    label,
-    meta: { touched, error, invalid },
-    type,
-    id,
-    ...custom
-  }) => {
-    return (
-      <TextField
-        //error={touched && invalid}
-        helperText="Enter the name of the city"
-        variant="outlined"
-        label={label}
-        id={input.name}
-        //value={formInput.name}
-        fullWidth
-        //required
-        type={type}
-        {...custom}
-        {...input}
-
-        //onChange={handleInput}
-      />
-    );
-  };
-
-  const renderCityCodeField = ({
-    input,
-    label,
-    meta: { touched, error, invalid },
-    type,
-    id,
-    ...custom
-  }) => {
-    return (
-      <TextField
-        //error={touched && invalid}
-        helperText="Enter the code for this City"
-        variant="outlined"
-        label={label}
-        id={input.name}
-        //value={formInput.name}
-        fullWidth
-        //required
-        type={type}
-        {...custom}
-        {...input}
-
-        //onChange={handleInput}
-      />
-    );
-  };
-
   const renderStateField = ({
     input,
     label,
@@ -229,35 +259,6 @@ function CityForm(props) {
           <FormHelperText>Select Country where city is located</FormHelperText>
         </FormControl>
       </Box>
-    );
-  };
-
-  const renderDescriptionField = ({
-    input,
-    label,
-    meta: { touched, error, invalid },
-    type,
-    id,
-    ...custom
-  }) => {
-    return (
-      <TextField
-        error={touched && invalid}
-        //placeholder="category description"
-        variant="outlined"
-        helperText="Describe the city"
-        label={label}
-        id={input.name}
-        // value={formInput.description}
-        fullWidth
-        type={type}
-        style={{ marginTop: 20 }}
-        multiline={true}
-        minRows={3}
-        {...custom}
-        {...input}
-        // onChange={handleInput}
-      />
     );
   };
 

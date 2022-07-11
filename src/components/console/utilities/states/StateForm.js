@@ -36,6 +36,83 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const renderStateNameField = ({
+  input,
+  label,
+  meta: { touched, error, invalid },
+  type,
+  id,
+  ...custom
+}) => {
+  return (
+    <TextField
+      //error={touched && invalid}
+      helperText="Enter State Name"
+      variant="outlined"
+      //label={label}
+      id={input.name}
+      defaultValue={input.value}
+      fullWidth
+      //required
+      type={type}
+      {...custom}
+      onChange={input.onChange}
+    />
+  );
+};
+
+const renderStateCodeField = ({
+  input,
+  label,
+  meta: { touched, error, invalid },
+  type,
+  id,
+  ...custom
+}) => {
+  return (
+    <TextField
+      //error={touched && invalid}
+      helperText="Enter State Code"
+      variant="outlined"
+      //label={label}
+      id={input.name}
+      defaultValue={input.value}
+      fullWidth
+      //required
+      type={type}
+      {...custom}
+      onChange={input.onChange}
+    />
+  );
+};
+
+const renderStateDescriptionField = ({
+  input,
+  label,
+  meta: { touched, error, invalid },
+  type,
+  id,
+  ...custom
+}) => {
+  return (
+    <TextField
+      //error={touched && invalid}
+      helperText="Provide a description of this state"
+      variant="outlined"
+      //label={label}
+      id={input.name}
+      defaultValue={input.value}
+      fullWidth
+      //required
+      type={type}
+      {...custom}
+      multiline={true}
+      minRows={4}
+      onChange={input.onChange}
+    />
+  );
+};
+
 function StateForm(props) {
   const classes = useStyles();
 
@@ -77,56 +154,6 @@ function StateForm(props) {
         </MenuItem>
       );
     });
-  };
-
-  const renderStateNameField = ({
-    input,
-    label,
-    meta: { touched, error, invalid },
-    type,
-    id,
-    ...custom
-  }) => {
-    return (
-      <TextField
-        //error={touched && invalid}
-        helperText="Enter State Name"
-        variant="outlined"
-        //label={label}
-        id={input.name}
-        //value={formInput.name}
-        fullWidth
-        //required
-        type={type}
-        {...custom}
-        {...input}
-      />
-    );
-  };
-
-  const renderStateCodeField = ({
-    input,
-    label,
-    meta: { touched, error, invalid },
-    type,
-    id,
-    ...custom
-  }) => {
-    return (
-      <TextField
-        //error={touched && invalid}
-        helperText="Enter State Code"
-        variant="outlined"
-        //label={label}
-        id={input.name}
-        //value={formInput.name}
-        fullWidth
-        //required
-        type={type}
-        {...custom}
-        {...input}
-      />
-    );
   };
 
   const renderCountryField = ({
@@ -196,33 +223,6 @@ function StateForm(props) {
           <FormHelperText>Select Country Region</FormHelperText>
         </FormControl>
       </Box>
-    );
-  };
-
-  const renderStateDescriptionField = ({
-    input,
-    label,
-    meta: { touched, error, invalid },
-    type,
-    id,
-    ...custom
-  }) => {
-    return (
-      <TextField
-        //error={touched && invalid}
-        helperText="Provide a description of this state"
-        variant="outlined"
-        //label={label}
-        id={input.name}
-        //value={formInput.name}
-        fullWidth
-        //required
-        type={type}
-        {...custom}
-        multiline={true}
-        minRows={4}
-        {...input}
-      />
     );
   };
 

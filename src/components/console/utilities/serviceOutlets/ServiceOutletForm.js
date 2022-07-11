@@ -36,6 +36,110 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const renderNameField = ({
+  input,
+  label,
+  meta: { touched, error, invalid },
+  type,
+  id,
+  ...custom
+}) => {
+  return (
+    <TextField
+      //error={touched && invalid}
+      helperText="Enter Service Outlet Name"
+      variant="outlined"
+      //label={label}
+      id={input.name}
+      defaultValue={input.value}
+      fullWidth
+      //required
+      type={type}
+      {...custom}
+      onChange={input.onChange}
+    />
+  );
+};
+
+const renderCodeField = ({
+  input,
+  label,
+  meta: { touched, error, invalid },
+  type,
+  id,
+  ...custom
+}) => {
+  return (
+    <TextField
+      //error={touched && invalid}
+      helperText="SOL Code"
+      variant="outlined"
+      //label={label}
+      id={input.name}
+      defaultValue={input.value}
+      fullWidth
+      //required
+      type={type}
+      {...custom}
+      onChange={input.onChange}
+    />
+  );
+};
+
+const renderDescriptionField = ({
+  input,
+  label,
+  meta: { touched, error, invalid },
+  type,
+  id,
+  ...custom
+}) => {
+  return (
+    <TextField
+      //error={touched && invalid}
+      helperText="Describe Service Outlet"
+      variant="outlined"
+      //label={label}
+      id={input.name}
+      defaultValue={input.value}
+      fullWidth
+      //required
+      type={type}
+      {...custom}
+      multiline={true}
+      minRows={1}
+      onChange={input.onChange}
+    />
+  );
+};
+
+const renderAddressField = ({
+  input,
+  label,
+  meta: { touched, error, invalid },
+  type,
+  id,
+  ...custom
+}) => {
+  return (
+    <TextField
+      //error={touched && invalid}
+      helperText="Enter Address of Service Outlet"
+      variant="outlined"
+      //label={label}
+      id={input.name}
+      defaultValue={input.value}
+      fullWidth
+      //required
+      type={type}
+      {...custom}
+      multiline={true}
+      minRows={1}
+      onChange={input.onChange}
+    />
+  );
+};
+
 function ServiceOutletForm(props) {
   const classes = useStyles();
 
@@ -77,56 +181,6 @@ function ServiceOutletForm(props) {
         </MenuItem>
       );
     });
-  };
-
-  const renderNameField = ({
-    input,
-    label,
-    meta: { touched, error, invalid },
-    type,
-    id,
-    ...custom
-  }) => {
-    return (
-      <TextField
-        //error={touched && invalid}
-        helperText="Enter Service Outlet Name"
-        variant="outlined"
-        //label={label}
-        id={input.name}
-        //value={formInput.name}
-        fullWidth
-        //required
-        type={type}
-        {...custom}
-        {...input}
-      />
-    );
-  };
-
-  const renderCodeField = ({
-    input,
-    label,
-    meta: { touched, error, invalid },
-    type,
-    id,
-    ...custom
-  }) => {
-    return (
-      <TextField
-        //error={touched && invalid}
-        helperText="SOL Code"
-        variant="outlined"
-        //label={label}
-        id={input.name}
-        //value={formInput.name}
-        fullWidth
-        //required
-        type={type}
-        {...custom}
-        {...input}
-      />
-    );
   };
 
   const renderLocationField = ({
@@ -196,60 +250,6 @@ function ServiceOutletForm(props) {
           <FormHelperText>Select City of the Address</FormHelperText>
         </FormControl>
       </Box>
-    );
-  };
-
-  const renderDescriptionField = ({
-    input,
-    label,
-    meta: { touched, error, invalid },
-    type,
-    id,
-    ...custom
-  }) => {
-    return (
-      <TextField
-        //error={touched && invalid}
-        helperText="Describe Service Outlet"
-        variant="outlined"
-        //label={label}
-        id={input.name}
-        //value={formInput.name}
-        fullWidth
-        //required
-        type={type}
-        {...custom}
-        multiline={true}
-        minRows={1}
-        {...input}
-      />
-    );
-  };
-
-  const renderAddressField = ({
-    input,
-    label,
-    meta: { touched, error, invalid },
-    type,
-    id,
-    ...custom
-  }) => {
-    return (
-      <TextField
-        //error={touched && invalid}
-        helperText="Enter Address of Service Outlet"
-        variant="outlined"
-        //label={label}
-        id={input.name}
-        //value={formInput.name}
-        fullWidth
-        //required
-        type={type}
-        {...custom}
-        multiline={true}
-        minRows={1}
-        {...input}
-      />
     );
   };
 

@@ -38,6 +38,110 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const renderEmailField = ({
+  input,
+  label,
+  meta: { touched, error, invalid },
+  type,
+  id,
+  ...custom
+}) => {
+  return (
+    <TextField
+      //error={touched && invalid}
+      helperText="Enter user email address"
+      variant="outlined"
+      label={label}
+      id={input.name}
+      defaultValue={input.value}
+      fullWidth
+      //required
+      type={type}
+      {...custom}
+      style={{ marginTop: 15 }}
+      onChange={input.onChange}
+    />
+  );
+};
+
+const renderPasswordField = ({
+  input,
+  label,
+  meta: { touched, error, invalid },
+  type,
+  id,
+  ...custom
+}) => {
+  return (
+    <TextField
+      //error={touched && invalid}
+      helperText="Enter user password"
+      variant="outlined"
+      label={label}
+      id={input.name}
+      defaultValue={input.value}
+      fullWidth
+      //required
+      type={type}
+      {...custom}
+      style={{ marginTop: 15 }}
+      onChange={input.onChange}
+    />
+  );
+};
+
+const renderNameField = ({
+  input,
+  label,
+  meta: { touched, error, invalid },
+  type,
+  id,
+  ...custom
+}) => {
+  return (
+    <TextField
+      //error={touched && invalid}
+      helperText="Enter the name of the user"
+      variant="outlined"
+      label={label}
+      id={input.name}
+      defaultValue={input.value}
+      fullWidth
+      //required
+      type={type}
+      {...custom}
+      style={{ marginTop: 15 }}
+      onChange={input.onChange}
+    />
+  );
+};
+
+const renderConfirmPasswordField = ({
+  input,
+  label,
+  meta: { touched, error, invalid },
+  type,
+  id,
+  ...custom
+}) => {
+  return (
+    <TextField
+      //error={touched && invalid}
+      helperText="Re-enter password for confirmation"
+      variant="outlined"
+      label={label}
+      id={input.name}
+      defaultValue={input.value}
+      fullWidth
+      //required
+      type={type}
+      {...custom}
+      onChange={input.onChange}
+      style={{ marginTop: 15 }}
+    />
+  );
+};
+
 function CustomerUserForm(props) {
   const classes = useStyles();
   const [role, setRole] = useState("");
@@ -52,34 +156,6 @@ function CustomerUserForm(props) {
 
   const handleTypeChange = (event) => {
     setValue(event.target.value);
-  };
-
-  const renderNameField = ({
-    input,
-    label,
-    meta: { touched, error, invalid },
-    type,
-    id,
-    ...custom
-  }) => {
-    return (
-      <TextField
-        //error={touched && invalid}
-        helperText="Enter the name of the user"
-        variant="outlined"
-        label={label}
-        id={input.name}
-        // value={formInput.name}
-        fullWidth
-        //required
-        type={type}
-        {...custom}
-        style={{ marginTop: 15 }}
-        {...input}
-
-        //onChange={handleInput}
-      />
-    );
   };
 
   const renderUserRoleField = ({
@@ -112,90 +188,6 @@ function CustomerUserForm(props) {
           <FormHelperText>Select User Role</FormHelperText>
         </FormControl>
       </Box>
-    );
-  };
-
-  const renderEmailField = ({
-    input,
-    label,
-    meta: { touched, error, invalid },
-    type,
-    id,
-    ...custom
-  }) => {
-    return (
-      <TextField
-        //error={touched && invalid}
-        helperText="Enter user email address"
-        variant="outlined"
-        label={label}
-        id={input.name}
-        //value={formInput.name}
-        fullWidth
-        //required
-        type={type}
-        {...custom}
-        style={{ marginTop: 15 }}
-        {...input}
-
-        //onChange={handleInput}
-      />
-    );
-  };
-
-  const renderPasswordField = ({
-    input,
-    label,
-    meta: { touched, error, invalid },
-    type,
-    id,
-    ...custom
-  }) => {
-    return (
-      <TextField
-        //error={touched && invalid}
-        helperText="Enter user password"
-        variant="outlined"
-        label={label}
-        id={input.name}
-        //value={formInput.name}
-        fullWidth
-        //required
-        type={type}
-        {...custom}
-        style={{ marginTop: 15 }}
-        {...input}
-
-        //onChange={handleInput}
-      />
-    );
-  };
-
-  const renderConfirmPasswordField = ({
-    input,
-    label,
-    meta: { touched, error, invalid },
-    type,
-    id,
-    ...custom
-  }) => {
-    return (
-      <TextField
-        //error={touched && invalid}
-        helperText="Re-enter password for confirmation"
-        variant="outlined"
-        label={label}
-        id={input.name}
-        //value={formInput.name}
-        fullWidth
-        //required
-        type={type}
-        {...custom}
-        {...input}
-        style={{ marginTop: 15 }}
-
-        //onChange={handleInput}
-      />
     );
   };
 
