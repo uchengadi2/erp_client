@@ -35,6 +35,205 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const renderAccountOwnershipTypeField = ({
+  input,
+  label,
+  meta: { touched, error, invalid },
+  type,
+  id,
+  ...custom
+}) => {
+  return (
+    <TextField
+      error={touched && invalid}
+      //placeholder="category description"
+      variant="outlined"
+      helperText="Account Ownership Type"
+      label={label}
+      id={input.name}
+      name={input.name}
+      //defaultValue={accountOwnershipType}
+      defaultValue={"asset"}
+      fullWidth
+      type={type}
+      style={{ marginTop: 20 }}
+      {...custom}
+      // {...input}
+      onChange={input.onChange}
+      disabled
+    />
+  );
+};
+
+const renderDescriptionField = ({
+  input,
+  label,
+  meta: { touched, error, invalid },
+  type,
+  id,
+  ...custom
+}) => {
+  return (
+    <TextField
+      error={touched && invalid}
+      //placeholder="category description"
+      variant="outlined"
+      helperText="Describe the Account"
+      label={label}
+      id={input.name}
+      name={input.name}
+      defaultValue={input.value}
+      fullWidth
+      type={type}
+      style={{ marginTop: 10 }}
+      multiline={true}
+      minRows={1}
+      {...custom}
+      // {...input}
+      onChange={input.onChange}
+    />
+  );
+};
+
+const renderMemoField = ({
+  input,
+  label,
+  meta: { touched, error, invalid },
+  type,
+  id,
+  ...custom
+}) => {
+  return (
+    <TextField
+      error={touched && invalid}
+      //placeholder="category description"
+      variant="outlined"
+      helperText="Memo"
+      label={label}
+      id={input.name}
+      name={input.name}
+      defaultValue={input.value}
+      fullWidth
+      type={type}
+      style={{ marginTop: 10 }}
+      multiline={true}
+      minRows={1}
+      {...custom}
+      // {...input}
+      onChange={input.onChange}
+    />
+  );
+};
+
+const renderNameField = ({
+  input,
+  label,
+  meta: { touched, error, invalid },
+  type,
+  id,
+  ...custom
+}) => {
+  return (
+    <TextField
+      //error={touched && invalid}
+      helperText="Enter Sub Ledger Owner Name"
+      variant="outlined"
+      label={label}
+      id={input.name}
+      defaultValue={input.value}
+      fullWidth
+      //required
+      type={type}
+      {...custom}
+      // {...input}
+      onChange={input.onChange}
+    />
+  );
+};
+
+const renderSubHeadCodeField = ({
+  input,
+  label,
+  meta: { touched, error, invalid },
+  type,
+  id,
+  ...custom
+}) => {
+  return (
+    <TextField
+      //error={touched && invalid}
+      helperText="Enter Sub Ledger Title"
+      variant="outlined"
+      label={label}
+      id={input.name}
+      defaultValue={input.value}
+      //value={input.value}
+      fullWidth
+      //required
+      type={type}
+      {...custom}
+      // {...input}
+      onChange={input.onChange}
+    />
+  );
+};
+
+const renderCreditLimitAmountField = ({
+  input,
+  label,
+  meta: { touched, error, invalid },
+  type,
+  id,
+  ...custom
+}) => {
+  return (
+    <TextField
+      error={touched && invalid}
+      //placeholder="category description"
+      variant="outlined"
+      helperText="Enter Cr Limit Amount"
+      label={label}
+      id={input.name}
+      name={input.name}
+      defaultValue={input.value}
+      fullWidth
+      type={type}
+      style={{ marginTop: 20 }}
+      {...custom}
+      // {...input}
+      onChange={input.onChange}
+    />
+  );
+};
+
+const renderDebitLimitAmountField = ({
+  input,
+  label,
+  meta: { touched, error, invalid },
+  type,
+  id,
+  ...custom
+}) => {
+  return (
+    <TextField
+      error={touched && invalid}
+      //placeholder="category description"
+      variant="outlined"
+      helperText="Enter Dr Limit Amount"
+      label={label}
+      id={input.name}
+      name={input.name}
+      defaultValue={input.value}
+      fullWidth
+      type={type}
+      style={{ marginTop: 20 }}
+      {...custom}
+      // {...input}
+      onChange={input.onChange}
+    />
+  );
+};
+
 function AccountsLedgerSubLedgerForm(props) {
   const classes = useStyles();
   const [name, setName] = useState();
@@ -59,115 +258,6 @@ function AccountsLedgerSubLedgerForm(props) {
 
   const handleAccountOwnershipTypeChange = (event) => {
     setAccountOwnershipType(event.target.value);
-  };
-
-  const renderNameField = ({
-    input,
-    label,
-    meta: { touched, error, invalid },
-    type,
-    id,
-    ...custom
-  }) => {
-    return (
-      <TextField
-        //error={touched && invalid}
-        helperText="Enter Sub Ledger Owner Name"
-        variant="outlined"
-        label={label}
-        id={input.name}
-        defaultValue={input.value}
-        fullWidth
-        //required
-        type={type}
-        {...custom}
-        // {...input}
-        onChange={input.onChange}
-      />
-    );
-  };
-
-  const renderSubHeadCodeField = ({
-    input,
-    label,
-    meta: { touched, error, invalid },
-    type,
-    id,
-    ...custom
-  }) => {
-    return (
-      <TextField
-        //error={touched && invalid}
-        helperText="Enter Sub Ledger Title"
-        variant="outlined"
-        label={label}
-        id={input.name}
-        defaultValue={input.value}
-        //value={input.value}
-        fullWidth
-        //required
-        type={type}
-        {...custom}
-        // {...input}
-        onChange={input.onChange}
-      />
-    );
-  };
-
-  const renderCreditLimitAmountField = ({
-    input,
-    label,
-    meta: { touched, error, invalid },
-    type,
-    id,
-    ...custom
-  }) => {
-    return (
-      <TextField
-        error={touched && invalid}
-        //placeholder="category description"
-        variant="outlined"
-        helperText="Enter Cr Limit Amount"
-        label={label}
-        id={input.name}
-        name={input.name}
-        defaultValue={input.value}
-        fullWidth
-        type={type}
-        style={{ marginTop: 20 }}
-        {...custom}
-        // {...input}
-        onChange={input.onChange}
-      />
-    );
-  };
-
-  const renderDebitLimitAmountField = ({
-    input,
-    label,
-    meta: { touched, error, invalid },
-    type,
-    id,
-    ...custom
-  }) => {
-    return (
-      <TextField
-        error={touched && invalid}
-        //placeholder="category description"
-        variant="outlined"
-        helperText="Enter Dr Limit Amount"
-        label={label}
-        id={input.name}
-        name={input.name}
-        defaultValue={input.value}
-        fullWidth
-        type={type}
-        style={{ marginTop: 20 }}
-        {...custom}
-        // {...input}
-        onChange={input.onChange}
-      />
-    );
   };
 
   const renderSubGlHeadCodeField = ({
@@ -437,45 +527,6 @@ function AccountsLedgerSubLedgerForm(props) {
     );
   };
 
-  const renderAccountCategoryField = ({
-    input,
-    label,
-    meta: { touched, error, invalid },
-    type,
-    id,
-    ...custom
-  }) => {
-    return (
-      <Box>
-        <FormControl variant="outlined">
-          {/* <InputLabel id="vendor_city">City</InputLabel> */}
-
-          <Select
-            labelId="accountCategory"
-            id="accountCategory"
-            //defaultValue={schemeType}
-            value={serviceOutlet}
-            // onChange={props.handleCountryChange}
-            onChange={handleSchemeTypeChange}
-            label="Account Category"
-            style={{ width: 200, marginTop: 10, height: 50 }}
-            {...input}
-          >
-            <MenuItem value="commodities">Commodities</MenuItem>
-            <MenuItem value="charcoal">Charcoal</MenuItem>
-            <MenuItem value="seafood">Sea Foods</MenuItem>
-            <MenuItem value="processedfoods">Processed Foods</MenuItem>
-
-            {/* {renderItemList()} */}
-          </Select>
-          <FormHelperText style={{ marginLeft: 20 }}>
-            Select Account Category
-          </FormHelperText>
-        </FormControl>
-      </Box>
-    );
-  };
-
   const renderAccountStatusField = ({
     input,
     label,
@@ -512,133 +563,6 @@ function AccountsLedgerSubLedgerForm(props) {
           </FormHelperText>
         </FormControl>
       </Box>
-    );
-  };
-
-  // const renderAccountOwnershipTypeField = ({
-  //   input,
-  //   label,
-  //   meta: { touched, error, invalid },
-  //   type,
-  //   id,
-  //   ...custom
-  // }) => {
-  //   return (
-  //     <Box>
-  //       <FormControl variant="outlined">
-  //         {/* <InputLabel id="vendor_city">City</InputLabel> */}
-
-  //         <Select
-  //           labelId="accountOwnershipType"
-  //           id="accountOwnershipType"
-  //           //defaultValue="asset"
-  //           value={accountOwnershipType}
-  //           // onChange={props.handleCountryChange}
-  //           onChange={handleAccountOwnershipTypeChange}
-  //           label="Account Ownership Type"
-  //           style={{ width: 400, marginTop: 10, height: 50 }}
-  //           {...input}
-  //           disabled
-  //         >
-  //           <MenuItem value="asset">Asset</MenuItem>
-
-  //           {/* {renderItemList()} */}
-  //         </Select>
-  //         <FormHelperText style={{ marginLeft: 20 }}>
-  //           Select Account Ownership Type
-  //         </FormHelperText>
-  //       </FormControl>
-  //     </Box>
-  //   );
-  // };
-
-  const renderAccountOwnershipTypeField = ({
-    input,
-    label,
-    meta: { touched, error, invalid },
-    type,
-    id,
-    ...custom
-  }) => {
-    return (
-      <TextField
-        error={touched && invalid}
-        //placeholder="category description"
-        variant="outlined"
-        helperText="Account Ownership Type"
-        label={label}
-        id={input.name}
-        name={input.name}
-        //defaultValue={accountOwnershipType}
-        defaultValue={"asset"}
-        fullWidth
-        type={type}
-        style={{ marginTop: 20 }}
-        {...custom}
-        // {...input}
-        onChange={input.onChange}
-        disabled
-      />
-    );
-  };
-
-  const renderDescriptionField = ({
-    input,
-    label,
-    meta: { touched, error, invalid },
-    type,
-    id,
-    ...custom
-  }) => {
-    return (
-      <TextField
-        error={touched && invalid}
-        //placeholder="category description"
-        variant="outlined"
-        helperText="Describe the Account"
-        label={label}
-        id={input.name}
-        name={input.name}
-        defaultValue={description}
-        fullWidth
-        type={type}
-        style={{ marginTop: 10 }}
-        multiline={true}
-        minRows={1}
-        {...custom}
-        // {...input}
-        onChange={input.onChange}
-      />
-    );
-  };
-
-  const renderMemoField = ({
-    input,
-    label,
-    meta: { touched, error, invalid },
-    type,
-    id,
-    ...custom
-  }) => {
-    return (
-      <TextField
-        error={touched && invalid}
-        //placeholder="category description"
-        variant="outlined"
-        helperText="Memo"
-        label={label}
-        id={input.name}
-        name={input.name}
-        defaultValue={description}
-        fullWidth
-        type={type}
-        style={{ marginTop: 10 }}
-        multiline={true}
-        minRows={1}
-        {...custom}
-        // {...input}
-        onChange={input.onChange}
-      />
     );
   };
 
