@@ -271,7 +271,9 @@ function CustomerUserForm(props) {
           style={{ color: "blue", fontSize: "1.5em" }}
           component="legend"
         >
-          Create Customer User
+          <Typography variant="subtitle1" style={{ fontSize: "1.0em" }}>
+            Create Customer User
+          </Typography>
         </FormLabel>
       </Grid>
       <Box

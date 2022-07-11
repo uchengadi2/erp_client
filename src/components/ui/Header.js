@@ -395,12 +395,12 @@ const Header = (props) => {
       activeIndex: 4,
       selectedIndex: 43,
     },
-    // {
-    //   name: "Invoices",
-    //   link: "/sales/invoices",
-    //   activeIndex: 4,
-    //   selectedIndex: 44,
-    // },
+    {
+      name: "Invoices",
+      link: "/sales/invoices",
+      activeIndex: 4,
+      selectedIndex: 44,
+    },
     // {
     //   name: "Campaign",
     //   link: "/sales/campaign",
@@ -413,12 +413,12 @@ const Header = (props) => {
       activeIndex: 4,
       selectedIndex: 45,
     },
-    // {
-    //   name: "Utilities",
-    //   link: "/sales/utilities",
-    //   activeIndex: 4,
-    //   selectedIndex: 45,
-    // },
+    {
+      name: "Utilities",
+      link: "/sales/utilities",
+      activeIndex: 4,
+      selectedIndex: 45,
+    },
   ];
 
   const hrOptions = [

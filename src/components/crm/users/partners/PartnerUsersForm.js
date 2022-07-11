@@ -305,7 +305,9 @@ function PartnerUsersForm(props) {
           style={{ color: "blue", fontSize: "1.5em", marginTop: 10 }}
           component="legend"
         >
-          Create Partner User
+          <Typography variant="subtitle1" style={{ fontSize: "1.0em" }}>
+            Create Partner User
+          </Typography>
         </FormLabel>
       </Grid>
       <Box

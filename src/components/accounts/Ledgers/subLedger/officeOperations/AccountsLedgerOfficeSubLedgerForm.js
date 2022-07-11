@@ -707,6 +707,36 @@ function AccountsLedgerOfficeSubLedgerForm(props) {
     );
   };
 
+  const renderAccountOwnershipTypeField = ({
+    input,
+    label,
+    meta: { touched, error, invalid },
+    type,
+    id,
+    ...custom
+  }) => {
+    return (
+      <TextField
+        error={touched && invalid}
+        //placeholder="category description"
+        variant="outlined"
+        helperText="Account Ownership Type"
+        label={label}
+        id={input.name}
+        name={input.name}
+        //defaultValue={accountOwnershipType}
+        defaultValue={"office"}
+        fullWidth
+        type={type}
+        style={{ marginTop: 20 }}
+        {...custom}
+        // {...input}
+        onChange={input.onChange}
+        disabled
+      />
+    );
+  };
+
   const onSubmit = (formValues) => {
     const form = new FormData();
     form.append("name", formValues.name);
@@ -909,17 +939,17 @@ function AccountsLedgerOfficeSubLedgerForm(props) {
               </Grid>
 
               <Grid container direction="row">
-                <Grid item style={{ width: "45%" }}>
+                <Grid item style={{ width: "100%" }}>
                   <Field
                     label=""
-                    id="accountCategory"
-                    name="accountCategory"
+                    id="accountOwnershipType"
+                    name="accountOwnershipType"
                     type="text"
-                    component={renderAccountCategoryField}
+                    component={renderAccountOwnershipTypeField}
                     style={{ marginTop: 10 }}
                   />
                 </Grid>
-                <Grid item style={{ width: "52%", marginLeft: 10 }}>
+                {/* <Grid item style={{ width: "52%", marginLeft: 10 }}>
                   <Field
                     label=""
                     id="accountClass"
@@ -928,7 +958,7 @@ function AccountsLedgerOfficeSubLedgerForm(props) {
                     component={renderAccountClassField}
                     style={{ marginTop: 10 }}
                   />
-                </Grid>
+                </Grid> */}
               </Grid>
               <Grid container direction="row">
                 <Grid item style={{ width: "45%" }}>

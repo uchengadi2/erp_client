@@ -160,19 +160,19 @@ function SchemeCodeForm(props) {
             style={{ width: 400, marginTop: 10, height: 50 }}
             {...input}
           >
-            <MenuItem value="commodities">Commodities</MenuItem>
-            <MenuItem value="charcoal">Charcoal</MenuItem>
-            <MenuItem value="seafood">Sea Foods</MenuItem>
-            <MenuItem value="processedfoods">Processed Foods</MenuItem>
-            <MenuItem value="plantation">Plantation</MenuItem>
-            <MenuItem value="livestock">Livestock</MenuItem>
-            <MenuItem value="minerals">Minerals</MenuItem>
-            <MenuItem value="headofficeaccounts">Head Office Accounts</MenuItem>
-            <MenuItem value="officeaccountbasic">Office Account Basic</MenuItem>
-            <MenuItem value="loans">Loans</MenuItem>
-            <MenuItem value="ranch">Ranch</MenuItem>
-            <MenuItem value="farmlands">Farmlands</MenuItem>
-            <MenuItem value="realestate">Real Estates</MenuItem>
+            <MenuItem value="cmm">Commodities</MenuItem>
+            <MenuItem value="chc">Charcoal</MenuItem>
+            <MenuItem value="sea">Sea Foods</MenuItem>
+            <MenuItem value="pcf">Processed Foods</MenuItem>
+            <MenuItem value="plt">Plantation</MenuItem>
+            <MenuItem value="lvs">Livestock</MenuItem>
+            <MenuItem value="min">Minerals</MenuItem>
+            <MenuItem value="hoa">Head Office Accounts</MenuItem>
+            <MenuItem value="oab">Office Account Basic</MenuItem>
+            <MenuItem value="lon">Loans</MenuItem>
+            <MenuItem value="ran">Ranch</MenuItem>
+            <MenuItem value="fld">Farmlands</MenuItem>
+            <MenuItem value="rle">Real Estates</MenuItem>
             {/* {renderItemList()} */}
           </Select>
           <FormHelperText style={{ marginLeft: 20 }}>

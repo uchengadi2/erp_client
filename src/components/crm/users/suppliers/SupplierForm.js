@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
     width: 100,
     marginLeft: 200,
     marginTop: 30,
-    marginBottom: 20,
+    marginBottom: 10,
     color: "white",
     backgroundColor: theme.palette.common.blue,
     "&:hover": {
@@ -305,7 +305,12 @@ function VendorForm(props) {
           style={{ color: "blue", fontSize: "1.5em", marginTop: 10 }}
           component="legend"
         >
-          Create Supplier User
+          <Typography
+            variant="subtitle1"
+            style={{ fontSize: "1.0em", marginTop: 5 }}
+          >
+            Create Supplier User
+          </Typography>
         </FormLabel>
       </Grid>
       <Box

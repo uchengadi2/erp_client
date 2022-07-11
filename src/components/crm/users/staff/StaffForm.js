@@ -266,12 +266,22 @@ function StaffForm(props) {
 
   return (
     <div className={classes.root}>
+      {/* <Grid item container justifyContent="center">
+        <FormLabel
+          style={{ color: "blue", fontSize: "1.5em" }}
+          component="legend"
+        >
+          <Typography variant="subtitle1">Create Staff User</Typography>
+        </FormLabel>
+      </Grid> */}
       <Grid item container justifyContent="center">
         <FormLabel
           style={{ color: "blue", fontSize: "1.5em" }}
           component="legend"
         >
-          Create Staff User
+          <Typography variant="subtitle1" style={{ fontSize: "1.0em" }}>
+            Create Staff User
+          </Typography>
         </FormLabel>
       </Grid>
       <Box

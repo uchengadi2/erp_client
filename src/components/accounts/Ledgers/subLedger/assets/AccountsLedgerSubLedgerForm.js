@@ -43,6 +43,7 @@ function AccountsLedgerSubLedgerForm(props) {
   const [glHeadCode, setGlHeadCode] = useState();
   const [currency, setCurrency] = useState();
   const [serviceOutlet, setServiceOutlet] = useState();
+  const [accountOwnershipType, setAccountOwnershipType] = useState();
 
   useEffect(() => {}, []);
 
@@ -56,8 +57,8 @@ function AccountsLedgerSubLedgerForm(props) {
     //     props.handleCountryChange(event.target.value);
   };
 
-  const handleOnDescriptionChange = (event) => {
-    setDescription(event.target.value);
+  const handleAccountOwnershipTypeChange = (event) => {
+    setAccountOwnershipType(event.target.value);
   };
 
   const renderNameField = ({
@@ -514,7 +515,44 @@ function AccountsLedgerSubLedgerForm(props) {
     );
   };
 
-  const renderAccountClassField = ({
+  // const renderAccountOwnershipTypeField = ({
+  //   input,
+  //   label,
+  //   meta: { touched, error, invalid },
+  //   type,
+  //   id,
+  //   ...custom
+  // }) => {
+  //   return (
+  //     <Box>
+  //       <FormControl variant="outlined">
+  //         {/* <InputLabel id="vendor_city">City</InputLabel> */}
+
+  //         <Select
+  //           labelId="accountOwnershipType"
+  //           id="accountOwnershipType"
+  //           //defaultValue="asset"
+  //           value={accountOwnershipType}
+  //           // onChange={props.handleCountryChange}
+  //           onChange={handleAccountOwnershipTypeChange}
+  //           label="Account Ownership Type"
+  //           style={{ width: 400, marginTop: 10, height: 50 }}
+  //           {...input}
+  //           disabled
+  //         >
+  //           <MenuItem value="asset">Asset</MenuItem>
+
+  //           {/* {renderItemList()} */}
+  //         </Select>
+  //         <FormHelperText style={{ marginLeft: 20 }}>
+  //           Select Account Ownership Type
+  //         </FormHelperText>
+  //       </FormControl>
+  //     </Box>
+  //   );
+  // };
+
+  const renderAccountOwnershipTypeField = ({
     input,
     label,
     meta: { touched, error, invalid },
@@ -523,33 +561,24 @@ function AccountsLedgerSubLedgerForm(props) {
     ...custom
   }) => {
     return (
-      <Box>
-        <FormControl variant="outlined">
-          {/* <InputLabel id="vendor_city">City</InputLabel> */}
-
-          <Select
-            labelId="accountClass"
-            id="accountClass"
-            //defaultValue={schemeType}
-            value={serviceOutlet}
-            // onChange={props.handleCountryChange}
-            onChange={handleSchemeTypeChange}
-            label="Account Class"
-            style={{ width: 190, marginLeft: 20, marginTop: 10, height: 50 }}
-            {...input}
-          >
-            <MenuItem value="commodities">Commodities</MenuItem>
-            <MenuItem value="charcoal">Charcoal</MenuItem>
-            <MenuItem value="seafood">Sea Foods</MenuItem>
-            <MenuItem value="processedfoods">Processed Foods</MenuItem>
-
-            {/* {renderItemList()} */}
-          </Select>
-          <FormHelperText style={{ marginLeft: 20 }}>
-            Select Account Class
-          </FormHelperText>
-        </FormControl>
-      </Box>
+      <TextField
+        error={touched && invalid}
+        //placeholder="category description"
+        variant="outlined"
+        helperText="Account Ownership Type"
+        label={label}
+        id={input.name}
+        name={input.name}
+        //defaultValue={accountOwnershipType}
+        defaultValue={"asset"}
+        fullWidth
+        type={type}
+        style={{ marginTop: 20 }}
+        {...custom}
+        // {...input}
+        onChange={input.onChange}
+        disabled
+      />
     );
   };
 
@@ -902,17 +931,17 @@ function AccountsLedgerSubLedgerForm(props) {
               </Grid>
 
               <Grid container direction="row">
-                <Grid item style={{ width: "45%" }}>
+                <Grid item style={{ width: "100%" }}>
                   <Field
                     label=""
-                    id="accountCategory"
-                    name="accountCategory"
+                    id="accountOwnershipType"
+                    name="accountOwnershipType"
                     type="text"
-                    component={renderAccountCategoryField}
+                    component={renderAccountOwnershipTypeField}
                     style={{ marginTop: 10 }}
                   />
                 </Grid>
-                <Grid item style={{ width: "52%", marginLeft: 10 }}>
+                {/* <Grid item style={{ width: "52%", marginLeft: 10 }}>
                   <Field
                     label=""
                     id="accountClass"
@@ -921,7 +950,7 @@ function AccountsLedgerSubLedgerForm(props) {
                     component={renderAccountClassField}
                     style={{ marginTop: 10 }}
                   />
-                </Grid>
+                </Grid> */}
               </Grid>
               <Grid container direction="row">
                 <Grid item style={{ width: "45%" }}>

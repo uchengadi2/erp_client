@@ -41,12 +41,17 @@ function AccountUtilityGlCodeForm(props) {
   const [schemeCode, setSchemeCode] = useState();
   const [description, setDescription] = useState();
   const [code, setCode] = useState();
+  const [accountClass, setAccountClass] = useState();
 
   useEffect(() => {}, []);
 
   const handleSchemeTypeChange = (event) => {
     setSchemeCode(event.target.value);
     //     props.handleCountryChange(event.target.value);
+  };
+
+  const handleAccountClassChange = (event) => {
+    setAccountClass(event.target.value);
   };
 
   const handleOnDescriptionChange = (event) => {
@@ -128,7 +133,7 @@ function AccountUtilityGlCodeForm(props) {
         type={type}
         style={{ marginTop: 20 }}
         multiline={true}
-        minRows={6}
+        minRows={4}
         {...custom}
         // {...input}
         onChange={input.onChange}
@@ -183,6 +188,46 @@ function AccountUtilityGlCodeForm(props) {
     );
   };
 
+  const renderAccountClassField = ({
+    input,
+    label,
+    meta: { touched, error, invalid },
+    type,
+    id,
+    ...custom
+  }) => {
+    return (
+      <Box>
+        <FormControl variant="outlined">
+          {/* <InputLabel id="vendor_city">City</InputLabel> */}
+
+          <Select
+            labelId="accountClass"
+            id="accountClass"
+            //defaultValue={schemeType}
+            value={accountClass}
+            // onChange={props.handleCountryChange}
+            onChange={handleAccountClassChange}
+            label="Account Class"
+            style={{ width: 400, marginTop: 10, height: 50 }}
+            {...input}
+          >
+            <MenuItem value="assets">Assets</MenuItem>
+            <MenuItem value="liabilities">Liabilities</MenuItem>
+            <MenuItem value="equity">Equity</MenuItem>
+            <MenuItem value="revenue">Revenue</MenuItem>
+            <MenuItem value="expense">Expense</MenuItem>
+
+            {/* {renderItemList()} */}
+          </Select>
+          <FormHelperText style={{ marginLeft: 20 }}>
+            Select Account Class
+          </FormHelperText>
+        </FormControl>
+      </Box>
+    );
+  };
+
   const onSubmit = (formValues) => {
     const form = new FormData();
     form.append("name", formValues.name);
@@ -204,7 +249,7 @@ function AccountUtilityGlCodeForm(props) {
         // onSubmit={onSubmit}
         sx={{
           width: 400,
-          height: 460,
+          height: 500,
         }}
         noValidate
         autoComplete="off"
@@ -253,6 +298,13 @@ function AccountUtilityGlCodeForm(props) {
             />
           </Grid>
         </Grid>
+        <Field
+          label=""
+          id="accountClass"
+          name="accountClass"
+          type="text"
+          component={renderAccountClassField}
+        />
 
         <Field
           label=""

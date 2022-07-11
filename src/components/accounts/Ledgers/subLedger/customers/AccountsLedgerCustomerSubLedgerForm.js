@@ -514,7 +514,7 @@ function AccountsLedgerCustomerSubLedgerForm(props) {
     );
   };
 
-  const renderAccountClassField = ({
+  const renderAccountOwnershipTypeField = ({
     input,
     label,
     meta: { touched, error, invalid },
@@ -523,33 +523,24 @@ function AccountsLedgerCustomerSubLedgerForm(props) {
     ...custom
   }) => {
     return (
-      <Box>
-        <FormControl variant="outlined">
-          {/* <InputLabel id="vendor_city">City</InputLabel> */}
-
-          <Select
-            labelId="accountClass"
-            id="accountClass"
-            //defaultValue={schemeType}
-            value={serviceOutlet}
-            // onChange={props.handleCountryChange}
-            onChange={handleSchemeTypeChange}
-            label="Account Class"
-            style={{ width: 190, marginLeft: 20, marginTop: 10, height: 50 }}
-            {...input}
-          >
-            <MenuItem value="commodities">Commodities</MenuItem>
-            <MenuItem value="charcoal">Charcoal</MenuItem>
-            <MenuItem value="seafood">Sea Foods</MenuItem>
-            <MenuItem value="processedfoods">Processed Foods</MenuItem>
-
-            {/* {renderItemList()} */}
-          </Select>
-          <FormHelperText style={{ marginLeft: 20 }}>
-            Select Account Class
-          </FormHelperText>
-        </FormControl>
-      </Box>
+      <TextField
+        error={touched && invalid}
+        //placeholder="category description"
+        variant="outlined"
+        helperText="Account Ownership Type"
+        label={label}
+        id={input.name}
+        name={input.name}
+        //defaultValue={accountOwnershipType}
+        defaultValue={"customer"}
+        fullWidth
+        type={type}
+        style={{ marginTop: 20 }}
+        {...custom}
+        // {...input}
+        onChange={input.onChange}
+        disabled
+      />
     );
   };
 
@@ -902,17 +893,17 @@ function AccountsLedgerCustomerSubLedgerForm(props) {
               </Grid>
 
               <Grid container direction="row">
-                <Grid item style={{ width: "45%" }}>
+                <Grid item style={{ width: "100%" }}>
                   <Field
                     label=""
-                    id="accountCategory"
-                    name="accountCategory"
+                    id="accountOwnershipType"
+                    name="accountOwnershipType"
                     type="text"
-                    component={renderAccountCategoryField}
+                    component={renderAccountOwnershipTypeField}
                     style={{ marginTop: 10 }}
                   />
                 </Grid>
-                <Grid item style={{ width: "52%", marginLeft: 10 }}>
+                {/* <Grid item style={{ width: "52%", marginLeft: 10 }}>
                   <Field
                     label=""
                     id="accountClass"
@@ -921,7 +912,7 @@ function AccountsLedgerCustomerSubLedgerForm(props) {
                     component={renderAccountClassField}
                     style={{ marginTop: 10 }}
                   />
-                </Grid>
+                </Grid> */}
               </Grid>
               <Grid container direction="row">
                 <Grid item style={{ width: "45%" }}>
