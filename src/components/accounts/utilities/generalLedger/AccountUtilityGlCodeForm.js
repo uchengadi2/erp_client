@@ -35,13 +35,102 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const renderNameField = ({
+  input,
+  label,
+  meta: { touched, error, invalid },
+  type,
+  id,
+  ...custom
+}) => {
+  return (
+    <TextField
+      //error={touched && invalid}
+      helperText="Enter the new GL Head Code name"
+      variant="outlined"
+      label={label}
+      id={input.name}
+      defaultValue={input.value}
+      fullWidth
+      //required
+      type={type}
+      {...custom}
+      // {...input}
+      onChange={input.onChange}
+    />
+  );
+};
+
+const renderCodeField = ({
+  input,
+  label,
+  meta: { touched, error, invalid },
+  type,
+  id,
+  ...custom
+}) => {
+  return (
+    <TextField
+      //error={touched && invalid}
+      helperText="Enter the new GL Head Code"
+      variant="outlined"
+      label={label}
+      id={input.name}
+      defaultValue={input.value}
+      //value={input.value}
+      fullWidth
+      //required
+      type={type}
+      {...custom}
+      // {...input}
+      onChange={input.onChange}
+    />
+  );
+};
+
+const renderDescriptionField = ({
+  input,
+  label,
+  meta: { touched, error, invalid },
+  type,
+  id,
+  ...custom
+}) => {
+  delete input.value;
+  return (
+    <TextField
+      key={id}
+      error={touched && invalid}
+      //placeholder="enter your description "
+      variant="outlined"
+      helperText="Describe the GL Head Code"
+      label={label}
+      id={input.name}
+      name={input.name}
+      defaultValue={input.value}
+      fullWidth
+      type={type}
+      style={{ marginTop: 20 }}
+      multiline={true}
+      minRows={4}
+      {...custom}
+      // {...input}
+      onChange={input.onChange}
+    />
+  );
+};
+
 function AccountUtilityGlCodeForm(props) {
-  const classes = useStyles();
   const [name, setName] = useState();
   const [schemeCode, setSchemeCode] = useState();
   const [description, setDescription] = useState();
   const [code, setCode] = useState();
   const [accountClass, setAccountClass] = useState();
+
+  const handleAccountClassChange = (event) => {
+    setAccountClass(event.target.value);
+  };
+  const classes = useStyles();
 
   useEffect(() => {}, []);
 
@@ -50,95 +139,8 @@ function AccountUtilityGlCodeForm(props) {
     //     props.handleCountryChange(event.target.value);
   };
 
-  const handleAccountClassChange = (event) => {
-    setAccountClass(event.target.value);
-  };
-
-  const handleOnDescriptionChange = (event) => {
-    setDescription(event.target.value);
-  };
-
-  const renderNameField = ({
-    input,
-    label,
-    meta: { touched, error, invalid },
-    type,
-    id,
-    ...custom
-  }) => {
-    return (
-      <TextField
-        //error={touched && invalid}
-        helperText="Enter the new GL Head Code name"
-        variant="outlined"
-        label={label}
-        id={input.name}
-        defaultValue={input.value}
-        fullWidth
-        //required
-        type={type}
-        {...custom}
-        // {...input}
-        onChange={input.onChange}
-      />
-    );
-  };
-
-  const renderCodeField = ({
-    input,
-    label,
-    meta: { touched, error, invalid },
-    type,
-    id,
-    ...custom
-  }) => {
-    return (
-      <TextField
-        //error={touched && invalid}
-        helperText="Enter the new GL Head Code"
-        variant="outlined"
-        label={label}
-        id={input.name}
-        defaultValue={input.value}
-        //value={input.value}
-        fullWidth
-        //required
-        type={type}
-        {...custom}
-        // {...input}
-        onChange={input.onChange}
-      />
-    );
-  };
-
-  const renderDescriptionField = ({
-    input,
-    label,
-    meta: { touched, error, invalid },
-    type,
-    id,
-    ...custom
-  }) => {
-    return (
-      <TextField
-        error={touched && invalid}
-        //placeholder="category description"
-        variant="outlined"
-        helperText="Describe the GL Head Code"
-        label={label}
-        id={input.name}
-        name={input.name}
-        defaultValue={description}
-        fullWidth
-        type={type}
-        style={{ marginTop: 20 }}
-        multiline={true}
-        minRows={4}
-        {...custom}
-        // {...input}
-        onChange={input.onChange}
-      />
-    );
+  const handleChange = (target) => {
+    setDescription(target.value);
   };
 
   const renderSchemeCodeField = ({
@@ -227,7 +229,6 @@ function AccountUtilityGlCodeForm(props) {
       </Box>
     );
   };
-
   const onSubmit = (formValues) => {
     const form = new FormData();
     form.append("name", formValues.name);

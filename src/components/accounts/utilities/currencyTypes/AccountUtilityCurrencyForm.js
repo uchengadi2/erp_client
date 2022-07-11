@@ -37,6 +37,112 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const renderCurrencyNameField = ({
+  input,
+  label,
+  meta: { touched, error, invalid },
+  type,
+  id,
+  ...custom
+}) => {
+  return (
+    <TextField
+      //error={touched && invalid}
+      helperText="Enter Currency Name"
+      variant="outlined"
+      //label={label}
+      id={input.name}
+      defaultValue={input.value}
+      fullWidth
+      //required
+      type={type}
+      {...custom}
+      // {...input}
+      onChange={input.onChange}
+    />
+  );
+};
+
+const renderCurrencyCodeField = ({
+  input,
+  label,
+  meta: { touched, error, invalid },
+  type,
+  id,
+  ...custom
+}) => {
+  return (
+    <TextField
+      //error={touched && invalid}
+      helperText="Enter Currency Code"
+      variant="outlined"
+      //label={label}
+      id={input.name}
+      defaultValue={input.value}
+      fullWidth
+      //required
+      type={type}
+      {...custom}
+      onChange={input.onChange}
+    />
+  );
+};
+
+const renderCurrencyDescriptionField = ({
+  input,
+  label,
+  meta: { touched, error, invalid },
+  type,
+  id,
+  ...custom
+}) => {
+  return (
+    <TextField
+      //error={touched && invalid}
+      helperText="Provide a description of this currency"
+      variant="outlined"
+      //label={label}
+      id={input.name}
+      defaultValue={input.value}
+      fullWidth
+      //required
+      type={type}
+      {...custom}
+      multiline={true}
+      minRows={4}
+      onChange={input.onChange}
+
+      // style={{ marginTop: 10 }}
+
+      //onChange={handleInput}
+    />
+  );
+};
+
+const renderCurrencySymbolField = ({
+  input,
+  label,
+  meta: { touched, error, invalid },
+  type,
+  id,
+  ...custom
+}) => {
+  delete input.value;
+  return (
+    <TextField
+      id={input.name}
+      variant="outlined"
+      type={type}
+      defaultValue={input.value}
+      fullWidth
+      style={{ marginTop: 20 }}
+      helperText="Upload Currency Symbol"
+      // {...input}
+      onChange={input.onChange}
+    />
+  );
+};
+
 function AccountUtilityCurrencyForm(props) {
   const classes = useStyles();
 
@@ -75,59 +181,6 @@ function AccountUtilityCurrencyForm(props) {
     });
   };
 
-  console.log("this is the country list", countryList);
-
-  const renderCurrencyNameField = ({
-    input,
-    label,
-    meta: { touched, error, invalid },
-    type,
-    id,
-    ...custom
-  }) => {
-    return (
-      <TextField
-        //error={touched && invalid}
-        helperText="Enter Currency Name"
-        variant="outlined"
-        //label={label}
-        id={input.name}
-        defaultValue={input.value}
-        fullWidth
-        //required
-        type={type}
-        {...custom}
-        // {...input}
-        onChange={input.onChange}
-      />
-    );
-  };
-
-  const renderCurrencyCodeField = ({
-    input,
-    label,
-    meta: { touched, error, invalid },
-    type,
-    id,
-    ...custom
-  }) => {
-    return (
-      <TextField
-        //error={touched && invalid}
-        helperText="Enter Currency Code"
-        variant="outlined"
-        //label={label}
-        id={input.name}
-        defaultValue={input.value}
-        fullWidth
-        //required
-        type={type}
-        {...custom}
-        onChange={input.onChange}
-      />
-    );
-  };
-
   const renderCurrencyCountryField = ({
     input,
     label,
@@ -154,61 +207,6 @@ function AccountUtilityCurrencyForm(props) {
           <FormHelperText>Select Country</FormHelperText>
         </FormControl>
       </Box>
-    );
-  };
-
-  const renderCurrencyDescriptionField = ({
-    input,
-    label,
-    meta: { touched, error, invalid },
-    type,
-    id,
-    ...custom
-  }) => {
-    return (
-      <TextField
-        //error={touched && invalid}
-        helperText="Provide a description of this currency"
-        variant="outlined"
-        //label={label}
-        id={input.name}
-        defaultValue={input.value}
-        fullWidth
-        //required
-        type={type}
-        {...custom}
-        multiline={true}
-        minRows={4}
-        onChange={input.onChange}
-
-        // style={{ marginTop: 10 }}
-
-        //onChange={handleInput}
-      />
-    );
-  };
-
-  const renderCurrencySymbolField = ({
-    input,
-    label,
-    meta: { touched, error, invalid },
-    type,
-    id,
-    ...custom
-  }) => {
-    delete input.value;
-    return (
-      <TextField
-        id={input.name}
-        variant="outlined"
-        type={type}
-        defaultValue={input.value}
-        fullWidth
-        style={{ marginTop: 20 }}
-        helperText="Upload Currency Symbol"
-        // {...input}
-        onChange={input.onChange}
-      />
     );
   };
 

@@ -35,6 +35,88 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const renderNameField = ({
+  input,
+  label,
+  meta: { touched, error, invalid },
+  type,
+  id,
+  ...custom
+}) => {
+  return (
+    <TextField
+      //error={touched && invalid}
+      helperText="Enter the Office Operation & Service Name"
+      variant="outlined"
+      label={label}
+      id={input.name}
+      defaultValue={input.value}
+      fullWidth
+      //required
+      type={type}
+      {...custom}
+      // {...input}
+      onChange={input.onChange}
+    />
+  );
+};
+
+const renderCodeField = ({
+  input,
+  label,
+  meta: { touched, error, invalid },
+  type,
+  id,
+  ...custom
+}) => {
+  return (
+    <TextField
+      //error={touched && invalid}
+      helperText="Enter the Office Operation & Service Code"
+      variant="outlined"
+      label={label}
+      id={input.name}
+      defaultValue={input.value}
+      fullWidth
+      //required
+      type={type}
+      {...custom}
+      // {...input}
+      onChange={input.onChange}
+    />
+  );
+};
+
+const renderDescriptionField = ({
+  input,
+  label,
+  meta: { touched, error, invalid },
+  type,
+  id,
+  ...custom
+}) => {
+  return (
+    <TextField
+      error={touched && invalid}
+      //placeholder="category description"
+      variant="outlined"
+      helperText="Describe the Office Operation & Service"
+      label={label}
+      id={input.name}
+      name={input.name}
+      defaultValue={input.value}
+      fullWidth
+      type={type}
+      style={{ marginTop: 20 }}
+      multiline={true}
+      minRows={6}
+      {...custom}
+      // {...input}
+      onChange={input.onChange}
+    />
+  );
+};
+
 function AccountUtilityOfficeOperationAndServicesForm(props) {
   const classes = useStyles();
   const [name, setName] = useState();
@@ -52,61 +134,6 @@ function AccountUtilityOfficeOperationAndServicesForm(props) {
   const handleOnDescriptionChange = (event) => {
     console.log("the vakues:", event.target.value);
     setDescription(event.target.value);
-  };
-  const renderNameField = ({
-    input,
-    label,
-    meta: { touched, error, invalid },
-    type,
-    id,
-    ...custom
-  }) => {
-    return (
-      <TextField
-        //error={touched && invalid}
-        helperText="Enter the Office Operation & Service Name"
-        variant="outlined"
-        label={label}
-        id={input.name}
-        defaultValue={input.value}
-        fullWidth
-        //required
-        type={type}
-        {...custom}
-        // {...input}
-        onChange={input.onChange}
-      />
-    );
-  };
-
-  const renderDescriptionField = ({
-    input,
-    label,
-    meta: { touched, error, invalid },
-    type,
-    id,
-    ...custom
-  }) => {
-    return (
-      <TextField
-        error={touched && invalid}
-        //placeholder="category description"
-        variant="outlined"
-        helperText="Describe the Office Operation & Service"
-        label={label}
-        id={input.name}
-        name={input.name}
-        defaultValue={description}
-        fullWidth
-        type={type}
-        style={{ marginTop: 20 }}
-        multiline={true}
-        minRows={6}
-        {...custom}
-        // {...input}
-        onChange={input.onChange}
-      />
-    );
   };
 
   const onSubmit = (formValues) => {
@@ -130,7 +157,7 @@ function AccountUtilityOfficeOperationAndServicesForm(props) {
         // onSubmit={onSubmit}
         sx={{
           width: 400,
-          height: 370,
+          height: 440,
         }}
         noValidate
         autoComplete="off"
@@ -157,6 +184,13 @@ function AccountUtilityOfficeOperationAndServicesForm(props) {
           name="name"
           type="text"
           component={renderNameField}
+        />
+        <Field
+          label=""
+          id="code"
+          name="code"
+          type="text"
+          component={renderCodeField}
         />
 
         <Field

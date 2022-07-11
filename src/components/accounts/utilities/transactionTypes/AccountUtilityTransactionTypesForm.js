@@ -35,6 +35,88 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const renderTransactionTypeNameField = ({
+  input,
+  label,
+  meta: { touched, error, invalid },
+  type,
+  id,
+  ...custom
+}) => {
+  return (
+    <TextField
+      //error={touched && invalid}
+      helperText="Enter Transaction Type Name"
+      variant="outlined"
+      label={label}
+      id={input.name}
+      defaultValue={input.value}
+      fullWidth
+      //required
+      type={type}
+      {...custom}
+      // {...input}
+      onChange={input.onChange}
+    />
+  );
+};
+
+const renderTransactionTypeCodeField = ({
+  input,
+  label,
+  meta: { touched, error, invalid },
+  type,
+  id,
+  ...custom
+}) => {
+  return (
+    <TextField
+      //error={touched && invalid}
+      helperText="Enter the Transaction Type Code"
+      variant="outlined"
+      label={label}
+      id={input.name}
+      defaultValue={input.value}
+      fullWidth
+      //required
+      type={type}
+      {...custom}
+      // {...input}
+      onChange={input.onChange}
+    />
+  );
+};
+
+const renderTransactionTypeDescriptionField = ({
+  input,
+  label,
+  meta: { touched, error, invalid },
+  type,
+  id,
+  ...custom
+}) => {
+  return (
+    <TextField
+      error={touched && invalid}
+      //placeholder="category description"
+      variant="outlined"
+      helperText="Describe Transaction Type"
+      label={label}
+      id={input.name}
+      name={input.name}
+      defaultValue={input.value}
+      fullWidth
+      type={type}
+      style={{ marginTop: 20 }}
+      multiline={true}
+      minRows={6}
+      {...custom}
+      // {...input}
+      onChange={input.onChange}
+    />
+  );
+};
+
 function AccountUtilityTransactionTypesForm(props) {
   const classes = useStyles();
   const [name, setName] = useState();
@@ -52,87 +134,6 @@ function AccountUtilityTransactionTypesForm(props) {
   const handleOnDescriptionChange = (event) => {
     console.log("the vakues:", event.target.value);
     setDescription(event.target.value);
-  };
-  const renderTransactionTypeNameField = ({
-    input,
-    label,
-    meta: { touched, error, invalid },
-    type,
-    id,
-    ...custom
-  }) => {
-    return (
-      <TextField
-        //error={touched && invalid}
-        helperText="Enter Transaction Type Name"
-        variant="outlined"
-        label={label}
-        id={input.name}
-        defaultValue={input.value}
-        fullWidth
-        //required
-        type={type}
-        {...custom}
-        // {...input}
-        onChange={input.onChange}
-      />
-    );
-  };
-
-  const renderTransactionTypeCodeField = ({
-    input,
-    label,
-    meta: { touched, error, invalid },
-    type,
-    id,
-    ...custom
-  }) => {
-    return (
-      <TextField
-        //error={touched && invalid}
-        helperText="Enter the Transaction Type Code"
-        variant="outlined"
-        label={label}
-        id={input.name}
-        defaultValue={input.value}
-        fullWidth
-        //required
-        type={type}
-        {...custom}
-        // {...input}
-        onChange={input.onChange}
-      />
-    );
-  };
-
-  const renderTransactionTypeDescriptionField = ({
-    input,
-    label,
-    meta: { touched, error, invalid },
-    type,
-    id,
-    ...custom
-  }) => {
-    return (
-      <TextField
-        error={touched && invalid}
-        //placeholder="category description"
-        variant="outlined"
-        helperText="Describe Transaction Type"
-        label={label}
-        id={input.name}
-        name={input.name}
-        defaultValue={description}
-        fullWidth
-        type={type}
-        style={{ marginTop: 20 }}
-        multiline={true}
-        minRows={6}
-        {...custom}
-        // {...input}
-        onChange={input.onChange}
-      />
-    );
   };
 
   const onSubmit = (formValues) => {

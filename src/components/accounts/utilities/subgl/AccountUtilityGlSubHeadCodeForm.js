@@ -35,6 +35,89 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const renderNameField = ({
+  input,
+  label,
+  meta: { touched, error, invalid },
+  type,
+  id,
+  ...custom
+}) => {
+  return (
+    <TextField
+      //error={touched && invalid}
+      helperText="Enter GL SubHead Code name"
+      variant="outlined"
+      label={label}
+      id={input.name}
+      defaultValue={input.value}
+      fullWidth
+      //required
+      type={type}
+      {...custom}
+      // {...input}
+      onChange={input.onChange}
+    />
+  );
+};
+
+const renderSubHeadCodeField = ({
+  input,
+  label,
+  meta: { touched, error, invalid },
+  type,
+  id,
+  ...custom
+}) => {
+  return (
+    <TextField
+      //error={touched && invalid}
+      helperText="Enter GL SubHead Code"
+      variant="outlined"
+      label={label}
+      id={input.name}
+      defaultValue={input.value}
+      //value={input.value}
+      fullWidth
+      //required
+      type={type}
+      {...custom}
+      // {...input}
+      onChange={input.onChange}
+    />
+  );
+};
+
+const renderDescriptionField = ({
+  input,
+  label,
+  meta: { touched, error, invalid },
+  type,
+  id,
+  ...custom
+}) => {
+  return (
+    <TextField
+      error={touched && invalid}
+      //placeholder="category description"
+      variant="outlined"
+      helperText="Describe the GL SubHead Code"
+      label={label}
+      id={input.name}
+      name={input.name}
+      defaultValue={input.value}
+      fullWidth
+      type={type}
+      style={{ marginTop: 20 }}
+      multiline={true}
+      minRows={3}
+      {...custom}
+      // {...input}
+      onChange={input.onChange}
+    />
+  );
+};
+
 function AccountUtilityGlSubHeadCodeForm(props) {
   const classes = useStyles();
   const [name, setName] = useState();
@@ -53,89 +136,6 @@ function AccountUtilityGlSubHeadCodeForm(props) {
 
   const handleOnDescriptionChange = (event) => {
     setDescription(event.target.value);
-  };
-
-  const renderNameField = ({
-    input,
-    label,
-    meta: { touched, error, invalid },
-    type,
-    id,
-    ...custom
-  }) => {
-    return (
-      <TextField
-        //error={touched && invalid}
-        helperText="Enter GL SubHead Code name"
-        variant="outlined"
-        label={label}
-        id={input.name}
-        defaultValue={input.value}
-        fullWidth
-        //required
-        type={type}
-        {...custom}
-        // {...input}
-        onChange={input.onChange}
-      />
-    );
-  };
-
-  const renderSubHeadCodeField = ({
-    input,
-    label,
-    meta: { touched, error, invalid },
-    type,
-    id,
-    ...custom
-  }) => {
-    return (
-      <TextField
-        //error={touched && invalid}
-        helperText="Enter GL SubHead Code"
-        variant="outlined"
-        label={label}
-        id={input.name}
-        defaultValue={input.value}
-        //value={input.value}
-        fullWidth
-        //required
-        type={type}
-        {...custom}
-        // {...input}
-        onChange={input.onChange}
-      />
-    );
-  };
-
-  const renderDescriptionField = ({
-    input,
-    label,
-    meta: { touched, error, invalid },
-    type,
-    id,
-    ...custom
-  }) => {
-    return (
-      <TextField
-        error={touched && invalid}
-        //placeholder="category description"
-        variant="outlined"
-        helperText="Describe the GL SubHead Code"
-        label={label}
-        id={input.name}
-        name={input.name}
-        defaultValue={description}
-        fullWidth
-        type={type}
-        style={{ marginTop: 20 }}
-        multiline={true}
-        minRows={3}
-        {...custom}
-        // {...input}
-        onChange={input.onChange}
-      />
-    );
   };
 
   const renderGlHeadCodeField = ({
