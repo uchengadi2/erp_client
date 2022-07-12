@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { Router, Route, Switch, Redirect } from "react-router-dom";
 import { ThemeProvider } from "@material-ui/core/styles";
+import Snackbar from "@material-ui/core/Snackbar";
 import history from "./../history";
 import theme from "./ui/Theme";
 import useToken from "../custom-hooks/useToken";
-// import UserLogin from "./users/UserLogin";
+import useUserId from "../custom-hooks/useUserId";
+import UserLogin from "./../components/authForms/UserLogin";
 import Header from "./ui/Header";
 import AccountsLedgerLayout from "./ui/Accounts/AccountLedgers/AccountsLedgerLayout";
 import AccountExpenseLayout from "./ui/Accounts/Expenses/AccountExpenseLayout";
@@ -57,12 +59,52 @@ import ConsoleTasksLayout from "./ui/console/tasks/ConsoleTasksLayout";
 
 function App() {
   const { token, setToken } = useToken();
+  const { userId, setUserId } = useUserId();
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [value, setValue] = useState(0);
+  const [alert, setAlert] = useState({
+    open: false,
+    message: "",
+    backgroundColor: "",
+  });
+  // const defaultOptions = {
+  //   loop: true,
+  //   autoplay: false,
+  //   animationData: animationData,
+  //   rendererSettings: {
+  //     preserveAspectRatio: "xMidyMid slice",
+  //   },
+  // };
 
-  // if (!token) {
-  //   return <UserLogin setToken={setToken} />;
-  // }
+  const handleLogoutProcess = () => {
+    setToken({});
+    sessionStorage.removeItem("token");
+  };
+
+  const handleSuccessfulLoginInSnackbar = () => {
+    // setBecomePartnerOpen(false);
+    setAlert({
+      open: true,
+      message: "You have successively logged in",
+      backgroundColor: "#4BB543",
+    });
+  };
+
+  const handleFailedLoginInSnackbar = () => {
+    setAlert({
+      open: true,
+      message:
+        "Could not logged you in. Please ensure your login credentials are correct",
+      backgroundColor: "#FF3232",
+    });
+    //setBecomePartnerOpen(true);
+  };
+
+  console.log("user id id:", userId);
+  console.log("user token is:", token);
+  if (!token) {
+    return <UserLogin setToken={setToken} setUserId={setUserId} />;
+  }
 
   return (
     <>
@@ -73,152 +115,168 @@ function App() {
             setValue={setValue}
             selectedIndex={selectedIndex}
             setSelectedIndex={setSelectedIndex}
+            token={token}
+            userId={userId}
+            setToken={setToken}
+            handleLogoutProcess={handleLogoutProcess}
+            handleSuccessfulLoginInSnackbar={handleSuccessfulLoginInSnackbar}
+            handleFailedLoginInSnackbar={handleFailedLoginInSnackbar}
           />
           ;
           <Switch>
             <Route path="/accounts/ledgers">
-              <AccountsLedgerLayout token={token} />
+              <AccountsLedgerLayout token={token} userId={userId} />
             </Route>
             <Route path="/accounts/expenses">
-              <AccountExpenseLayout token={token} />
+              <AccountExpenseLayout token={token} userId={userId} />
             </Route>
             <Route path="/accounts/inflows">
-              <AccountInflowLayout token={token} />
+              <AccountInflowLayout token={token} userId={userId} />
             </Route>
             <Route path="/accounts/listings">
-              <AccountListingLayout token={token} />
+              <AccountListingLayout token={token} userId={userId} />
             </Route>
             <Route path="/accounts/employees">
-              <AccountEmployeeLayout token={token} />
+              <AccountEmployeeLayout token={token} userId={userId} />
             </Route>
             <Route path="/accounts/transactions">
-              <AccountTransactionsLayout token={token} />
+              <AccountTransactionsLayout token={token} userId={userId} />
             </Route>
             <Route path="/accounts/bankdeposits">
-              <AccountBankDepositLayout token={token} />
+              <AccountBankDepositLayout token={token} userId={userId} />
             </Route>
             <Route path="/accounts/utilities">
-              <AccountUtilitiesLayout token={token} />
+              <AccountUtilitiesLayout token={token} userId={userId} />
             </Route>
             <Route path="/assets/assets">
-              <AssetsAssetLayout token={token} />
+              <AssetsAssetLayout token={token} userId={userId} />
             </Route>
             <Route path="/assets/procurements">
-              <AssetsProcurementLayout token={token} />
+              <AssetsProcurementLayout token={token} userId={userId} />
             </Route>
             <Route path="/assets/depreciations">
-              <AssetDepreciationLayout token={token} />
+              <AssetDepreciationLayout token={token} userId={userId} />
             </Route>
             <Route path="/assets/inventories">
-              <AssetInventoryLayout token={token} />
+              <AssetInventoryLayout token={token} userId={userId} />
             </Route>
             <Route path="/assets/maintenances">
-              <AssetMaintenancesLayout token={token} />
+              <AssetMaintenancesLayout token={token} userId={userId} />
             </Route>
             <Route path="/assets/supplychains">
-              <AssetSupplyChainLayout token={token} />
+              <AssetSupplyChainLayout token={token} userId={userId} />
             </Route>
             <Route path="/assets/dispositions">
-              <AssetDispositionLayout token={token} />
+              <AssetDispositionLayout token={token} userId={userId} />
             </Route>
             <Route path="/assets/locations">
-              <AssetsLocationLayout token={token} />
+              <AssetsLocationLayout token={token} userId={userId} />
             </Route>
             <Route path="/assets/transfers">
-              <AssetTransferAndLeasingLayout token={token} />
+              <AssetTransferAndLeasingLayout token={token} userId={userId} />
             </Route>
             <Route path="/assets/utilities">
-              <AssetUtilityLayout token={token} />
+              <AssetUtilityLayout token={token} userId={userId} />
             </Route>
             <Route path="/crm/users">
-              <CrmUsersLayout token={token} />
+              <CrmUsersLayout token={token} userId={userId} />
             </Route>
             <Route path="/crm/contacts">
-              <CrmContactsLayout token={token} />
+              <CrmContactsLayout token={token} userId={userId} />
             </Route>
             <Route path="/crm/suppliers">
-              <CrmSuppliersLayout token={token} />
+              <CrmSuppliersLayout token={token} userId={userId} />
             </Route>
             <Route path="/crm/partners">
-              <CrmPartnersLayout token={token} />
+              <CrmPartnersLayout token={token} userId={userId} />
             </Route>
             <Route path="/crm/customers">
-              <CrmCustomersLayout token={token} />
+              <CrmCustomersLayout token={token} userId={userId} />
             </Route>
             <Route path="/crm/leads">
-              <CrmLeadsLayout token={token} />
+              <CrmLeadsLayout token={token} userId={userId} />
             </Route>
 
             <Route path="/operations/projects">
-              <OperationsProjectLayout token={token} />
+              <OperationsProjectLayout token={token} userId={userId} />
             </Route>
             <Route path="/operations/utilities">
-              <OperationsUtilityLayout token={token} />
+              <OperationsUtilityLayout token={token} userId={userId} />
             </Route>
             <Route path="/operations/transformations">
-              <OperationsTransformationLayout token={token} />
+              <OperationsTransformationLayout token={token} userId={userId} />
             </Route>
             <Route path="/operations/maintenances">
-              <OperationsMaintenancesLayout token={token} />
+              <OperationsMaintenancesLayout token={token} userId={userId} />
             </Route>
             <Route path="/operations/qualityassurances">
-              <OperationsQualityAssuranceLayout token={token} />
+              <OperationsQualityAssuranceLayout token={token} userId={userId} />
             </Route>
             <Route path="/operations/finishings">
-              <OperationsFinishingLayout token={token} />
+              <OperationsFinishingLayout token={token} userId={userId} />
             </Route>
             <Route path="/sales/products">
-              <SalesProductsLayout token={token} />
+              <SalesProductsLayout token={token} userId={userId} />
             </Route>
             <Route path="/sales/teams">
-              <SalesTeamLayout token={token} />
+              <SalesTeamLayout token={token} userId={userId} />
             </Route>
             <Route path="/sales/tasks">
-              <SalesTasksLayout token={token} />
+              <SalesTasksLayout token={token} userId={userId} />
             </Route>
             <Route path="/sales/sales">
-              <SalesSalesLayout token={token} />
+              <SalesSalesLayout token={token} userId={userId} />
             </Route>
             <Route path="/sales/accounts">
-              <SalesAccountLayout token={token} />
+              <SalesAccountLayout token={token} userId={userId} />
             </Route>
             <Route path="/hr/planning">
-              <HrPlanningLayout token={token} />
+              <HrPlanningLayout token={token} userId={userId} />
             </Route>
             <Route path="/hr/recruitments">
-              <HrRecruitmentLayout token={token} />
+              <HrRecruitmentLayout token={token} userId={userId} />
             </Route>
             <Route path="/hr/compensations">
-              <HrCompensationsLayout token={token} />
+              <HrCompensationsLayout token={token} userId={userId} />
             </Route>
             <Route path="/hr/performances">
-              <HrPerformancesLayout token={token} />
+              <HrPerformancesLayout token={token} userId={userId} />
             </Route>
             <Route path="/hr/leaves">
-              <HrLeavesLayout token={token} />
+              <HrLeavesLayout token={token} userId={userId} />
             </Route>
             <Route path="/hr/exit">
-              <HrExittedLayout token={token} />
+              <HrExittedLayout token={token} userId={userId} />
             </Route>
             <Route path="/hr/selfservices">
-              <HrSelfServicesLayout token={token} />
+              <HrSelfServicesLayout token={token} userId={userId} />
             </Route>
             <Route path="/hr/utilities">
-              <HrUtilityLayout token={token} />
+              <HrUtilityLayout token={token} userId={userId} />
             </Route>
             <Route path="/systems/utilities">
-              <ConsoleUtilitiesLayout token={token} />
+              <ConsoleUtilitiesLayout token={token} userId={userId} />
             </Route>
             <Route path="/systems/roles">
-              <ConsoleRoleLayout token={token} />
+              <ConsoleRoleLayout token={token} userId={userId} />
             </Route>
             <Route path="/systems/tasks">
-              <ConsoleTasksLayout token={token} />
+              <ConsoleTasksLayout token={token} userId={userId} />
             </Route>
             <Route path="/systems/privileges">
-              <ConsolePrivilegesLayout token={token} />
+              <ConsolePrivilegesLayout token={token} userId={userId} />
             </Route>
           </Switch>
+          <Snackbar
+            open={alert.open}
+            message={alert.message}
+            ContentProps={{
+              style: { backgroundColor: alert.backgroundColor },
+            }}
+            anchorOrigin={{ vertical: "top", horizontal: "center" }}
+            onClose={() => setAlert({ ...alert, open: false })}
+            autoHideDuration={4000}
+          />
         </Router>
       </ThemeProvider>
     </>

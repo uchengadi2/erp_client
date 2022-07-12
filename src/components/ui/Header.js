@@ -18,9 +18,13 @@ import MenuIcon from "@material-ui/icons/Menu";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
+import Dialog from "@material-ui/core/Dialog";
+import DialogContent from "@material-ui/core/DialogContent";
+import history from "./../../history";
 
 import logo from "./../../assets/logo.svg";
 import { RouterRounded } from "@material-ui/icons";
+import UserLogout from "../authForms/UserLogout";
 
 function ElevationScroll(props) {
   const { children } = props;
@@ -138,6 +142,7 @@ const Header = (props) => {
 
   const [anchorEl, setAnchorEl] = useState(null);
   const [openMenu, setOpenMenu] = useState(false);
+  const [openLogout, setOpenLogout] = useState(false);
 
   const handleChange = (e, newValue) => {
     props.setValue(newValue);
@@ -1177,14 +1182,44 @@ const Header = (props) => {
     return (
       <Button
         variant="contained"
-        component={Link}
-        to="/logout"
+        //component={Link}
+        //to="/"
         color="secondary"
         className={classes.button}
-        onClick={() => props.setValue(12)}
+        // onClick={() => props.setValue(12)}
+        //onClick={props.handleLogoutProcess}
+        // onClick={() => (
+        //   <UserLogout
+        //     handleLogoutProcess={props.handleLogoutProcess}
+        //     setToken={props.setToken}
+        //   />
+        // )}
+        onClick={() => [setOpenLogout(true), history.push("/")]}
       >
         Sign Out
       </Button>
+    );
+  };
+
+  const renderLogout = () => {
+    return (
+      <Dialog
+        style={{ zIndex: 1302 }}
+        fullScreen
+        open={openLogout}
+        onClose={() => [setOpenLogout(false), history.push("/")]}
+        fullWidth
+        maxWidth="md"
+      >
+        <DialogContent>
+          <UserLogout
+            token={props.token}
+            handleLogoutProcess={props.handleLogoutProcess}
+            setToken={props.setToken}
+            // handleDialogOpenStatus={handleDialogOpenStatus}
+          />
+        </DialogContent>
+      </Dialog>
     );
   };
 
@@ -1301,6 +1336,7 @@ const Header = (props) => {
             {drawer}
             {renderTab()}
             {renderSignOut()}
+            {renderLogout()}
           </Toolbar>
         </AppBar>
       </ElevationScroll>

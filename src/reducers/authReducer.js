@@ -13,9 +13,14 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         isSignedIn: true,
-        userId: action.payload.data.user.id,
+        userId: action.payload.data.user._id,
         data: action.payload,
-        token: { status: action.payload.status, token: action.payload.token },
+        token: {
+          status: action.payload.status,
+          token: action.payload.token,
+          userId: action.payload.data.user._id,
+          role: action.payload.data.user.role,
+        },
       };
 
     case SIGN_UP:
@@ -23,7 +28,7 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, isSignedIn: true, userId: action.payload.user.id };
 
     case SIGN_OUT:
-      return { ...state, isSignedIn: false, userId: null };
+      return { ...state, isSignedIn: false, userId: null, token: undefined };
 
     default:
       return state;

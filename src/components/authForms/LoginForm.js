@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 import { Field, reduxForm } from "redux-form";
 import Grid from "@material-ui/core/Grid";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
+import Box from "@material-ui/core/Box";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 
 import { TextField } from "@material-ui/core";
 import background from "./../../logistic_assets/cover_image_1.png";
+import { padding } from "@mui/system";
 
 const useStyles = makeStyles((theme) => ({
   sendButton: {
@@ -15,9 +16,10 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: 10,
     height: 40,
     width: 100,
-    marginLeft: 200,
+    marginLeft: 170,
     marginBottom: 10,
-    fontSize: "1.25rem",
+    marginTop: 30,
+    fontSize: "1.15rem",
     backgroundColor: "#FFBA60",
     color: "white",
     "&:hover": {
@@ -43,10 +45,72 @@ const useStyles = makeStyles((theme) => ({
       // backgroundImage: `url(${mobileBackground})`,
       backgroundAttachment: "inherit",
     },
+    inputText: {
+      marginLeft: 400,
+      width: "100%",
+      color: "white",
+    },
+  },
+  boxContainer: {
+    backgroundColor: "white",
+    marginLeft: 400,
+    width: "100%",
+    margin: 40,
+    padding: 30,
+    borderRadius: 80,
   },
 }));
 
-const SignInForm = (props) => {
+const renderTextField = ({
+  input,
+  label,
+  meta: { touched, error, invalid },
+  type,
+  id,
+  ...custom
+}) => {
+  return (
+    <TextField
+      error={touched && invalid}
+      helperText={touched && error}
+      variant="outlined"
+      label={label}
+      id={input.name}
+      defaultValue={input.value}
+      fullWidth
+      type={type}
+      {...custom}
+      onChange={input.onChange}
+    />
+  );
+};
+
+const renderPasswordField = ({
+  input,
+  label,
+  meta: { touched, error, invalid },
+  type,
+  id,
+  ...custom
+}) => {
+  return (
+    <TextField
+      error={touched && invalid}
+      helperText={touched && error}
+      variant="outlined"
+      defaultValue={input.value}
+      label={label}
+      id={input.name}
+      fullWidth
+      type={type}
+      style={{ marginTop: "1em" }}
+      {...custom}
+      onChange={input.onChange}
+    />
+  );
+};
+
+const LoginForm = (props) => {
   const classes = useStyles();
   const theme = useTheme();
   const [email, setEmail] = useState("");
@@ -58,139 +122,77 @@ const SignInForm = (props) => {
     email: "",
     password: "",
   });
+  const [loading, setLoading] = useState(false);
 
-  // const handleFormChange = (event) => {
-  //   let loginParamsNew = { ...loginParams };
-  //   let val = event.target.value;
-  //   loginParamsNew[event.target.name] = val;
-  //   this.setState({
-  //     loginParams: loginParamsNew,
-  //   });
-  // };
-
-  // const login = (event) => {
-  //   let email = loginParams.email;
-  //   let user_password = loginParams.password;
-  //   if (email === "admin" && password === "123") {
-  //     localStorage.setItem("token", "T");
-  //     this.setState({
-  //       islogged: true,
-  //     });
-  //   }
-  //   event.preventDefault();
-  // };
-
-  const renderTextField = ({
-    input,
-    label,
-    meta: { touched, error, invalid },
-    type,
-    id,
-    ...custom
-  }) => {
-    return (
-      <TextField
-        error={touched && invalid}
-        helperText={touched && error}
-        variant="outlined"
-        label={label}
-        id={input.name}
-        fullWidth
-        type={type}
-        {...custom}
-        {...input}
-      />
-    );
-  };
-
-  const renderPasswordField = ({
-    input,
-    label,
-    meta: { touched, error, invalid },
-    type,
-    id,
-    ...custom
-  }) => {
-    return (
-      <TextField
-        error={touched && invalid}
-        helperText={touched && error}
-        variant="outlined"
-        //placeholder={label}
-        //value={"password1234"}
-        label={label}
-        id={input.name}
-        fullWidth
-        type={type}
-        style={{ marginTop: "1em" }}
-        {...custom}
-      />
-    );
+  const buttonContent = () => {
+    return <React.Fragment>Login</React.Fragment>;
   };
 
   const onSubmit = (formValues) => {
+    setLoading(false);
     props.onSubmit(formValues);
-    //console.log("login form values are:", formValues);
+    setLoading(true);
   };
 
   return (
     <form id="loginForm" className={classes.background}>
-      <Grid item>
+      <Box
+        sx={{
+          width: 500,
+          //height: 420,
+        }}
+        noValidate
+        autoComplete="off"
+        style={{ marginTop: 20 }}
+      >
         <Grid
           container
           justifyContent="center"
           alignItems="center"
+          direction="column"
           style={{ minHeight: "100vh" }}
         >
-          <Grid item lg={5}>
-            <Card className={classes.root}>
-              <CardContent>
-                <Grid container direction="column">
-                  <Grid item style={{ marginTop: 10 }}>
-                    <Field
-                      name="email"
-                      component={renderTextField}
-                      //component="input"
-                      label="Email"
-                      type="email"
-                      //ref="email"
-                      //hintText="Email"
-                      //floatingLabelText="Email"
-                      //withRef
-                    />
-                  </Grid>
-                  <Grid item style={{ marginTop: 20 }}>
-                    <Field
-                      name="password"
-                      component={renderTextField}
-                      //component="input"
-                      label="Password"
-                      type="password"
-                      //hintText="Password"
-                      //floatingLabelText="Password"
-                    />
-                  </Grid>
-                </Grid>
-              </CardContent>
-              <Grid item style={{ marginTop: "2em" }}>
-                <Button
-                  //   disabled={
-                  //     email.length === 0 ||
-                  //     password.length === 0 ||
-                  //     emailHelper.length !== 0 ||
-                  //     passwordHelper.length !== 0
-                  //   }
-                  variant="contained"
-                  className={classes.sendButton}
-                  onClick={props.handleSubmit(onSubmit)}
-                >
-                  Login
-                </Button>
-              </Grid>
-            </Card>
-          </Grid>
+          <Box className={classes.boxContainer}>
+            <Grid
+              item
+              className={classes.inputText}
+              style={{ width: "100%", marginTop: 20 }}
+            >
+              <Field
+                name="email"
+                label="Email"
+                type="email"
+                component={renderTextField}
+              />
+            </Grid>
+            <Grid
+              item
+              className={classes.inputText}
+              style={{ width: "100%", marginTop: 20 }}
+            >
+              <Field
+                name="password"
+                label="Password"
+                type="password"
+                component={renderTextField}
+              />
+            </Grid>
+            <Grid item style={{ marginTop: "2em" }}>
+              <Button
+                variant="contained"
+                className={classes.sendButton}
+                onClick={props.handleSubmit(onSubmit)}
+              >
+                {loading ? (
+                  <CircularProgress size={30} color="inherit" />
+                ) : (
+                  buttonContent()
+                )}
+              </Button>
+            </Grid>
+          </Box>
         </Grid>
-      </Grid>
+      </Box>
     </form>
   );
 };
@@ -217,4 +219,4 @@ const validate = (formValues) => {
 export default reduxForm({
   form: "loginForm",
   // validate: validate,
-})(SignInForm);
+})(LoginForm);
