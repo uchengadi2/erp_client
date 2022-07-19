@@ -121,6 +121,8 @@ function SchemeTypeFilter(props) {
             <MenuItem value="officeaccountbasic">Office Account Basic</MenuItem>
             <MenuItem value="loans">Loans</MenuItem>
             <MenuItem value="ranch">Ranch</MenuItem>
+            <MenuItem value="asa">Assets & Stocks</MenuItem>
+            <MenuItem value="emc">Employees</MenuItem>
             <MenuItem value="farmlands">Farmlands</MenuItem>
             <MenuItem value="realestate">Real Estates</MenuItem>
             {/* {renderItemList()} */}

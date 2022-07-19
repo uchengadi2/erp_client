@@ -172,6 +172,8 @@ function SchemeCodeForm(props) {
             <MenuItem value="oab">Office Account Basic</MenuItem>
             <MenuItem value="lon">Loans</MenuItem>
             <MenuItem value="ran">Ranch</MenuItem>
+            <MenuItem value="asa">Assets & Stocks</MenuItem>
+            <MenuItem value="emc">Employees</MenuItem>
             <MenuItem value="fld">Farmlands</MenuItem>
             <MenuItem value="rle">Real Estates</MenuItem>
             {/* {renderItemList()} */}
