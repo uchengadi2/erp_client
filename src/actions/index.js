@@ -69,46 +69,6 @@ import {
   FETCH_CURRENCY,
   DELETE_CURRENCY,
   EDIT_CURRENCY,
-  CREATE_CLUSTER,
-  FETCH_CLUSTERS,
-  FETCH_CLUSTER,
-  DELETE_CLUSTER,
-  EDIT_CLUSTER,
-  CREATE_TRIP,
-  FETCH_TRIPS,
-  FETCH_TRIP,
-  DELETE_TRIP,
-  EDIT_TRIP,
-  CREATE_ONTRANSIT_TRIP,
-  FETCH_ONTRANSIT_TRIPS,
-  FETCH_ONTRANSIT_TRIP,
-  DELETE_ONTRANSIT_TRIP,
-  EDIT_ONTRANSIT_TRIP,
-  CREATE_FULLFILLED_TRIP,
-  FETCH_FULLFILLED_TRIPS,
-  FETCH_FULLFILLED_TRIP,
-  DELETE_FULLFILLED_TRIP,
-  EDIT_FULLFILLED_TRIP,
-  CREATE_FULLFILLED_PAYMENT,
-  FETCH_FULLFILLED_PAYMENTS,
-  FETCH_FULLFILLED_PAYMENT,
-  DELETE_FULLFILLED_PAYMENT,
-  EDIT_FULLFILLED_PAYMENT,
-  EDIT_PARTIAL_PAYMENT,
-  CREATE_PARTIAL_PAYMENT,
-  FETCH_PARTIAL_PAYMENTS,
-  FETCH_PARTIAL_PAYMENT,
-  DELETE_PARTIAL_PAYMENT,
-  PROCESS_PARTIAL_REMITTANCE,
-  FETCH_PARTIAL_REMITTANCES,
-  FETCH_PARTIAL_REMITTANCE,
-  DELETE_PARTIAL_REMITTANCE,
-  EDIT_PARTIAL_REMITTANCE,
-  PROCESS_COMPLETE_REMITTANCE,
-  FETCH_COMPLETE_REMITTANCES,
-  FETCH_COMPLETE_REMITTANCE,
-  DELETE_COMPLETE_REMITTANCE,
-  EDIT_COMPLETE_REMITTANCE,
   CREATE_SCHEMECODE,
   FETCH_SCHEMECODES,
   FETCH_SCHEMECODE,
@@ -133,6 +93,13 @@ import {
   FETCH_SERVICEOUTLET,
   DELETE_SERVICEOUTLET,
   EDIT_SERVICEOUTLET,
+  CREATE_LOCATION,
+  FETCH_LOCATIONS,
+  FETCH_LOCATION,
+  //EDIT_LOCATION,
+  DELETE_LOCATION,
+  EDIT_LOCATION_SUCCEEDED,
+  EDIT_LOCATION_FAILED,
 } from "./types";
 
 //authentication and authorization  operations
@@ -275,15 +242,11 @@ export const deleteUser = (id, token) => {
 export const createCity = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch, getState) => {
-    const { userId } = getState().auth;
-    const response = await data.post("/cities", {
-      ...formValues,
-      userId,
-    });
+    const response = await data.post("/cities", formValues);
 
     //console.log(response);
-    dispatch({ type: CREATE_CITY, payload: response.data });
-    history.push("/cities");
+    dispatch({ type: CREATE_CITY, payload: response.data.data.data });
+    //history.push("/cities");
   };
 };
 
@@ -300,7 +263,8 @@ export const fetchCity = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
     const response = await data.get(`/cities/${id}`);
-    dispatch({ type: FETCH_CITY, payload: response.data });
+    console.log("fetch city response here:", response);
+    dispatch({ type: FETCH_CITY, payload: response.data.data.data });
   };
 };
 
@@ -308,8 +272,9 @@ export const editCity = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
     const response = await data.patch(`/cities/${id}`, formValues);
-    dispatch({ type: EDIT_CITY, payload: response.data });
-    history.push("/cities");
+    console.log("index response:", response);
+    dispatch({ type: EDIT_CITY, payload: response.data.data.data });
+    //history.push("/cities");
   };
 };
 
@@ -318,7 +283,81 @@ export const deleteCity = (id, token) => {
   return async (dispatch) => {
     await data.delete(`/cities/${id}`);
     dispatch({ type: DELETE_CITY, payload: id });
-    history.push("/cities");
+    //history.push("/cities");
+  };
+};
+
+///////////////////////Locations////////////////////////////////////
+
+//city resource crud operation
+export const createLocation = (formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch, getState) => {
+    const response = await data.post("/locations", formValues);
+
+    console.log("new location response:", response);
+    dispatch({ type: CREATE_LOCATION, payload: response.data.data.data });
+    //history.push("/cities");
+  };
+};
+
+export const fetchLocations = (tokens) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
+  return async (dispatch) => {
+    const response = await data.get("/locations");
+    console.log("the locations are:", response);
+    dispatch({ type: FETCH_LOCATIONS, payload: response.data.data.data });
+  };
+};
+
+export const fetchLocation = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.get(`/locations/${id}`);
+    dispatch({ type: FETCH_LOCATION, payload: response.data.data.data });
+  };
+};
+
+export const editLocation = (id, formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.patch(`/locations/${id}`, formValues);
+    if (response.status === 200) {
+      dispatch({
+        type: EDIT_LOCATION_SUCCEEDED,
+        payload: response.data.data.data,
+      });
+    } else {
+      dispatch({ type: EDIT_LOCATION_FAILED, status: "API Failed" });
+    }
+
+    //history.push("/cities");
+  };
+};
+
+// export function editLocation(state){
+//   return dispatch => {
+//      axios.post('login', state).then(res =>{
+//       dispatch({
+//        data:  "Some response",
+//        type: "EDIT_LOCATION"
+//       })
+//       })
+//       .catch(err) {
+//       dispatch({
+//        data:  err,
+//        type: "API_FAILURE"
+//       })
+//       }
+// }
+// }
+
+export const deleteLocation = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    await data.delete(`/locations/${id}`);
+    dispatch({ type: DELETE_LOCATION, payload: id });
+    //history.push("/cities");
   };
 };
 
@@ -474,6 +513,7 @@ export const editPolicy = (id, formValues, token) => {
 
 export const deletePolicy = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+
   return async (dispatch) => {
     await data.delete(`/policies/${id}`);
     dispatch({ type: DELETE_POLICY, payload: id });
@@ -486,16 +526,12 @@ export const deletePolicy = (id, token) => {
 
 export const createCountry = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-  return async (dispatch, getState) => {
-    const { userId } = getState().auth;
-    const response = await data.post("/countries", {
-      ...formValues,
-      userId,
-    });
+  console.log("form values:", formValues);
+  console.log("token:", token);
 
-    //console.log(response);
-    dispatch({ type: CREATE_COUNTRY, payload: response.data });
-    history.push("/utilities/countries");
+  return async (dispatch, getState) => {
+    const response = await data.post("/countries", formValues);
+    dispatch({ type: CREATE_COUNTRY, payload: response.data.data.data });
   };
 };
 
@@ -520,8 +556,8 @@ export const editCountry = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
     const response = await data.patch(`/countries/${id}`, formValues);
-    dispatch({ type: EDIT_COUNTRY, payload: response.data });
-    history.push("/utility/countries");
+    dispatch({ type: EDIT_COUNTRY, payload: response.data.data.data });
+    //history.push("/utility/countries");
   };
 };
 
@@ -530,7 +566,7 @@ export const deleteCountry = (id, token) => {
   return async (dispatch) => {
     await data.delete(`/countries/${id}`);
     dispatch({ type: DELETE_COUNTRY, payload: id });
-    history.push("/utilities/countries");
+    //history.push("/utilities/countries");
   };
 };
 
@@ -540,15 +576,10 @@ export const deleteCountry = (id, token) => {
 export const createState = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch, getState) => {
-    const { userId } = getState().auth;
-    const response = await data.post("/states", {
-      ...formValues,
-      userId,
-    });
-
+    const response = await data.post("/states", formValues);
     //console.log(response);
-    dispatch({ type: CREATE_STATE, payload: response.data });
-    history.push("/utilities/states");
+    dispatch({ type: CREATE_STATE, payload: response.data.data.data });
+    //history.push("/utilities/states");
   };
 };
 
@@ -574,8 +605,9 @@ export const editState = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
     const response = await data.patch(`/states/${id}`, formValues);
-    dispatch({ type: EDIT_STATE, payload: response.data });
-    history.push("/utilities/states");
+
+    dispatch({ type: EDIT_STATE, payload: response.data.data.data });
+    //history.push("/utilities/states");
   };
 };
 
@@ -584,7 +616,7 @@ export const deleteState = (id, token) => {
   return async (dispatch) => {
     await data.delete(`/states/${id}`);
     dispatch({ type: DELETE_STATE, payload: id });
-    history.push("/utilities/states");
+    //history.push("/utilities/states");
   };
 };
 

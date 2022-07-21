@@ -9,11 +9,7 @@ class StateEdit extends React.Component {
   }
 
   onSubmit = (formValues) => {
-    this.props.editRemittance(
-      this.props.params.id,
-      formValues,
-      this.props.token
-    );
+    this.props.editState(this.props.params.id, formValues, this.props.token);
     this.props.handleEditDialogOpenStatus();
 
     //console.log("the form values areeeee:", formValues);

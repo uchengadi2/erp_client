@@ -299,7 +299,7 @@ function ConsoleUtilitiesCityLayout(props) {
           </Toolbar>
         </Grid>
         <Grid item className={classes.contentContainer}>
-          <CityList token={props.token} />
+          <CityList token={props.token} userId={props.userId} />
           {/* {renderDataList()} */}
           {/* <DataGridText /> */}
         </Grid>
@@ -316,6 +316,7 @@ function ConsoleUtilitiesCityLayout(props) {
         <DialogContent>
           <CityFormContainer
             token={props.token}
+            userId={props.userId}
             handleDialogOpenStatus={handleDialogOpenStatus}
           />
         </DialogContent>

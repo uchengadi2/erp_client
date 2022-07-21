@@ -29,10 +29,9 @@ const useStyles = makeStyles((theme) => ({
   submitButton: {
     borderRadius: 10,
     height: 40,
-    width: 150,
-    marginLeft: 180,
-    marginTop: 10,
-    marginBottom: 10,
+    width: 170,
+    marginLeft: 130,
+    marginTop: 30,
     color: "white",
     backgroundColor: theme.palette.common.blue,
     "&:hover": {
@@ -54,7 +53,7 @@ const renderDescriptionField = ({
       error={touched && invalid}
       //placeholder="category description"
       variant="outlined"
-      helperText="City Description"
+      helperText="Location Description"
       label={label}
       id={input.name}
       defaultValue={input.value}
@@ -80,7 +79,7 @@ const renderNameField = ({
   return (
     <TextField
       //error={touched && invalid}
-      helperText="City name"
+      helperText="Location name"
       variant="outlined"
       label={label}
       id={input.name}
@@ -94,7 +93,7 @@ const renderNameField = ({
   );
 };
 
-const renderCityCodeField = ({
+const renderCodeField = ({
   input,
   label,
   meta: { touched, error, invalid },
@@ -105,7 +104,7 @@ const renderCityCodeField = ({
   return (
     <TextField
       //error={touched && invalid}
-      helperText="City Code"
+      helperText="Location Code"
       variant="outlined"
       label={label}
       id={input.name}
@@ -119,7 +118,7 @@ const renderCityCodeField = ({
   );
 };
 
-function CityEditForm(props) {
+function LocationEditForm(props) {
   const classes = useStyles();
   const [state, setState] = useState("");
   const [country, setCountry] = useState("");
@@ -129,33 +128,9 @@ function CityEditForm(props) {
 
   useEffect(() => {
     setCountry(props.params.country);
-    setState(props.params.state);
   }, [props]);
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     let allData = [];
-  //     data.defaults.headers.common["Authorization"] = `Bearer ${props.token}`;
-  //     const response = await data.get(`/cities/${props.params.id}`);
-  //     const workingData = Object.values(response.data.data);
-  //     let row = {};
-  //     workingData.map((city) => {
-  //       row = {
-  //         id: city.id,
-  //         name: city.name,
-  //         code: city.code,
-  //         description: city.description,
-  //         country: city.country,
-  //         state: city.state,
-  //       };
-  //     });
-  //     setParams(row);
-  //   };
-
-  //   //call the function
-
-  //   fetchData().catch(console.error);
-  // }, []);
+  console.log("params:", props.params);
 
   const params = props.params;
 
@@ -176,29 +151,6 @@ function CityEditForm(props) {
     fetchData().catch(console.error);
   }, []);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      let allData = [];
-      data.defaults.headers.common["Authorization"] = `Bearer ${props.token}`;
-      const response = await data.get("/states", {
-        params: { country: country },
-      });
-      const workingData = response.data.data.data;
-      workingData.map((state) => {
-        allData.push({ id: state._id, name: state.name });
-      });
-      setStateList(allData);
-    };
-
-    //call the function
-
-    fetchData().catch(console.error);
-  }, [country]);
-
-  const handleStateChange = (event) => {
-    setState(event.target.value);
-  };
-
   const handleCountryChange = (event) => {
     setCountry(event.target.value);
   };
@@ -212,47 +164,6 @@ function CityEditForm(props) {
         </MenuItem>
       );
     });
-  };
-
-  //get all state list
-  const renderStateList = () => {
-    return stateList.map((item) => {
-      return (
-        <MenuItem key={item.id} value={item.id}>
-          {item.name}
-        </MenuItem>
-      );
-    });
-  };
-
-  const renderStateField = ({
-    input,
-    label,
-    meta: { touched, error, invalid },
-    type,
-    id,
-    ...custom
-  }) => {
-    return (
-      <Box>
-        <FormControl variant="outlined">
-          {/* <InputLabel id="vendor_city">City</InputLabel> */}
-          <Select
-            labelId="state"
-            id="state"
-            value={state}
-            onChange={handleStateChange}
-            label="State"
-            style={{ marginTop: 20, width: 500 }}
-          >
-            {renderStateList()}
-          </Select>
-          <FormHelperText>
-            Select State/Region/Province where City is located
-          </FormHelperText>
-        </FormControl>
-      </Box>
-    );
   };
 
   const renderCountryField = ({
@@ -273,11 +184,11 @@ function CityEditForm(props) {
             value={country}
             onChange={handleCountryChange}
             label="Country"
-            style={{ marginTop: 20, width: 500 }}
+            style={{ marginTop: 20, width: 400 }}
           >
             {renderCountryList()}
           </Select>
-          <FormHelperText>Select Country where city is located</FormHelperText>
+          <FormHelperText>Select Country</FormHelperText>
         </FormControl>
       </Box>
     );
@@ -286,70 +197,64 @@ function CityEditForm(props) {
   const onSubmit = (formValues) => {
     formValues["createdBy"] = props.userId;
     formValues["country"] = country;
-    formValues["state"] = state;
 
     props.onSubmit(formValues);
   };
 
   return (
-    <div className={classes.root}>
+    <>
       <Grid item container justifyContent="center">
         <FormLabel
-          style={{ color: "blue", fontSize: "1.75em" }}
+          style={{ color: "blue", fontSize: "1.5em" }}
           component="legend"
         >
-          <Typography variant="subtitle1">City Details</Typography>
+          <Typography variant="subtitle1">Location Details</Typography>
         </FormLabel>
       </Grid>
       <Box
         component="form"
-        id="cityForm"
+        id="locationForm"
         // onSubmit={onSubmit}
         sx={{
-          width: 500,
-          //height: 420,
+          width: 400,
         }}
         noValidate
         autoComplete="off"
-        style={{ marginTop: 20 }}
+        style={{ marginTop: 10 }}
       >
-        <Grid container direction="row">
-          <Grid item style={{ width: "65%" }}>
+        <Grid container direction="row" style={{ marginTop: 10 }}>
+          <Grid item style={{ width: "60%" }}>
             <Field
+              label=""
               id="name"
               name="name"
-              defaultValue={params["name"]}
+              defaultValue={params.name}
               type="text"
               component={renderNameField}
             />
           </Grid>
-          <Grid item style={{ width: "33%", marginLeft: 10 }}>
+          <Grid item style={{ width: "37%", marginLeft: 10 }}>
             <Field
+              label=""
               id="code"
               name="code"
-              defaultValue={params["code"]}
+              defaultValue={params.code}
               type="text"
-              component={renderCityCodeField}
+              component={renderCodeField}
             />
           </Grid>
         </Grid>
-
-        <Field
-          label=""
-          id="country"
-          name="country"
-          type="text"
-          component={renderCountryField}
-        />
-
-        <Field
-          label=""
-          id="state"
-          name="state"
-          type="text"
-          component={renderStateField}
-        />
-
+        <Grid container direction="row" style={{ marginTop: 10 }}>
+          <Grid item style={{ width: "100%" }}>
+            <Field
+              label=""
+              id="country"
+              name="country"
+              type="text"
+              component={renderCountryField}
+            />
+          </Grid>
+        </Grid>
         <Field
           label=""
           id="description"
@@ -357,6 +262,7 @@ function CityEditForm(props) {
           defaultValue={params.description}
           type="text"
           component={renderDescriptionField}
+          style={{ marginTop: 10 }}
         />
 
         <Button
@@ -364,14 +270,14 @@ function CityEditForm(props) {
           className={classes.submitButton}
           onClick={props.handleSubmit(onSubmit)}
         >
-          Update City
+          Edit Location
         </Button>
       </Box>
       {/* </form> */}
-    </div>
+    </>
   );
 }
 
 export default reduxForm({
-  form: "cityForm",
-})(CityEditForm);
+  form: "locationForm",
+})(LocationEditForm);

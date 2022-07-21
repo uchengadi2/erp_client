@@ -62,7 +62,7 @@ const renderDescriptionField = ({
       type={type}
       style={{ marginTop: 20 }}
       multiline={true}
-      minRows={3}
+      minRows={2}
       {...custom}
       // {...input}
       onChange={input.onChange}
@@ -155,7 +155,7 @@ function CityForm(props) {
       let allData = [];
       data.defaults.headers.common["Authorization"] = `Bearer ${props.token}`;
       const response = await data.get(`/states`, {
-        params: { country: selectedCountry },
+        params: { country: country },
       });
       const workingData = response.data.data.data;
       workingData.map((state) => {
@@ -167,17 +167,17 @@ function CityForm(props) {
     //call the function
 
     fetchData().catch(console.error);
-  }, [selectedCountry]);
+  }, [country]);
 
   const handleStateChange = (event) => {
     setState(event.target.value);
-    setSelectedState(event.target.value);
+    //setSelectedState(event.target.value);
   };
 
   const handleCountryChange = (event) => {
     setCountry(event.target.value);
-    setSelectedCountry(event.target.value);
-    setStateList([]);
+    // setSelectedCountry(event.target.value);
+    // setStateList([]);
   };
 
   //get the state list
@@ -221,7 +221,6 @@ function CityForm(props) {
             onChange={handleStateChange}
             label="State"
             style={{ marginTop: 20, width: 500 }}
-            {...input}
           >
             {renderStateList()}
           </Select>
@@ -252,7 +251,6 @@ function CityForm(props) {
             onChange={handleCountryChange}
             label="Country"
             style={{ marginTop: 20, width: 500 }}
-            {...input}
           >
             {renderCountryList()}
           </Select>
@@ -263,15 +261,10 @@ function CityForm(props) {
   };
 
   const onSubmit = (formValues) => {
-    const data = {
-      name: formValues.name,
-      code: formValues.code || " ",
-      description: formValues.description || " ",
-      country: formValues.country,
-      state: formValues.state,
-      createdBy: props.userId,
-    };
-    props.onSubmit(data);
+    formValues["createdBy"] = props.userId;
+    formValues["country"] = country;
+    formValues["state"] = state;
+    props.onSubmit(formValues);
   };
 
   return (
@@ -290,7 +283,7 @@ function CityForm(props) {
         // onSubmit={onSubmit}
         sx={{
           width: 500,
-          height: 450,
+          //height: 450,
         }}
         noValidate
         autoComplete="off"

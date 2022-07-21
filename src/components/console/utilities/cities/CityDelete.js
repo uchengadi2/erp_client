@@ -20,7 +20,7 @@ class CityDelete extends React.Component {
 
     const handleNoDelete = () => {
       this.props.handleDialogOpenStatus();
-      history.push("/cities");
+      history.push("/systems/utilities/cities");
     };
     return (
       <>

@@ -298,7 +298,7 @@ function ConsoleUtilitiesCountryLayout(props) {
           </Toolbar>
         </Grid>
         <Grid item className={classes.contentContainer}>
-          <CountryList token={props.token} />
+          <CountryList token={props.token} userId={props.userId} />
           {/* {renderDataList()} */}
           {/* <DataGridText /> */}
         </Grid>
@@ -315,6 +315,7 @@ function ConsoleUtilitiesCountryLayout(props) {
         <DialogContent>
           <CountryFormContainer
             token={props.token}
+            userId={props.userId}
             handleDialogOpenStatus={handleDialogOpenStatus}
           />
         </DialogContent>

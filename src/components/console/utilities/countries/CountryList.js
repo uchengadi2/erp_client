@@ -46,12 +46,13 @@ class CountryList extends React.Component {
           open={this.state.editOpen}
           onClose={() => [
             this.setState({ editOpen: false }),
-            history.push("/utilities/countries"),
+            history.push("/systems/utilities/countries"),
           ]}
         >
           <DialogContent>
             <CountryEdit
               token={this.props.token}
+              userId={this.props.userId}
               params={this.state.params}
               handleEditDialogOpenStatus={this.handleEditDialogOpenStatus}
             />
@@ -70,12 +71,13 @@ class CountryList extends React.Component {
           open={this.state.deleteOpen}
           onClose={() => [
             this.setState({ deleteOpen: false }),
-            history.push(`/utilities/countries`),
+            history.push(`/systems/utilities/countries`),
           ]}
         >
           <DialogContent>
             <CountryDelete
               token={this.props.token}
+              userId={this.props.userId}
               id={this.state.id}
               handleDialogOpenStatus={this.handleDialogOpenStatus}
             />
@@ -94,7 +96,7 @@ class CountryList extends React.Component {
           open={this.state.blacklistOpen}
           onClose={() => [
             this.setState({ blacklistOpen: false }),
-            history.push(`/utilities/countries`),
+            history.push(`/systems/utilities/countries`),
           ]}
         >
           <DialogContent>
@@ -113,7 +115,7 @@ class CountryList extends React.Component {
       { field: "code", headerName: "Country Code", width: 200 },
       { field: "continent", headerName: "Continent", width: 200 },
       { field: "region", headerName: "Continent Region", width: 200 },
-      { field: "description", headerName: "Description", width: 200 },
+      // { field: "description", headerName: "Description", width: 200 },
 
       {
         field: "editaction",
@@ -130,7 +132,7 @@ class CountryList extends React.Component {
                   id: params.id,
                   params: params.row,
                 }),
-                history.push(`/utilities/countries/edit/${params.id}`),
+                history.push(`/systems/utilities/countries/edit/${params.id}`),
                 console.log("the country row is:", params.row),
               ]}
             />
@@ -149,7 +151,9 @@ class CountryList extends React.Component {
               style={{ color: "black" }}
               onClick={() => [
                 this.setState({ blacklistOpen: true, id: params.id }),
-                history.push(`/utilities/countries/blacklist/${params.id}`),
+                history.push(
+                  `/systems/utilities/countries/blacklist/${params.id}`
+                ),
               ]}
             />
           </strong>
@@ -167,7 +171,9 @@ class CountryList extends React.Component {
               style={{ color: "red" }}
               onClick={() => [
                 this.setState({ deleteOpen: true, id: params.id }),
-                history.push(`/utilities/countries/delete/${params.id}`),
+                history.push(
+                  `/systems/utilities/countries/delete/${params.id}`
+                ),
               ]}
             />
           </strong>

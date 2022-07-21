@@ -46,7 +46,7 @@ class StateList extends React.Component {
           open={this.state.editOpen}
           onClose={() => [
             this.setState({ editOpen: false }),
-            history.push("/utilities/states"),
+            history.push("/systems/utilities/states"),
           ]}
         >
           <DialogContent>
@@ -71,7 +71,7 @@ class StateList extends React.Component {
           open={this.state.deleteOpen}
           onClose={() => [
             this.setState({ deleteOpen: false }),
-            history.push(`/utilities/states`),
+            history.push(`/systems/utilities/states`),
           ]}
         >
           <DialogContent>
@@ -96,7 +96,7 @@ class StateList extends React.Component {
           open={this.state.blacklistOpen}
           onClose={() => [
             this.setState({ blacklistOpen: false }),
-            history.push(`/utilities/states`),
+            history.push(`/systems/utilities/states`),
           ]}
         >
           <DialogContent>
@@ -131,7 +131,7 @@ class StateList extends React.Component {
                   id: params.id,
                   params: params.row,
                 }),
-                history.push(`/utilities/states/edit/${params.id}`),
+                history.push(`/systems/utilities/states/edit/${params.id}`),
               ]}
             />
           </strong>
@@ -149,7 +149,9 @@ class StateList extends React.Component {
               style={{ color: "black" }}
               onClick={() => [
                 this.setState({ blacklistOpen: true, id: params.id }),
-                history.push(`/utilities/states/blacklist/${params.id}`),
+                history.push(
+                  `/systems/utilities/states/blacklist/${params.id}`
+                ),
               ]}
             />
           </strong>
@@ -167,7 +169,7 @@ class StateList extends React.Component {
               style={{ color: "red" }}
               onClick={() => [
                 this.setState({ deleteOpen: true, id: params.id }),
-                history.push(`/utilities/states/delete/${params.id}`),
+                history.push(`/systems/utilities/states/delete/${params.id}`),
               ]}
             />
           </strong>

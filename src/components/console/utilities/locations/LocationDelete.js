@@ -4,9 +4,9 @@ import { Alert, AlertTitle } from "@material-ui/lab";
 import Button from "@material-ui/core/Button";
 import history from "../../../../history";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
-import { fetchCountry, deleteCountry } from "../../../../actions";
+import { fetchLocation, deleteLocation } from "../../../../actions";
 
-class CountryDelete extends React.Component {
+class LocationDelete extends React.Component {
   componentDidMount() {
     // console.log("the item id is:", this.props.id);
     // console.log("the token is:", this.props.token);
@@ -14,13 +14,13 @@ class CountryDelete extends React.Component {
 
   render() {
     const handleDelete = () => {
-      this.props.deleteCountry(this.props.id, this.props.token);
+      this.props.deleteLocation(this.props.id, this.props.token);
       this.props.handleDialogOpenStatus();
     };
 
     const handleNoDelete = () => {
       this.props.handleDialogOpenStatus();
-      history.push("/systems/utilities/countries");
+      history.push("/systems/utilities/locations");
     };
     return (
       <>
@@ -48,8 +48,8 @@ class CountryDelete extends React.Component {
             </Button>,
           ]}
         >
-          <AlertTitle>Delete Country?</AlertTitle>
-          Are you sure you want to delete this country?
+          <AlertTitle>Delete Location?</AlertTitle>
+          Are you sure you want to delete this location?
         </Alert>
       </>
     );
@@ -57,7 +57,7 @@ class CountryDelete extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  return { country: state.country[ownProps.match.params.id] };
+  return { location: state.location[ownProps.params.id] };
 };
 
-export default connect(null, { fetchCountry, deleteCountry })(CountryDelete);
+export default connect(null, { fetchLocation, deleteLocation })(LocationDelete);

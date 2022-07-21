@@ -140,6 +140,87 @@ const renderCountryFlagField = ({
   );
 };
 
+const renderContinentField = ({
+  input,
+  label,
+  meta: { touched, error, invalid },
+  type,
+  id,
+  ...custom
+}) => {
+  return (
+    <Box>
+      <FormControl variant="outlined">
+        {/* <InputLabel id="vendor_city">City</InputLabel> */}
+        <Select
+          labelId="continent"
+          id="continent"
+          value={input.value}
+          //onChange={handleContinentChange}
+          onChange={input.onChange}
+          label="Continent"
+          style={{ width: 300 }}
+          // {...input}
+        >
+          <MenuItem value="">
+            <em>None</em>
+          </MenuItem>
+          <MenuItem value={"africa"}>Africa</MenuItem>
+          <MenuItem value={"europe"}>Europe</MenuItem>
+          <MenuItem value={"asia"}>Asia</MenuItem>
+          <MenuItem value={"north-america"}>North America</MenuItem>
+          <MenuItem value={"south-america"}>South America</MenuItem>
+        </Select>
+        <FormHelperText>Select Continent</FormHelperText>
+      </FormControl>
+    </Box>
+  );
+};
+
+const renderContinentRegionsField = ({
+  input,
+  label,
+  meta: { touched, error, invalid },
+  type,
+  id,
+  ...custom
+}) => {
+  return (
+    <Box>
+      <FormControl variant="outlined">
+        {/* <InputLabel id="vendor_city">City</InputLabel> */}
+        <Select
+          labelId="region"
+          id="region"
+          value={input.value}
+          onChange={input.onChange}
+          label="Continent Region"
+          style={{ width: 190 }}
+          {...input}
+        >
+          <MenuItem value="">
+            <em>None</em>
+          </MenuItem>
+          <MenuItem value={"west"}>West</MenuItem>
+          <MenuItem value={"east"}>East</MenuItem>
+          <MenuItem value={"north"}>North</MenuItem>
+          <MenuItem value={"south"}>South</MenuItem>
+          <MenuItem value={"central"}>Central</MenuItem>
+          <MenuItem value={"south-east"}>South East</MenuItem>
+          <MenuItem value={"south-west"}>South West</MenuItem>
+          <MenuItem value={"south-central"}>South Central</MenuItem>
+          <MenuItem value={"south-south"}>South South</MenuItem>
+          <MenuItem value={"north-east"}>North East</MenuItem>
+          <MenuItem value={"north-west"}>North West</MenuItem>
+          <MenuItem value={"north-central"}>North Central</MenuItem>
+          <MenuItem value={"north-north"}>North North</MenuItem>
+        </Select>
+        <FormHelperText>Select Continent Region</FormHelperText>
+      </FormControl>
+    </Box>
+  );
+};
+
 //script to upload multiple images at once
 let images = [];
 const uploadScreenshotFile = (event) => {
@@ -155,97 +236,6 @@ const uploadScreenshotFile = (event) => {
 
 function CountryForm(props) {
   const classes = useStyles();
-
-  const [continent, setContinent] = useState();
-  const [region, setRegion] = useState();
-
-  const handleContinentChange = (event) => {
-    setContinent(event.target.value);
-  };
-
-  const handleRegionChange = (event) => {
-    setRegion(event.target.value);
-  };
-
-  const renderContinentField = ({
-    input,
-    label,
-    meta: { touched, error, invalid },
-    type,
-    id,
-    ...custom
-  }) => {
-    return (
-      <Box>
-        <FormControl variant="outlined">
-          {/* <InputLabel id="vendor_city">City</InputLabel> */}
-          <Select
-            labelId="continent"
-            id="continent"
-            value={continent}
-            onChange={handleContinentChange}
-            label="Prefered Currency"
-            style={{ width: 300 }}
-            {...input}
-          >
-            <MenuItem value="">
-              <em>None</em>
-            </MenuItem>
-            <MenuItem value={"africa"}>Africa</MenuItem>
-            <MenuItem value={"europe"}>Europe</MenuItem>
-            <MenuItem value={"asia"}>Asia</MenuItem>
-            <MenuItem value={"north-america"}>North America</MenuItem>
-            <MenuItem value={"south-america"}>South America</MenuItem>
-          </Select>
-          <FormHelperText>Select Continent</FormHelperText>
-        </FormControl>
-      </Box>
-    );
-  };
-
-  const renderContinentRegionsField = ({
-    input,
-    label,
-    meta: { touched, error, invalid },
-    type,
-    id,
-    ...custom
-  }) => {
-    return (
-      <Box>
-        <FormControl variant="outlined">
-          {/* <InputLabel id="vendor_city">City</InputLabel> */}
-          <Select
-            labelId="region"
-            id="region"
-            value={region}
-            onChange={handleRegionChange}
-            label="Continent Region"
-            style={{ width: 190 }}
-            {...input}
-          >
-            <MenuItem value="">
-              <em>None</em>
-            </MenuItem>
-            <MenuItem value={"west"}>West</MenuItem>
-            <MenuItem value={"east"}>East</MenuItem>
-            <MenuItem value={"north"}>North</MenuItem>
-            <MenuItem value={"south"}>South</MenuItem>
-            <MenuItem value={"central"}>Central</MenuItem>
-            <MenuItem value={"south-east"}>South East</MenuItem>
-            <MenuItem value={"south-west"}>South West</MenuItem>
-            <MenuItem value={"south-central"}>South Central</MenuItem>
-            <MenuItem value={"south-south"}>South South</MenuItem>
-            <MenuItem value={"north-east"}>North East</MenuItem>
-            <MenuItem value={"north-west"}>North West</MenuItem>
-            <MenuItem value={"north-central"}>North Central</MenuItem>
-            <MenuItem value={"north-north"}>North North</MenuItem>
-          </Select>
-          <FormHelperText>Select Continent Region</FormHelperText>
-        </FormControl>
-      </Box>
-    );
-  };
 
   const onSubmit = (formValues) => {
     const form = new FormData();
@@ -278,7 +268,7 @@ function CountryForm(props) {
         // onSubmit={onSubmit}
         sx={{
           width: 500,
-          height: 450,
+          //height: 450,
         }}
         noValidate
         autoComplete="off"

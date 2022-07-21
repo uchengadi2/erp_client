@@ -17,7 +17,11 @@ export default (state = {}, action) => {
     case CREATE_CITY:
       return { ...state, [action.payload.id]: action.payload };
     case EDIT_CITY:
-      return { ...state, [action.payload.id]: action.payload };
+      console.log("editted text:", action.payload);
+      return {
+        ...state,
+        [action.payload.id]: action.payload,
+      };
     case DELETE_CITY:
       return _.omit(state, action.payload); //note that payload is just the city id
     default:

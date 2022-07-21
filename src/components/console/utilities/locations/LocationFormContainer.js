@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { createState } from "../../../../actions";
+import { createLocation } from "../../../../actions";
 
 import LocationForm from "./LocationForm";
 
@@ -14,7 +14,7 @@ class LocationFormContainer extends React.Component {
   componentDidMount() {}
 
   onSubmit = (formValues) => {
-    this.props.createState(formValues, this.props.token);
+    this.props.createLocation(formValues, this.props.token);
     this.props.handleDialogOpenStatus();
   };
   render() {
@@ -26,4 +26,4 @@ class LocationFormContainer extends React.Component {
   }
 }
 
-export default connect(null, { createState })(LocationFormContainer);
+export default connect(null, { createLocation })(LocationFormContainer);

@@ -79,14 +79,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function ConsoleUtilitiesLayout({ token }) {
+function ConsoleUtilitiesLayout({ token, userId }) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-
+  console.log("user id at system utilities:", userId);
   return (
     <div className={classes.root}>
       <Tabs
@@ -148,22 +148,25 @@ function ConsoleUtilitiesLayout({ token }) {
       </Tabs>
 
       <TabPanel value={value} index={0}>
-        <ConsoleUtilitiesCountryLayout token={token} />
+        <ConsoleUtilitiesCountryLayout token={token} userId={userId} />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <ConsoleUtilitiesStateLayout token={token} />
+        <ConsoleUtilitiesStateLayout token={token} userId={userId} />
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <ConsoleUtilitiesCityLayout token={token} />
+        <ConsoleUtilitiesCityLayout token={token} userId={userId} />
       </TabPanel>
       <TabPanel value={value} index={3}>
-        <ConsoleUtilitiesLocationLayout token={token} />
+        <ConsoleUtilitiesLocationLayout token={token} userId={userId} />
       </TabPanel>
       <TabPanel value={value} index={4}>
-        <ConsoleUtilityServiceOutletLayout token={token} />
+        <ConsoleUtilityServiceOutletLayout token={token} userId={userId} />
       </TabPanel>
       <TabPanel value={value} index={5}>
-        <ConsoleUtilitiesHeadofficeServiceOutletLayout token={token} />
+        <ConsoleUtilitiesHeadofficeServiceOutletLayout
+          token={token}
+          userId={userId}
+        />
       </TabPanel>
     </div>
   );

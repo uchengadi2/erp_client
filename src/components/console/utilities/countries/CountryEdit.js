@@ -9,11 +9,7 @@ class CountryEdit extends React.Component {
   }
 
   onSubmit = (formValues) => {
-    this.props.editRemittance(
-      this.props.params.id,
-      formValues,
-      this.props.token
-    );
+    this.props.editCountry(this.props.params.id, formValues, this.props.token);
     this.props.handleEditDialogOpenStatus();
 
     //console.log("the form values areeeee:", formValues);
@@ -24,6 +20,7 @@ class CountryEdit extends React.Component {
       <>
         <CountryEditForm
           token={this.props.token}
+          userId={this.props.userId}
           params={this.props.params}
           handleEditDialogOpenStatus={this.props.handleEditDialogOpenStatus}
           onSubmit={this.onSubmit}

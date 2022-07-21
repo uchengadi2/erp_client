@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const renderStateDescriptionField = ({
+const renderDescriptionField = ({
   input,
   label,
   meta: { touched, error, invalid },
@@ -63,7 +63,7 @@ const renderStateDescriptionField = ({
   );
 };
 
-const renderStateNameField = ({
+const renderNameField = ({
   input,
   label,
   meta: { touched, error, invalid },
@@ -88,7 +88,7 @@ const renderStateNameField = ({
   );
 };
 
-const renderStateCodeField = ({
+const renderCodeField = ({
   input,
   label,
   meta: { touched, error, invalid },
@@ -99,7 +99,7 @@ const renderStateCodeField = ({
   return (
     <TextField
       //error={touched && invalid}
-      helperText="Enter State Code"
+      helperText="Enter Location Code"
       variant="outlined"
       //label={label}
       id={input.name}
@@ -175,7 +175,6 @@ function LocationForm(props) {
             onChange={handleCountryChange}
             label="Country"
             style={{ width: 400 }}
-            {...input}
           >
             {renderCountryList()}
           </Select>
@@ -185,58 +184,13 @@ function LocationForm(props) {
     );
   };
 
-  const renderCountryRegionsField = ({
-    input,
-    label,
-    meta: { touched, error, invalid },
-    type,
-    id,
-    ...custom
-  }) => {
-    return (
-      <Box>
-        <FormControl variant="outlined">
-          {/* <InputLabel id="vendor_city">City</InputLabel> */}
-          <Select
-            labelId="region"
-            id="region"
-            value={region}
-            onChange={handleRegionChange}
-            label="Country Region"
-            style={{ width: 190 }}
-            {...input}
-          >
-            <MenuItem value={"west"}>West</MenuItem>
-            <MenuItem value={"east"}>East</MenuItem>
-            <MenuItem value={"north"}>North</MenuItem>
-            <MenuItem value={"south"}>South</MenuItem>
-            <MenuItem value={"central"}>Central</MenuItem>
-            <MenuItem value={"south-east"}>South East</MenuItem>
-            <MenuItem value={"south-west"}>South West</MenuItem>
-            <MenuItem value={"south-central"}>South Central</MenuItem>
-            <MenuItem value={"south-south"}>South South</MenuItem>
-            <MenuItem value={"north-east"}>North East</MenuItem>
-            <MenuItem value={"north-west"}>North West</MenuItem>
-            <MenuItem value={"north-central"}>North Central</MenuItem>
-            <MenuItem value={"north-north"}>North North</MenuItem>
-          </Select>
-          <FormHelperText>Select Country Region</FormHelperText>
-        </FormControl>
-      </Box>
-    );
-  };
-
   const onSubmit = (formValues) => {
-    const data = {
-      name: formValues.name,
-      region: formValues.region,
-      description: formValues.description,
-      country: formValues.country,
-      code: formValues.code,
-      createdBy: props.userId,
-    };
+    formValues["createdBy"] = props.userId;
+    formValues["country"] = country;
 
-    props.onSubmit(data);
+    console.log("location form values:", formValues);
+
+    props.onSubmit(formValues);
   };
 
   return (
@@ -261,13 +215,22 @@ function LocationForm(props) {
         style={{ marginTop: 10 }}
       >
         <Grid container direction="row" style={{ marginTop: 10 }}>
-          <Grid item style={{ width: "100%" }}>
+          <Grid item style={{ width: "60%" }}>
             <Field
               label=""
               id="name"
               name="name"
               type="text"
-              component={renderStateNameField}
+              component={renderNameField}
+            />
+          </Grid>
+          <Grid item style={{ width: "37%", marginLeft: 10 }}>
+            <Field
+              label=""
+              id="code"
+              name="code"
+              type="text"
+              component={renderCodeField}
             />
           </Grid>
         </Grid>
@@ -287,7 +250,7 @@ function LocationForm(props) {
           id="description"
           name="description"
           type="text"
-          component={renderStateDescriptionField}
+          component={renderDescriptionField}
           style={{ marginTop: 10 }}
         />
 

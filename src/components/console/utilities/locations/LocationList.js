@@ -7,8 +7,10 @@ import DeleteRoundedIcon from "@material-ui/icons/DeleteRounded";
 import CancelRoundedIcon from "@material-ui/icons/CancelRounded";
 import Typography from "@material-ui/core/Typography";
 import history from "../../../../history";
-import { fetchStates } from "../../../../actions";
+import { fetchLocations } from "../../../../actions";
 import DataGridContainer from "../../../DataGridContainer";
+import LocationEdit from "./LocationEdit";
+import LocationDelete from "./LocationDelete";
 
 class LocationList extends React.Component {
   constructor(props) {
@@ -22,7 +24,7 @@ class LocationList extends React.Component {
     };
   }
   componentDidMount() {
-    this.props.fetchStates(this.props.token);
+    this.props.fetchLocations(this.props.token);
   }
 
   handleDialogOpenStatus = () => {
@@ -44,17 +46,17 @@ class LocationList extends React.Component {
           open={this.state.editOpen}
           onClose={() => [
             this.setState({ editOpen: false }),
-            history.push("/utilities/locations"),
+            history.push("/systems/utilities/locations"),
           ]}
         >
-          {/* <DialogContent>
-            <StateEdit
+          <DialogContent>
+            <LocationEdit
               token={this.props.token}
               userId={this.props.userId}
               params={this.state.params}
               handleEditDialogOpenStatus={this.handleEditDialogOpenStatus}
             />
-          </DialogContent> */}
+          </DialogContent>
         </Dialog>
       </>
     );
@@ -69,16 +71,16 @@ class LocationList extends React.Component {
           open={this.state.deleteOpen}
           onClose={() => [
             this.setState({ deleteOpen: false }),
-            history.push(`/utilities/locations`),
+            history.push(`/systems/utilities/locations`),
           ]}
         >
           <DialogContent>
-            {/* <StateDelete
+            <LocationDelete
               token={this.props.token}
               userId={this.props.userId}
               id={this.state.id}
               handleDialogOpenStatus={this.handleDialogOpenStatus}
-            /> */}
+            />
           </DialogContent>
         </Dialog>
       </>
@@ -94,7 +96,7 @@ class LocationList extends React.Component {
           open={this.state.blacklistOpen}
           onClose={() => [
             this.setState({ blacklistOpen: false }),
-            history.push(`/utilities/locations`),
+            history.push(`/systems/utilities/locations`),
           ]}
         >
           <DialogContent>
@@ -109,10 +111,9 @@ class LocationList extends React.Component {
     let counter = 0;
     const columns = [
       { field: "numbering", headerName: "S/n", width: 100 },
-      { field: "name", headerName: "State Name", width: 200 },
-      { field: "code", headerName: "State Code", width: 200 },
+      { field: "name", headerName: "Location Name", width: 200 },
+      { field: "code", headerName: "Location Code", width: 200 },
       { field: "country", headerName: "Country", width: 200 },
-      { field: "region", headerName: "Country Region", width: 200 },
 
       {
         field: "editaction",
@@ -129,7 +130,7 @@ class LocationList extends React.Component {
                   id: params.id,
                   params: params.row,
                 }),
-                history.push(`/utilities/locations/edit/${params.id}`),
+                history.push(`/systems/utilities/locations/edit/${params.id}`),
               ]}
             />
           </strong>
@@ -147,7 +148,9 @@ class LocationList extends React.Component {
               style={{ color: "black" }}
               onClick={() => [
                 this.setState({ blacklistOpen: true, id: params.id }),
-                history.push(`/utilities/locations/blacklist/${params.id}`),
+                history.push(
+                  `/systems/utilities/locations/blacklist/${params.id}`
+                ),
               ]}
             />
           </strong>
@@ -165,22 +168,24 @@ class LocationList extends React.Component {
               style={{ color: "red" }}
               onClick={() => [
                 this.setState({ deleteOpen: true, id: params.id }),
-                history.push(`/utilities/locations/delete/${params.id}`),
+                history.push(
+                  `/systems/utilities/locations/delete/${params.id}`
+                ),
               ]}
             />
           </strong>
         ),
       },
     ];
-    this.props.states.map((state) => {
+    this.props.locations.map((location) => {
+      console.log("location:", location);
       let row = {
         numbering: ++counter,
-        id: state.id,
-        name: state.name,
-        code: state.code,
-        region: state.region,
-        country: state.country,
-        description: state.description,
+        id: location.id,
+        name: location.name,
+        code: location.code,
+        description: location.description,
+        country: location.country,
       };
       rows.push(row);
     });
@@ -199,7 +204,7 @@ class LocationList extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return { states: Object.values(state.state) };
+  return { locations: Object.values(state.location) };
 };
 
-export default connect(mapStateToProps, { fetchStates })(LocationList);
+export default connect(mapStateToProps, { fetchLocations })(LocationList);

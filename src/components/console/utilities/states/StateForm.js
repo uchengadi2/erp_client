@@ -145,6 +145,8 @@ function StateForm(props) {
     fetchData().catch(console.error);
   }, []);
 
+ 
+
   //get the country list
   const renderCountryList = () => {
     return countryList.map((item) => {
@@ -171,11 +173,13 @@ function StateForm(props) {
           <Select
             labelId="country"
             id="country"
-            value={country}
-            onChange={handleCountryChange}
+            // value={country}
+            // onChange={handleCountryChange}
+            value={input.value}
+            onChange={input.onChange}
             label="Country"
             style={{ width: 300 }}
-            {...input}
+            // {...input}
           >
             {renderCountryList()}
           </Select>
@@ -200,11 +204,13 @@ function StateForm(props) {
           <Select
             labelId="region"
             id="region"
-            value={region}
-            onChange={handleRegionChange}
+            // value={region}
+            // onChange={handleRegionChange}
+            value={input.value}
+            onChange={input.onChange}
             label="Country Region"
             style={{ width: 190 }}
-            {...input}
+            // {...input}
           >
             <MenuItem value={"west"}>West</MenuItem>
             <MenuItem value={"east"}>East</MenuItem>

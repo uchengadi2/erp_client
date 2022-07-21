@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Field, reduxForm } from "redux-form";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
@@ -13,6 +13,7 @@ import FormHelperText from "@material-ui/core/FormHelperText";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
+import data from "./../../../../apis/local";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -35,11 +36,122 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const renderStateNameField = ({
+  input,
+  label,
+  meta: { touched, error, invalid },
+  type,
+  id,
+  ...custom
+}) => {
+  return (
+    <TextField
+      //error={touched && invalid}
+      helperText="State Name"
+      variant="outlined"
+      //label={label}
+      id={input.name}
+      defaultValue={input.value}
+      fullWidth
+      //required
+      type={type}
+      {...custom}
+      onChange={input.onChange}
+    />
+  );
+};
+
+const renderStateCodeField = ({
+  input,
+  label,
+  meta: { touched, error, invalid },
+  type,
+  id,
+  ...custom
+}) => {
+  return (
+    <TextField
+      //error={touched && invalid}
+      helperText="State Code"
+      variant="outlined"
+      //label={label}
+      id={input.name}
+      defaultValue={input.value}
+      fullWidth
+      //required
+      type={type}
+      {...custom}
+      onChange={input.onChange}
+    />
+  );
+};
+
+const renderStateDescriptionField = ({
+  input,
+  label,
+  meta: { touched, error, invalid },
+  type,
+  id,
+  ...custom
+}) => {
+  return (
+    <TextField
+      //error={touched && invalid}
+      helperText="Description of the state"
+      variant="outlined"
+      //label={label}
+      id={input.name}
+      defaultValue={input.value}
+      fullWidth
+      //required
+      type={type}
+      {...custom}
+      multiline={true}
+      minRows={4}
+      onChange={input.onChange}
+    />
+  );
+};
+
 function StateEditForm(props) {
   const classes = useStyles();
 
   const [country, setCountry] = useState();
   const [region, setRegion] = useState();
+  const [countryList, setCountryList] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      let allData = [];
+      data.defaults.headers.common["Authorization"] = `Bearer ${props.token}`;
+      const response = await data.get("/countries");
+      const workingData = response.data.data.data;
+      workingData.map((country) => {
+        allData.push({ id: country._id, name: country.name });
+      });
+      setCountryList(allData);
+    };
+
+    //call the function
+
+    fetchData().catch(console.error);
+  }, []);
+
+  useEffect(() => {
+    setCountry(props.params.country);
+    setRegion(props.params.region);
+  }, [props]);
+
+  //get the country list
+  const renderCountryList = () => {
+    return countryList.map((item) => {
+      return (
+        <MenuItem key={item.id} value={item.id}>
+          {item.name}
+        </MenuItem>
+      );
+    });
+  };
 
   const handleCountryChange = (event) => {
     setCountry(event.target.value);
@@ -50,56 +162,6 @@ function StateEditForm(props) {
   };
 
   const params = props.params;
-
-  const renderStateNameField = ({
-    input,
-    label,
-    meta: { touched, error, invalid },
-    type,
-    id,
-    ...custom
-  }) => {
-    return (
-      <TextField
-        //error={touched && invalid}
-        helperText="Enter State Name"
-        variant="outlined"
-        //label={label}
-        id={input.name}
-        value={params.name}
-        fullWidth
-        //required
-        type={type}
-        {...custom}
-        {...input}
-      />
-    );
-  };
-
-  const renderStateCodeField = ({
-    input,
-    label,
-    meta: { touched, error, invalid },
-    type,
-    id,
-    ...custom
-  }) => {
-    return (
-      <TextField
-        //error={touched && invalid}
-        helperText="Enter State Code"
-        variant="outlined"
-        //label={label}
-        id={input.name}
-        value={params.code}
-        fullWidth
-        //required
-        type={type}
-        {...custom}
-        {...input}
-      />
-    );
-  };
 
   const renderCountryField = ({
     input,
@@ -116,17 +178,12 @@ function StateEditForm(props) {
           <Select
             labelId="country"
             id="country"
-            value={params.country}
+            value={country}
             onChange={handleCountryChange}
             label="Country"
             style={{ width: 300 }}
-            {...input}
           >
-            <MenuItem value={"africa"}>Africa</MenuItem>
-            <MenuItem value={"europe"}>Europe</MenuItem>
-            <MenuItem value={"asia"}>Asia</MenuItem>
-            <MenuItem value={"north-america"}>North America</MenuItem>
-            <MenuItem value={"south-america"}>South America</MenuItem>
+            {renderCountryList()}
           </Select>
           <FormHelperText>Select Country</FormHelperText>
         </FormControl>
@@ -149,11 +206,11 @@ function StateEditForm(props) {
           <Select
             labelId="region"
             id="region"
-            value={params.region}
+            value={region}
             onChange={handleRegionChange}
             label="Country Region"
             style={{ width: 190 }}
-            {...input}
+            // {...input}
           >
             <MenuItem value={"west"}>West</MenuItem>
             <MenuItem value={"east"}>East</MenuItem>
@@ -169,40 +226,17 @@ function StateEditForm(props) {
             <MenuItem value={"north-central"}>North Central</MenuItem>
             <MenuItem value={"north-north"}>North North</MenuItem>
           </Select>
-          <FormHelperText>Select Country Region</FormHelperText>
+          <FormHelperText>Country Region</FormHelperText>
         </FormControl>
       </Box>
     );
   };
 
-  const renderStateDescriptionField = ({
-    input,
-    label,
-    meta: { touched, error, invalid },
-    type,
-    id,
-    ...custom
-  }) => {
-    return (
-      <TextField
-        //error={touched && invalid}
-        helperText="Provide a description of this state"
-        variant="outlined"
-        //label={label}
-        id={input.name}
-        value={params.description}
-        fullWidth
-        //required
-        type={type}
-        {...custom}
-        multiline={true}
-        minRows={4}
-        {...input}
-      />
-    );
-  };
-
   const onSubmit = (formValues) => {
+    formValues["country"] = country;
+    formValues["region"] = region;
+    formValues["createdNy"] = props.userId;
+
     props.onSubmit(formValues);
   };
 
@@ -234,15 +268,17 @@ function StateEditForm(props) {
               id="name"
               name="name"
               type="text"
+              defaultValue={params.name}
               component={renderStateNameField}
             />
           </Grid>
           <Grid item style={{ width: "28%", marginLeft: 10 }}>
             <Field
               label=""
-              id="name"
-              name="name"
+              id="code"
+              name="code"
               type="text"
+              defaultValue={params.code}
               component={renderStateCodeField}
             />
           </Grid>
@@ -261,7 +297,7 @@ function StateEditForm(props) {
             <Field
               label=""
               id="region"
-              name="egion"
+              name="region"
               type="text"
               component={renderCountryRegionsField}
             />
@@ -272,6 +308,7 @@ function StateEditForm(props) {
           id="description"
           name="description"
           type="text"
+          defaultValue={params.description}
           component={renderStateDescriptionField}
           style={{ marginTop: 10 }}
         />

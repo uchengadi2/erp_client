@@ -523,7 +523,7 @@ const Header = (props) => {
     },
     {
       name: "Utilities",
-      link: "/systems/Utilities",
+      link: "/systems/utilities",
       activeIndex: 7,
       selectedIndex: 74,
     },

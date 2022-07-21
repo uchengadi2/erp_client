@@ -46,12 +46,13 @@ class CityList extends React.Component {
           open={this.state.editOpen}
           onClose={() => [
             this.setState({ editOpen: false }),
-            history.push("/cities"),
+            history.push("/systems/utilities/cities"),
           ]}
         >
           <DialogContent>
             <CityEdit
               token={this.props.token}
+              userId={this.props.userId}
               params={this.state.params}
               handleEditDialogOpenStatus={this.handleEditDialogOpenStatus}
             />
@@ -70,12 +71,13 @@ class CityList extends React.Component {
           open={this.state.deleteOpen}
           onClose={() => [
             this.setState({ deleteOpen: false }),
-            history.push(`/cities`),
+            history.push(`/systems/utilities/cities`),
           ]}
         >
           <DialogContent>
             <CityDelete
               token={this.props.token}
+              userId={this.props.userId}
               id={this.state.id}
               handleDialogOpenStatus={this.handleDialogOpenStatus}
             />
@@ -94,7 +96,7 @@ class CityList extends React.Component {
           open={this.state.blacklistOpen}
           onClose={() => [
             this.setState({ blacklistOpen: false }),
-            history.push(`/cities`),
+            history.push(`/systems/utilities/cities`),
           ]}
         >
           <DialogContent>
@@ -110,9 +112,9 @@ class CityList extends React.Component {
     const columns = [
       { field: "numbering", headerName: "S/n", width: 100 },
       { field: "name", headerName: "City Name", width: 300 },
-      { field: "description", headerName: "Description", width: 350 },
+      { field: "state", headerName: "State", width: 350 },
       { field: "country", headerName: "Country", width: 250 },
-      { field: "security", headerName: "Security Status", width: 70 },
+
       {
         field: "editaction",
         headerName: "",
@@ -128,7 +130,7 @@ class CityList extends React.Component {
                   id: params.id,
                   params: params.row,
                 }),
-                history.push(`/cities/edit/${params.id}`),
+                history.push(`/systems/utilities/cities/edit/${params.id}`),
               ]}
             />
           </strong>
@@ -146,7 +148,9 @@ class CityList extends React.Component {
               style={{ color: "black" }}
               onClick={() => [
                 this.setState({ blacklistOpen: true, id: params.id }),
-                history.push(`/cities/blacklist/${params.id}`),
+                history.push(
+                  `/systems/utilities/cities/blacklist/${params.id}`
+                ),
               ]}
             />
           </strong>
@@ -164,7 +168,7 @@ class CityList extends React.Component {
               style={{ color: "red" }}
               onClick={() => [
                 this.setState({ deleteOpen: true, id: params.id }),
-                history.push(`/cities/delete/${params.id}`),
+                history.push(`/systems/utilities/cities/delete/${params.id}`),
               ]}
             />
           </strong>
@@ -176,9 +180,10 @@ class CityList extends React.Component {
         numbering: ++counter,
         id: city.id,
         name: city.name,
+        code: city.code,
         description: city.description,
-        country: city.country[0],
-        security: city.securityStatus,
+        state: city.state,
+        country: city.country,
       };
       rows.push(row);
     });

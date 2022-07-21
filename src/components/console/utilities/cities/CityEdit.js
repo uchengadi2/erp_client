@@ -5,14 +5,12 @@ import CityEditForm from "./CityEditForm";
 
 class CityEdit extends React.Component {
   componentDidMount() {
-    //this.props.fetchCategory(this.props.match.params.id);
+    this.props.fetchCity(this.props.params.id, this.props.token);
   }
 
   onSubmit = (formValues) => {
     this.props.editCity(this.props.params.id, formValues, this.props.token);
     this.props.handleEditDialogOpenStatus();
-
-    //console.log("the form values areeeee:", formValues);
   };
 
   render() {
@@ -20,6 +18,7 @@ class CityEdit extends React.Component {
       <>
         <CityEditForm
           token={this.props.token}
+          userId={this.props.userId}
           params={this.props.params}
           handleEditDialogOpenStatus={this.props.handleEditDialogOpenStatus}
           onSubmit={this.onSubmit}
@@ -30,7 +29,7 @@ class CityEdit extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  return { city: state.city[ownProps.match.params.id] };
+  return { city: state.city[ownProps.params.id] };
 };
 
-export default connect(null, { fetchCity, editCity })(CityEdit);
+export default connect(mapStateToProps, { fetchCity, editCity })(CityEdit);
