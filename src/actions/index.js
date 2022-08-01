@@ -638,60 +638,6 @@ export const deleteState = (id, token) => {
   };
 };
 
-////////////////////////////////////////////////////////////////////////
-//currencies resource models
-
-export const createCurrency = (formValues, token) => {
-  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-  return async (dispatch, getState) => {
-    const { userId } = getState().auth;
-    const response = await data.post("/currencies", {
-      ...formValues,
-      userId,
-    });
-
-    //console.log(response);
-    dispatch({ type: CREATE_CURRENCY, payload: response.data });
-    history.push("/utilities/currencies");
-  };
-};
-
-export const fetchCurrencies = (tokens) => {
-  data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
-  return async (dispatch) => {
-    const response = await data.get("/currencies");
-    //console.log("vendor response is:", response);
-
-    dispatch({ type: FETCH_CURRENCIES, payload: response.data.data.data });
-  };
-};
-
-export const fetchCurrency = (id, token) => {
-  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-  return async (dispatch) => {
-    const response = await data.get(`/currencies/${id}`);
-    dispatch({ type: FETCH_CURRENCY, payload: response.data });
-  };
-};
-
-export const editCurrency = (id, formValues, token) => {
-  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-  return async (dispatch) => {
-    const response = await data.patch(`/currencies/${id}`, formValues);
-    dispatch({ type: EDIT_CURRENCY, payload: response.data });
-    history.push("/utilities/currencies");
-  };
-};
-
-export const deleteCurrency = (id, token) => {
-  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-  return async (dispatch) => {
-    await data.delete(`/currencies/${id}`);
-    dispatch({ type: DELETE_CURRENCY, payload: id });
-    history.push("/utilities/currencies");
-  };
-};
-
 ////////////////////////// working on service outlets //////////////////////
 
 export const createServiceOutlet = (formValues, token) => {
@@ -842,3 +788,91 @@ export const deleteSchemeCode = (id, token) => {
 export const fetchOrders = () => {};
 
 /////////////////////////////////////////////////////
+
+/////////////////////////////CURRENCY //////////////////////////////////////
+
+export const createCurrency = (formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.post("/currencies", formValues);
+
+    dispatch({ type: CREATE_CURRENCY, payload: response.data.data.data });
+  };
+};
+
+export const fetchCurrencies = (tokens) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
+  return async (dispatch) => {
+    const response = await data.get("/currencies");
+
+    dispatch({ type: FETCH_CURRENCIES, payload: response.data.data.data });
+  };
+};
+
+export const fetchCurrency = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.get(`/currencies/${id}`);
+    dispatch({ type: FETCH_CURRENCY, payload: response.data.data.data });
+  };
+};
+
+export const editCurrency = (id, formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.patch(`/currencies/${id}`, formValues);
+    dispatch({ type: EDIT_CURRENCY, payload: response.data.data.data });
+  };
+};
+
+export const deleteCurrency = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    await data.delete(`/currencies/${id}`);
+    dispatch({ type: DELETE_CURRENCY, payload: id });
+  };
+};
+
+//////////////////////////GL HEADS ///////////////////////////////
+
+export const createGlHead = (formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.post("/glheadaccounts", formValues);
+
+    dispatch({ type: CREATE_GLCODE, payload: response.data.data.data });
+  };
+};
+
+export const fetchGlHeads = (tokens) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
+  return async (dispatch) => {
+    const response = await data.get("/glheadaccounts");
+
+    dispatch({ type: FETCH_GLCODES, payload: response.data.data.data });
+  };
+};
+
+export const fetchGlCode = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.get(`/glheadaccounts/${id}`);
+    dispatch({ type: FETCH_GLCODE, payload: response.data.data.data });
+  };
+};
+
+export const editGlHead = (id, formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.patch(`/glheadaccounts/${id}`, formValues);
+    dispatch({ type: EDIT_GLCODE, payload: response.data.data.data });
+  };
+};
+
+export const deleteGlHead = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    await data.delete(`/glheadaccounts/${id}`);
+    dispatch({ type: DELETE_GLCODE, payload: id });
+  };
+};

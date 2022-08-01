@@ -26,8 +26,6 @@ class AccountUtilityCurrencyTypeContainerForm extends React.Component {
   onSubmit = (formValues) => {
     this.props.createCurrency(formValues, this.props.token);
     this.props.handleDialogOpenStatus();
-
-    //console.log("the form values areeeee:", formValues);
   };
   render() {
     return (
@@ -35,20 +33,12 @@ class AccountUtilityCurrencyTypeContainerForm extends React.Component {
         <AccountUtilityCurrencyForm
           onSubmit={this.onSubmit}
           userId={this.props.userId}
+          token={this.props.token}
         />
       </Box>
     );
   }
 }
-
-// CategoryFormContainer.propTypes = {
-//   setToken: PropTypes.func.isRequired,
-// };
-
-// const mapStateToProps = (state) => {
-//   //return { token: state.auth.token };
-//   return null;
-// };
 
 export default connect(null, { createCurrency })(
   AccountUtilityCurrencyTypeContainerForm

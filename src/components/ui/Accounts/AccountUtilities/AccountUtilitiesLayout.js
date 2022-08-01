@@ -122,7 +122,7 @@ function AccountUtilitiesLayout({ token, userId }) {
           {...a11yProps(2)}
           onClick={(event) => {
             event.preventDefault();
-            history.push(`/accounts/utilities/glcodes`);
+            history.push(`/accounts/utilities/glheads`);
           }}
         />
         <Tab

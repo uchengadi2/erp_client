@@ -9,7 +9,6 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 
-import AccountTypeFilter from "../../../ui/headerFilters/AccountTypeFilter";
 import AccountUtilityCurrencyTypesList from "../../../accounts/utilities/currencyTypes/AccountUtilityCurrencyTypesList";
 import history from "../../../../history";
 import AccountUtilityCurrencyTypeContainerForm from "../../../accounts/utilities/currencyTypes/AccountUtilityCurrencyTypeContainerForm";
@@ -62,195 +61,15 @@ const useStyles = makeStyles((theme) => ({
 function AccountUtilityCurrencyTypeLayout(props) {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
-  const [selectedSourceCountry, setSelectedSourceCountry] = useState("all");
-  const [selectedDestinationCountry, setSelectedDestinationCountry] =
-    useState("all");
-  const [sourceCountryList, setSourceCountryList] = useState([
-    { id: "", name: "" },
-  ]);
-  const [destinationCountryList, setDestinationCountryList] = useState([
-    { id: "", name: "" },
-  ]);
-  const [selectedCategory, setSelectedCategory] = useState("all");
-  const [categoryList, setCategoryList] = useState([{ id: "", name: "" }]);
   const theme = useTheme();
   const matchesMD = useMediaQuery(theme.breakpoints.down("md"));
   const matchesSM = useMediaQuery(theme.breakpoints.down("sm"));
   const matchesXS = useMediaQuery(theme.breakpoints.down("xs"));
 
-  //   useEffect(() => {
-  //     const fetchSourceCountryData = async () => {
-  //       let allData = [{ id: "all", name: "All" }];
-  //       data.defaults.headers.common["Authorization"] = `Bearer ${props.token}`;
-  //       const response = await data.get("/countries");
-  //       const workingData = response.data.data.data;
-  //       workingData.map((country) => {
-  //         allData.push({ id: country._id, name: country.name });
-  //       });
-  //       setSourceCountryList(allData);
-  //     };
-
-  //     //call the function
-
-  //     fetchSourceCountryData().catch(console.error);
-  //   }, []);
-
-  //   useEffect(() => {
-  //     const fetchDestinationCountryData = async () => {
-  //       let allData = [{ id: "all", name: "All" }];
-  //       data.defaults.headers.common["Authorization"] = `Bearer ${props.token}`;
-  //       const response = await data.get("/countries");
-  //       const workingData = response.data.data.data;
-  //       workingData.map((country) => {
-  //         allData.push({ id: country._id, name: country.name });
-  //       });
-  //       setDestinationCountryList(allData);
-  //     };
-
-  //     //call the function
-
-  //     fetchDestinationCountryData().catch(console.error);
-  //   }, []);
-
-  //   useEffect(() => {
-  //     const fetchCategoryData = async () => {
-  //       let allData = [{ id: "all", name: "All" }];
-  //       data.defaults.headers.common["Authorization"] = `Bearer ${props.token}`;
-  //       const response = await data.get("/categories");
-  //       const workingData = response.data.data.data;
-  //       workingData.map((category) => {
-  //         allData.push({ id: category._id, name: category.name });
-  //       });
-  //       setCategoryList(allData);
-  //     };
-
-  //     //call the function
-
-  //     fetchCategoryData().catch(console.error);
-  //   }, []);
-
   const handleDialogOpenStatus = () => {
     // history.push("/categories/new");
     setOpen(false);
   };
-
-  const handleSourceCountryChange = (value) => {
-    setSelectedSourceCountry(value);
-    console.log("the selected country iseeeeeeee:", selectedSourceCountry);
-  };
-
-  const handleDestinationCountryChange = (value) => {
-    setSelectedDestinationCountry(value);
-    console.log("the selected country iseeeeeeee:", selectedDestinationCountry);
-  };
-
-  const handleCategoryChange = (value) => {
-    setSelectedCategory(value);
-    console.log("the selected vendor iseeeeeeee:", selectedCategory);
-  };
-
-  const status = "pending";
-
-  //   const renderDataList = () => {
-  //     if (
-  //       selectedSourceCountry === "all" &&
-  //       selectedDestinationCountry === "all" &&
-  //       selectedCategory === "all"
-  //     ) {
-  //       return <OrdersList token={props.token} status={status} />;
-  //     } else if (
-  //       selectedSourceCountry === "all" &&
-  //       selectedDestinationCountry === "all" &&
-  //       selectedCategory !== "all"
-  //     ) {
-  //       return (
-  //         <OrderByCategoryList
-  //           token={props.token}
-  //           selectedCategory={selectedCategory}
-  //           status={status}
-  //         />
-  //       );
-  //     } else if (
-  //       selectedSourceCountry === "all" &&
-  //       selectedDestinationCountry !== "all" &&
-  //       selectedCategory !== "all"
-  //     ) {
-  //       return (
-  //         // <OrderByCategoryAndDestinationCountryList
-  //         //   token={props.token}
-  //         //   selectedCategory={selectedCategory}
-  //         //   selectedDestinationCountry={selectedDestinationCountry}
-  //         //   status={status}
-  //         // />
-  //       );
-  //     } else if (
-  //       selectedSourceCountry !== "all" &&
-  //       selectedDestinationCountry !== "all" &&
-  //       selectedCategory !== "all"
-  //     ) {
-  //       return (
-  //         // <OrderByCategorySourceAndDestinationCountryList
-  //         //   token={props.token}
-  //         //   selectedCategory={selectedCategory}
-  //         //   selectedDestinationCountry={selectedDestinationCountry}
-  //         //   selectedSourceCountry={selectedSourceCountry}
-  //         //   status={status}
-  //         // />
-  //       );
-  //     } else if (
-  //       selectedSourceCountry !== "all" &&
-  //       selectedDestinationCountry !== "all" &&
-  //       selectedCategory === "all"
-  //     ) {
-  //       return (
-  //         // <OrderBySourceAndDestinationCountryList
-  //         //   token={props.token}
-  //         //   selectedDestinationCountry={selectedDestinationCountry}
-  //         //   selectedSourceCountry={selectedSourceCountry}
-  //         //   status={status}
-  //         // />
-  //       );
-  //     } else if (
-  //       selectedSourceCountry !== "all" &&
-  //       selectedDestinationCountry === "all" &&
-  //       selectedCategory === "all"
-  //     ) {
-  //       return (
-  //         // <OrderBySourceCountryList
-  //         //   token={props.token}
-  //         //   selectedSourceCountry={selectedSourceCountry}
-  //         //   status={status}
-  //         // />
-  //       );
-  //     } else if (
-  //       selectedSourceCountry === "all" &&
-  //       selectedDestinationCountry !== "all" &&
-  //       selectedCategory === "all"
-  //     ) {
-  //       return (
-  //         // <OrderByDestinationCountryList
-  //         //   token={props.token}
-  //         //   selectedDestinationCountry={selectedDestinationCountry}
-  //         //   status={status}
-  //         // />
-  //       );
-  //     } else if (
-  //       selectedSourceCountry !== "all" &&
-  //       selectedDestinationCountry === "all" &&
-  //       selectedCategory !== "all"
-  //     ) {
-  //       return (
-  //         // <OrderByCategoryAndSourceCountryList
-  //         //   token={props.token}
-  //         //   selectedCategory={selectedCategory}
-  //         //   selectedSourceCountry={selectedSourceCountry}
-  //         //   status={status}
-  //         // />
-  //       );
-  //     } else {
-  //       return null;
-  //     }
-  //   };
 
   const width = 12;
 
@@ -264,20 +83,7 @@ function AccountUtilityCurrencyTypeLayout(props) {
       spacing={2}
     >
       <Grid item container direction="column" sm={width}>
-        <Grid item className={classes.selectField}>
-          {/* <AccountTypeFilter
-          // token={props.token}
-          // sourceCountryList={sourceCountryList}
-          // destinationCountryList={destinationCountryList}
-          // selectedSourceCountry={selectedSourceCountry}
-          // selectedDestinationCountry={selectedDestinationCountry}
-          // handleSourceCountryChange={handleSourceCountryChange}
-          // handleDestinationCountryChange={handleDestinationCountryChange}
-          // categoryList={categoryList}
-          // selectedCategory={selectedCategory}
-          // handleCategoryChange={handleCategoryChange}
-          /> */}
-        </Grid>
+        <Grid item className={classes.selectField}></Grid>
         <Grid
           item
           container
@@ -291,7 +97,7 @@ function AccountUtilityCurrencyTypeLayout(props) {
                 className={classes.addButton}
                 onClick={() => [
                   setOpen(true),
-                  history.push("/accounts/utilities/currencytype/new"),
+                  history.push("/accounts/utilities/currencytypes/new"),
                 ]}
               >
                 Add Currency
@@ -301,9 +107,10 @@ function AccountUtilityCurrencyTypeLayout(props) {
           </Toolbar>
         </Grid>
         <Grid item className={classes.contentContainer}>
-          <AccountUtilityCurrencyTypesList token={props.token} />
-          {/* {renderDataList()} */}
-          {/* <DataGridText /> */}
+          <AccountUtilityCurrencyTypesList
+            token={props.token}
+            userId={props.userId}
+          />
         </Grid>
       </Grid>
       <Dialog
@@ -312,12 +119,13 @@ function AccountUtilityCurrencyTypeLayout(props) {
         open={open}
         onClose={() => [
           setOpen(false),
-          history.push("/accounts/utilities/currencytype"),
+          history.push("/accounts/utilities/currencytypes"),
         ]}
       >
         <DialogContent>
           <AccountUtilityCurrencyTypeContainerForm
             token={props.token}
+            userId={props.userId}
             handleDialogOpenStatus={handleDialogOpenStatus}
           />
         </DialogContent>

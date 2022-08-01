@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Field, reduxForm } from "redux-form";
+import { useDispatch } from "react-redux";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import { TextField, Typography } from "@material-ui/core";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import Paper from "@material-ui/core/Paper";
 import Box from "@material-ui/core/Box";
 import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
@@ -13,7 +16,8 @@ import FormHelperText from "@material-ui/core/FormHelperText";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
-import data from "./../../../../apis/local";
+import api from "./../../../../apis/local";
+import { EDIT_CURRENCY } from "../../../../actions/types";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -143,17 +147,22 @@ const renderCurrencySymbolField = ({
   );
 };
 
-function AccountUtilityCurrencyForm(props) {
+function AccountUtilityCurrencyTypeEditForm(props) {
   const classes = useStyles();
 
-  const [country, setCountry] = useState();
+  const dispatch = useDispatch();
+
+  const [country, setCountry] = useState(props.params.country);
   const [countryList, setCountryList] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  const params = props.params;
 
   useEffect(() => {
     const fetchData = async () => {
       let allData = [];
-      data.defaults.headers.common["Authorization"] = `Bearer ${props.token}`;
-      const response = await data.get("/countries");
+      api.defaults.headers.common["Authorization"] = `Bearer ${props.token}`;
+      const response = await api.get("/countries");
       const workingData = response.data.data.data;
       workingData.map((country) => {
         allData.push({ id: country._id, name: country.name });
@@ -200,7 +209,7 @@ function AccountUtilityCurrencyForm(props) {
             onChange={handleCountryChange}
             label="Country"
             style={{ width: 500 }}
-            {...input}
+            // {...input}
           >
             {renderCountryList()}
           </Select>
@@ -210,35 +219,70 @@ function AccountUtilityCurrencyForm(props) {
     );
   };
 
-  const onSubmit = (formValues) => {
-    const form = new FormData();
-    form.append("name", formValues.name);
-    form.append("code", formValues.code);
-    form.append("description", formValues.description);
-    form.append("country", formValues.country);
-    form.append("createdBy", props.userId);
-    if (formValues.symbol) {
-      form.append("symbol", formValues.symbol[0]);
-    }
+  const buttonContent = () => {
+    return <React.Fragment> Update Currency</React.Fragment>;
+  };
 
-    props.onSubmit(form);
+  const onSubmit = (formValues) => {
+    setLoading(true);
+
+    // const form = new FormData();
+    // form.append("name", formValues.name);
+    // form.append("code", formValues.code);
+    // form.append("description", formValues.description);
+    // form.append("country", formValues.country);
+    // if (formValues.symbol) {
+    //   form.append("symbol", formValues.symbol[0]);
+    // }
+
+    if (formValues) {
+      const editcurrencyForm = async () => {
+        api.defaults.headers.common["Authorization"] = `Bearer ${props.token}`;
+        const response = await api.patch(
+          `/currencies/${props.params.id}`,
+          formValues
+        );
+
+        if (response.data.status === "success") {
+          //const currency = response.data.data.data;
+
+          dispatch({ type: EDIT_CURRENCY, payload: response.data.data.data });
+
+          props.handleSuccessfulEditSnackbar(
+            `${response.data.data.data.name} Currency is editted successfully!!!`
+          );
+          props.handleEditDialogOpenStatus();
+          setLoading(false);
+        } else {
+          props.handleSuccessfulFailedSnackbar(
+            "Something went wrong, please try again!!!"
+          );
+        }
+      };
+      editcurrencyForm().catch((err) => {
+        props.handleSuccessfulFailedSnackbar();
+        console.log("err:", err.message);
+      });
+    } else {
+      props.handleSuccessfulFailedSnackbar(
+        "Something went wrong, please try again!!!"
+      );
+    }
   };
 
   return (
-    <div className={classes.root}>
+    <Box className={classes.root}>
       <Grid item container justifyContent="center">
         <FormLabel
           style={{ color: "blue", fontSize: "1.5em" }}
           component="legend"
         >
-          <Typography variant="subtitle1">
-            Enter New Currency Details
-          </Typography>
+          <Typography variant="subtitle1">Update Currency Details</Typography>
         </FormLabel>
       </Grid>
       <Box
         component="form"
-        id="accountUtilityCurrencyForm"
+        id="accountUtilityCurrencyEditForm"
         // onSubmit={onSubmit}
         sx={{
           width: 500,
@@ -254,6 +298,7 @@ function AccountUtilityCurrencyForm(props) {
               label=""
               id="name"
               name="name"
+              defaultValue={params.name}
               type="text"
               component={renderCurrencyNameField}
             />
@@ -263,6 +308,7 @@ function AccountUtilityCurrencyForm(props) {
               label=""
               id="code"
               name="code"
+              defaultValue={params.code}
               type="text"
               component={renderCurrencyCodeField}
             />
@@ -274,6 +320,7 @@ function AccountUtilityCurrencyForm(props) {
               label=""
               id="country"
               name="country"
+              defaultValue={params.country}
               type="text"
               component={renderCurrencyCountryField}
             />
@@ -283,6 +330,7 @@ function AccountUtilityCurrencyForm(props) {
           label=""
           id="description"
           name="description"
+          defaultValue={params.description}
           type="text"
           component={renderCurrencyDescriptionField}
           style={{ marginTop: 10 }}
@@ -302,14 +350,18 @@ function AccountUtilityCurrencyForm(props) {
           className={classes.submitButton}
           onClick={props.handleSubmit(onSubmit)}
         >
-          Add Currency
+          {loading ? (
+            <CircularProgress size={30} color="inherit" />
+          ) : (
+            buttonContent()
+          )}
         </Button>
       </Box>
       {/* </form> */}
-    </div>
+    </Box>
   );
 }
 
 export default reduxForm({
-  form: "accountUtilityCurrencyForm",
-})(AccountUtilityCurrencyForm);
+  form: "accountUtilityCurrencyEditForm",
+})(AccountUtilityCurrencyTypeEditForm);

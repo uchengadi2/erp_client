@@ -75,7 +75,7 @@ export const EDIT_SCHEMECODE = "EDIT_SCHEMECODE";
 
 // for General Ledger Codes
 export const CREATE_GLCODE = "CREATE_GLCODE";
-export const FETCH_GLCODEs = "FETCH_GLCODES";
+export const FETCH_GLCODES = "FETCH_GLCODES";
 export const FETCH_GLCODE = "FETCH_GLCODE";
 export const DELETE_GLCODE = "DELETE_GLCODE";
 export const EDIT_GLCODE = "EDIT_GLCODE";

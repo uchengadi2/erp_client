@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import Dialog from "@material-ui/core/Dialog";
+import Snackbar from "@material-ui/core/Snackbar";
 import DialogContent from "@material-ui/core/DialogContent";
 import EditRoundedIcon from "@material-ui/icons/EditRounded";
 import DeleteRoundedIcon from "@material-ui/icons/DeleteRounded";
@@ -8,9 +9,12 @@ import CancelRoundedIcon from "@material-ui/icons/CancelRounded";
 import AssignmentIcon from "@material-ui/icons/Assignment";
 import Typography from "@material-ui/core/Typography";
 import history from "../../../../history";
-import { fetchOrders } from "../../../../actions";
+import { fetchCurrencies } from "../../../../actions";
 import DataGridContainer from "../../../DataGridContainer";
 import AccountUtilityCurrencyTypeContainerForm from "./AccountUtilityCurrencyTypeContainerForm";
+import AccountUtilityCurrencyTypeDelete from "./AccountUtilityCurrencyTypeDelete";
+import AccountUtilityCurrencyTypeEdit from "./AccountUtilityCurrencyTypeEdit";
+import AccountUtilityCurrencyTypeEditForm from "./AccountUtilityCurrencyTypeEditForm";
 
 class AccountUtilityCurrencyTypesList extends React.Component {
   constructor(props) {
@@ -20,21 +24,47 @@ class AccountUtilityCurrencyTypesList extends React.Component {
       deleteOpen: false,
       cancelOpen: false,
       assignOpen: false,
+      alert: {
+        open: false,
+        message: "",
+        backgroundColor: "",
+      },
       id: null,
       params: {},
     };
   }
   componentDidMount() {
-    // this.props.fetchOrders(this.props.token, this.props.status);
+    this.props.fetchCurrencies(this.props.token);
   }
 
   handleDialogOpenStatus = () => {
-    // history.push("/categories/new");
     this.setState({ deleteOpen: false });
   };
 
   handleEditDialogOpenStatus = () => {
+    this.setState({ editOpen: false });
+  };
+
+  handleSuccessfulEditSnackbar = (message) => {
     // history.push("/categories/new");
+    this.setState({ editOpen: false });
+    this.setState({
+      alert: {
+        open: true,
+        message: message,
+        backgroundColor: "#4BB543",
+      },
+    });
+  };
+
+  handleSuccessfulFailedSnackbar = (message) => {
+    this.setState({
+      alert: {
+        open: true,
+        message: message,
+        backgroundColor: "#FF3232",
+      },
+    });
     this.setState({ editOpen: false });
   };
 
@@ -51,11 +81,22 @@ class AccountUtilityCurrencyTypesList extends React.Component {
           ]}
         >
           <DialogContent>
-            {/* <OrdersEdit
+            {/* <AccountUtilityCurrencyTypeEdit
               token={this.props.token}
+              userId={this.props.userId}
               params={this.state.params}
               handleEditDialogOpenStatus={this.handleEditDialogOpenStatus}
             /> */}
+            <AccountUtilityCurrencyTypeEditForm
+              token={this.props.token}
+              userId={this.props.userId}
+              params={this.state.params}
+              handleEditDialogOpenStatus={this.handleEditDialogOpenStatus}
+              handleSuccessfulEditSnackbar={this.handleSuccessfulEditSnackbar}
+              handleSuccessfulFailedSnackbar={
+                this.handleSuccessfulFailedSnackbar
+              }
+            />
           </DialogContent>
         </Dialog>
       </>
@@ -75,11 +116,12 @@ class AccountUtilityCurrencyTypesList extends React.Component {
           ]}
         >
           <DialogContent>
-            {/* <OrderDelete
+            <AccountUtilityCurrencyTypeDelete
               token={this.props.token}
+              userId={this.props.userId}
               id={this.state.id}
               handleDialogOpenStatus={this.handleDialogOpenStatus}
-            /> */}
+            />
           </DialogContent>
         </Dialog>
       </>
@@ -121,6 +163,7 @@ class AccountUtilityCurrencyTypesList extends React.Component {
           <DialogContent>
             <AccountUtilityCurrencyTypeContainerForm
               token={this.props.token}
+              userId={this.props.token}
               params={this.state.params}
               handleEditDialogOpenStatus={this.handleEditDialogOpenStatus}
             />
@@ -130,26 +173,15 @@ class AccountUtilityCurrencyTypesList extends React.Component {
     );
   };
 
-  renderOrdersList = () => {
+  renderCurrenciesList = () => {
     let rows = [];
     let counter = 0;
     const columns = [
       { field: "numbering", headerName: "S/n", width: 60 },
-      { field: "orderNumber", headerName: "Order Number", width: 150 },
-      { field: "dateOrdered", headerName: "Date Ordered", width: 100 },
-      { field: "orderedQuantity", headerName: "Ordered Quantity", width: 80 },
-      { field: "status", headerName: "Status", width: 100 },
-      { field: "category", headerName: "Category", width: 150 },
-      {
-        field: "consignmentCountry",
-        headerName: "Source Country",
-        width: 150,
-      },
-      {
-        field: "destinationCountry",
-        headerName: "Destination Country",
-        width: 150,
-      },
+      { field: "name", headerName: "Name", width: 150 },
+      { field: "code", headerName: "Currency Code", width: 150 },
+      { field: "country", headerName: "Country", width: 150 },
+
       {
         field: "editaction",
         headerName: "",
@@ -173,46 +205,7 @@ class AccountUtilityCurrencyTypesList extends React.Component {
           </strong>
         ),
       },
-      {
-        field: "cancelorder",
-        headerName: "",
-        width: 30,
-        description: "Cancel Order",
-        renderCell: (params) => (
-          <strong>
-            {/* {params.value.getFullYear()} */}
-            <CancelRoundedIcon
-              style={{ color: "black" }}
-              onClick={() => [
-                this.setState({ cancelOpen: true, id: params.id }),
-                history.push(
-                  `/accounts/utilities/currencytypes/cancel/${params.id}`
-                ),
-              ]}
-            />
-          </strong>
-        ),
-      },
-      {
-        field: "assignorder",
-        headerName: "",
-        width: 30,
-        description: "Assign Order",
-        renderCell: (params) => (
-          <strong>
-            {/* {params.value.getFullYear()} */}
-            <AssignmentIcon
-              style={{ color: "black" }}
-              onClick={() => [
-                this.setState({ assignOpen: true, id: params.id }),
-                history.push(
-                  `/accounts/utilities/currencytypes/assign/${params.id}`
-                ),
-              ]}
-            />
-          </strong>
-        ),
-      },
+
       {
         field: "deleteaction",
         headerName: "",
@@ -234,21 +227,18 @@ class AccountUtilityCurrencyTypesList extends React.Component {
         ),
       },
     ];
-    // this.props.orders.map((order) => {
-    //   console.log("these are the orderrrrnew:", order);
-    //   let row = {
-    //     numbering: ++counter,
-    //     id: order.id,
-    //     orderNumber: order.orderNumber,
-    //     dateOrdered: order.dateOrdered,
-    //     orderedQuantity: order.orderQuantity,
-    //     status: order.status,
-    //     consignmentCountry: order.consignmentCountry[0],
-    //     destinationCountry: order.destinationCountry[0],
-    //     category: order.category,
-    //   };
-    //   rows.push(row);
-    // });
+    this.props.currencies.map((currency) => {
+      let row = {
+        numbering: ++counter,
+        id: currency.id,
+        name: currency.name,
+        code: currency.code,
+        symbol: currency.symbol,
+        description: currency.description,
+        country: currency.country,
+      };
+      rows.push(row);
+    });
     return <DataGridContainer columns={columns} rows={rows} />;
   };
 
@@ -257,17 +247,26 @@ class AccountUtilityCurrencyTypesList extends React.Component {
       <>
         {this.renderDeleteDialogForm()}
         {this.renderEditDialogForm()}
-        {this.renderOrdersList()}
-        {this.renderCancelDialogForm()}
-        {this.renderAssignOrderDialogForm()}
+        {this.renderCurrenciesList()}
+        <Snackbar
+          open={this.state.alert.open}
+          message={this.state.alert.message}
+          ContentProps={{
+            style: { backgroundColor: this.state.alert.backgroundColor },
+          }}
+          anchorOrigin={{ vertical: "top", horizontal: "center" }}
+          onClose={() => this.setState({ alert: { ...alert, open: false } })}
+          autoHideDuration={4000}
+        />
       </>
     );
   }
 }
 
 const mapStateToProps = (state) => {
-  console.log("this is the state:", state);
-  return { orders: Object.values(state.order) };
+  return { currencies: Object.values(state.currency) };
 };
 
-export default connect(null, {})(AccountUtilityCurrencyTypesList);
+export default connect(mapStateToProps, { fetchCurrencies })(
+  AccountUtilityCurrencyTypesList
+);

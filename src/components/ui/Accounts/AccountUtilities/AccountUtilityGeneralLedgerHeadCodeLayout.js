@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Grid from "@material-ui/core/Grid";
+import Snackbar from "@material-ui/core/Snackbar";
 
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
@@ -13,6 +14,7 @@ import history from "../../../../history";
 import SchemeCodeFilter from "../../headerFilters/SchemeCodeFilter";
 import AccountUtilityGeneralLedgerList from "../../../accounts/utilities/generalLedger/AccountUtilityGeneralLedgerList";
 import AccountUtilityGlCodeFormContainer from "../../../accounts/utilities/generalLedger/AccountUtilityGlCodeFormContainer";
+import AccountUtilityGlCodeForm from "../../../accounts/utilities/generalLedger/AccountUtilityGlCodeForm";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -62,195 +64,40 @@ const useStyles = makeStyles((theme) => ({
 function AccountUtilityGeneralLedgerHeadCodeLayout(props) {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
-  const [selectedSourceCountry, setSelectedSourceCountry] = useState("all");
-  const [selectedDestinationCountry, setSelectedDestinationCountry] =
-    useState("all");
-  const [sourceCountryList, setSourceCountryList] = useState([
-    { id: "", name: "" },
-  ]);
-  const [destinationCountryList, setDestinationCountryList] = useState([
-    { id: "", name: "" },
-  ]);
-  const [selectedCategory, setSelectedCategory] = useState("all");
-  const [categoryList, setCategoryList] = useState([{ id: "", name: "" }]);
+  const [alert, setAlert] = useState({
+    open: false,
+    message: "",
+    backgroundColor: "",
+  });
+
   const theme = useTheme();
   const matchesMD = useMediaQuery(theme.breakpoints.down("md"));
   const matchesSM = useMediaQuery(theme.breakpoints.down("sm"));
   const matchesXS = useMediaQuery(theme.breakpoints.down("xs"));
-
-  //   useEffect(() => {
-  //     const fetchSourceCountryData = async () => {
-  //       let allData = [{ id: "all", name: "All" }];
-  //       data.defaults.headers.common["Authorization"] = `Bearer ${props.token}`;
-  //       const response = await data.get("/countries");
-  //       const workingData = response.data.data.data;
-  //       workingData.map((country) => {
-  //         allData.push({ id: country._id, name: country.name });
-  //       });
-  //       setSourceCountryList(allData);
-  //     };
-
-  //     //call the function
-
-  //     fetchSourceCountryData().catch(console.error);
-  //   }, []);
-
-  //   useEffect(() => {
-  //     const fetchDestinationCountryData = async () => {
-  //       let allData = [{ id: "all", name: "All" }];
-  //       data.defaults.headers.common["Authorization"] = `Bearer ${props.token}`;
-  //       const response = await data.get("/countries");
-  //       const workingData = response.data.data.data;
-  //       workingData.map((country) => {
-  //         allData.push({ id: country._id, name: country.name });
-  //       });
-  //       setDestinationCountryList(allData);
-  //     };
-
-  //     //call the function
-
-  //     fetchDestinationCountryData().catch(console.error);
-  //   }, []);
-
-  //   useEffect(() => {
-  //     const fetchCategoryData = async () => {
-  //       let allData = [{ id: "all", name: "All" }];
-  //       data.defaults.headers.common["Authorization"] = `Bearer ${props.token}`;
-  //       const response = await data.get("/categories");
-  //       const workingData = response.data.data.data;
-  //       workingData.map((category) => {
-  //         allData.push({ id: category._id, name: category.name });
-  //       });
-  //       setCategoryList(allData);
-  //     };
-
-  //     //call the function
-
-  //     fetchCategoryData().catch(console.error);
-  //   }, []);
 
   const handleDialogOpenStatus = () => {
     // history.push("/categories/new");
     setOpen(false);
   };
 
-  const handleSourceCountryChange = (value) => {
-    setSelectedSourceCountry(value);
-    console.log("the selected country iseeeeeeee:", selectedSourceCountry);
+  const handleSuccessfulCreateSnackbar = (message) => {
+    // history.push("/categories/new");
+    setOpen({ open: false });
+    setAlert({
+      open: true,
+      message: message,
+      backgroundColor: "#4BB543",
+    });
   };
 
-  const handleDestinationCountryChange = (value) => {
-    setSelectedDestinationCountry(value);
-    console.log("the selected country iseeeeeeee:", selectedDestinationCountry);
+  const handleFailedSnackbar = (message) => {
+    setAlert({
+      open: true,
+      message,
+      backgroundColor: "#FF3232",
+    });
+    setOpen({ open: false });
   };
-
-  const handleCategoryChange = (value) => {
-    setSelectedCategory(value);
-    console.log("the selected vendor iseeeeeeee:", selectedCategory);
-  };
-
-  const status = "pending";
-
-  //   const renderDataList = () => {
-  //     if (
-  //       selectedSourceCountry === "all" &&
-  //       selectedDestinationCountry === "all" &&
-  //       selectedCategory === "all"
-  //     ) {
-  //       return <OrdersList token={props.token} status={status} />;
-  //     } else if (
-  //       selectedSourceCountry === "all" &&
-  //       selectedDestinationCountry === "all" &&
-  //       selectedCategory !== "all"
-  //     ) {
-  //       return (
-  //         <OrderByCategoryList
-  //           token={props.token}
-  //           selectedCategory={selectedCategory}
-  //           status={status}
-  //         />
-  //       );
-  //     } else if (
-  //       selectedSourceCountry === "all" &&
-  //       selectedDestinationCountry !== "all" &&
-  //       selectedCategory !== "all"
-  //     ) {
-  //       return (
-  //         // <OrderByCategoryAndDestinationCountryList
-  //         //   token={props.token}
-  //         //   selectedCategory={selectedCategory}
-  //         //   selectedDestinationCountry={selectedDestinationCountry}
-  //         //   status={status}
-  //         // />
-  //       );
-  //     } else if (
-  //       selectedSourceCountry !== "all" &&
-  //       selectedDestinationCountry !== "all" &&
-  //       selectedCategory !== "all"
-  //     ) {
-  //       return (
-  //         // <OrderByCategorySourceAndDestinationCountryList
-  //         //   token={props.token}
-  //         //   selectedCategory={selectedCategory}
-  //         //   selectedDestinationCountry={selectedDestinationCountry}
-  //         //   selectedSourceCountry={selectedSourceCountry}
-  //         //   status={status}
-  //         // />
-  //       );
-  //     } else if (
-  //       selectedSourceCountry !== "all" &&
-  //       selectedDestinationCountry !== "all" &&
-  //       selectedCategory === "all"
-  //     ) {
-  //       return (
-  //         // <OrderBySourceAndDestinationCountryList
-  //         //   token={props.token}
-  //         //   selectedDestinationCountry={selectedDestinationCountry}
-  //         //   selectedSourceCountry={selectedSourceCountry}
-  //         //   status={status}
-  //         // />
-  //       );
-  //     } else if (
-  //       selectedSourceCountry !== "all" &&
-  //       selectedDestinationCountry === "all" &&
-  //       selectedCategory === "all"
-  //     ) {
-  //       return (
-  //         // <OrderBySourceCountryList
-  //         //   token={props.token}
-  //         //   selectedSourceCountry={selectedSourceCountry}
-  //         //   status={status}
-  //         // />
-  //       );
-  //     } else if (
-  //       selectedSourceCountry === "all" &&
-  //       selectedDestinationCountry !== "all" &&
-  //       selectedCategory === "all"
-  //     ) {
-  //       return (
-  //         // <OrderByDestinationCountryList
-  //         //   token={props.token}
-  //         //   selectedDestinationCountry={selectedDestinationCountry}
-  //         //   status={status}
-  //         // />
-  //       );
-  //     } else if (
-  //       selectedSourceCountry !== "all" &&
-  //       selectedDestinationCountry === "all" &&
-  //       selectedCategory !== "all"
-  //     ) {
-  //       return (
-  //         // <OrderByCategoryAndSourceCountryList
-  //         //   token={props.token}
-  //         //   selectedCategory={selectedCategory}
-  //         //   selectedSourceCountry={selectedSourceCountry}
-  //         //   status={status}
-  //         // />
-  //       );
-  //     } else {
-  //       return null;
-  //     }
-  //   };
 
   const width = 12;
 
@@ -265,18 +112,7 @@ function AccountUtilityGeneralLedgerHeadCodeLayout(props) {
     >
       <Grid item container direction="column" sm={width}>
         <Grid item className={classes.selectField}>
-          <SchemeCodeFilter
-          // token={props.token}
-          // sourceCountryList={sourceCountryList}
-          // destinationCountryList={destinationCountryList}
-          // selectedSourceCountry={selectedSourceCountry}
-          // selectedDestinationCountry={selectedDestinationCountry}
-          // handleSourceCountryChange={handleSourceCountryChange}
-          // handleDestinationCountryChange={handleDestinationCountryChange}
-          // categoryList={categoryList}
-          // selectedCategory={selectedCategory}
-          // handleCategoryChange={handleCategoryChange}
-          />
+          <SchemeCodeFilter />
         </Grid>
         <Grid
           item
@@ -291,17 +127,20 @@ function AccountUtilityGeneralLedgerHeadCodeLayout(props) {
                 className={classes.addButton}
                 onClick={() => [
                   setOpen(true),
-                  history.push("/accounts/utilities/glcodes/new"),
+                  history.push("/accounts/utilities/glheadcodes/new"),
                 ]}
               >
-                Create GL Code
+                Create GL Head
               </Button>
             </Grid>
             <Grid item></Grid>
           </Toolbar>
         </Grid>
         <Grid item className={classes.contentContainer}>
-          <AccountUtilityGeneralLedgerList token={props.token} />
+          <AccountUtilityGeneralLedgerList
+            token={props.token}
+            userId={props.userId}
+          />
           {/* {renderDataList()} */}
           {/* <DataGridText /> */}
         </Grid>
@@ -312,13 +151,16 @@ function AccountUtilityGeneralLedgerHeadCodeLayout(props) {
         open={open}
         onClose={() => [
           setOpen(false),
-          history.push("/accounts/utilities/glcodes"),
+          history.push("/accounts/utilities/glheadcodes"),
         ]}
       >
         <DialogContent>
-          <AccountUtilityGlCodeFormContainer
+          <AccountUtilityGlCodeForm
             token={props.token}
+            userId={props.userId}
             handleDialogOpenStatus={handleDialogOpenStatus}
+            handleSuccessfulCreateSnackbar={handleSuccessfulCreateSnackbar}
+            handleFailedSnackbar={handleFailedSnackbar}
           />
         </DialogContent>
       </Dialog>
@@ -340,6 +182,16 @@ function AccountUtilityGeneralLedgerHeadCodeLayout(props) {
           <Typography>This is the fourth Inner Container</Typography>
         </Grid>
       </Grid>
+      <Snackbar
+        open={alert.open}
+        message={alert.message}
+        ContentProps={{
+          style: { backgroundColor: alert.backgroundColor },
+        }}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        onClose={() => setAlert({ ...alert, open: false })}
+        autoHideDuration={4000}
+      />
     </Grid>
   );
 }

@@ -15,7 +15,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import Select from "@material-ui/core/Select";
 import api from "./../../../../apis/local";
-import { CREATE_GLCODE } from "../../../../actions/types";
+import { EDIT_GLCODE } from "../../../../actions/types";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -50,7 +50,7 @@ const renderNameField = ({
   return (
     <TextField
       //error={touched && invalid}
-      helperText="Enter the new GL Head Code name"
+      helperText="GL Head Code name"
       variant="outlined"
       label={label}
       id={input.name}
@@ -76,7 +76,7 @@ const renderGlHeadField = ({
   return (
     <TextField
       //error={touched && invalid}
-      helperText="Enter the new GL Head Code"
+      helperText="GL Head Code"
       variant="outlined"
       label={label}
       id={input.name}
@@ -107,7 +107,7 @@ const renderDescriptionField = ({
       error={touched && invalid}
       //placeholder="enter your description "
       variant="outlined"
-      helperText="Describe the GL Head Code"
+      helperText="GL Head Description"
       label={label}
       id={input.name}
       name={input.name}
@@ -124,15 +124,17 @@ const renderDescriptionField = ({
   );
 };
 
-function AccountUtilityGlCodeForm(props) {
-  const [schemeCode, setSchemeCode] = useState();
+function AccountUtilityGlCodeEditForm(props) {
+  const [schemeCode, setSchemeCode] = useState(props.params.schemeCode);
   const [schemeType, setSchemeType] = useState();
   const [schemeCodeList, setSchemeCodeList] = useState([]);
 
-  const [accountClass, setAccountClass] = useState();
+  const [accountClass, setAccountClass] = useState(props.params.accountClass);
   const [loading, setLoading] = useState(false);
 
   const dispatch = useDispatch();
+
+  const params = props.params;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -161,11 +163,6 @@ function AccountUtilityGlCodeForm(props) {
 
   const handleSchemeCodeChange = (event) => {
     setSchemeCode(event.target.value);
-  };
-
-  const handleSchemeTypeChange = (event) => {
-    setSchemeType(event.target.value);
-    //     props.handleCountryChange(event.target.value);
   };
 
   //get the scheme codes list
@@ -201,7 +198,7 @@ function AccountUtilityGlCodeForm(props) {
             onChange={handleSchemeCodeChange}
             label="Scheme Code"
             style={{ width: 400, marginTop: 10, height: 50 }}
-            {...input}
+            //{...input}
           >
             {renderSchemeCodeList()}
             {/* {renderItemList()} */}
@@ -236,7 +233,7 @@ function AccountUtilityGlCodeForm(props) {
             onChange={handleAccountClassChange}
             label="Account Class"
             style={{ width: 400, marginTop: 10, height: 50 }}
-            {...input}
+            //{...input}
           >
             <MenuItem value="assets">Assets</MenuItem>
             <MenuItem value="liabilities">Liabilities</MenuItem>
@@ -255,30 +252,35 @@ function AccountUtilityGlCodeForm(props) {
   };
 
   const buttonContent = () => {
-    return <React.Fragment> Create Gl Head</React.Fragment>;
+    return <React.Fragment> Update Gl Head</React.Fragment>;
   };
 
   const onSubmit = (formValues) => {
     setLoading(true);
 
-    formValues["createdBy"] = props.userId;
+    formValues["accountClass"] = accountClass;
+    formValues["schemeCode"] = schemeCode;
+    formValues["updatedBy"] = props.userId;
 
     console.log("this is the form values:", formValues);
 
     if (formValues) {
-      const createGlHeadForm = async () => {
+      const editGlHeadForm = async () => {
         api.defaults.headers.common["Authorization"] = `Bearer ${props.token}`;
-        const response = await api.post(`/glheadaccounts`, formValues);
+        const response = await api.patch(
+          `/glheadaccounts/${props.params.id}`,
+          formValues
+        );
 
         if (response.data.status === "success") {
           //const currency = response.data.data.data;
 
-          dispatch({ type: CREATE_GLCODE, payload: response.data.data.data });
+          dispatch({ type: EDIT_GLCODE, payload: response.data.data.data });
 
-          props.handleSuccessfulCreateSnackbar(
-            `${response.data.data.data.glHead} GlHead is created successfully!!!`
+          props.handleSuccessfulEditSnackbar(
+            `${response.data.data.data.glHead} GlHead is updated successfully!!!`
           );
-          props.handleDialogOpenStatus();
+          props.handleEditDialogOpenStatus();
           setLoading(false);
         } else {
           props.handleFailedSnackbar(
@@ -286,18 +288,20 @@ function AccountUtilityGlCodeForm(props) {
           );
         }
       };
-      createGlHeadForm().catch((err) => {
+      editGlHeadForm().catch((err) => {
         props.handleFailedSnackbar();
-        console.log("err:", err.message);
+        //console.log("err:", err.message);
       });
     } else {
-      props.handleFailedSnackbar("Something went wrong, please try again!!!");
+      props.handleFailedSnackbar(
+        "No field was changed, so there was nothing to update"
+      );
     }
     //props.onSubmit(form);
   };
 
   return (
-    <form id="accountUtilityGlCodeForm">
+    <form id="accountUtilityGlCodeEditForm">
       <Box
         // component="form"
         // id="categoryForm"
@@ -319,9 +323,7 @@ function AccountUtilityGlCodeForm(props) {
             style={{ color: "blue", fontSize: "1.5em" }}
             component="legend"
           >
-            <Typography variant="subtitle1">
-              Create A New Gl Code Head
-            </Typography>
+            <Typography variant="subtitle1">Edit Gl Code Head</Typography>
           </FormLabel>
         </Grid>
         <Grid container direction="row">
@@ -339,6 +341,7 @@ function AccountUtilityGlCodeForm(props) {
               label=""
               id="schemeCode"
               name="schemeCode"
+              defaultValue={params.schemeCode}
               type="text"
               component={renderSchemeCodeField}
             />
@@ -351,6 +354,7 @@ function AccountUtilityGlCodeForm(props) {
               label=""
               id="glHead"
               name="glHead"
+              defaultValue={params.glHead}
               type="text"
               component={renderGlHeadField}
               style={{ marginTop: 20 }}
@@ -361,6 +365,7 @@ function AccountUtilityGlCodeForm(props) {
               label=""
               id="name"
               name="name"
+              defaultValue={params.name}
               type="text"
               component={renderNameField}
               style={{ marginTop: 20 }}
@@ -371,6 +376,7 @@ function AccountUtilityGlCodeForm(props) {
           label=""
           id="accountClass"
           name="accountClass"
+          defaultValue={params.accountClass}
           type="text"
           component={renderAccountClassField}
         />
@@ -379,6 +385,7 @@ function AccountUtilityGlCodeForm(props) {
           label=""
           id="description"
           name="description"
+          defaultValue={params.description}
           type="text"
           component={renderDescriptionField}
         />
@@ -400,5 +407,5 @@ function AccountUtilityGlCodeForm(props) {
 }
 
 export default reduxForm({
-  form: "accountUtilityGlCodeForm",
-})(AccountUtilityGlCodeForm);
+  form: "accountUtilityGlCodeEditForm",
+})(AccountUtilityGlCodeEditForm);
