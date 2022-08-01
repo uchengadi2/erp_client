@@ -83,7 +83,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function AccountUtilitiesLayout({ token }) {
+function AccountUtilitiesLayout({ token, userId }) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
@@ -203,34 +203,43 @@ function AccountUtilitiesLayout({ token }) {
       </Tabs>
 
       <TabPanel value={value} index={0}>
-        <AccountUtilitySchemeCodesLayout token={token} />
+        <AccountUtilitySchemeCodesLayout token={token} userId={userId} />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <AccountUtilityCurrencyTypeLayout token={token} />
+        <AccountUtilityCurrencyTypeLayout token={token} userId={userId} />
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <AccountUtilityGeneralLedgerLayout token={token} />
+        <AccountUtilityGeneralLedgerLayout token={token} userId={userId} />
       </TabPanel>
       <TabPanel value={value} index={3}>
-        <AccountUtilityGlSubHeadLedgerCodeLayout token={token} />
+        <AccountUtilityGlSubHeadLedgerCodeLayout
+          token={token}
+          userId={userId}
+        />
       </TabPanel>
       {/* <TabPanel value={value} index={4}>
         <AccountUtilitySubsidiaryLedger token={token} />
       </TabPanel> */}
       <TabPanel value={value} index={4}>
-        <AccountUtilityTransactionTypeLayout token={token} />
+        <AccountUtilityTransactionTypeLayout token={token} userId={userId} />
       </TabPanel>
       <TabPanel value={value} index={5}>
-        <AccountUtilityOfficeOperationsAndServicesLayout token={token} />
+        <AccountUtilityOfficeOperationsAndServicesLayout
+          token={token}
+          userId={userId}
+        />
       </TabPanel>
       <TabPanel value={value} index={8}>
-        <AccountUtilityEquityFundingLayout token={token} />
+        <AccountUtilityEquityFundingLayout token={token} userId={userId} />
       </TabPanel>
       <TabPanel value={value} index={9}>
-        <AccountUtilityCashAccountLayout token={token} />
+        <AccountUtilityCashAccountLayout token={token} userId={userId} />
       </TabPanel>
       <TabPanel value={value} index={10}>
-        <AccountUtilityStaffAccountFundingLayout token={token} />
+        <AccountUtilityStaffAccountFundingLayout
+          token={token}
+          userId={userId}
+        />
       </TabPanel>
     </div>
   );

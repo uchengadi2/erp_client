@@ -136,26 +136,26 @@ class CityList extends React.Component {
           </strong>
         ),
       },
-      {
-        field: "blacklistaction",
-        headerName: "",
-        width: 30,
-        description: "Blacklist city",
-        renderCell: (params) => (
-          <strong>
-            {/* {params.value.getFullYear()} */}
-            <CancelRoundedIcon
-              style={{ color: "black" }}
-              onClick={() => [
-                this.setState({ blacklistOpen: true, id: params.id }),
-                history.push(
-                  `/systems/utilities/cities/blacklist/${params.id}`
-                ),
-              ]}
-            />
-          </strong>
-        ),
-      },
+      // {
+      //   field: "blacklistaction",
+      //   headerName: "",
+      //   width: 30,
+      //   description: "Blacklist city",
+      //   renderCell: (params) => (
+      //     <strong>
+      //       {/* {params.value.getFullYear()} */}
+      //       <CancelRoundedIcon
+      //         style={{ color: "black" }}
+      //         onClick={() => [
+      //           this.setState({ blacklistOpen: true, id: params.id }),
+      //           history.push(
+      //             `/systems/utilities/cities/blacklist/${params.id}`
+      //           ),
+      //         ]}
+      //       />
+      //     </strong>
+      //   ),
+      // },
       {
         field: "deleteaction",
         headerName: "",
@@ -203,6 +203,7 @@ class CityList extends React.Component {
 }
 
 const mapStateToProps = (state) => {
+  console.log("state city:", state.city);
   return { cities: Object.values(state.city) };
 };
 

@@ -147,7 +147,7 @@ function CrmStaffUsersLayout(props) {
     setSelectedCategory(value);
   };
 
-  const status = "pending";
+
 
   //   const renderDataList = () => {
   //     if (
@@ -299,7 +299,7 @@ function CrmStaffUsersLayout(props) {
           </Toolbar>
         </Grid>
         <Grid item className={classes.contentContainer}>
-          <StaffList token={props.token} />
+          <StaffList token={props.token} userId={props.userId} />
           {/* {renderDataList()} */}
           {/* <DataGridText /> */}
         </Grid>
@@ -313,6 +313,7 @@ function CrmStaffUsersLayout(props) {
         <DialogContent>
           <StaffFormContainer
             token={props.token}
+            userId={props.userId}
             handleDialogOpenStatus={handleDialogOpenStatus}
           />
         </DialogContent>

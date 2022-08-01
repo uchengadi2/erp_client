@@ -297,7 +297,7 @@ function ConsoleUtilitiesHeadofficeServiceOutletLayout(props) {
           </Toolbar>
         </Grid>
         <Grid item className={classes.contentContainer}>
-          <HOServiceOutletList token={props.token} />
+          <HOServiceOutletList token={props.token} userId={props.userId} />
           {/* {renderDataList()} */}
           {/* <DataGridText /> */}
         </Grid>
@@ -315,6 +315,7 @@ function ConsoleUtilitiesHeadofficeServiceOutletLayout(props) {
         <DialogContent>
           <HOServiceOutletFormContainer
             token={props.token}
+            userId={props.userId}
             handleDialogOpenStatus={handleDialogOpenStatus}
           />
         </DialogContent>

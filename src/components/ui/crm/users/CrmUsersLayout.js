@@ -77,7 +77,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function CrmUsersLayout({ token }) {
+function CrmUsersLayout({ token, userId }) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
@@ -130,16 +130,16 @@ function CrmUsersLayout({ token }) {
       </Tabs>
 
       <TabPanel value={value} index={0}>
-        <CrmStaffUsersLayout token={token} />
+        <CrmStaffUsersLayout token={token} userId={userId} />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <CrmCustomerUsersLayout token={token} />
+        <CrmCustomerUsersLayout token={token} userId={userId} />
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <CrmPartnerUsersLayout token={token} />
+        <CrmPartnerUsersLayout token={token} userId={userId} />
       </TabPanel>
       <TabPanel value={value} index={3}>
-        <CrmSupplierUsersLayout token={token} />
+        <CrmSupplierUsersLayout token={token} userId={userId} />
       </TabPanel>
     </div>
   );

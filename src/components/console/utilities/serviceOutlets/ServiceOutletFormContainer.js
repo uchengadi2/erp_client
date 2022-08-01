@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { createState } from "../../../../actions";
+import { createServiceOutlet } from "../../../../actions";
 
 import ServiceOutletForm from "./ServiceOutletForm";
 
@@ -14,7 +14,7 @@ class ServiceOutletFormContainer extends React.Component {
   componentDidMount() {}
 
   onSubmit = (formValues) => {
-    this.props.createState(formValues, this.props.token);
+    this.props.createServiceOutlet(formValues, this.props.token);
     this.props.handleDialogOpenStatus();
   };
   render() {
@@ -23,10 +23,13 @@ class ServiceOutletFormContainer extends React.Component {
         <ServiceOutletForm
           onSubmit={this.onSubmit}
           userId={this.props.userId}
+          token={this.props.token}
         />
       </div>
     );
   }
 }
 
-export default connect(null, { createState })(ServiceOutletFormContainer);
+export default connect(null, { createServiceOutlet })(
+  ServiceOutletFormContainer
+);

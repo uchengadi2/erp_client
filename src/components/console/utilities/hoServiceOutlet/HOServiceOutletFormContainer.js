@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { createState } from "../../../../actions";
+import { createHoServiceOutlet } from "../../../../actions";
 
 import HOServiceOutletForm from "./HOServiceOutletForm";
 
@@ -14,7 +14,7 @@ class HOServiceOutletFormContainer extends React.Component {
   componentDidMount() {}
 
   onSubmit = (formValues) => {
-    this.props.createState(formValues, this.props.token);
+    this.props.createHoServiceOutlet(formValues, this.props.token);
     this.props.handleDialogOpenStatus();
   };
   render() {
@@ -23,10 +23,13 @@ class HOServiceOutletFormContainer extends React.Component {
         <HOServiceOutletForm
           onSubmit={this.onSubmit}
           userId={this.props.userId}
+          token={this.props.token}
         />
       </div>
     );
   }
 }
 
-export default connect(null, { createState })(HOServiceOutletFormContainer);
+export default connect(null, { createHoServiceOutlet })(
+  HOServiceOutletFormContainer
+);

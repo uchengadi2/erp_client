@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Field, reduxForm } from "redux-form";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
@@ -16,6 +16,8 @@ import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormHelperText from "@material-ui/core/FormHelperText";
 
+import api from "./../../../../apis/local";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     marginTop: 10,
@@ -28,8 +30,8 @@ const useStyles = makeStyles((theme) => ({
     height: 40,
     width: 100,
     marginLeft: 200,
-    marginTop: 60,
-    marginBottom: 20,
+    marginTop: 30,
+    marginBottom: 10,
     color: "white",
     backgroundColor: theme.palette.common.blue,
     "&:hover": {
@@ -153,17 +155,43 @@ const renderConfirmPasswordField = ({
 function StaffForm(props) {
   const classes = useStyles();
   const [role, setRole] = useState("");
-  const [type, setType] = useState("staff");
-  const [value, setValue] = useState();
-  const [selectedRole, setSelectedRole] = useState();
+  const [serviceOutlet, setServiceOutlet] = useState();
+  const [serviceOutletList, setServiceOutletList] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      let allData = [];
+      api.defaults.headers.common["Authorization"] = `Bearer ${props.token}`;
+      const response = await api.get(`/serviceoutlets`);
+      const workingData = response.data.data.data;
+      workingData.map((state) => {
+        allData.push({ id: state._id, name: state.name });
+      });
+      setServiceOutletList(allData);
+    };
+
+    //call the function
+
+    fetchData().catch(console.error);
+  }, []);
 
   const handleUserRoleChange = (event) => {
     setRole(event.target.value);
-    setSelectedRole(event.target.value);
   };
 
-  const handleTypeChange = (event) => {
-    setValue(event.target.value);
+  const handleServiceOutletChange = (event) => {
+    setServiceOutlet(event.target.value);
+  };
+
+  //get the state list
+  const renderServiceOutletList = () => {
+    return serviceOutletList.map((item) => {
+      return (
+        <MenuItem key={item.id} value={item.id}>
+          {item.name}
+        </MenuItem>
+      );
+    });
   };
 
   const renderUserRoleField = ({
@@ -181,7 +209,7 @@ function StaffForm(props) {
           <Select
             labelId="role"
             id="role"
-            value={role ? role : selectedRole}
+            value={role}
             onChange={handleUserRoleChange}
             label="Role"
             style={{ marginTop: 15, width: 240 }}
@@ -199,7 +227,7 @@ function StaffForm(props) {
     );
   };
 
-  const renderTypeRadioField = ({
+  const renderServiceOutletField = ({
     input,
     label,
     meta: { touched, error, invalid },
@@ -208,78 +236,46 @@ function StaffForm(props) {
     ...custom
   }) => {
     return (
-      <Box style={{ marginTop: 15 }}>
-        <FormControl component="fieldset">
-          <FormLabel style={{ color: "blue" }} component="legend">
-            User Type
-          </FormLabel>
-          <RadioGroup
-            aria-label="type"
-            name="type"
-            value={value}
-            onChange={handleTypeChange}
+      <Box>
+        <FormControl variant="outlined">
+          {/* <InputLabel id="vendor_city">City</InputLabel> */}
+          <Select
+            labelId="currentServiceOutlet"
+            id="currentServiceOutlet"
+            value={serviceOutlet}
+            onChange={handleServiceOutletChange}
+            label="Service Outlet"
+            style={{ marginTop: 15, width: 500 }}
             {...input}
           >
-            <Grid item container direction="row">
-              <Grid item>
-                <FormControlLabel
-                  value="staff"
-                  control={<Radio />}
-                  label="Staff"
-                />
-              </Grid>
-
-              <Grid item>
-                <FormControlLabel
-                  value="partner"
-                  control={<Radio />}
-                  label="Partner"
-                />
-              </Grid>
-              <Grid item>
-                <FormControlLabel
-                  value="customer"
-                  control={<Radio />}
-                  label="Customer"
-                />
-              </Grid>
-            </Grid>
-          </RadioGroup>
+            {renderServiceOutletList()}
+          </Select>
+          <FormHelperText>Select User Service Outlet</FormHelperText>
         </FormControl>
       </Box>
     );
   };
-  const onSubmit = (formValues) => {
-    console.log("this is the formvakues:", formValues);
-    const data = {
-      name: formValues.name,
-      email: formValues.email,
-      role: formValues.role,
-      password: formValues.password,
-      passwordConfirm: formValues.passwordConfirm,
-      type: formValues.type,
-    };
 
-    console.log("this is the data:", data);
-    props.onSubmit(data);
+  const onSubmit = (formValues) => {
+    formValues["createdBy"] = props.userId;
+    //formValues["userType"] = "staff";
+    //formValues.servedServiceOutlets = formValues.currentServiceOutlet;
+    formValues["passwordConfirm"] = "password1234";
+
+    props.onSubmit(formValues);
   };
 
   return (
     <div className={classes.root}>
-      {/* <Grid item container justifyContent="center">
-        <FormLabel
-          style={{ color: "blue", fontSize: "1.5em" }}
-          component="legend"
-        >
-          <Typography variant="subtitle1">Create Staff User</Typography>
-        </FormLabel>
-      </Grid> */}
       <Grid item container justifyContent="center">
         <FormLabel
           style={{ color: "blue", fontSize: "1.5em" }}
           component="legend"
         >
-          <Typography variant="subtitle1" style={{ fontSize: "1.0em" }}>
+          <Typography
+            variant="subtitle1"
+            style={{ fontSize: "1.0em", marginTop: 20 }}
+          >
             Create Staff User
           </Typography>
         </FormLabel>
@@ -290,7 +286,7 @@ function StaffForm(props) {
         // onSubmit={onSubmit}
         sx={{
           width: 500,
-          height: 420,
+          //height: 420,
         }}
         noValidate
         autoComplete="off"
@@ -304,7 +300,7 @@ function StaffForm(props) {
           component={renderEmailField}
         />
         <Grid container direction="row">
-          <Grid item style={{ width: "50%", marginTop: 10 }}>
+          <Grid item style={{ width: "100%", marginTop: 10 }}>
             <Field
               label=""
               id="password"
@@ -313,7 +309,7 @@ function StaffForm(props) {
               component={renderPasswordField}
             />
           </Grid>
-          <Grid item style={{ width: "48%", marginTop: 10, marginLeft: 10 }}>
+          {/* <Grid item style={{ width: "48%", marginTop: 10, marginLeft: 10 }}>
             <Field
               label=""
               id="confirmPassword"
@@ -321,7 +317,7 @@ function StaffForm(props) {
               type="password"
               component={renderConfirmPasswordField}
             />
-          </Grid>
+          </Grid> */}
         </Grid>
 
         <Grid container direction="row">
@@ -344,6 +340,13 @@ function StaffForm(props) {
             />
           </Grid>
         </Grid>
+        <Field
+          label=""
+          id="currentServiceOutlet"
+          name="currentServiceOutlet"
+          type="text"
+          component={renderServiceOutletField}
+        />
 
         <Button
           variant="contained"

@@ -14,6 +14,7 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
 import api from "./../../../../apis/local";
+import { CREATE_SERVICEOUTLET } from "./../../../../actions/types";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -25,8 +26,8 @@ const useStyles = makeStyles((theme) => ({
   submitButton: {
     borderRadius: 10,
     height: 40,
-    width: 170,
-    marginLeft: 130,
+    width: 200,
+    marginLeft: 110,
     marginTop: 30,
     color: "white",
     backgroundColor: theme.palette.common.blue,
@@ -47,7 +48,7 @@ const renderNameField = ({
   return (
     <TextField
       //error={touched && invalid}
-      helperText="Enter Service Outlet Name"
+      helperText="Service Outlet Name"
       variant="outlined"
       //label={label}
       id={input.name}
@@ -97,7 +98,7 @@ const renderDescriptionField = ({
   return (
     <TextField
       //error={touched && invalid}
-      helperText="Describe Service Outlet"
+      helperText="Description of this Service Outlet"
       variant="outlined"
       //label={label}
       id={input.name}
@@ -124,7 +125,7 @@ const renderAddressField = ({
   return (
     <TextField
       //error={touched && invalid}
-      helperText="Enter Address of Service Outlet"
+      helperText="Address of this Service Outlet"
       variant="outlined"
       //label={label}
       id={input.name}
@@ -140,13 +141,15 @@ const renderAddressField = ({
   );
 };
 
-function HOServiceOutletForm(props) {
+function ServiceOutletEditForm(props) {
   const classes = useStyles();
 
   const [location, setLocation] = useState();
   const [city, setCity] = useState();
   const [locationList, setLocationList] = useState([]);
   const [cityList, setCityList] = useState([]);
+
+  const params = props.params;
 
   const handleLocationChange = (event) => {
     setLocation(event.target.value);
@@ -190,6 +193,14 @@ function HOServiceOutletForm(props) {
     fetchData().catch(console.error);
   }, []);
 
+  useEffect(() => {
+    setCity(props.params.city);
+  }, []);
+
+  useEffect(() => {
+    setLocation(props.params.location);
+  }, []);
+
   //get the location list
   const renderLocationList = () => {
     return locationList.map((item) => {
@@ -231,7 +242,7 @@ function HOServiceOutletForm(props) {
             onChange={handleLocationChange}
             label="Location"
             style={{ width: 400 }}
-            {...input}
+            //{...input}
           >
             {renderLocationList()}
           </Select>
@@ -260,7 +271,7 @@ function HOServiceOutletForm(props) {
             onChange={handleCityChange}
             label="City"
             style={{ width: 400, marginTop: 10 }}
-            {...input}
+            //{...input}
           >
             {renderCityList()}
           </Select>
@@ -271,8 +282,10 @@ function HOServiceOutletForm(props) {
   };
 
   const onSubmit = (formValues) => {
-    formValues["isHeadofficeOutlet"] = true;
     formValues["createdBy"] = props.userId;
+    formValues["location"] = location;
+    formValues["city"] = city;
+
     props.onSubmit(formValues);
   };
 
@@ -283,14 +296,12 @@ function HOServiceOutletForm(props) {
           style={{ color: "blue", fontSize: "1.5em" }}
           component="legend"
         >
-          <Typography variant="subtitle1">
-            Create HeadOffice Service Outlet
-          </Typography>
+          <Typography variant="subtitle1">Edit Service Outlet</Typography>
         </FormLabel>
       </Grid>
       <Box
         component="form"
-        id="hoServiceOutletForm"
+        id="serviceOutletEditForm"
         // onSubmit={onSubmit}
         sx={{
           width: 400,
@@ -305,6 +316,7 @@ function HOServiceOutletForm(props) {
               label=""
               id="name"
               name="name"
+              defaultValue={params.name}
               type="text"
               component={renderNameField}
             />
@@ -314,6 +326,7 @@ function HOServiceOutletForm(props) {
               label=""
               id="solId"
               name="solId"
+              defaultValue={params.solId}
               type="text"
               component={renderSolIdField}
             />
@@ -325,6 +338,7 @@ function HOServiceOutletForm(props) {
               label=""
               id="location"
               name="location"
+              defaultValue={params.location}
               type="text"
               component={renderLocationField}
             />
@@ -334,6 +348,7 @@ function HOServiceOutletForm(props) {
           label=""
           id="address"
           name="address"
+          defaultValue={params.address}
           type="text"
           component={renderAddressField}
           style={{ marginTop: 10 }}
@@ -342,6 +357,7 @@ function HOServiceOutletForm(props) {
           label=""
           id="city"
           name="city"
+          defaultValue={params.city}
           type="text"
           component={renderCityField}
           style={{ marginTop: 10 }}
@@ -350,6 +366,7 @@ function HOServiceOutletForm(props) {
           label=""
           id="description"
           name="description"
+          defaultValue={params.description}
           type="text"
           component={renderDescriptionField}
           style={{ marginTop: 10 }}
@@ -360,7 +377,7 @@ function HOServiceOutletForm(props) {
           className={classes.submitButton}
           onClick={props.handleSubmit(onSubmit)}
         >
-          Add Service Outlet
+          Update Service Outlet
         </Button>
       </Box>
       {/* </form> */}
@@ -369,5 +386,5 @@ function HOServiceOutletForm(props) {
 }
 
 export default reduxForm({
-  form: "hoServiceOutletForm",
-})(HOServiceOutletForm);
+  form: "serviceOutletEditForm",
+})(ServiceOutletEditForm);

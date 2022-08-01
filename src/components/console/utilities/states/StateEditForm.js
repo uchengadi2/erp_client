@@ -140,7 +140,7 @@ function StateEditForm(props) {
   useEffect(() => {
     setCountry(props.params.country);
     setRegion(props.params.region);
-  }, [props]);
+  }, []);
 
   //get the country list
   const renderCountryList = () => {

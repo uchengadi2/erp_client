@@ -13,7 +13,8 @@ import FormHelperText from "@material-ui/core/FormHelperText";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Radio from "@material-ui/core/Radio";
 import RadioGroup from "@material-ui/core/RadioGroup";
-import data from "./../../../../apis/local";
+import api from "./../../../../apis/local";
+import { CREATE_SERVICEOUTLET } from "./../../../../actions/types";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -61,7 +62,7 @@ const renderNameField = ({
   );
 };
 
-const renderCodeField = ({
+const renderSolIdField = ({
   input,
   label,
   meta: { touched, error, invalid },
@@ -72,7 +73,7 @@ const renderCodeField = ({
   return (
     <TextField
       //error={touched && invalid}
-      helperText="SOL Code"
+      helperText="SolId"
       variant="outlined"
       //label={label}
       id={input.name}
@@ -143,28 +144,29 @@ const renderAddressField = ({
 function ServiceOutletForm(props) {
   const classes = useStyles();
 
-  const [country, setCountry] = useState();
-  const [region, setRegion] = useState();
-  const [countryList, setCountryList] = useState([]);
+  const [location, setLocation] = useState();
+  const [city, setCity] = useState();
+  const [locationList, setLocationList] = useState([]);
+  const [cityList, setCityList] = useState([]);
 
-  const handleCountryChange = (event) => {
-    setCountry(event.target.value);
+  const handleLocationChange = (event) => {
+    setLocation(event.target.value);
   };
 
-  const handleRegionChange = (event) => {
-    setRegion(event.target.value);
+  const handleCityChange = (event) => {
+    setCity(event.target.value);
   };
 
   useEffect(() => {
     const fetchData = async () => {
       let allData = [];
-      data.defaults.headers.common["Authorization"] = `Bearer ${props.token}`;
-      const response = await data.get("/countries");
+      api.defaults.headers.common["Authorization"] = `Bearer ${props.token}`;
+      const response = await api.get("/locations");
       const workingData = response.data.data.data;
-      workingData.map((country) => {
-        allData.push({ id: country._id, name: country.name });
+      workingData.map((location) => {
+        allData.push({ id: location._id, name: location.name });
       });
-      setCountryList(allData);
+      setLocationList(allData);
     };
 
     //call the function
@@ -172,9 +174,37 @@ function ServiceOutletForm(props) {
     fetchData().catch(console.error);
   }, []);
 
-  //get the country list
-  const renderCountryList = () => {
-    return countryList.map((item) => {
+  useEffect(() => {
+    const fetchData = async () => {
+      let allData = [];
+      api.defaults.headers.common["Authorization"] = `Bearer ${props.token}`;
+      const response = await api.get("/cities");
+      const workingData = response.data.data.data;
+      workingData.map((city) => {
+        allData.push({ id: city._id, name: city.name });
+      });
+      setCityList(allData);
+    };
+
+    //call the function
+
+    fetchData().catch(console.error);
+  }, []);
+
+  //get the location list
+  const renderLocationList = () => {
+    return locationList.map((item) => {
+      return (
+        <MenuItem key={item.id} value={item.id}>
+          {item.name}
+        </MenuItem>
+      );
+    });
+  };
+
+  //get the city list
+  const renderCityList = () => {
+    return cityList.map((item) => {
       return (
         <MenuItem key={item.id} value={item.id}>
           {item.name}
@@ -196,15 +226,15 @@ function ServiceOutletForm(props) {
         <FormControl variant="outlined">
           {/* <InputLabel id="vendor_city">City</InputLabel> */}
           <Select
-            labelId="country"
-            id="country"
-            value={country}
-            onChange={handleCountryChange}
-            label="Country"
+            labelId="location"
+            id="location"
+            value={location}
+            onChange={handleLocationChange}
+            label="Location"
             style={{ width: 400 }}
             {...input}
           >
-            {renderCountryList()}
+            {renderLocationList()}
           </Select>
           <FormHelperText>Select Location</FormHelperText>
         </FormControl>
@@ -227,25 +257,13 @@ function ServiceOutletForm(props) {
           <Select
             labelId="city"
             id="city"
-            value={region}
-            onChange={handleRegionChange}
+            value={city}
+            onChange={handleCityChange}
             label="City"
             style={{ width: 400, marginTop: 10 }}
             {...input}
           >
-            <MenuItem value={"west"}>West</MenuItem>
-            <MenuItem value={"east"}>East</MenuItem>
-            <MenuItem value={"north"}>North</MenuItem>
-            <MenuItem value={"south"}>South</MenuItem>
-            <MenuItem value={"central"}>Central</MenuItem>
-            <MenuItem value={"south-east"}>South East</MenuItem>
-            <MenuItem value={"south-west"}>South West</MenuItem>
-            <MenuItem value={"south-central"}>South Central</MenuItem>
-            <MenuItem value={"south-south"}>South South</MenuItem>
-            <MenuItem value={"north-east"}>North East</MenuItem>
-            <MenuItem value={"north-west"}>North West</MenuItem>
-            <MenuItem value={"north-central"}>North Central</MenuItem>
-            <MenuItem value={"north-north"}>North North</MenuItem>
+            {renderCityList()}
           </Select>
           <FormHelperText>Select City of the Address</FormHelperText>
         </FormControl>
@@ -254,16 +272,7 @@ function ServiceOutletForm(props) {
   };
 
   const onSubmit = (formValues) => {
-    const data = {
-      name: formValues.name,
-      region: formValues.region,
-      description: formValues.description,
-      country: formValues.country,
-      code: formValues.code,
-      createdBy: props.userId,
-    };
-
-    props.onSubmit(data);
+    props.onSubmit(formValues);
   };
 
   return (
@@ -300,10 +309,10 @@ function ServiceOutletForm(props) {
           <Grid item style={{ width: "28%", marginLeft: 10 }}>
             <Field
               label=""
-              id="code"
-              name="code"
+              id="solId"
+              name="solId"
               type="text"
-              component={renderCodeField}
+              component={renderSolIdField}
             />
           </Grid>
         </Grid>

@@ -100,6 +100,12 @@ import {
   DELETE_LOCATION,
   EDIT_LOCATION_SUCCEEDED,
   EDIT_LOCATION_FAILED,
+  CREATE_HOSERVICEOUTLET,
+  FETCH_HOSERVICEOUTLETS,
+  FETCH_HOSERVICEOUTLET,
+  DELETE_HOSERVICEOUTLET,
+  EDIT_HOSERVICEOUTLET,
+  EDIT_SCHEMECODE,
 } from "./types";
 
 //authentication and authorization  operations
@@ -185,27 +191,27 @@ export const deleteCategory = (id, token) => {
   };
 };
 
-//user resource crud operation
+///////////////user resource crud operation //////////////////////////////////////
 export const createUser = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-  return async (dispatch, getState) => {
-    const { userId } = getState().auth;
-    const response = await data.post("/users", {
-      ...formValues,
-      userId,
-    });
+  console.log("formvalues at index:", formValues);
+  console.log("token at index:", token);
+  return async (dispatch) => {
+    const response = await data.post("/users");
 
-    //console.log(response);
-    dispatch({ type: CREATE_USER, payload: response.data });
-    history.push("/users");
+    console.log("staff user response:", response);
+    dispatch({ type: CREATE_USER, payload: response.data.data.data });
+    //history.push("/users");
   };
 };
 
 export const fetchUsers = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/users");
-    console.log("the users are:", response);
+    const response = await data.get("/users", {
+      params: { userType: "staff" },
+    });
+    console.log("user response:", response.data);
     dispatch({ type: FETCH_USERS, payload: response.data.data.data });
   };
 };
@@ -223,7 +229,7 @@ export const editUser = (id, formValues, token) => {
   return async (dispatch) => {
     const response = await data.patch(`/users/${id}`, formValues);
     dispatch({ type: EDIT_USER, payload: response.data });
-    history.push("/users");
+    //history.push("/users");
   };
 };
 
@@ -232,7 +238,7 @@ export const deleteUser = (id, token) => {
   return async (dispatch) => {
     await data.delete(`/users/${id}`);
     dispatch({ type: DELETE_USER, payload: id });
-    history.push("/users");
+    // history.push("/users");
   };
 };
 
@@ -244,7 +250,7 @@ export const createCity = (formValues, token) => {
   return async (dispatch, getState) => {
     const response = await data.post("/cities", formValues);
 
-    //console.log(response);
+    console.log("city response:", response);
     dispatch({ type: CREATE_CITY, payload: response.data.data.data });
     //history.push("/cities");
   };
@@ -318,15 +324,44 @@ export const fetchLocation = (id, token) => {
   };
 };
 
+// export const editLocation = (id, formValues, token) => {
+//   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+//   return async (dispatch) => {
+//     const response = await data.patch(`/locations/${id}`, formValues);
+//     console.log("thsi is the response:", response);
+//     if (response) {
+//       if (response.data.status === "success") {
+//         dispatch({
+//           type: EDIT_LOCATION_SUCCEEDED,
+//           payload: response.data.data.data,
+//         });
+//       } else {
+//         dispatch({ type: EDIT_LOCATION_FAILED, status: "API Failed" });
+//       }
+//     } else {
+//       dispatch({ type: EDIT_LOCATION_FAILED, status: "API Failed" });
+//     }
+
+//     //history.push("/cities");
+//   };
+// };
+
 export const editLocation = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
     const response = await data.patch(`/locations/${id}`, formValues);
-    if (response.status === 200) {
-      dispatch({
-        type: EDIT_LOCATION_SUCCEEDED,
-        payload: response.data.data.data,
-      });
+    console.log("thsi is the response:", response);
+    if (response) {
+      if (response.data.status === "success") {
+        dispatch({
+          type: EDIT_LOCATION_SUCCEEDED,
+          payload: response.data.data.data,
+        });
+      } else {
+        dispatch({ type: EDIT_LOCATION_FAILED, status: "API Failed" });
+        // const status = "failed";
+        // return status;
+      }
     } else {
       dispatch({ type: EDIT_LOCATION_FAILED, status: "API Failed" });
     }
@@ -334,23 +369,6 @@ export const editLocation = (id, formValues, token) => {
     //history.push("/cities");
   };
 };
-
-// export function editLocation(state){
-//   return dispatch => {
-//      axios.post('login', state).then(res =>{
-//       dispatch({
-//        data:  "Some response",
-//        type: "EDIT_LOCATION"
-//       })
-//       })
-//       .catch(err) {
-//       dispatch({
-//        data:  err,
-//        type: "API_FAILURE"
-//       })
-//       }
-// }
-// }
 
 export const deleteLocation = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
@@ -674,14 +692,153 @@ export const deleteCurrency = (id, token) => {
   };
 };
 
-///Working on Scheme codes ////////////////////////////////////////
+////////////////////////// working on service outlets //////////////////////
 
-export const createSchemeCode = (formValues, token) => {
+export const createServiceOutlet = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-  return async (dispatch, getState) => {
-    const { userId } = getState().auth;
-    const response = await data.post("/schemecodes", formValues);
+  return async (dispatch) => {
+    const response = await data.post("/serviceoutlets", formValues);
+
+    dispatch({ type: CREATE_SERVICEOUTLET, payload: response.data.data.data });
+    //history.push("/cities");
   };
 };
 
+export const fetchServiceOutlets = (tokens) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
+  return async (dispatch) => {
+    const response = await data.get("/serviceoutlets", {
+      params: { isHeadofficeOutlet: false },
+    });
+
+    dispatch({ type: FETCH_SERVICEOUTLETS, payload: response.data.data.data });
+  };
+};
+
+export const fetchServiceOutlet = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.get(`/serviceoutlets/${id}`);
+    dispatch({ type: FETCH_SERVICEOUTLET, payload: response.data.data.data });
+  };
+};
+
+export const editServiceOutlet = (id, formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.patch(`/serviceoutlets/${id}`, formValues);
+    dispatch({ type: EDIT_SERVICEOUTLET, payload: response.data.data.data });
+    //history.push("/cities");
+  };
+};
+
+export const deleteServiceOutlet = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    await data.delete(`/serviceoutlets/${id}`);
+    dispatch({ type: DELETE_SERVICEOUTLET, payload: id });
+    //history.push("/cities");
+  };
+};
+
+/////////////////Head officer Service Outlet /////////////////////////////
+
+export const createHoServiceOutlet = (formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.post("/serviceoutlets", formValues);
+
+    dispatch({
+      type: CREATE_HOSERVICEOUTLET,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchHoServiceOutlets = (tokens) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
+  return async (dispatch) => {
+    const response = await data.get("/serviceoutlets", {
+      params: { isHeadofficeOutlet: true },
+    });
+    console.log("response is:", response.data);
+    dispatch({
+      type: FETCH_HOSERVICEOUTLETS,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchHoServiceOutlet = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.get(`/serviceoutlets/${id}`);
+    dispatch({ type: FETCH_HOSERVICEOUTLET, payload: response.data.data.data });
+  };
+};
+
+export const editHoServiceOutlet = (id, formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.patch(`/serviceoutlets/${id}`, formValues);
+    dispatch({ type: EDIT_HOSERVICEOUTLET, payload: response.data.data.data });
+  };
+};
+
+export const deleteHoServiceOutlet = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    await data.delete(`/serviceoutlets/${id}`);
+    dispatch({ type: DELETE_HOSERVICEOUTLET, payload: id });
+  };
+};
+
+//////////////////////Scheme Code ////////////////////////////////////////
+
+export const createSchemeCode = (formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.post("/schemecodes", formValues);
+
+    dispatch({ type: CREATE_SCHEMECODE, payload: response.data.data.data });
+  };
+};
+
+export const fetchSchemeCodes = (tokens) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
+  return async (dispatch) => {
+    const response = await data.get("/schemecodes");
+
+    dispatch({ type: FETCH_SCHEMECODES, payload: response.data.data.data });
+  };
+};
+
+export const fetchSchemeCode = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.get(`/schemecodes/${id}`);
+    dispatch({ type: FETCH_SCHEMECODE, payload: response.data.data.data });
+  };
+};
+
+export const editSchemeCode = (id, formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.patch(`/schemecodes/${id}`, formValues);
+    dispatch({ type: EDIT_SCHEMECODE, payload: response.data.data.data });
+  };
+};
+
+export const deleteSchemeCode = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    await data.delete(`/schemecodes/${id}`);
+    dispatch({ type: DELETE_SCHEMECODE, payload: id });
+  };
+};
+
+//////////////////TEMPORARY SCRIPT //////////////////
+
 export const fetchOrders = () => {};
+
+/////////////////////////////////////////////////////

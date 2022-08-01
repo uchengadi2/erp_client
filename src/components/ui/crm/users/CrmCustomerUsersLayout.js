@@ -298,7 +298,7 @@ function CrmCustomerUsersLayout(props) {
           </Toolbar>
         </Grid>
         <Grid item className={classes.contentContainer}>
-          <CustomerUserList token={props.token} />
+          <CustomerUserList token={props.token} userId={props.userId} />
           {/* {renderDataList()} */}
           {/* <DataGridText /> */}
         </Grid>
@@ -315,6 +315,7 @@ function CrmCustomerUsersLayout(props) {
         <DialogContent>
           <CustomerUserFormContainer
             token={props.token}
+            userId={props.userId}
             handleDialogOpenStatus={handleDialogOpenStatus}
           />
         </DialogContent>

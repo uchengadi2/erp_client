@@ -5,6 +5,8 @@ import useToken from "../custom-hooks/useToken";
 const INITIAL_STATE = {
   isSignedIn: null,
   userId: null,
+  token: {},
+  data: {},
 };
 
 export default (state = INITIAL_STATE, action) => {

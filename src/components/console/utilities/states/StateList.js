@@ -137,26 +137,26 @@ class StateList extends React.Component {
           </strong>
         ),
       },
-      {
-        field: "blacklistaction",
-        headerName: "",
-        width: 30,
-        description: "Blacklist state",
-        renderCell: (params) => (
-          <strong>
-            {/* {params.value.getFullYear()} */}
-            <CancelRoundedIcon
-              style={{ color: "black" }}
-              onClick={() => [
-                this.setState({ blacklistOpen: true, id: params.id }),
-                history.push(
-                  `/systems/utilities/states/blacklist/${params.id}`
-                ),
-              ]}
-            />
-          </strong>
-        ),
-      },
+      // {
+      //   field: "blacklistaction",
+      //   headerName: "",
+      //   width: 30,
+      //   description: "Blacklist state",
+      //   renderCell: (params) => (
+      //     <strong>
+      //       {/* {params.value.getFullYear()} */}
+      //       <CancelRoundedIcon
+      //         style={{ color: "black" }}
+      //         onClick={() => [
+      //           this.setState({ blacklistOpen: true, id: params.id }),
+      //           history.push(
+      //             `/systems/utilities/states/blacklist/${params.id}`
+      //           ),
+      //         ]}
+      //       />
+      //     </strong>
+      //   ),
+      // },
       {
         field: "deleteaction",
         headerName: "",

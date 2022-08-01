@@ -1,15 +1,19 @@
 import React from "react";
 import { connect } from "react-redux";
-import { fetchLocation, editLocation } from "../../../../actions";
-import LocationEditForm from "./LocationEditForm";
+import { fetchHoServiceOutlet, editHoServiceOutlet } from "../../../../actions";
+import HOServiceOutletEditForm from "./HOServiceOutletEditForm";
 
-class LocationEdit extends React.Component {
+class HOServiceOutletEdit extends React.Component {
   componentDidMount() {
-    this.props.fetchLocation(this.props.params.id, this.props.token);
+    this.props.fetchHoServiceOutlet(this.props.params.id, this.props.token);
   }
 
   onSubmit = (formValues) => {
-    this.props.editLocation(this.props.params.id, formValues, this.props.token);
+    this.props.editHoServiceOutlet(
+      this.props.params.id,
+      formValues,
+      this.props.token
+    );
 
     this.props.handleEditDialogOpenStatus();
   };
@@ -17,7 +21,7 @@ class LocationEdit extends React.Component {
   render() {
     return (
       <>
-        <LocationEditForm
+        <HOServiceOutletEditForm
           token={this.props.token}
           userId={this.props.userId}
           params={this.props.params}
@@ -30,10 +34,10 @@ class LocationEdit extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  console.log("location state:", state.location);
   return { location: state.location[ownProps.params.id] };
 };
 
-export default connect(mapStateToProps, { fetchLocation, editLocation })(
-  LocationEdit
-);
+export default connect(mapStateToProps, {
+  fetchHoServiceOutlet,
+  editHoServiceOutlet,
+})(HOServiceOutletEdit);

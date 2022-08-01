@@ -7,7 +7,7 @@ import DeleteRoundedIcon from "@material-ui/icons/DeleteRounded";
 import CancelRoundedIcon from "@material-ui/icons/CancelRounded";
 import Typography from "@material-ui/core/Typography";
 import history from "../../../../history";
-import { fetchCities } from "../../../../actions";
+import { fetchUsers } from "../../../../actions";
 import DataGridContainer from "../../../DataGridContainer";
 
 class StaffList extends React.Component {
@@ -22,7 +22,7 @@ class StaffList extends React.Component {
     };
   }
   componentDidMount() {
-    this.props.fetchCities(this.props.token);
+    this.props.fetchUsers(this.props.token);
   }
 
   handleDialogOpenStatus = () => {
@@ -107,10 +107,11 @@ class StaffList extends React.Component {
     let counter = 0;
     const columns = [
       { field: "numbering", headerName: "S/n", width: 100 },
-      { field: "name", headerName: "City Name", width: 300 },
-      { field: "description", headerName: "Description", width: 350 },
-      { field: "country", headerName: "Country", width: 250 },
-      { field: "security", headerName: "Security Status", width: 70 },
+      { field: "name", headerName: "Name", width: 300 },
+      { field: "email", headerName: "Email", width: 350 },
+      { field: "role", headerName: "Role", width: 250 },
+      { field: "userType", headerName: "User Type", width: 100 },
+      { field: "serviceOutlet", headerName: "Service Outlet", width: 100 },
       {
         field: "editaction",
         headerName: "",
@@ -132,24 +133,24 @@ class StaffList extends React.Component {
           </strong>
         ),
       },
-      {
-        field: "blacklistaction",
-        headerName: "",
-        width: 30,
-        description: "Blacklist city",
-        renderCell: (params) => (
-          <strong>
-            {/* {params.value.getFullYear()} */}
-            <CancelRoundedIcon
-              style={{ color: "black" }}
-              onClick={() => [
-                this.setState({ blacklistOpen: true, id: params.id }),
-                history.push(`/crm/users/staffers/blacklist/${params.id}`),
-              ]}
-            />
-          </strong>
-        ),
-      },
+      // {
+      //   field: "blacklistaction",
+      //   headerName: "",
+      //   width: 30,
+      //   description: "Blacklist city",
+      //   renderCell: (params) => (
+      //     <strong>
+      //       {/* {params.value.getFullYear()} */}
+      //       <CancelRoundedIcon
+      //         style={{ color: "black" }}
+      //         onClick={() => [
+      //           this.setState({ blacklistOpen: true, id: params.id }),
+      //           history.push(`/crm/users/staffers/blacklist/${params.id}`),
+      //         ]}
+      //       />
+      //     </strong>
+      //   ),
+      // },
       {
         field: "deleteaction",
         headerName: "",
@@ -169,14 +170,35 @@ class StaffList extends React.Component {
         ),
       },
     ];
-    this.props.cities.map((city) => {
+    this.props.users.map((user) => {
       let row = {
         numbering: ++counter,
-        id: city.id,
-        name: city.name,
-        description: city.description,
-        country: city.country[0],
-        security: city.securityStatus,
+        id: user._id,
+        name: user.name,
+        role: user.role,
+        serviceOutlet: user.staffUserDetail.currentServiceOutlet,
+        servedServiceOutlets: user.staffUserDetail.servedServiceOutlets,
+        userType: user.userType,
+        email: user.email,
+        staffNumber: user.staffUserDetail.staffNumber,
+        gender: user.staffUserDetail.gender,
+        maritalStatus: user.staffUserDetail.maritalStatus,
+        dateOfBirth: user.staffUserDetail.dateOfBirth,
+        highestLevelOfEducationAttained:
+          user.staffUserDetail.highestLevelOfEducationAttained,
+        courseOfStudy: user.staffUserDetail.courseOfStudy,
+        References: user.staffUserDetail.References,
+        yearsOfExperience: user.staffUserDetail.yearsOfExperience,
+        houseAddress: user.staffUserDetail.houseAddress,
+        // nextOfKinName: user.staffUserDetail.nextOfKin.name || "",
+        // nextOfKinAddress: user.staffUserDetail.nextOfKin.address || "",
+        // nextOfKinRelationship:
+        //   user.staffUserDetail.nextOfKin.relationship || "",
+        // guarantorName: user.staffUserDetail.guarantor.name || "",
+        // guarantorAddress: user.staffUserDetail.guarantor.address || "",
+        // guarantorGender: user.staffUserDetail.guarantor.gender || "",
+        // guarantorRelationship:
+        //   user.staffUserDetail.guarantor.relationship || "",
       };
       rows.push(row);
     });
@@ -196,7 +218,7 @@ class StaffList extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return { cities: Object.values(state.city) };
+  return { users: Object.values(state.user) };
 };
 
-export default connect(mapStateToProps, { fetchCities })(StaffList);
+export default connect(mapStateToProps, { fetchUsers })(StaffList);

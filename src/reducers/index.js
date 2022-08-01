@@ -11,6 +11,9 @@ import stateReducer from "./stateReducer";
 import currencyReducer from "./currencyReducer";
 import cityReducer from "./cityReducer";
 import locationReducer from "./locationReducer";
+import serviceOutletReducer from "./serviceOutletReducer";
+import hoServiceOutletReducer from "./hoServiceOutletReducer";
+import schemeCodeReducer from "./schemeCodeReducer";
 
 export default combineReducers({
   auth: authReducer,
@@ -25,4 +28,7 @@ export default combineReducers({
   state: stateReducer,
   currency: currencyReducer,
   location: locationReducer,
+  serviceOutlet: serviceOutletReducer,
+  hoServiceOutlet: hoServiceOutletReducer,
+  schemeCode: schemeCodeReducer,
 });

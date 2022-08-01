@@ -26,8 +26,6 @@ class SchemeCodeFormContainer extends React.Component {
   onSubmit = (formValues) => {
     this.props.createSchemeCode(formValues, this.props.token);
     this.props.handleDialogOpenStatus();
-
-    //console.log("the form values areeeee:", formValues);
   };
   render() {
     return (
@@ -37,14 +35,5 @@ class SchemeCodeFormContainer extends React.Component {
     );
   }
 }
-
-// CategoryFormContainer.propTypes = {
-//   setToken: PropTypes.func.isRequired,
-// };
-
-// const mapStateToProps = (state) => {
-//   //return { token: state.auth.token };
-//   return null;
-// };
 
 export default connect(null, { createSchemeCode })(SchemeCodeFormContainer);

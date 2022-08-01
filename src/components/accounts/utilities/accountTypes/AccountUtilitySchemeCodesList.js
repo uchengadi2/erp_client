@@ -8,11 +8,11 @@ import CancelRoundedIcon from "@material-ui/icons/CancelRounded";
 import AssignmentIcon from "@material-ui/icons/Assignment";
 import Typography from "@material-ui/core/Typography";
 import history from "../../../../history";
-import { fetchOrders } from "../../../../actions";
+import { fetchSchemeCodes } from "../../../../actions";
 import DataGridContainer from "../../../DataGridContainer";
-// import OrderAssignmentFormContainer from "./OrderAssignmentFormContainer";
-// import OrdersEdit from "./OrdersEdit";
-// import OrderDelete from "./OrdersDelete";
+import SchemeCodeFormContainer from "./SchemeCodeFormContainer";
+import SchemeCodeEdit from "./SchemeCodeEdit";
+import SchemeCodeDelete from "./SchemeCodeDelete";
 
 class AccountUtilitySchemeCodesList extends React.Component {
   constructor(props) {
@@ -27,7 +27,7 @@ class AccountUtilitySchemeCodesList extends React.Component {
     };
   }
   componentDidMount() {
-    // this.props.fetchOrders(this.props.token, this.props.status);
+    this.props.fetchSchemeCodes(this.props.token);
   }
 
   handleDialogOpenStatus = () => {
@@ -53,11 +53,12 @@ class AccountUtilitySchemeCodesList extends React.Component {
           ]}
         >
           <DialogContent>
-            {/* <OrdersEdit
+            <SchemeCodeEdit
               token={this.props.token}
+              userId={this.props.userId}
               params={this.state.params}
               handleEditDialogOpenStatus={this.handleEditDialogOpenStatus}
-            /> */}
+            />
           </DialogContent>
         </Dialog>
       </>
@@ -77,11 +78,12 @@ class AccountUtilitySchemeCodesList extends React.Component {
           ]}
         >
           <DialogContent>
-            {/* <OrderDelete
+            <SchemeCodeDelete
               token={this.props.token}
+              userId={this.props.userId}
               id={this.state.id}
               handleDialogOpenStatus={this.handleDialogOpenStatus}
-            /> */}
+            />
           </DialogContent>
         </Dialog>
       </>
@@ -121,11 +123,11 @@ class AccountUtilitySchemeCodesList extends React.Component {
           ]}
         >
           <DialogContent>
-            {/* <OrderAssignmentFormContainer
+            <SchemeCodeFormContainer
               token={this.props.token}
               params={this.state.params}
               handleEditDialogOpenStatus={this.handleEditDialogOpenStatus}
-            /> */}
+            />
           </DialogContent>
         </Dialog>
       </>
@@ -137,21 +139,10 @@ class AccountUtilitySchemeCodesList extends React.Component {
     let counter = 0;
     const columns = [
       { field: "numbering", headerName: "S/n", width: 60 },
-      { field: "orderNumber", headerName: "Order Number", width: 150 },
-      { field: "dateOrdered", headerName: "Date Ordered", width: 100 },
-      { field: "orderedQuantity", headerName: "Ordered Quantity", width: 80 },
-      { field: "status", headerName: "Status", width: 100 },
-      { field: "category", headerName: "Category", width: 150 },
-      {
-        field: "consignmentCountry",
-        headerName: "Source Country",
-        width: 150,
-      },
-      {
-        field: "destinationCountry",
-        headerName: "Destination Country",
-        width: 150,
-      },
+      { field: "name", headerName: "Scheme Code Name", width: 150 },
+      { field: "code", headerName: "Scheme Code", width: 150 },
+      { field: "schemeType", headerName: "Scheme Type", width: 150 },
+
       {
         field: "editaction",
         headerName: "",
@@ -175,46 +166,7 @@ class AccountUtilitySchemeCodesList extends React.Component {
           </strong>
         ),
       },
-      {
-        field: "cancelorder",
-        headerName: "",
-        width: 30,
-        description: "Cancel Order",
-        renderCell: (params) => (
-          <strong>
-            {/* {params.value.getFullYear()} */}
-            <CancelRoundedIcon
-              style={{ color: "black" }}
-              onClick={() => [
-                this.setState({ cancelOpen: true, id: params.id }),
-                history.push(
-                  `/accounts/utilities/schemecodes/cancel/${params.id}`
-                ),
-              ]}
-            />
-          </strong>
-        ),
-      },
-      {
-        field: "assignorder",
-        headerName: "",
-        width: 30,
-        description: "Assign Order",
-        renderCell: (params) => (
-          <strong>
-            {/* {params.value.getFullYear()} */}
-            <AssignmentIcon
-              style={{ color: "black" }}
-              onClick={() => [
-                this.setState({ assignOpen: true, id: params.id }),
-                history.push(
-                  `/accounts/utilities/schemecodes/assign/${params.id}`
-                ),
-              ]}
-            />
-          </strong>
-        ),
-      },
+
       {
         field: "deleteaction",
         headerName: "",
@@ -236,21 +188,17 @@ class AccountUtilitySchemeCodesList extends React.Component {
         ),
       },
     ];
-    // this.props.orders.map((order) => {
-    //   console.log("these are the orderrrrnew:", order);
-    //   let row = {
-    //     numbering: ++counter,
-    //     id: order.id,
-    //     orderNumber: order.orderNumber,
-    //     dateOrdered: order.dateOrdered,
-    //     orderedQuantity: order.orderQuantity,
-    //     status: order.status,
-    //     consignmentCountry: order.consignmentCountry[0],
-    //     destinationCountry: order.destinationCountry[0],
-    //     category: order.category,
-    //   };
-    //   rows.push(row);
-    // });
+    this.props.schemeCodes.map((schemeCode) => {
+      let row = {
+        numbering: ++counter,
+        id: schemeCode.id,
+        name: schemeCode.name,
+        code: schemeCode.code,
+        description: schemeCode.description,
+        schemeType: schemeCode.schemeType,
+      };
+      rows.push(row);
+    });
     return <DataGridContainer columns={columns} rows={rows} />;
   };
 
@@ -268,8 +216,9 @@ class AccountUtilitySchemeCodesList extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log("this is the state:", state);
-  return { orders: Object.values(state.order) };
+  return { schemeCodes: Object.values(state.schemeCode) };
 };
 
-export default connect(null, {})(AccountUtilitySchemeCodesList);
+export default connect(mapStateToProps, { fetchSchemeCodes })(
+  AccountUtilitySchemeCodesList
+);

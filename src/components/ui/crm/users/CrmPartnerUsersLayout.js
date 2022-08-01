@@ -298,7 +298,7 @@ function CrmPartnerUsersLayout(props) {
           </Toolbar>
         </Grid>
         <Grid item className={classes.contentContainer}>
-          <PartnerUsersList token={props.token} />
+          <PartnerUsersList token={props.token} userId={props.userId} />
           {/* {renderDataList()} */}
           {/* <DataGridText /> */}
         </Grid>
@@ -315,6 +315,7 @@ function CrmPartnerUsersLayout(props) {
         <DialogContent>
           <PartnerUsersFormContainer
             token={props.token}
+            userId={props.userId}
             handleDialogOpenStatus={handleDialogOpenStatus}
           />
         </DialogContent>

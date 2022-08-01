@@ -118,14 +118,15 @@ const renderDescriptionField = ({
   );
 };
 
-function SchemeCodeForm(props) {
+function SchemeCodeEditForm(props) {
   const classes = useStyles();
-  const [name, setName] = useState();
   const [schemeType, setSchemeType] = useState();
-  const [description, setDescription] = useState();
-  const [code, setCode] = useState();
 
-  useEffect(() => {}, []);
+  const params = props.params;
+
+  useEffect(() => {
+    setSchemeType(props.params.schemeType);
+  }, []);
 
   const handleSchemeTypeChange = (event) => {
     setSchemeType(event.target.value);
@@ -154,7 +155,6 @@ function SchemeCodeForm(props) {
             onChange={handleSchemeTypeChange}
             label="Scheme Type"
             style={{ width: 400, marginTop: 10, height: 50 }}
-            {...input}
           >
             <MenuItem value="cmm">Commodities</MenuItem>
             <MenuItem value="chc">Charcoal</MenuItem>
@@ -181,16 +181,12 @@ function SchemeCodeForm(props) {
     );
   };
 
-  const onSubmit = (formValues) => {
-    // const form = new FormData();
-    // form.append("name", formValues.name);
-    // form.append("description", formValues.description);
-    // form.append("createdBy", props.userId);
-    // if (formValues.image) {
-    //   form.append("image", formValues.image[0]);
-    // }
+  console.log("params schemetype:", schemeType);
 
+  const onSubmit = (formValues) => {
     formValues["createdBy"] = props.userId;
+    formValues["schemeType"] = schemeType;
+
     props.onSubmit(formValues);
   };
 
@@ -224,6 +220,7 @@ function SchemeCodeForm(props) {
           label=""
           id="schemeType"
           name="schemeType"
+          defaultValue={params.schemeType}
           type="text"
           component={renderSchemeTypeField}
         />
@@ -233,6 +230,7 @@ function SchemeCodeForm(props) {
               label=""
               id="code"
               name="code"
+              defaultValue={params.code}
               type="text"
               component={renderCodeField}
               style={{ marginTop: 20 }}
@@ -243,6 +241,7 @@ function SchemeCodeForm(props) {
               label=""
               id="name"
               name="name"
+              defaultValue={params.name}
               type="text"
               component={renderNameField}
               style={{ marginTop: 20 }}
@@ -254,6 +253,7 @@ function SchemeCodeForm(props) {
           label=""
           id="description"
           name="description"
+          defaultValue={params.description}
           type="text"
           component={renderDescriptionField}
         />
@@ -272,4 +272,4 @@ function SchemeCodeForm(props) {
 
 export default reduxForm({
   form: "schemeCodeForm",
-})(SchemeCodeForm);
+})(SchemeCodeEditForm);

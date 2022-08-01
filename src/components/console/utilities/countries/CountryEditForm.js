@@ -160,7 +160,7 @@ function CountryEditForm(props) {
   useEffect(() => {
     setContinent(props.params.continent);
     setRegion(props.params.region);
-  }, [props]);
+  }, []);
 
   const renderContinentField = ({
     input,

@@ -7,8 +7,10 @@ import DeleteRoundedIcon from "@material-ui/icons/DeleteRounded";
 import CancelRoundedIcon from "@material-ui/icons/CancelRounded";
 import Typography from "@material-ui/core/Typography";
 import history from "../../../../history";
-import { fetchStates } from "../../../../actions";
+import { fetchHoServiceOutlets } from "../../../../actions";
 import DataGridContainer from "../../../DataGridContainer";
+import HOServiceOutletDelete from "./HOServiceOutletDelete";
+import HOServiceOutletEdit from "./HOServiceOutletEdit";
 
 class HOServiceOutletList extends React.Component {
   constructor(props) {
@@ -22,7 +24,7 @@ class HOServiceOutletList extends React.Component {
     };
   }
   componentDidMount() {
-    this.props.fetchStates(this.props.token);
+    this.props.fetchHoServiceOutlets(this.props.token);
   }
 
   handleDialogOpenStatus = () => {
@@ -44,17 +46,17 @@ class HOServiceOutletList extends React.Component {
           open={this.state.editOpen}
           onClose={() => [
             this.setState({ editOpen: false }),
-            history.push("/utilities/hoserviceoutlets"),
+            history.push("/systems/utilities/hoserviceoutlets"),
           ]}
         >
-          {/* <DialogContent>
-            <StateEdit
+          <DialogContent>
+            <HOServiceOutletEdit
               token={this.props.token}
               userId={this.props.userId}
               params={this.state.params}
               handleEditDialogOpenStatus={this.handleEditDialogOpenStatus}
             />
-          </DialogContent> */}
+          </DialogContent>
         </Dialog>
       </>
     );
@@ -69,16 +71,16 @@ class HOServiceOutletList extends React.Component {
           open={this.state.deleteOpen}
           onClose={() => [
             this.setState({ deleteOpen: false }),
-            history.push(`/utilities/hoserviceoutlets`),
+            history.push(`/systems/utilities/hoserviceoutlets`),
           ]}
         >
           <DialogContent>
-            {/* <StateDelete
+            <HOServiceOutletDelete
               token={this.props.token}
               userId={this.props.userId}
               id={this.state.id}
               handleDialogOpenStatus={this.handleDialogOpenStatus}
-            /> */}
+            />
           </DialogContent>
         </Dialog>
       </>
@@ -94,7 +96,7 @@ class HOServiceOutletList extends React.Component {
           open={this.state.blacklistOpen}
           onClose={() => [
             this.setState({ blacklistOpen: false }),
-            history.push(`/utilities/hoserviceoutlets`),
+            history.push(`/systems/utilities/hoserviceoutlets`),
           ]}
         >
           <DialogContent>
@@ -109,10 +111,11 @@ class HOServiceOutletList extends React.Component {
     let counter = 0;
     const columns = [
       { field: "numbering", headerName: "S/n", width: 100 },
-      { field: "name", headerName: "State Name", width: 200 },
-      { field: "code", headerName: "State Code", width: 200 },
-      { field: "country", headerName: "Country", width: 200 },
-      { field: "region", headerName: "Country Region", width: 200 },
+      { field: "name", headerName: "Service Outlet Name", width: 200 },
+      { field: "solId", headerName: "SolId", width: 200 },
+      { field: "address", headerName: "Address", width: 200 },
+      { field: "city", headerName: "City", width: 200 },
+      { field: "location", headerName: "Location", width: 200 },
 
       {
         field: "editaction",
@@ -129,32 +132,34 @@ class HOServiceOutletList extends React.Component {
                   id: params.id,
                   params: params.row,
                 }),
-                history.push(`/utilities/hoserviceoutlets/edit/${params.id}`),
-              ]}
-            />
-          </strong>
-        ),
-      },
-      {
-        field: "blacklistaction",
-        headerName: "",
-        width: 30,
-        description: "Blacklist state",
-        renderCell: (params) => (
-          <strong>
-            {/* {params.value.getFullYear()} */}
-            <CancelRoundedIcon
-              style={{ color: "black" }}
-              onClick={() => [
-                this.setState({ blacklistOpen: true, id: params.id }),
                 history.push(
-                  `/utilities/hoserviceoutlets/blacklist/${params.id}`
+                  `/systems/utilities/hoserviceoutlets/edit/${params.id}`
                 ),
               ]}
             />
           </strong>
         ),
       },
+      // {
+      //   field: "blacklistaction",
+      //   headerName: "",
+      //   width: 30,
+      //   description: "Blacklist state",
+      //   renderCell: (params) => (
+      //     <strong>
+      //       {/* {params.value.getFullYear()} */}
+      //       <CancelRoundedIcon
+      //         style={{ color: "black" }}
+      //         onClick={() => [
+      //           this.setState({ blacklistOpen: true, id: params.id }),
+      //           history.push(
+      //             `/systems/utilities/hoserviceoutlets/blacklist/${params.id}`
+      //           ),
+      //         ]}
+      //       />
+      //     </strong>
+      //   ),
+      // },
       {
         field: "deleteaction",
         headerName: "",
@@ -167,22 +172,28 @@ class HOServiceOutletList extends React.Component {
               style={{ color: "red" }}
               onClick={() => [
                 this.setState({ deleteOpen: true, id: params.id }),
-                history.push(`/utilities/hoserviceoutlets/delete/${params.id}`),
+                history.push(
+                  `/systems/utilities/hoserviceoutlets/delete/${params.id}`
+                ),
               ]}
             />
           </strong>
         ),
       },
     ];
-    this.props.states.map((state) => {
+    this.props.hoServiceOutlets.map((serviceOutlet) => {
       let row = {
         numbering: ++counter,
-        id: state.id,
-        name: state.name,
-        code: state.code,
-        region: state.region,
-        country: state.country,
-        description: state.description,
+        id: serviceOutlet.id,
+        name: serviceOutlet.name,
+        solId: serviceOutlet.solId,
+        description: serviceOutlet.description,
+        address: serviceOutlet.address,
+        city: serviceOutlet.city,
+        location: serviceOutlet.location,
+        isHeadofficeOutlet: serviceOutlet.isHeadofficeOutlet,
+        createdBy: serviceOutlet.createdBy,
+        dateCreated: serviceOutlet.dateCreated,
       };
       rows.push(row);
     });
@@ -201,7 +212,10 @@ class HOServiceOutletList extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return { states: Object.values(state.state) };
+  console.log("ho sol state:", state.hoServiceOutlet);
+  return { hoServiceOutlets: Object.values(state.hoServiceOutlet) };
 };
 
-export default connect(mapStateToProps, { fetchStates })(HOServiceOutletList);
+export default connect(mapStateToProps, { fetchHoServiceOutlets })(
+  HOServiceOutletList
+);

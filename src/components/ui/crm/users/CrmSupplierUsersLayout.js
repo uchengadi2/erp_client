@@ -298,7 +298,7 @@ function CrmSupplierUsersLayout(props) {
           </Toolbar>
         </Grid>
         <Grid item className={classes.contentContainer}>
-          <SupplierList token={props.token} />
+          <SupplierList token={props.token} userId={props.userId} />
           {/* {renderDataList()} */}
           {/* <DataGridText /> */}
         </Grid>
@@ -315,6 +315,7 @@ function CrmSupplierUsersLayout(props) {
         <DialogContent>
           <SupplierFormContainer
             token={props.token}
+            userId={props.userId}
             handleDialogOpenStatus={handleDialogOpenStatus}
           />
         </DialogContent>

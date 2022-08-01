@@ -128,9 +128,7 @@ function LocationEditForm(props) {
 
   useEffect(() => {
     setCountry(props.params.country);
-  }, [props]);
-
-  console.log("params:", props.params);
+  }, []);
 
   const params = props.params;
 

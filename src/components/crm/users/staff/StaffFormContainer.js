@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { createCountry } from "../../../../actions";
+import { createUser } from "../../../../actions";
 
 import StaffForm from "./StaffForm";
 
@@ -12,20 +12,24 @@ class StaffFormContainer extends React.Component {
     };
   }
   componentDidMount() {
-    console.log("a;; the props are:", this.props);
+    console.log("the token props are:", this.props.token);
   }
 
   onSubmit = (formValues) => {
-    this.props.createCountry(formValues, this.props.token);
+    this.props.createUser(formValues, this.props.token);
     this.props.handleDialogOpenStatus();
   };
   render() {
     return (
       <div>
-        <StaffForm onSubmit={this.onSubmit} userId={this.props.userId} />
+        <StaffForm
+          onSubmit={this.onSubmit}
+          userId={this.props.userId}
+          token={this.props.token}
+        />
       </div>
     );
   }
 }
 
-export default connect(null, { createCountry })(StaffFormContainer);
+export default connect(null, { createUser })(StaffFormContainer);

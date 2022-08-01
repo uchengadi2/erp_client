@@ -10,11 +10,11 @@ import {
 
 const initialState = {
   loading: true,
-  status: false,
-  error: false,
+  status: null,
+  error: null,
 };
 
-export default (state = {}, action, initialState) => {
+export default (state = {}, action) => {
   switch (action.type) {
     case FETCH_LOCATIONS:
       //console.log("this state is:", state);
@@ -31,7 +31,7 @@ export default (state = {}, action, initialState) => {
     case EDIT_LOCATION_FAILED:
       return {
         ...state,
-        [initialState.status]: action.status,
+        [state.status]: action.status,
       };
     case DELETE_LOCATION:
       return _.omit(state, action.payload); //note that payload is just the city id

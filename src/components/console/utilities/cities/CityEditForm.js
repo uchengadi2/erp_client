@@ -130,7 +130,7 @@ function CityEditForm(props) {
   useEffect(() => {
     setCountry(props.params.country);
     setState(props.params.state);
-  }, [props]);
+  }, []);
 
   // useEffect(() => {
   //   const fetchData = async () => {

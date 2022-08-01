@@ -298,7 +298,7 @@ function ConsoleUtilityServiceOutletLayout(props) {
           </Toolbar>
         </Grid>
         <Grid item className={classes.contentContainer}>
-          <ServiceOutletList token={props.token} />
+          <ServiceOutletList token={props.token} userId={props.userId} />
           {/* {renderDataList()} */}
           {/* <DataGridText /> */}
         </Grid>
@@ -316,6 +316,7 @@ function ConsoleUtilityServiceOutletLayout(props) {
         <DialogContent>
           <ServiceOutletFormContainer
             token={props.token}
+            userId={props.userId}
             handleDialogOpenStatus={handleDialogOpenStatus}
           />
         </DialogContent>

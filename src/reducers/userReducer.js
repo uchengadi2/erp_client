@@ -11,7 +11,7 @@ export default (state = {}, action) => {
   switch (action.type) {
     case FETCH_USERS:
       //console.log("this state is:", state);
-      return { ...state, ..._.mapKeys(action.payload, "id") };
+      return { ...state, ..._.mapKeys(action.payload, "_id") };
     case FETCH_USER:
       return { ...state, [action.payload.id]: action.payload };
     case CREATE_USER:
