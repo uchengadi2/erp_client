@@ -18,6 +18,12 @@ import glHeadReducer from "./glHeadReducer";
 import subGlHeadReducer from "./subGlHeadReducer";
 import transTypesReducer from "./transTypesReducer";
 import officeOperationReducer from "./officeOperationReducer";
+import storeTypeReducer from "./storeTypeReducer";
+import assetSubclassReducer from "./assetSubclassReducer";
+import assetTypeReducer from "./assetTypeReducer";
+import depreciationTypeReducer from "./depreciationTypeReducer";
+import assetMaintenanceTypeReducer from "./assetMaintenanceTypeReducer";
+import measurementUnitReducer from "./measurementUnitReducer";
 
 export default combineReducers({
   auth: authReducer,
@@ -39,4 +45,10 @@ export default combineReducers({
   subGlHead: subGlHeadReducer,
   transType: transTypesReducer,
   officeOperation: officeOperationReducer,
+  storeType: storeTypeReducer,
+  assetSubclass: assetSubclassReducer,
+  assetType: assetTypeReducer,
+  depreciationType: depreciationTypeReducer,
+  assetMaintenanceType: assetMaintenanceTypeReducer,
+  measurementUnit: measurementUnitReducer,
 });

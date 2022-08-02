@@ -11,7 +11,7 @@ import history from "./../../../../history";
 import AssetAssetSubClassTypesLayout from "./AssetAssetSubClassTypesLayout";
 import AssetAssetTypesLayout from "./AssetAssetTypesLayout";
 import AssetDepreciationTypesLayout from "./AssetDepreciationTypesLayout";
-import AssetLocationTypes from "./AssetLocationTypes";
+import AssetStoreTypesLayout from "./AssetStoreTypesLayout";
 import AssetMaintenanceTypesLayout from "./AssetMaintenanceTypesLayout";
 import AssetMeasurementUnitTypes from "./AssetMeasurementUnitTypes";
 
@@ -79,7 +79,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function AssetUtilityLayout({ token }) {
+function AssetUtilityLayout({ token, userId }) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
@@ -122,13 +122,14 @@ function AssetUtilityLayout({ token }) {
           }}
         />
         <Tab
-          label="Location Types"
+          label="Store Types"
           {...a11yProps(0)}
           onClick={(event) => {
             event.preventDefault();
-            history.push(`/assets/utilities/locationtypes`);
+            history.push(`/assets/utilities/storetypes`);
           }}
         />
+
         <Tab
           label="Maintenance Types"
           {...a11yProps(0)}
@@ -148,22 +149,22 @@ function AssetUtilityLayout({ token }) {
       </Tabs>
 
       <TabPanel value={value} index={0}>
-        <AssetAssetSubClassTypesLayout token={token} />
+        <AssetAssetSubClassTypesLayout token={token} userId={userId} />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <AssetAssetTypesLayout token={token} />
+        <AssetAssetTypesLayout token={token} userId={userId} />
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <AssetDepreciationTypesLayout token={token} />
+        <AssetDepreciationTypesLayout token={token} userId={userId} />
       </TabPanel>
       <TabPanel value={value} index={3}>
-        <AssetLocationTypes token={token} />
+        <AssetStoreTypesLayout token={token} userId={userId} />
       </TabPanel>
       <TabPanel value={value} index={4}>
-        <AssetMaintenanceTypesLayout token={token} />
+        <AssetMaintenanceTypesLayout token={token} userId={userId} />
       </TabPanel>
       <TabPanel value={value} index={5}>
-        <AssetMeasurementUnitTypes token={token} />
+        <AssetMeasurementUnitTypes token={token} userId={userId} />
       </TabPanel>
     </div>
   );

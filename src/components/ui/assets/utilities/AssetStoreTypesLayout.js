@@ -11,8 +11,8 @@ import DialogContent from "@material-ui/core/DialogContent";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import history from "../../../../history";
 
-import AssetUtilityMeasurementUnitCreateForm from "../../../assets/utilities/measurementUnit/AssetUtilityMeasurementUnitCreateForm";
-import AssetUtilityMeasurementUnitList from "../../../assets/utilities/measurementUnit/AssetUtilityMeasurementUnitList";
+import AssetUtilityStoreTypeCreateForm from "../../../assets/utilities/storeType/AssetUtilityStoreTypeCreateForm";
+import AssetUtilityStoreTypeList from "../../../assets/utilities/storeType/AssetUtilityStoreTypeList";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -59,7 +59,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function AssetMeasurementUnitTypes(props) {
+function AssetStoreTypesLayout(props) {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [alert, setAlert] = useState({
@@ -125,17 +125,17 @@ function AssetMeasurementUnitTypes(props) {
                 className={classes.addButton}
                 onClick={() => [
                   setOpen(true),
-                  history.push("/assets/utilities/measurementunits/new"),
+                  history.push("/assets/utilities/storetypes/new"),
                 ]}
               >
-                Add Measurement Unit
+                Create a Store Type
               </Button>
             </Grid>
             <Grid item></Grid>
           </Toolbar>
         </Grid>
         <Grid item className={classes.contentContainer}>
-          <AssetUtilityMeasurementUnitList
+          <AssetUtilityStoreTypeList
             token={props.token}
             userId={props.userId}
           />
@@ -147,11 +147,11 @@ function AssetMeasurementUnitTypes(props) {
         open={open}
         onClose={() => [
           setOpen(false),
-          history.push("/assets/utilities/measurementunits"),
+          history.push("/assets/utilities/storetypes"),
         ]}
       >
         <DialogContent>
-          <AssetUtilityMeasurementUnitCreateForm
+          <AssetUtilityStoreTypeCreateForm
             token={props.token}
             userId={props.userId}
             handleDialogOpenStatus={handleDialogOpenStatus}
@@ -192,4 +192,4 @@ function AssetMeasurementUnitTypes(props) {
   );
 }
 
-export default AssetMeasurementUnitTypes;
+export default AssetStoreTypesLayout;
