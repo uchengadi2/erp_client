@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Field, reduxForm } from "redux-form";
 import Grid from "@material-ui/core/Grid";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
 import { useDispatch } from "react-redux";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import { TextField, Typography } from "@material-ui/core";
@@ -14,8 +14,9 @@ import FormLabel from "@material-ui/core/FormLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import Select from "@material-ui/core/Select";
-import { CREATE_OFFICEOPERATION } from "../../../../actions/types";
 import api from "./../../../../apis/local";
+import { EDIT_TRANSTYPE } from "../../../../actions/types";
+import { applyInitialState } from "@mui/x-data-grid/hooks/features/columns/gridColumnsUtils";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -27,10 +28,10 @@ const useStyles = makeStyles((theme) => ({
   submitButton: {
     borderRadius: 10,
     height: 40,
-    width: 200,
+    width: 180,
     marginLeft: 110,
     marginTop: 20,
-    marginBottom: 10,
+    marginBottom: 20,
     color: "white",
     backgroundColor: theme.palette.common.blue,
     "&:hover": {
@@ -39,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const renderNameField = ({
+const renderTransactionTypeNameField = ({
   input,
   label,
   meta: { touched, error, invalid },
@@ -50,7 +51,7 @@ const renderNameField = ({
   return (
     <TextField
       //error={touched && invalid}
-      helperText="Enter the Office Operation & Service Name"
+      helperText="Enter Transaction Type Name"
       variant="outlined"
       label={label}
       id={input.name}
@@ -65,7 +66,7 @@ const renderNameField = ({
   );
 };
 
-const renderCodeField = ({
+const renderTransactionTypeCodeField = ({
   input,
   label,
   meta: { touched, error, invalid },
@@ -76,7 +77,7 @@ const renderCodeField = ({
   return (
     <TextField
       //error={touched && invalid}
-      helperText="Enter the Office Operation & Service Code(4 characters maximum)"
+      helperText="Transaction Type Code (4 characters maximum"
       variant="outlined"
       label={label}
       id={input.name}
@@ -91,7 +92,7 @@ const renderCodeField = ({
   );
 };
 
-const renderDescriptionField = ({
+const renderTransactionTypeDescriptionField = ({
   input,
   label,
   meta: { touched, error, invalid },
@@ -104,7 +105,7 @@ const renderDescriptionField = ({
       error={touched && invalid}
       //placeholder="category description"
       variant="outlined"
-      helperText="Describe the Office Operation & Service"
+      helperText="Description of this Transaction Type"
       label={label}
       id={input.name}
       name={input.name}
@@ -121,48 +122,42 @@ const renderDescriptionField = ({
   );
 };
 
-function AccountUtilityOfficeOperationAndServicesForm(props) {
+function AccountUtilityTransactionTypeEditForm(props) {
   const classes = useStyles();
   const [loading, setLoading] = useState(false);
 
   const dispatch = useDispatch();
 
-  const buttonContent = () => {
-    return <React.Fragment> Create Office Operation</React.Fragment>;
-  };
+  const params = props.params;
 
-  const Str = require("@supercharge/strings");
+  const buttonContent = () => {
+    return <React.Fragment> Update Trans Type</React.Fragment>;
+  };
 
   const onSubmit = (formValues) => {
     setLoading(true);
-    // const form = new FormData();
-    // form.append("name", formValues.name);
-    // form.append("description", formValues.description);
-    // form.append("createdBy", props.userId);
-    // if (formValues.image) {
-    //   form.append("image", formValues.image[0]);
-    // }
 
+    const Str = require("@supercharge/strings");
     formValues["code"] = Str(formValues.code).limit(4).get();
-    console.log("this is the form values:", formValues);
 
     if (formValues) {
-      const createOfficeOperationForm = async () => {
+      const createTransTypeForm = async () => {
         api.defaults.headers.common["Authorization"] = `Bearer ${props.token}`;
-        const response = await api.post(`/officeoperations`, formValues);
+        const response = await api.patch(
+          `/transactiontypes/${props.params.id}`,
+          formValues
+        );
 
         if (response.data.status === "success") {
-          //const currency = response.data.data.data;
-
           dispatch({
-            type: CREATE_OFFICEOPERATION,
+            type: EDIT_TRANSTYPE,
             payload: response.data.data.data,
           });
 
-          props.handleSuccessfulCreateSnackbar(
-            `${response.data.data.data.code} - ${response.data.data.data.name} Office Operation & Services is created successfully!!!`
+          props.handleSuccessfulEditSnackbar(
+            `${response.data.data.data.code} - ${response.data.data.data.name} Trans Type is updated successfully!!!`
           );
-          props.handleDialogOpenStatus();
+          props.handleEditDialogOpenStatus();
           setLoading(false);
         } else {
           props.handleFailedSnackbar(
@@ -170,25 +165,26 @@ function AccountUtilityOfficeOperationAndServicesForm(props) {
           );
         }
       };
-      createOfficeOperationForm().catch((err) => {
+      createTransTypeForm().catch((err) => {
         props.handleFailedSnackbar();
         console.log("err:", err.message);
       });
     } else {
       props.handleFailedSnackbar("Something went wrong, please try again!!!");
     }
+
     //props.onSubmit(form);
   };
 
   return (
-    <form id="accountUtilityOfficeOperationAndServicesForm">
+    <form id="accountUtilityTransactionTypeEditForm">
       <Box
         // component="form"
         // id="categoryForm"
         // onSubmit={onSubmit}
         sx={{
           width: 400,
-          height: 440,
+          height: 460,
         }}
         noValidate
         autoComplete="off"
@@ -203,25 +199,24 @@ function AccountUtilityOfficeOperationAndServicesForm(props) {
             style={{ color: "blue", fontSize: "1.5em" }}
             component="legend"
           >
-            <Typography variant="subtitle1">
-              {" "}
-              Add Office Operation & Service
-            </Typography>
+            <Typography variant="subtitle1"> Edit Transaction Type</Typography>
           </FormLabel>
         </Grid>
         <Field
           label=""
           id="name"
           name="name"
+          defaultValue={params.name}
           type="text"
-          component={renderNameField}
+          component={renderTransactionTypeNameField}
         />
         <Field
           label=""
           id="code"
           name="code"
+          defaultValue={params.code}
           type="text"
-          component={renderCodeField}
+          component={renderTransactionTypeCodeField}
           style={{ marginTop: 10 }}
         />
 
@@ -229,8 +224,9 @@ function AccountUtilityOfficeOperationAndServicesForm(props) {
           label=""
           id="description"
           name="description"
+          defaultValue={params.description}
           type="text"
-          component={renderDescriptionField}
+          component={renderTransactionTypeDescriptionField}
         />
 
         <Button
@@ -250,5 +246,5 @@ function AccountUtilityOfficeOperationAndServicesForm(props) {
 }
 
 export default reduxForm({
-  form: "accountUtilityOfficeOperationAndServicesForm",
-})(AccountUtilityOfficeOperationAndServicesForm);
+  form: "accountUtilityTransactionTypeEditForm",
+})(AccountUtilityTransactionTypeEditForm);

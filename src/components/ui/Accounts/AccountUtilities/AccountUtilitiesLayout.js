@@ -130,7 +130,7 @@ function AccountUtilitiesLayout({ token, userId }) {
           {...a11yProps(3)}
           onClick={(event) => {
             event.preventDefault();
-            history.push(`/accounts/utilities/subglcodes`);
+            history.push(`/accounts/utilities/subglheads`);
           }}
         />
         {/* <Tab

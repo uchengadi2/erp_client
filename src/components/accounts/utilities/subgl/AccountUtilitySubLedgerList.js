@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import Dialog from "@material-ui/core/Dialog";
+import Snackbar from "@material-ui/core/Snackbar";
 import DialogContent from "@material-ui/core/DialogContent";
 import EditRoundedIcon from "@material-ui/icons/EditRounded";
 import DeleteRoundedIcon from "@material-ui/icons/DeleteRounded";
@@ -8,11 +9,11 @@ import CancelRoundedIcon from "@material-ui/icons/CancelRounded";
 import AssignmentIcon from "@material-ui/icons/Assignment";
 import Typography from "@material-ui/core/Typography";
 import history from "../../../../history";
-import { fetchOrders } from "../../../../actions";
+import { fetchSubGlHeads } from "../../../../actions";
 import DataGridContainer from "../../../DataGridContainer";
-// import OrderAssignmentFormContainer from "./OrderAssignmentFormContainer";
-// import OrdersEdit from "./OrdersEdit";
-// import OrderDelete from "./OrdersDelete";
+import AccountUtilityGlSubHeadCodeForm from "./AccountUtilityGlSubHeadCodeForm";
+import AccountUtilitySubGlHeadDelete from "./AccountUtilitySubGlHeadDelete";
+import AccountUtilitySubGlHeadFormEdit from "./AccountUtilitySubGlHeadFormEdit";
 
 class AccountUtilitySubLedgerList extends React.Component {
   constructor(props) {
@@ -24,10 +25,15 @@ class AccountUtilitySubLedgerList extends React.Component {
       assignOpen: false,
       id: null,
       params: {},
+      alert: {
+        open: false,
+        message: "",
+        backgroundColor: "",
+      },
     };
   }
   componentDidMount() {
-    //this.props.fetchOrders(this.props.token, this.props.status);
+    this.props.fetchSubGlHeads(this.props.token);
   }
 
   handleDialogOpenStatus = () => {
@@ -40,6 +46,29 @@ class AccountUtilitySubLedgerList extends React.Component {
     this.setState({ editOpen: false });
   };
 
+  handleSuccessfulEditSnackbar = (message) => {
+    // history.push("/categories/new");
+    this.setState({ editOpen: false });
+    this.setState({
+      alert: {
+        open: true,
+        message: message,
+        backgroundColor: "#4BB543",
+      },
+    });
+  };
+
+  handleFailedSnackbar = (message) => {
+    this.setState({
+      alert: {
+        open: true,
+        message: message,
+        backgroundColor: "#FF3232",
+      },
+    });
+    this.setState({ editOpen: false });
+  };
+
   renderEditDialogForm = () => {
     //token will be used here
     return (
@@ -49,15 +78,17 @@ class AccountUtilitySubLedgerList extends React.Component {
           open={this.state.editOpen}
           onClose={() => [
             this.setState({ editOpen: false }),
-            history.push("/accounts/utilities/subgls"),
+            history.push("/accounts/utilities/subglheads"),
           ]}
         >
           <DialogContent>
-            {/* <OrdersEdit
+            <AccountUtilitySubGlHeadFormEdit
               token={this.props.token}
               params={this.state.params}
               handleEditDialogOpenStatus={this.handleEditDialogOpenStatus}
-            /> */}
+              handleSuccessfulEditSnackbar={this.handleSuccessfulEditSnackbar}
+              handleFailedSnackbar={this.handleFailedSnackbar}
+            />
           </DialogContent>
         </Dialog>
       </>
@@ -73,15 +104,16 @@ class AccountUtilitySubLedgerList extends React.Component {
           open={this.state.deleteOpen}
           onClose={() => [
             this.setState({ deleteOpen: false }),
-            history.push(`/accounts/utilities/subgls`),
+            history.push(`/accounts/utilities/subglheads`),
           ]}
         >
           <DialogContent>
-            {/* <OrderDelete
+            <AccountUtilitySubGlHeadDelete
               token={this.props.token}
+              userId={this.props.userId}
               id={this.state.id}
               handleDialogOpenStatus={this.handleDialogOpenStatus}
-            /> */}
+            />
           </DialogContent>
         </Dialog>
       </>
@@ -97,7 +129,7 @@ class AccountUtilitySubLedgerList extends React.Component {
           open={this.state.cancelOpen}
           onClose={() => [
             this.setState({ cancelOpen: false }),
-            history.push(`/accounts/utilities/subgls`),
+            history.push(`/accounts/utilities/subglheads`),
           ]}
         >
           <DialogContent>
@@ -117,41 +149,35 @@ class AccountUtilitySubLedgerList extends React.Component {
           open={this.state.assignOpen}
           onClose={() => [
             this.setState({ assignOpen: false }),
-            history.push(`/accounts/utilities/subgls`),
+            history.push(`/accounts/utilities/subglheads`),
           ]}
         >
           <DialogContent>
-            {/* <OrderAssignmentFormContainer
+            <AccountUtilityGlSubHeadCodeForm
               token={this.props.token}
+              userId={this.props.userId}
               params={this.state.params}
-              handleEditDialogOpenStatus={this.handleEditDialogOpenStatus}
-            /> */}
+              handleDialogOpenStatus={this.handleDialogOpenStatus}
+              handleFailedSnackbar={this.handleFailedSnackbar}
+              handleSuccessfulEditSnackbar={this.handleSuccessfulEditSnackbar}
+            />
           </DialogContent>
         </Dialog>
       </>
     );
   };
 
-  renderOrdersList = () => {
+  renderSubGlHeadsList = () => {
     let rows = [];
     let counter = 0;
     const columns = [
       { field: "numbering", headerName: "S/n", width: 60 },
-      { field: "orderNumber", headerName: "Order Number", width: 150 },
-      { field: "dateOrdered", headerName: "Date Ordered", width: 100 },
-      { field: "orderedQuantity", headerName: "Ordered Quantity", width: 80 },
-      { field: "status", headerName: "Status", width: 100 },
-      { field: "category", headerName: "Category", width: 150 },
-      {
-        field: "consignmentCountry",
-        headerName: "Source Country",
-        width: 150,
-      },
-      {
-        field: "destinationCountry",
-        headerName: "Destination Country",
-        width: 150,
-      },
+      { field: "subGlHead", headerName: "SubGl Head", width: 150 },
+      { field: "name", headerName: "Sub Gl Title", width: 150 },
+      { field: "glHead", headerName: "Parent Gl Head", width: 150 },
+      { field: "serviceOutlet", headerName: "Service Outlet", width: 150 },
+      { field: "currency", headerName: "Currency", width: 150 },
+
       {
         field: "editaction",
         headerName: "",
@@ -167,48 +193,15 @@ class AccountUtilitySubLedgerList extends React.Component {
                   id: params.id,
                   params: params.row,
                 }),
-                history.push(`/accounts/utilities/subgls/edit/${params.id}`),
+                history.push(
+                  `/accounts/utilities/subglheads/edit/${params.id}`
+                ),
               ]}
             />
           </strong>
         ),
       },
-      {
-        field: "cancelorder",
-        headerName: "",
-        width: 30,
-        description: "Cancel Order",
-        renderCell: (params) => (
-          <strong>
-            {/* {params.value.getFullYear()} */}
-            <CancelRoundedIcon
-              style={{ color: "black" }}
-              onClick={() => [
-                this.setState({ cancelOpen: true, id: params.id }),
-                history.push(`/accounts/utilities/subgls/cancel/${params.id}`),
-              ]}
-            />
-          </strong>
-        ),
-      },
-      {
-        field: "assignorder",
-        headerName: "",
-        width: 30,
-        description: "Assign Order",
-        renderCell: (params) => (
-          <strong>
-            {/* {params.value.getFullYear()} */}
-            <AssignmentIcon
-              style={{ color: "black" }}
-              onClick={() => [
-                this.setState({ assignOpen: true, id: params.id }),
-                history.push(`/accounts/utilities/subgls/assign/${params.id}`),
-              ]}
-            />
-          </strong>
-        ),
-      },
+
       {
         field: "deleteaction",
         headerName: "",
@@ -221,28 +214,28 @@ class AccountUtilitySubLedgerList extends React.Component {
               style={{ color: "red" }}
               onClick={() => [
                 this.setState({ deleteOpen: true, id: params.id }),
-                history.push(`/accounts/utilities/subgls/delete/${params.id}`),
+                history.push(
+                  `/accounts/utilities/subglheads/delete/${params.id}`
+                ),
               ]}
             />
           </strong>
         ),
       },
     ];
-    // this.props.orders.map((order) => {
-    //   console.log("these are the orderrrrnew:", order);
-    //   let row = {
-    //     numbering: ++counter,
-    //     id: order.id,
-    //     orderNumber: order.orderNumber,
-    //     dateOrdered: order.dateOrdered,
-    //     orderedQuantity: order.orderQuantity,
-    //     status: order.status,
-    //     consignmentCountry: order.consignmentCountry[0],
-    //     destinationCountry: order.destinationCountry[0],
-    //     category: order.category,
-    //   };
-    //   rows.push(row);
-    // });
+    this.props.subGlHeads.map((subGlHead) => {
+      let row = {
+        numbering: ++counter,
+        id: subGlHead.id,
+        subGlHead: subGlHead.subGlHead,
+        name: subGlHead.name,
+        glHead: subGlHead.glHead,
+        serviceOutlet: subGlHead.serviceOutlet,
+        currency: subGlHead.currency,
+        description: subGlHead.description,
+      };
+      rows.push(row);
+    });
     return <DataGridContainer columns={columns} rows={rows} />;
   };
 
@@ -251,17 +244,26 @@ class AccountUtilitySubLedgerList extends React.Component {
       <>
         {this.renderDeleteDialogForm()}
         {this.renderEditDialogForm()}
-        {this.renderOrdersList()}
-        {this.renderCancelDialogForm()}
-        {this.renderAssignOrderDialogForm()}
+        {this.renderSubGlHeadsList()}
+        <Snackbar
+          open={this.state.alert.open}
+          message={this.state.alert.message}
+          ContentProps={{
+            style: { backgroundColor: this.state.alert.backgroundColor },
+          }}
+          anchorOrigin={{ vertical: "top", horizontal: "center" }}
+          onClose={() => this.setState({ alert: { ...alert, open: false } })}
+          autoHideDuration={4000}
+        />
       </>
     );
   }
 }
 
 const mapStateToProps = (state) => {
-  console.log("this is the state:", state);
-  return { orders: Object.values(state.order) };
+  return { subGlHeads: Object.values(state.subGlHead) };
 };
 
-export default connect(null, {})(AccountUtilitySubLedgerList);
+export default connect(mapStateToProps, { fetchSubGlHeads })(
+  AccountUtilitySubLedgerList
+);

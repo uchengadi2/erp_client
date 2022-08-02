@@ -127,7 +127,7 @@ function AccountUtilityGeneralLedgerHeadCodeLayout(props) {
                 className={classes.addButton}
                 onClick={() => [
                   setOpen(true),
-                  history.push("/accounts/utilities/glheadcodes/new"),
+                  history.push("/accounts/utilities/glheads/new"),
                 ]}
               >
                 Create GL Head
@@ -151,7 +151,7 @@ function AccountUtilityGeneralLedgerHeadCodeLayout(props) {
         open={open}
         onClose={() => [
           setOpen(false),
-          history.push("/accounts/utilities/glheadcodes"),
+          history.push("/accounts/utilities/glheads"),
         ]}
       >
         <DialogContent>

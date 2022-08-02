@@ -149,15 +149,7 @@ class AccountUtilityGeneralLedgerList extends React.Component {
             this.setState({ assignOpen: false }),
             history.push(`/accounts/utilities/glheads`),
           ]}
-        >
-          <DialogContent>
-            {/* <AccountUtilityGlCodeFormContainer
-              token={this.props.token}
-              params={this.state.params}
-              handleEditDialogOpenStatus={this.handleEditDialogOpenStatus}
-            /> */}
-          </DialogContent>
-        </Dialog>
+        ></Dialog>
       </>
     );
   };

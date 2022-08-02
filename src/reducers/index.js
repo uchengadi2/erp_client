@@ -15,6 +15,9 @@ import serviceOutletReducer from "./serviceOutletReducer";
 import hoServiceOutletReducer from "./hoServiceOutletReducer";
 import schemeCodeReducer from "./schemeCodeReducer";
 import glHeadReducer from "./glHeadReducer";
+import subGlHeadReducer from "./subGlHeadReducer";
+import transTypesReducer from "./transTypesReducer";
+import officeOperationReducer from "./officeOperationReducer";
 
 export default combineReducers({
   auth: authReducer,
@@ -33,4 +36,7 @@ export default combineReducers({
   hoServiceOutlet: hoServiceOutletReducer,
   schemeCode: schemeCodeReducer,
   glHead: glHeadReducer,
+  subGlHead: subGlHeadReducer,
+  transType: transTypesReducer,
+  officeOperation: officeOperationReducer,
 });

@@ -254,7 +254,7 @@ function AccountUtilityGlCodeEditForm(props) {
   const buttonContent = () => {
     return <React.Fragment> Update Gl Head</React.Fragment>;
   };
-
+  const Str = require("@supercharge/strings");
   const onSubmit = (formValues) => {
     setLoading(true);
 
@@ -262,7 +262,7 @@ function AccountUtilityGlCodeEditForm(props) {
     formValues["schemeCode"] = schemeCode;
     formValues["updatedBy"] = props.userId;
 
-    console.log("this is the form values:", formValues);
+    formValues["glHead"] = Str(formValues.glHead).limit(4).get();
 
     if (formValues) {
       const editGlHeadForm = async () => {

@@ -285,6 +285,8 @@ function ServiceOutletEditForm(props) {
     formValues["createdBy"] = props.userId;
     formValues["location"] = location;
     formValues["city"] = city;
+    const Str = require("@supercharge/strings");
+    formValues["solId"] = Str(formValues.solId).limit(4).get();
 
     props.onSubmit(formValues);
   };

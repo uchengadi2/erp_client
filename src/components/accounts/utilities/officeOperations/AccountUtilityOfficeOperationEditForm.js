@@ -14,7 +14,7 @@ import FormLabel from "@material-ui/core/FormLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import Select from "@material-ui/core/Select";
-import { CREATE_OFFICEOPERATION } from "../../../../actions/types";
+import { EDIT_OFFICEOPERATION } from "../../../../actions/types";
 import api from "./../../../../apis/local";
 
 const useStyles = makeStyles((theme) => ({
@@ -121,48 +121,49 @@ const renderDescriptionField = ({
   );
 };
 
-function AccountUtilityOfficeOperationAndServicesForm(props) {
+function AccountUtilityOfficeOperationEditForm(props) {
   const classes = useStyles();
   const [loading, setLoading] = useState(false);
 
-  const dispatch = useDispatch();
+  const params = props.params;
 
-  const buttonContent = () => {
-    return <React.Fragment> Create Office Operation</React.Fragment>;
-  };
+  const dispatch = useDispatch();
 
   const Str = require("@supercharge/strings");
 
+  //description={Str(category.description).limit(500, "...").get()}
+
+  const buttonContent = () => {
+    return <React.Fragment> Update Office Operation</React.Fragment>;
+  };
+
   const onSubmit = (formValues) => {
     setLoading(true);
-    // const form = new FormData();
-    // form.append("name", formValues.name);
-    // form.append("description", formValues.description);
-    // form.append("createdBy", props.userId);
-    // if (formValues.image) {
-    //   form.append("image", formValues.image[0]);
-    // }
 
     formValues["code"] = Str(formValues.code).limit(4).get();
+
     console.log("this is the form values:", formValues);
 
     if (formValues) {
-      const createOfficeOperationForm = async () => {
+      const updateOfficeOperationForm = async () => {
         api.defaults.headers.common["Authorization"] = `Bearer ${props.token}`;
-        const response = await api.post(`/officeoperations`, formValues);
+        const response = await api.patch(
+          `/officeoperations/${props.params.id}`,
+          formValues
+        );
 
         if (response.data.status === "success") {
           //const currency = response.data.data.data;
 
           dispatch({
-            type: CREATE_OFFICEOPERATION,
+            type: EDIT_OFFICEOPERATION,
             payload: response.data.data.data,
           });
 
-          props.handleSuccessfulCreateSnackbar(
-            `${response.data.data.data.code} - ${response.data.data.data.name} Office Operation & Services is created successfully!!!`
+          props.handleSuccessfulEditSnackbar(
+            `${response.data.data.data.code} - ${response.data.data.data.name} Office Operation & Services is updated successfully!!!`
           );
-          props.handleDialogOpenStatus();
+          props.handleEditDialogOpenStatus();
           setLoading(false);
         } else {
           props.handleFailedSnackbar(
@@ -170,7 +171,7 @@ function AccountUtilityOfficeOperationAndServicesForm(props) {
           );
         }
       };
-      createOfficeOperationForm().catch((err) => {
+      updateOfficeOperationForm().catch((err) => {
         props.handleFailedSnackbar();
         console.log("err:", err.message);
       });
@@ -181,7 +182,7 @@ function AccountUtilityOfficeOperationAndServicesForm(props) {
   };
 
   return (
-    <form id="accountUtilityOfficeOperationAndServicesForm">
+    <form id="accountUtilityOfficeOperationEditForm">
       <Box
         // component="form"
         // id="categoryForm"
@@ -205,7 +206,7 @@ function AccountUtilityOfficeOperationAndServicesForm(props) {
           >
             <Typography variant="subtitle1">
               {" "}
-              Add Office Operation & Service
+              Update Office Operation & Service
             </Typography>
           </FormLabel>
         </Grid>
@@ -213,6 +214,7 @@ function AccountUtilityOfficeOperationAndServicesForm(props) {
           label=""
           id="name"
           name="name"
+          defaultValue={params.name}
           type="text"
           component={renderNameField}
         />
@@ -220,6 +222,7 @@ function AccountUtilityOfficeOperationAndServicesForm(props) {
           label=""
           id="code"
           name="code"
+          defaultValue={params.code}
           type="text"
           component={renderCodeField}
           style={{ marginTop: 10 }}
@@ -229,6 +232,7 @@ function AccountUtilityOfficeOperationAndServicesForm(props) {
           label=""
           id="description"
           name="description"
+          defaultValue={params.description}
           type="text"
           component={renderDescriptionField}
         />
@@ -250,5 +254,5 @@ function AccountUtilityOfficeOperationAndServicesForm(props) {
 }
 
 export default reduxForm({
-  form: "accountUtilityOfficeOperationAndServicesForm",
-})(AccountUtilityOfficeOperationAndServicesForm);
+  form: "accountUtilityOfficeOperationEditForm",
+})(AccountUtilityOfficeOperationEditForm);

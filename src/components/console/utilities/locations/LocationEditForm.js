@@ -196,6 +196,9 @@ function LocationEditForm(props) {
     formValues["createdBy"] = props.userId;
     formValues["country"] = country;
 
+    const Str = require("@supercharge/strings");
+    formValues["code"] = Str(formValues.code).limit(4).get();
+
     props.onSubmit(formValues);
   };
 

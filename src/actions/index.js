@@ -23,9 +23,6 @@ import {
   EDIT_CITY,
   CREATE_VENDOR,
   FETCH_VENDORS,
-  FETCH_ASSIGNED_ORDERS,
-  FETCH_COMPLETED_ORDERS,
-  FETCH_ONTRANSIT_ORDERS,
   FETCH_VENDOR,
   DELETE_VENDOR,
   EDIT_VENDOR,
@@ -39,21 +36,6 @@ import {
   FETCH_POLICY,
   DELETE_POLICY,
   EDIT_POLICY,
-  CREATE_ORDER,
-  FETCH_ORDERS,
-  FETCH_ORDER,
-  DELETE_ORDER,
-  EDIT_ORDER,
-  MAKE_PAYMENT,
-  FETCH_PAYMENTS,
-  FETCH_PAYMENT,
-  DELETE_PAYMENT,
-  EDIT_PAYMENT,
-  PROCESS_REMITTANCE,
-  FETCH_REMITTANCES,
-  FETCH_REMITTANCE,
-  DELETE_REMITTANCE,
-  EDIT_REMITTANCE,
   CREATE_COUNTRY,
   FETCH_COUNTRIES,
   FETCH_COUNTRY,
@@ -106,6 +88,11 @@ import {
   DELETE_HOSERVICEOUTLET,
   EDIT_HOSERVICEOUTLET,
   EDIT_SCHEMECODE,
+  CREATE_OFFICEOPERATION,
+  FETCH_OFFICEOPERATIONS,
+  FETCH_OFFICEOPERATION,
+  EDIT_OFFICEOPERATION,
+  DELETE_OFFICEOPERATION,
 } from "./types";
 
 //authentication and authorization  operations
@@ -874,5 +861,145 @@ export const deleteGlHead = (id, token) => {
   return async (dispatch) => {
     await data.delete(`/glheadaccounts/${id}`);
     dispatch({ type: DELETE_GLCODE, payload: id });
+  };
+};
+
+/////////////////////////////SUBGL HEAD //////////////////////////////////////////////
+
+export const createSubGlHead = (formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.post("/subglheadaccounts", formValues);
+
+    dispatch({ type: CREATE_SUBGLCODE, payload: response.data.data.data });
+  };
+};
+
+export const fetchSubGlHeads = (tokens) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
+  return async (dispatch) => {
+    const response = await data.get("/subglheadaccounts");
+
+    dispatch({ type: FETCH_SUBGLCODES, payload: response.data.data.data });
+  };
+};
+
+export const fetchSubGlHead = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.get(`/subglheadaccounts/${id}`);
+    dispatch({ type: FETCH_SUBGLCODE, payload: response.data.data.data });
+  };
+};
+
+export const editSubGlHead = (id, formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.patch(`/subglheadaccounts/${id}`, formValues);
+    dispatch({ type: EDIT_GLSUBCODE, payload: response.data.data.data });
+  };
+};
+
+export const deleteSubGlHead = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    await data.delete(`/subglheadaccounts/${id}`);
+    dispatch({ type: DELETE_SUBGLCODE, payload: id });
+  };
+};
+
+/////////////////////////////////////////TRANSACTION TYPES /////////////////////////////
+
+export const createTransType = (formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.post("/transactiontypes", formValues);
+
+    dispatch({ type: CREATE_TRANSTYPE, payload: response.data.data.data });
+  };
+};
+
+export const fetchTransTypes = (tokens) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
+  return async (dispatch) => {
+    const response = await data.get("/transactiontypes");
+    console.log("trans types response:", response.data);
+
+    dispatch({ type: FETCH_TRANSTYPES, payload: response.data.data.data });
+  };
+};
+
+export const fetchTransType = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.get(`/transactiontypes/${id}`);
+    dispatch({ type: FETCH_TRANSTYPE, payload: response.data.data.data });
+  };
+};
+
+export const editTransType = (id, formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.patch(`/transactiontypes/${id}`, formValues);
+    dispatch({ type: EDIT_TRANSTYPE, payload: response.data.data.data });
+  };
+};
+
+export const deleteTransType = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    await data.delete(`/transactiontypes/${id}`);
+    dispatch({ type: DELETE_TRANSTYPE, payload: id });
+  };
+};
+
+//////////////////////////////////  OFFICE OPERATIONS AND SERVICES /////////////////
+
+export const createOfficeOperation = (formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.post("/officeoperations", formValues);
+
+    dispatch({
+      type: CREATE_OFFICEOPERATION,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchOfficeOperations = (tokens) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
+  return async (dispatch) => {
+    const response = await data.get("/officeoperations");
+    console.log("trans types response:", response.data);
+
+    dispatch({
+      type: FETCH_OFFICEOPERATIONS,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchOfficeOperation = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.get(`/officeoperations/${id}`);
+    dispatch({ type: FETCH_OFFICEOPERATION, payload: response.data.data.data });
+  };
+};
+
+export const editOfficeOperation = (id, formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    dispatch({ type: EDIT_OFFICEOPERATION, payload: response.data.data.data });
+  };
+};
+
+export const deleteOfficeOperation = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    await data.delete(`/officeoperations/${id}`);
+    dispatch({ type: DELETE_OFFICEOPERATION, payload: id });
   };
 };

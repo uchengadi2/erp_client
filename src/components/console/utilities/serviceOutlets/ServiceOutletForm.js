@@ -272,6 +272,8 @@ function ServiceOutletForm(props) {
   };
 
   const onSubmit = (formValues) => {
+    const Str = require("@supercharge/strings");
+    formValues["solId"] = Str(formValues.solId).limit(4).get();
     props.onSubmit(formValues);
   };
 
