@@ -74,7 +74,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function AssetsAssetLayout({ token }) {
+function AssetsAssetLayout({ token, userId }) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
@@ -97,7 +97,7 @@ function AssetsAssetLayout({ token }) {
           {...a11yProps(0)}
           onClick={(event) => {
             event.preventDefault();
-            history.push(`/assets/assets/stock`);
+            history.push(`/assets/assets/stocks`);
           }}
         />
         <Tab
@@ -111,10 +111,10 @@ function AssetsAssetLayout({ token }) {
       </Tabs>
 
       <TabPanel value={value} index={0}>
-        <AssetsAssetStockLayout token={token} />
+        <AssetsAssetStockLayout token={token} userId={userId} />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <AssetsAssetsOtherAssetsLayout token={token} />
+        <AssetsAssetsOtherAssetsLayout token={token} userId={userId} />
       </TabPanel>
     </div>
   );

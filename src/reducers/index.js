@@ -24,6 +24,8 @@ import assetTypeReducer from "./assetTypeReducer";
 import depreciationTypeReducer from "./depreciationTypeReducer";
 import assetMaintenanceTypeReducer from "./assetMaintenanceTypeReducer";
 import measurementUnitReducer from "./measurementUnitReducer";
+import stockReducer from "./stockReducer";
+import otherAssetReducer from "./otherAssetReducer";
 
 export default combineReducers({
   auth: authReducer,
@@ -51,4 +53,6 @@ export default combineReducers({
   depreciationType: depreciationTypeReducer,
   assetMaintenanceType: assetMaintenanceTypeReducer,
   measurementUnit: measurementUnitReducer,
+  stock: stockReducer,
+  otherAsset: otherAssetReducer,
 });

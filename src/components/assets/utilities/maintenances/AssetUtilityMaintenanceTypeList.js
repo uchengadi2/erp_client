@@ -249,5 +249,5 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, { fetchMaintenanceTypes })(
-  AssetUtilityMaintenanceTypeList
+    AssetUtilityMaintenanceTypeList
 );

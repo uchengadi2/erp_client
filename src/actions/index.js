@@ -123,6 +123,16 @@ import {
   FETCH_MEASUREMENTUNIT,
   DELETE_MEASUREMENTUNIT,
   EDIT_MEASUREMENTUNIT,
+  CREATE_STOCK,
+  FETCH_STOCKS,
+  FETCH_STOCK,
+  DELETE_STOCK,
+  EDIT_STOCK,
+  CREATE_OTHERASSET,
+  FETCH_OTHERASSETS,
+  FETCH_OTHERASSET,
+  DELETE_OTHERASSET,
+  EDIT_OTHERASSET,
 } from "./types";
 
 //authentication and authorization  operations
@@ -1341,5 +1351,111 @@ export const deleteMeasurementUnit = (id, token) => {
   return async (dispatch) => {
     await data.delete(`/officeoperations/${id}`);
     dispatch({ type: DELETE_MEASUREMENTUNIT, payload: id });
+  };
+};
+
+///////////////////////////////// STOCK ///////////////////////////////////
+
+export const createStock = (formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.post("/officeoperations", formValues);
+
+    dispatch({
+      type: CREATE_STOCK,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchStocks = (tokens) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
+  return async (dispatch) => {
+    const response = await data.get("/officeoperations");
+
+    dispatch({
+      type: FETCH_STOCKS,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchStock = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.get(`/officeoperations/${id}`);
+    dispatch({
+      type: FETCH_STOCK,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const editStock = (id, formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    dispatch({ type: EDIT_STOCK, payload: response.data.data.data });
+  };
+};
+
+export const deleteStock = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    await data.delete(`/officeoperations/${id}`);
+    dispatch({ type: DELETE_STOCK, payload: id });
+  };
+};
+
+//////////////////////////////// OTHER ASSETS ////////////////////////////////////
+
+export const createOtherAsset = (formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.post("/officeoperations", formValues);
+
+    dispatch({
+      type: CREATE_OTHERASSET,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchOtherAssets = (tokens) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
+  return async (dispatch) => {
+    const response = await data.get("/officeoperations");
+
+    dispatch({
+      type: FETCH_OTHERASSETS,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchOtherAsset = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.get(`/officeoperations/${id}`);
+    dispatch({
+      type: FETCH_OTHERASSET,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const editOtherAsset = (id, formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    dispatch({ type: EDIT_OTHERASSET, payload: response.data.data.data });
+  };
+};
+
+export const deleteOtherAsset = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    await data.delete(`/officeoperations/${id}`);
+    dispatch({ type: DELETE_OTHERASSET, payload: id });
   };
 };
