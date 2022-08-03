@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Grid from "@material-ui/core/Grid";
+import Snackbar from "@material-ui/core/Snackbar";
 
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
@@ -10,8 +11,8 @@ import DialogContent from "@material-ui/core/DialogContent";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import history from "../../../../history";
 
-import ServiceOutLetsAndOnlyDatesFilter from "../../headerFilters/ServiceOutLetsAndOnlyDatesFilter";
 import AssetsUnapprovedProcurementsList from "../../../assets/procurements/unapproved/AssetsUnapprovedProcurementsList";
+import AssetUnapprovedProcurementCreateForm from "../../../assets/procurements/unapproved/AssetUnapprovedProcurementCreateForm";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -40,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
     width: 220,
     marginLeft: 10,
     marginTop: 50,
-    marginBottom: 5,
+    marginBottom: 20,
     fontSize: "0.75rem",
     backgroundColor: theme.palette.common.orange,
     color: "white",
@@ -61,195 +62,40 @@ const useStyles = makeStyles((theme) => ({
 function AssetsUnapprovedProcurementLayout(props) {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
-  const [selectedSourceCountry, setSelectedSourceCountry] = useState("all");
-  const [selectedDestinationCountry, setSelectedDestinationCountry] =
-    useState("all");
-  const [sourceCountryList, setSourceCountryList] = useState([
-    { id: "", name: "" },
-  ]);
-  const [destinationCountryList, setDestinationCountryList] = useState([
-    { id: "", name: "" },
-  ]);
-  const [selectedCategory, setSelectedCategory] = useState("all");
-  const [categoryList, setCategoryList] = useState([{ id: "", name: "" }]);
+  const [alert, setAlert] = useState({
+    open: false,
+    message: "",
+    backgroundColor: "",
+  });
+
   const theme = useTheme();
   const matchesMD = useMediaQuery(theme.breakpoints.down("md"));
   const matchesSM = useMediaQuery(theme.breakpoints.down("sm"));
   const matchesXS = useMediaQuery(theme.breakpoints.down("xs"));
-
-  //   useEffect(() => {
-  //     const fetchSourceCountryData = async () => {
-  //       let allData = [{ id: "all", name: "All" }];
-  //       data.defaults.headers.common["Authorization"] = `Bearer ${props.token}`;
-  //       const response = await data.get("/countries");
-  //       const workingData = response.data.data.data;
-  //       workingData.map((country) => {
-  //         allData.push({ id: country._id, name: country.name });
-  //       });
-  //       setSourceCountryList(allData);
-  //     };
-
-  //     //call the function
-
-  //     fetchSourceCountryData().catch(console.error);
-  //   }, []);
-
-  //   useEffect(() => {
-  //     const fetchDestinationCountryData = async () => {
-  //       let allData = [{ id: "all", name: "All" }];
-  //       data.defaults.headers.common["Authorization"] = `Bearer ${props.token}`;
-  //       const response = await data.get("/countries");
-  //       const workingData = response.data.data.data;
-  //       workingData.map((country) => {
-  //         allData.push({ id: country._id, name: country.name });
-  //       });
-  //       setDestinationCountryList(allData);
-  //     };
-
-  //     //call the function
-
-  //     fetchDestinationCountryData().catch(console.error);
-  //   }, []);
-
-  //   useEffect(() => {
-  //     const fetchCategoryData = async () => {
-  //       let allData = [{ id: "all", name: "All" }];
-  //       data.defaults.headers.common["Authorization"] = `Bearer ${props.token}`;
-  //       const response = await data.get("/categories");
-  //       const workingData = response.data.data.data;
-  //       workingData.map((category) => {
-  //         allData.push({ id: category._id, name: category.name });
-  //       });
-  //       setCategoryList(allData);
-  //     };
-
-  //     //call the function
-
-  //     fetchCategoryData().catch(console.error);
-  //   }, []);
 
   const handleDialogOpenStatus = () => {
     // history.push("/categories/new");
     setOpen(false);
   };
 
-  const handleSourceCountryChange = (value) => {
-    setSelectedSourceCountry(value);
-    console.log("the selected country iseeeeeeee:", selectedSourceCountry);
+  const handleSuccessfulCreateSnackbar = (message) => {
+    // history.push("/categories/new");
+    setOpen({ open: false });
+    setAlert({
+      open: true,
+      message: message,
+      backgroundColor: "#4BB543",
+    });
   };
 
-  const handleDestinationCountryChange = (value) => {
-    setSelectedDestinationCountry(value);
-    console.log("the selected country iseeeeeeee:", selectedDestinationCountry);
+  const handleFailedSnackbar = (message) => {
+    setAlert({
+      open: true,
+      message,
+      backgroundColor: "#FF3232",
+    });
+    setOpen({ open: false });
   };
-
-  const handleCategoryChange = (value) => {
-    setSelectedCategory(value);
-    console.log("the selected vendor iseeeeeeee:", selectedCategory);
-  };
-
-  const status = "pending";
-
-  //   const renderDataList = () => {
-  //     if (
-  //       selectedSourceCountry === "all" &&
-  //       selectedDestinationCountry === "all" &&
-  //       selectedCategory === "all"
-  //     ) {
-  //       return <OrdersList token={props.token} status={status} />;
-  //     } else if (
-  //       selectedSourceCountry === "all" &&
-  //       selectedDestinationCountry === "all" &&
-  //       selectedCategory !== "all"
-  //     ) {
-  //       return (
-  //         <OrderByCategoryList
-  //           token={props.token}
-  //           selectedCategory={selectedCategory}
-  //           status={status}
-  //         />
-  //       );
-  //     } else if (
-  //       selectedSourceCountry === "all" &&
-  //       selectedDestinationCountry !== "all" &&
-  //       selectedCategory !== "all"
-  //     ) {
-  //       return (
-  //         // <OrderByCategoryAndDestinationCountryList
-  //         //   token={props.token}
-  //         //   selectedCategory={selectedCategory}
-  //         //   selectedDestinationCountry={selectedDestinationCountry}
-  //         //   status={status}
-  //         // />
-  //       );
-  //     } else if (
-  //       selectedSourceCountry !== "all" &&
-  //       selectedDestinationCountry !== "all" &&
-  //       selectedCategory !== "all"
-  //     ) {
-  //       return (
-  //         // <OrderByCategorySourceAndDestinationCountryList
-  //         //   token={props.token}
-  //         //   selectedCategory={selectedCategory}
-  //         //   selectedDestinationCountry={selectedDestinationCountry}
-  //         //   selectedSourceCountry={selectedSourceCountry}
-  //         //   status={status}
-  //         // />
-  //       );
-  //     } else if (
-  //       selectedSourceCountry !== "all" &&
-  //       selectedDestinationCountry !== "all" &&
-  //       selectedCategory === "all"
-  //     ) {
-  //       return (
-  //         // <OrderBySourceAndDestinationCountryList
-  //         //   token={props.token}
-  //         //   selectedDestinationCountry={selectedDestinationCountry}
-  //         //   selectedSourceCountry={selectedSourceCountry}
-  //         //   status={status}
-  //         // />
-  //       );
-  //     } else if (
-  //       selectedSourceCountry !== "all" &&
-  //       selectedDestinationCountry === "all" &&
-  //       selectedCategory === "all"
-  //     ) {
-  //       return (
-  //         // <OrderBySourceCountryList
-  //         //   token={props.token}
-  //         //   selectedSourceCountry={selectedSourceCountry}
-  //         //   status={status}
-  //         // />
-  //       );
-  //     } else if (
-  //       selectedSourceCountry === "all" &&
-  //       selectedDestinationCountry !== "all" &&
-  //       selectedCategory === "all"
-  //     ) {
-  //       return (
-  //         // <OrderByDestinationCountryList
-  //         //   token={props.token}
-  //         //   selectedDestinationCountry={selectedDestinationCountry}
-  //         //   status={status}
-  //         // />
-  //       );
-  //     } else if (
-  //       selectedSourceCountry !== "all" &&
-  //       selectedDestinationCountry === "all" &&
-  //       selectedCategory !== "all"
-  //     ) {
-  //       return (
-  //         // <OrderByCategoryAndSourceCountryList
-  //         //   token={props.token}
-  //         //   selectedCategory={selectedCategory}
-  //         //   selectedSourceCountry={selectedSourceCountry}
-  //         //   status={status}
-  //         // />
-  //       );
-  //     } else {
-  //       return null;
-  //     }
-  //   };
 
   const width = 12;
 
@@ -264,18 +110,7 @@ function AssetsUnapprovedProcurementLayout(props) {
     >
       <Grid item container direction="column" sm={width}>
         <Grid item className={classes.selectField}>
-          <ServiceOutLetsAndOnlyDatesFilter
-          // token={props.token}
-          // sourceCountryList={sourceCountryList}
-          // destinationCountryList={destinationCountryList}
-          // selectedSourceCountry={selectedSourceCountry}
-          // selectedDestinationCountry={selectedDestinationCountry}
-          // handleSourceCountryChange={handleSourceCountryChange}
-          // handleDestinationCountryChange={handleDestinationCountryChange}
-          // categoryList={categoryList}
-          // selectedCategory={selectedCategory}
-          // handleCategoryChange={handleCategoryChange}
-          />
+          {/* <GeneralLedgerCodeFilter /> */}
         </Grid>
         <Grid
           item
@@ -290,7 +125,9 @@ function AssetsUnapprovedProcurementLayout(props) {
                 className={classes.addButton}
                 onClick={() => [
                   setOpen(true),
-                  history.push("/assets/procurements/unapproved/new"),
+                  history.push(
+                    "/assets/procurements/unapprovedprocurements/new"
+                  ),
                 ]}
               >
                 Initiate Procurement Request
@@ -300,7 +137,10 @@ function AssetsUnapprovedProcurementLayout(props) {
           </Toolbar>
         </Grid>
         <Grid item className={classes.contentContainer}>
-          <AssetsUnapprovedProcurementsList token={props.token} />
+          <AssetsUnapprovedProcurementsList
+            token={props.token}
+            userId={props.userId}
+          />
           {/* {renderDataList()} */}
           {/* <DataGridText /> */}
         </Grid>
@@ -311,14 +151,17 @@ function AssetsUnapprovedProcurementLayout(props) {
         open={open}
         onClose={() => [
           setOpen(false),
-          history.push("/assets/procurements/unapproved"),
+          history.push("/assets/procurements/unapprovedprocurements"),
         ]}
       >
         <DialogContent>
-          {/* <OrderFormContainer
+          <AssetUnapprovedProcurementCreateForm
             token={props.token}
+            userId={props.userId}
             handleDialogOpenStatus={handleDialogOpenStatus}
-          /> */}
+            handleSuccessfulCreateSnackbar={handleSuccessfulCreateSnackbar}
+            handleFailedSnackbar={handleFailedSnackbar}
+          />
         </DialogContent>
       </Dialog>
       <Grid
@@ -339,6 +182,16 @@ function AssetsUnapprovedProcurementLayout(props) {
           <Typography>This is the fourth Inner Container</Typography>
         </Grid>
       </Grid>
+      <Snackbar
+        open={alert.open}
+        message={alert.message}
+        ContentProps={{
+          style: { backgroundColor: alert.backgroundColor },
+        }}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        onClose={() => setAlert({ ...alert, open: false })}
+        autoHideDuration={4000}
+      />
     </Grid>
   );
 }

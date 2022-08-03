@@ -133,6 +133,21 @@ import {
   FETCH_OTHERASSET,
   DELETE_OTHERASSET,
   EDIT_OTHERASSET,
+  CREATE_UNAPPROVEDPROCUREMENT,
+  FETCH_UNAPPROVEDPROCUREMENTS,
+  FETCH_UNAPPROVEDPROCUREMENT,
+  DELETE_UNAPPROVEDPROCUREMENT,
+  EDIT_UNAPPROVEDPROCUREMENT,
+  CREATE_APPROVEDPROCUREMENT,
+  FETCH_APPROVEDPROCUREMENTS,
+  FETCH_APPROVEDPROCUREMENT,
+  DELETE_APPROVEDPROCUREMENT,
+  EDIT_APPROVEDPROCUREMENT,
+  CREATE_EXECAPPROVEDPROCUREMENT,
+  FETCH_EXECAPPROVEDPROCUREMENTS,
+  FETCH_EXECAPPROVEDPROCUREMENT,
+  DELETE_EXECAPPROVEDPROCUREMENT,
+  EDIT_EXECAPPROVEDPROCUREMENT,
 } from "./types";
 
 //authentication and authorization  operations
@@ -1457,5 +1472,173 @@ export const deleteOtherAsset = (id, token) => {
   return async (dispatch) => {
     await data.delete(`/officeoperations/${id}`);
     dispatch({ type: DELETE_OTHERASSET, payload: id });
+  };
+};
+
+////////////////////////////// UNAPPROVED PROCUREMENT ACTION CREATORS /////////////////
+
+export const createUnapprovedProcurement = (formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.post("/officeoperations", formValues);
+
+    dispatch({
+      type: CREATE_UNAPPROVEDPROCUREMENT,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchUnapprovedProcurements = (tokens) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
+  return async (dispatch) => {
+    const response = await data.get("/officeoperations");
+
+    dispatch({
+      type: FETCH_UNAPPROVEDPROCUREMENTS,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchUnapprovedProcurement = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.get(`/officeoperations/${id}`);
+    dispatch({
+      type: FETCH_UNAPPROVEDPROCUREMENT,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const editUnapprovedProcurement = (id, formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    dispatch({
+      type: EDIT_UNAPPROVEDPROCUREMENT,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const deleteUnapprovedProcurement = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    await data.delete(`/officeoperations/${id}`);
+    dispatch({ type: DELETE_UNAPPROVEDPROCUREMENT, payload: id });
+  };
+};
+
+////////////////////////////// APPROVED PROCUREMENT ///////////////////////////
+
+export const createApprovedProcurement = (formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.post("/officeoperations", formValues);
+
+    dispatch({
+      type: CREATE_APPROVEDPROCUREMENT,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchApprovedProcurements = (tokens) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
+  return async (dispatch) => {
+    const response = await data.get("/officeoperations");
+
+    dispatch({
+      type: FETCH_APPROVEDPROCUREMENTS,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchApprovedProcurement = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.get(`/officeoperations/${id}`);
+    dispatch({
+      type: FETCH_APPROVEDPROCUREMENT,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const editApprovedProcurement = (id, formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    dispatch({
+      type: EDIT_APPROVEDPROCUREMENT,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const deleteApprovedProcurement = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    await data.delete(`/officeoperations/${id}`);
+    dispatch({ type: DELETE_APPROVEDPROCUREMENT, payload: id });
+  };
+};
+
+///////////////////////////////// EXECUTED PROCUREMENTS ACTIONS /////////////////
+
+export const createExecApprovedProcurement = (formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.post("/officeoperations", formValues);
+
+    dispatch({
+      type: CREATE_EXECAPPROVEDPROCUREMENT,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchExecApprovedProcurements = (tokens) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
+  return async (dispatch) => {
+    const response = await data.get("/officeoperations");
+
+    dispatch({
+      type: FETCH_EXECAPPROVEDPROCUREMENTS,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchExecApprovedProcurement = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.get(`/officeoperations/${id}`);
+    dispatch({
+      type: FETCH_EXECAPPROVEDPROCUREMENT,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const editExecApprovedProcurement = (id, formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    dispatch({
+      type: EDIT_EXECAPPROVEDPROCUREMENT,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const deleteExecApprovedProcurement = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    await data.delete(`/officeoperations/${id}`);
+    dispatch({ type: DELETE_EXECAPPROVEDPROCUREMENT, payload: id });
   };
 };

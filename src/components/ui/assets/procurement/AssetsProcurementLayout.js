@@ -76,7 +76,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function AssetsProcurementLayout({ token }) {
+function AssetsProcurementLayout({ token, userId }) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
@@ -99,7 +99,7 @@ function AssetsProcurementLayout({ token }) {
           {...a11yProps(0)}
           onClick={(event) => {
             event.preventDefault();
-            history.push(`/assets/procurements/unapprovedrequest`);
+            history.push(`/assets/procurements/unapprovedprocurements`);
           }}
         />
         <Tab
@@ -107,7 +107,7 @@ function AssetsProcurementLayout({ token }) {
           {...a11yProps(0)}
           onClick={(event) => {
             event.preventDefault();
-            history.push(`/assets/procurements/approvedrequest`);
+            history.push(`/assets/procurements/approvedprocurements`);
           }}
         />
         <Tab
@@ -115,19 +115,19 @@ function AssetsProcurementLayout({ token }) {
           {...a11yProps(0)}
           onClick={(event) => {
             event.preventDefault();
-            history.push(`/assets/procurements/executedrequest`);
+            history.push(`/assets/procurements/executedprocurements`);
           }}
         />
       </Tabs>
 
       <TabPanel value={value} index={0}>
-        <AssetsUnapprovedProcurementLayout token={token} />
+        <AssetsUnapprovedProcurementLayout token={token} userId={userId} />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <AssetsApprovedProcurementsLayout token={token} />
+        <AssetsApprovedProcurementsLayout token={token} userId={userId} />
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <AssetsExecutedProcurementsLayout token={token} />
+        <AssetsExecutedProcurementsLayout token={token} userId={userId} />
       </TabPanel>
     </div>
   );

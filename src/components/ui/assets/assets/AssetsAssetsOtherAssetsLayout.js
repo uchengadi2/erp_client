@@ -125,7 +125,7 @@ function AssetsAssetsOtherAssetsLayout(props) {
                 className={classes.addButton}
                 onClick={() => [
                   setOpen(true),
-                  history.push("/assets/assets/utilities/otherassets/new"),
+                  history.push("/assets/assets/otherassets/new"),
                 ]}
               >
                 Add Other Assets
@@ -146,7 +146,7 @@ function AssetsAssetsOtherAssetsLayout(props) {
         open={open}
         onClose={() => [
           setOpen(false),
-          history.push("/assets/assets/utilities/otherassets"),
+          history.push("/assets/assets/otherassets"),
         ]}
       >
         <DialogContent>

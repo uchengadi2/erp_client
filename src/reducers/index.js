@@ -26,6 +26,9 @@ import assetMaintenanceTypeReducer from "./assetMaintenanceTypeReducer";
 import measurementUnitReducer from "./measurementUnitReducer";
 import stockReducer from "./stockReducer";
 import otherAssetReducer from "./otherAssetReducer";
+import unapprovedProcurementReducer from "./unapprovedProcurementReducer";
+import approvedProcurementReducer from "./approvedProcurementReducer";
+import executedProcurementReducer from "./executedProcurementReducer";
 
 export default combineReducers({
   auth: authReducer,
@@ -55,4 +58,7 @@ export default combineReducers({
   measurementUnit: measurementUnitReducer,
   stock: stockReducer,
   otherAsset: otherAssetReducer,
+  unapprovedProcurement: unapprovedProcurementReducer,
+  approvedProcurement: approvedProcurementReducer,
+  executedProcurement: executedProcurementReducer,
 });

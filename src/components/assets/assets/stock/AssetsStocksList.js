@@ -78,7 +78,7 @@ class AssetsStocksList extends React.Component {
           open={this.state.editOpen}
           onClose={() => [
             this.setState({ editOpen: false }),
-            history.push("/assets/assets/utilities/stocks"),
+            history.push("/assets/assets/stocks"),
           ]}
         >
           <DialogContent>
@@ -105,7 +105,7 @@ class AssetsStocksList extends React.Component {
           open={this.state.deleteOpen}
           onClose={() => [
             this.setState({ deleteOpen: false }),
-            history.push(`/assets/assets/utilities/stocks`),
+            history.push(`/assets/assets/stocks`),
           ]}
         >
           <DialogContent>
@@ -130,7 +130,7 @@ class AssetsStocksList extends React.Component {
           open={this.state.cancelOpen}
           onClose={() => [
             this.setState({ cancelOpen: false }),
-            history.push(`/assets/assets/utilities/stocks`),
+            history.push(`/assets/assets/stocks`),
           ]}
         >
           <DialogContent>
@@ -150,7 +150,7 @@ class AssetsStocksList extends React.Component {
           open={this.state.assignOpen}
           onClose={() => [
             this.setState({ assignOpen: false }),
-            history.push(`/assets/assets/utilities/stocks`),
+            history.push(`/assets/assets/stocks`),
           ]}
         ></Dialog>
       </>
@@ -180,9 +180,7 @@ class AssetsStocksList extends React.Component {
                   id: params.id,
                   params: params.row,
                 }),
-                history.push(
-                  `/assets/assets/utilities/stocks/edit/${params.id}`
-                ),
+                history.push(`/assets/assets/stocks/edit/${params.id}`),
               ]}
             />
           </strong>
@@ -201,9 +199,7 @@ class AssetsStocksList extends React.Component {
               style={{ color: "red" }}
               onClick={() => [
                 this.setState({ deleteOpen: true, id: params.id }),
-                history.push(
-                  `/assets/assets/utilities/stocks/delete/${params.id}`
-                ),
+                history.push(`/assets/assets/stocks/delete/${params.id}`),
               ]}
             />
           </strong>

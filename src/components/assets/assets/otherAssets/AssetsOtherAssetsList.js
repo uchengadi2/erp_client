@@ -78,7 +78,7 @@ class AssetsOtherAssetsList extends React.Component {
           open={this.state.editOpen}
           onClose={() => [
             this.setState({ editOpen: false }),
-            history.push("/assets/assets/utilities/otherassets"),
+            history.push("/assets/assets/otherassets"),
           ]}
         >
           <DialogContent>
@@ -105,7 +105,7 @@ class AssetsOtherAssetsList extends React.Component {
           open={this.state.deleteOpen}
           onClose={() => [
             this.setState({ deleteOpen: false }),
-            history.push(`/assets/assets/utilities/otherassets`),
+            history.push(`/assets/assets/otherassets`),
           ]}
         >
           <DialogContent>
@@ -130,7 +130,7 @@ class AssetsOtherAssetsList extends React.Component {
           open={this.state.cancelOpen}
           onClose={() => [
             this.setState({ cancelOpen: false }),
-            history.push(`/assets/assets/utilities/otherassets`),
+            history.push(`/assets/assets/otherassets`),
           ]}
         >
           <DialogContent>
@@ -150,7 +150,7 @@ class AssetsOtherAssetsList extends React.Component {
           open={this.state.assignOpen}
           onClose={() => [
             this.setState({ assignOpen: false }),
-            history.push(`/assets/assets/utilities/otherassets`),
+            history.push(`/assets/assets/otherassets`),
           ]}
         ></Dialog>
       </>
@@ -180,9 +180,7 @@ class AssetsOtherAssetsList extends React.Component {
                   id: params.id,
                   params: params.row,
                 }),
-                history.push(
-                  `/assets/assets/utilities/otherassets/edit/${params.id}`
-                ),
+                history.push(`/assets/assets/otherassets/edit/${params.id}`),
               ]}
             />
           </strong>
@@ -201,9 +199,7 @@ class AssetsOtherAssetsList extends React.Component {
               style={{ color: "red" }}
               onClick={() => [
                 this.setState({ deleteOpen: true, id: params.id }),
-                history.push(
-                  `/assets/assets/utilities/otherassets/delete/${params.id}`
-                ),
+                history.push(`/assets/assets/otherassets/delete/${params.id}`),
               ]}
             />
           </strong>

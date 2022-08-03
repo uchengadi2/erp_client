@@ -125,7 +125,7 @@ function AssetsAssetStockLayout(props) {
                 className={classes.addButton}
                 onClick={() => [
                   setOpen(true),
-                  history.push("/assets/assets/utilities/stocks/new"),
+                  history.push("/assets/assets/stocks/new"),
                 ]}
               >
                 Add Stock
@@ -144,10 +144,7 @@ function AssetsAssetStockLayout(props) {
         //style={{ zIndex: 1302 }}
         fullScreen={matchesXS}
         open={open}
-        onClose={() => [
-          setOpen(false),
-          history.push("/assets/assets/utilities/stocks"),
-        ]}
+        onClose={() => [setOpen(false), history.push("/assets/assets/stocks")]}
       >
         <DialogContent>
           <AssetsStockCreateForm
