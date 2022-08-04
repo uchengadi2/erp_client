@@ -29,6 +29,19 @@ import otherAssetReducer from "./otherAssetReducer";
 import unapprovedProcurementReducer from "./unapprovedProcurementReducer";
 import approvedProcurementReducer from "./approvedProcurementReducer";
 import executedProcurementReducer from "./executedProcurementReducer";
+import unapprovedMaintenanceReducer from "./unapprovedMaintenanceReducer";
+import approvedMaintenanceReducer from "./approvedMaintenanceReducer";
+import executedMaintenanceReducer from "./executedMaintenanceReducer";
+import stockInventoryReducer from "./stockInventoryReducer";
+import unapprovedInventoryRequisitionReducer from "./unapprovedInventoryRequisitionReducer";
+import unapprovedInventoryDisposalReducer from "./unapprovedInventoryDisposalReducer";
+import unapprovedInventoryRetirementReducer from "./unapprovedInventoryRetirementReducer";
+import unapprovedInventoryTransferReducer from "./unapprovedInventoryTransferReducer";
+import assetRequisitionReducer from "./assetRequisitionReducer";
+import pendingAssetRequisitionReducer from "./pendingAssetRequisitionReducer";
+import withdrawnAssetRequistionReducer from "./withdrawnAssetRequistionReducer";
+import abortedAssetRequisitionReducer from "./abortedAssetRequisitionReducer";
+import returnAssetPostRequisitionReducer from "./returnAssetPostRequisitionReducer";
 
 export default combineReducers({
   auth: authReducer,
@@ -61,4 +74,17 @@ export default combineReducers({
   unapprovedProcurement: unapprovedProcurementReducer,
   approvedProcurement: approvedProcurementReducer,
   executedProcurement: executedProcurementReducer,
+  unapprovedMaintenance: unapprovedMaintenanceReducer,
+  approvedMaintenance: approvedMaintenanceReducer,
+  executedMaintenance: executedMaintenanceReducer,
+  stockInventory: stockInventoryReducer,
+  unapprovedInventoryRequisition: unapprovedInventoryRequisitionReducer,
+  unapprovedInventoryDisposition: unapprovedInventoryDisposalReducer,
+  unapprovedInventoryRetirement: unapprovedInventoryRetirementReducer,
+  unapprovedInventoryTransfer: unapprovedInventoryTransferReducer,
+  assetRequisition: assetRequisitionReducer,
+  pendingAssetRequisition: pendingAssetRequisitionReducer,
+  withdrawnAssetRequisition: withdrawnAssetRequistionReducer,
+  abortedAssetRequisition: abortedAssetRequisitionReducer,
+  returnAssetPostRequisition: returnAssetPostRequisitionReducer,
 });

@@ -10,6 +10,7 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import history from "../../../../history";
+import ServiceOutletFilters from "../../headerFilters/ServiceOutletFilters";
 
 import AssetsApprovedProcurementCreateForm from "../../../assets/procurements/approved/AssetsApprovedProcurementCreateForm";
 import AssetsApprovedProcurementList from "../../../assets/procurements/approved/AssetsApprovedProcurementList";
@@ -17,7 +18,7 @@ import AssetsApprovedProcurementList from "../../../assets/procurements/approved
 const useStyles = makeStyles((theme) => ({
   root: {
     marginTop: "-80px",
-    width: 1100,
+    width: 1000,
   },
   headerContainer: {
     height: 20,
@@ -56,6 +57,9 @@ const useStyles = makeStyles((theme) => ({
   toolbar: {
     padding: 5,
     margin: -10,
+  },
+  selectField: {
+    marginTop: 30,
   },
 }));
 
@@ -110,7 +114,7 @@ function AssetsApprovedProcurementsLayout(props) {
     >
       <Grid item container direction="column" sm={width}>
         <Grid item className={classes.selectField}>
-          {/* <GeneralLedgerCodeFilter /> */}
+          <ServiceOutletFilters />
         </Grid>
         <Grid
           item

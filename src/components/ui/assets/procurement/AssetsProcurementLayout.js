@@ -95,6 +95,14 @@ function AssetsProcurementLayout({ token, userId }) {
         className={classes.tabs}
       >
         <Tab
+          label="Asset Procurements"
+          {...a11yProps(0)}
+          onClick={(event) => {
+            event.preventDefault();
+            history.push(`/assets/procurements/executedprocurements`);
+          }}
+        />
+        <Tab
           label="Unapproved Procurement Request"
           {...a11yProps(0)}
           onClick={(event) => {
@@ -102,33 +110,24 @@ function AssetsProcurementLayout({ token, userId }) {
             history.push(`/assets/procurements/unapprovedprocurements`);
           }}
         />
-        <Tab
+        {/* <Tab
           label="Approved Procurement Request"
           {...a11yProps(0)}
           onClick={(event) => {
             event.preventDefault();
             history.push(`/assets/procurements/approvedprocurements`);
           }}
-        />
-        <Tab
-          label="Executed Procurement Request"
-          {...a11yProps(0)}
-          onClick={(event) => {
-            event.preventDefault();
-            history.push(`/assets/procurements/executedprocurements`);
-          }}
-        />
+        /> */}
       </Tabs>
-
       <TabPanel value={value} index={0}>
-        <AssetsUnapprovedProcurementLayout token={token} userId={userId} />
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-        <AssetsApprovedProcurementsLayout token={token} userId={userId} />
-      </TabPanel>
-      <TabPanel value={value} index={2}>
         <AssetsExecutedProcurementsLayout token={token} userId={userId} />
       </TabPanel>
+      <TabPanel value={value} index={1}>
+        <AssetsUnapprovedProcurementLayout token={token} userId={userId} />
+      </TabPanel>
+      {/* <TabPanel value={value} index={2}>
+        <AssetsApprovedProcurementsLayout token={token} userId={userId} />
+      </TabPanel> */}
     </div>
   );
 }

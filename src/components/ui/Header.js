@@ -218,38 +218,39 @@ const Header = (props) => {
 
   const assetsOptions = [
     {
-      name: "Assets",
-      link: "/assets/assets",
+      name: "Procurement",
+      link: "/assets/procurements",
       activeIndex: 1,
       selectedIndex: 10,
     },
     {
-      name: "Procurement",
-      link: "/assets/procurements",
+      name: "Assets",
+      link: "/assets/assets",
       activeIndex: 1,
       selectedIndex: 11,
     },
-    {
-      name: "Depreciation",
-      link: "/assets/depreciations",
-      activeIndex: 1,
-      selectedIndex: 12,
-    },
+
     {
       name: "Inventory",
       link: "/assets/inventories",
       activeIndex: 1,
-      selectedIndex: 13,
+      selectedIndex: 12,
     },
     {
       name: "Maintenances",
       link: "/assets/maintenances",
       activeIndex: 1,
+      selectedIndex: 13,
+    },
+    {
+      name: "Requisitions",
+      link: "/assets/requisitions",
+      activeIndex: 1,
       selectedIndex: 14,
     },
     {
-      name: "Supply Chain",
-      link: "/assets/supplychains",
+      name: "Retirements",
+      link: "/assets/retirements",
       activeIndex: 1,
       selectedIndex: 15,
     },
@@ -259,15 +260,16 @@ const Header = (props) => {
       activeIndex: 1,
       selectedIndex: 16,
     },
+
     {
-      name: "Locations",
-      link: "/assets/locations",
+      name: "Transfer & Leasing",
+      link: "/assets/transfers",
       activeIndex: 1,
       selectedIndex: 17,
     },
     {
-      name: "Transfer & Leasing",
-      link: "/assets/transfers",
+      name: "Stores",
+      link: "/assets/stores",
       activeIndex: 1,
       selectedIndex: 18,
     },

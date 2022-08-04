@@ -23,7 +23,7 @@ import AssetInventoryLayout from "./ui/assets/inventory/AssetInventoryLayout";
 import AssetMaintenancesLayout from "./ui/assets/maintenances/AssetMaintenancesLayout";
 import AssetSupplyChainLayout from "./ui/assets/supplyChain/AssetSupplyChainLayout";
 import AssetDispositionLayout from "./ui/assets/disposition/AssetDispositionLayout";
-import AssetsLocationLayout from "./ui/assets/locations/AssetsLocationLayout";
+import AssetsLocationLayout from "./ui/assets/store/AssetsLocationLayout";
 import AssetTransferAndLeasingLayout from "./ui/assets/transfer/AssetTransferAndLeasingLayout";
 import AssetUtilityLayout from "./ui/assets/utilities/AssetUtilityLayout";
 import CrmUsersLayout from "./ui/crm/users/CrmUsersLayout";
@@ -57,6 +57,7 @@ import ConsolePrivilegesLayout from "./ui/console/privileges/ConsolePrivilegesLa
 import ConsoleRoleLayout from "./ui/console/roles/ConsoleRoleLayout";
 import ConsoleTasksLayout from "./ui/console/tasks/ConsoleTasksLayout";
 import AssetStoreTypesLayout from "./ui/assets/utilities/AssetStoreTypesLayout";
+import AssetRequisitionLayout from "./ui/assets/requisition/AssetRequisitionLayout";
 
 function App() {
   const { token, setToken } = useToken();
@@ -172,6 +173,9 @@ function App() {
             </Route>
             <Route path="/assets/storetypes">
               <AssetStoreTypesLayout token={token} userId={userId} />
+            </Route>
+            <Route path="/assets/requisitions">
+              <AssetRequisitionLayout token={token} userId={userId} />
             </Route>
             <Route path="/assets/transfers">
               <AssetTransferAndLeasingLayout token={token} userId={userId} />

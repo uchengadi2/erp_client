@@ -8,10 +8,8 @@ import Box from "@material-ui/core/Box";
 import { Link } from "react-router-dom";
 import history from "./../../../../history";
 
-import AssetMaintenancesAllAssetsLayout from "./AssetMaintenancesAllAssetsLayout";
 import AssetMaintenancesUnapprovedLayout from "./AssetMaintenancesUnapprovedLayout";
-import AssetMaintenancesApprovedLayout from "./AssetMaintenancesApprovedLayout";
-import AssetMaintenancesEffectedLayout from "./AssetMaintenancesEffectedLayout";
+import AssetMaintenancesEffectedLayout from "./AssetMaintenancesExecutedLayout";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -86,7 +84,7 @@ function AssetMaintenancesLayout({ token }) {
   };
 
   return (
-    <div className={classes.root}>
+    <Box className={classes.root}>
       <Tabs
         orientation="vertical"
         //variant="scrollable"
@@ -96,11 +94,11 @@ function AssetMaintenancesLayout({ token }) {
         className={classes.tabs}
       >
         <Tab
-          label="All Assets"
+          label="Assets Maintenances"
           {...a11yProps(0)}
           onClick={(event) => {
             event.preventDefault();
-            history.push(`/assets/maintenances/allassets`);
+            history.push(`/assets/maintenances/executed`);
           }}
         />
         <Tab
@@ -111,37 +109,26 @@ function AssetMaintenancesLayout({ token }) {
             history.push(`/assets/maintenances/unapproved`);
           }}
         />
-        <Tab
+        {/* <Tab
           label="Approved Assets Maintenances"
           {...a11yProps(0)}
           onClick={(event) => {
             event.preventDefault();
             history.push(`/assets/maintenances/approved`);
           }}
-        />
-        <Tab
-          label="Effected Assets Maintenances"
-          {...a11yProps(0)}
-          onClick={(event) => {
-            event.preventDefault();
-            history.push(`/assets/maintenances/effected`);
-          }}
-        />
+        /> */}
       </Tabs>
 
       <TabPanel value={value} index={0}>
-        <AssetMaintenancesAllAssetsLayout token={token} />
+        <AssetMaintenancesEffectedLayout token={token} />
       </TabPanel>
       <TabPanel value={value} index={1}>
         <AssetMaintenancesUnapprovedLayout token={token} />
       </TabPanel>
-      <TabPanel value={value} index={2}>
+      {/* <TabPanel value={value} index={2}>
         <AssetMaintenancesApprovedLayout token={token} />
-      </TabPanel>
-      <TabPanel value={value} index={3}>
-        <AssetMaintenancesEffectedLayout token={token} />
-      </TabPanel>
-    </div>
+      </TabPanel> */}
+    </Box>
   );
 }
 

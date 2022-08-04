@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import Dialog from "@material-ui/core/Dialog";
+import Snackbar from "@material-ui/core/Snackbar";
 import DialogContent from "@material-ui/core/DialogContent";
 import EditRoundedIcon from "@material-ui/icons/EditRounded";
 import DeleteRoundedIcon from "@material-ui/icons/DeleteRounded";
@@ -8,11 +9,11 @@ import CancelRoundedIcon from "@material-ui/icons/CancelRounded";
 import AssignmentIcon from "@material-ui/icons/Assignment";
 import Typography from "@material-ui/core/Typography";
 import history from "../../../../history";
-import { fetchOrders } from "../../../../actions";
+import { fetchUnapprovedStockRetirements } from "../../../../actions";
 import DataGridContainer from "../../../DataGridContainer";
-// import OrderAssignmentFormContainer from "./OrderAssignmentFormContainer";
-// import OrdersEdit from "./OrdersEdit";
-// import OrderDelete from "./OrdersDelete";
+
+import AssetInventoryUnapprovedRetirementDelete from "./AssetInventoryUnapprovedRetirementDelete";
+import AssetInventoryUnapprovedRetirementEditForm from "./AssetInventoryUnapprovedRetirementEditForm";
 
 class AssetInventoryUnapprovedRetirementList extends React.Component {
   constructor(props) {
@@ -24,10 +25,15 @@ class AssetInventoryUnapprovedRetirementList extends React.Component {
       assignOpen: false,
       id: null,
       params: {},
+      alert: {
+        open: false,
+        message: "",
+        backgroundColor: "",
+      },
     };
   }
   componentDidMount() {
-    //this.props.fetchOrders(this.props.token, this.props.status);
+    this.props.fetchUnapprovedStockRetirements(this.props.token);
   }
 
   handleDialogOpenStatus = () => {
@@ -40,6 +46,29 @@ class AssetInventoryUnapprovedRetirementList extends React.Component {
     this.setState({ editOpen: false });
   };
 
+  handleSuccessfulEditSnackbar = (message) => {
+    // history.push("/categories/new");
+    this.setState({ editOpen: false });
+    this.setState({
+      alert: {
+        open: true,
+        message: message,
+        backgroundColor: "#4BB543",
+      },
+    });
+  };
+
+  handleFailedSnackbar = (message) => {
+    this.setState({
+      alert: {
+        open: true,
+        message: message,
+        backgroundColor: "#FF3232",
+      },
+    });
+    this.setState({ editOpen: false });
+  };
+
   renderEditDialogForm = () => {
     //token will be used here
     return (
@@ -49,15 +78,18 @@ class AssetInventoryUnapprovedRetirementList extends React.Component {
           open={this.state.editOpen}
           onClose={() => [
             this.setState({ editOpen: false }),
-            history.push("/assets/inventories/unapprovedretirement"),
+            history.push("/assets/inventories/unapprovedretirements"),
           ]}
         >
           <DialogContent>
-            {/* <OrdersEdit
+            <AssetInventoryUnapprovedRetirementEditForm
               token={this.props.token}
+              userId={this.props.userId}
               params={this.state.params}
               handleEditDialogOpenStatus={this.handleEditDialogOpenStatus}
-            /> */}
+              handleSuccessfulEditSnackbar={this.handleSuccessfulEditSnackbar}
+              handleFailedSnackbar={this.handleFailedSnackbar}
+            />
           </DialogContent>
         </Dialog>
       </>
@@ -73,15 +105,16 @@ class AssetInventoryUnapprovedRetirementList extends React.Component {
           open={this.state.deleteOpen}
           onClose={() => [
             this.setState({ deleteOpen: false }),
-            history.push(`/assets/inventories/unapprovedretirement`),
+            history.push(`/assets/inventories/unapprovedretirements`),
           ]}
         >
           <DialogContent>
-            {/* <OrderDelete
+            <AssetInventoryUnapprovedRetirementDelete
               token={this.props.token}
+              userId={this.props.userId}
               id={this.state.id}
               handleDialogOpenStatus={this.handleDialogOpenStatus}
-            /> */}
+            />
           </DialogContent>
         </Dialog>
       </>
@@ -97,7 +130,7 @@ class AssetInventoryUnapprovedRetirementList extends React.Component {
           open={this.state.cancelOpen}
           onClose={() => [
             this.setState({ cancelOpen: false }),
-            history.push(`/assets/inventories/unapprovedretirement`),
+            history.push(`/assets/inventories/unapprovedretirements`),
           ]}
         >
           <DialogContent>
@@ -117,41 +150,21 @@ class AssetInventoryUnapprovedRetirementList extends React.Component {
           open={this.state.assignOpen}
           onClose={() => [
             this.setState({ assignOpen: false }),
-            history.push(`/assets/inventories/unapprovedretirement`),
+            history.push(`/assets/inventories/unapprovedretirements`),
           ]}
-        >
-          <DialogContent>
-            {/* <OrderAssignmentFormContainer
-              token={this.props.token}
-              params={this.state.params}
-              handleEditDialogOpenStatus={this.handleEditDialogOpenStatus}
-            /> */}
-          </DialogContent>
-        </Dialog>
+        ></Dialog>
       </>
     );
   };
 
-  renderOrdersList = () => {
+  renderUnapprovedStockRequisitionsList = () => {
     let rows = [];
     let counter = 0;
     const columns = [
       { field: "numbering", headerName: "S/n", width: 60 },
-      { field: "orderNumber", headerName: "Order Number", width: 150 },
-      { field: "dateOrdered", headerName: "Date Ordered", width: 100 },
-      { field: "orderedQuantity", headerName: "Ordered Quantity", width: 80 },
-      { field: "status", headerName: "Status", width: 100 },
-      { field: "category", headerName: "Category", width: 150 },
-      {
-        field: "consignmentCountry",
-        headerName: "Source Country",
-        width: 150,
-      },
-      {
-        field: "destinationCountry",
-        headerName: "Destination Country",
-        width: 150,
-      },
+      { field: "code", headerName: "Transaction Code", width: 150 },
+      { field: "name", headerName: "Transaction Name", width: 200 },
+
       {
         field: "editaction",
         headerName: "",
@@ -168,53 +181,14 @@ class AssetInventoryUnapprovedRetirementList extends React.Component {
                   params: params.row,
                 }),
                 history.push(
-                  `/assets/inventories/unapprovedretirement/edit/${params.id}`
+                  `/assets/inventories/unapprovedretirements/edit/${params.id}`
                 ),
               ]}
             />
           </strong>
         ),
       },
-      {
-        field: "cancelorder",
-        headerName: "",
-        width: 30,
-        description: "Cancel Order",
-        renderCell: (params) => (
-          <strong>
-            {/* {params.value.getFullYear()} */}
-            <CancelRoundedIcon
-              style={{ color: "black" }}
-              onClick={() => [
-                this.setState({ cancelOpen: true, id: params.id }),
-                history.push(
-                  `/assets/inventories/unapprovedretirement/cancel/${params.id}`
-                ),
-              ]}
-            />
-          </strong>
-        ),
-      },
-      {
-        field: "assignorder",
-        headerName: "",
-        width: 30,
-        description: "Assign Order",
-        renderCell: (params) => (
-          <strong>
-            {/* {params.value.getFullYear()} */}
-            <AssignmentIcon
-              style={{ color: "black" }}
-              onClick={() => [
-                this.setState({ assignOpen: true, id: params.id }),
-                history.push(
-                  `/assets/inventories/unapprovedretirement/assign/${params.id}`
-                ),
-              ]}
-            />
-          </strong>
-        ),
-      },
+
       {
         field: "deleteaction",
         headerName: "",
@@ -228,7 +202,7 @@ class AssetInventoryUnapprovedRetirementList extends React.Component {
               onClick={() => [
                 this.setState({ deleteOpen: true, id: params.id }),
                 history.push(
-                  `/assets/inventories/unapprovedretirement/delete/${params.id}`
+                  `/assets/inventories/unapprovedretirements/delete/${params.id}`
                 ),
               ]}
             />
@@ -236,21 +210,18 @@ class AssetInventoryUnapprovedRetirementList extends React.Component {
         ),
       },
     ];
-    // this.props.orders.map((order) => {
-    //   console.log("these are the orderrrrnew:", order);
-    //   let row = {
-    //     numbering: ++counter,
-    //     id: order.id,
-    //     orderNumber: order.orderNumber,
-    //     dateOrdered: order.dateOrdered,
-    //     orderedQuantity: order.orderQuantity,
-    //     status: order.status,
-    //     consignmentCountry: order.consignmentCountry[0],
-    //     destinationCountry: order.destinationCountry[0],
-    //     category: order.category,
-    //   };
-    //   rows.push(row);
-    // });
+    this.props.unapprovedInventoryRetirements.map(
+      (unapprovedInventoryRetirement) => {
+        let row = {
+          numbering: ++counter,
+          id: unapprovedInventoryRetirement.id,
+          code: unapprovedInventoryRetirement.code,
+          name: unapprovedInventoryRetirement.name,
+          description: unapprovedInventoryRetirement.description,
+        };
+        rows.push(row);
+      }
+    );
     return <DataGridContainer columns={columns} rows={rows} />;
   };
 
@@ -259,18 +230,30 @@ class AssetInventoryUnapprovedRetirementList extends React.Component {
       <>
         {this.renderDeleteDialogForm()}
         {this.renderEditDialogForm()}
-        {this.renderOrdersList()}
-        {this.renderCancelDialogForm()}
-        {this.renderAssignOrderDialogForm()}
+        {this.renderUnapprovedStockRequisitionsList()}
+        <Snackbar
+          open={this.state.alert.open}
+          message={this.state.alert.message}
+          ContentProps={{
+            style: { backgroundColor: this.state.alert.backgroundColor },
+          }}
+          anchorOrigin={{ vertical: "top", horizontal: "center" }}
+          onClose={() => this.setState({ alert: { ...alert, open: false } })}
+          autoHideDuration={4000}
+        />
       </>
     );
   }
 }
 
 const mapStateToProps = (state) => {
-  return { orders: Object.values(state.order) };
+  return {
+    unapprovedInventoryRetirements: Object.values(
+      state.unapprovedInventoryRetirement
+    ),
+  };
 };
 
-export default connect(null, { fetchOrders })(
+export default connect(mapStateToProps, { fetchUnapprovedStockRetirements })(
   AssetInventoryUnapprovedRetirementList
 );

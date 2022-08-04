@@ -148,6 +148,65 @@ import {
   FETCH_EXECAPPROVEDPROCUREMENT,
   DELETE_EXECAPPROVEDPROCUREMENT,
   EDIT_EXECAPPROVEDPROCUREMENT,
+  CREATE_UNAPPROVEDMAINTENANCE,
+  FETCH_UNAPPROVEDMAINTENANCES,
+  FETCH_UNAPPROVEDMAINTENANCE,
+  DELETE_UNAPPROVEDMAINTENANCE,
+  EDIT_UNAPPROVEDMAINTENANCE,
+  CREATE_APPROVEDMAINTENANCE,
+  FETCH_APPROVEDMAINTENANCES,
+  FETCH_APPROVEDMAINTENANCE,
+  DELETE_APPROVEDMAINTENANCE,
+  EDIT_APPROVEDMAINTENANCE,
+  CREATE_EXECUTEDMAINTENANCE,
+  FETCH_EXECUTEDMAINTENANCES,
+  FETCH_EXECUTEDMAINTENANCE,
+  DELETE_EXECUTEDMAINTENANCE,
+  EDIT_EXECUTEDMAINTENANCE,
+  MAKE_INVENTORYREQUISITIONREQUEST,
+  MAKE_INVENTORYRETIREMENTREQUEST,
+  MAKE_INVENTORYDISPOSALREQUEST,
+  MAKE_INVENTORYTRANSFERREQUEST,
+  FETCH_INVENTORYSTOCKS,
+  FETCH_INVENTORYSTOCK,
+  DELETE_INVENTORYSTOCK,
+  EDIT_INVENTORYSTOCK,
+  FETCH_UNAPPROVEDSTOCKREQUISITIONS,
+  FETCH_UNAPPROVEDSTOCKREQUISITION,
+  DELETE_UNAPPROVEDSTOCKREQUISITION,
+  EDIT_UNAPPROVEDSTOCKREQUISITION,
+  FETCH_UNAPPROVEDSTOCKRETIREMENTS,
+  FETCH_UNAPPROVEDSTOCKRETIREMENT,
+  DELETE_UNAPPROVEDSTOCKRETIREMENT,
+  EDIT_UNAPPROVEDSTOCKRETIREMENT,
+  FETCH_UNAPPROVEDSTOCKDISPOSITIONS,
+  FETCH_UNAPPROVEDSTOCKDISPOSITION,
+  DELETE_UNAPPROVEDSTOCKDISPOSITION,
+  EDIT_UNAPPROVEDSTOCKDISPOSITION,
+  FETCH_UNAPPROVEDSTOCKTRANSFERS,
+  FETCH_UNAPPROVEDSTOCKTRANSFER,
+  DELETE_UNAPPROVEDSTOCKTRANSFER,
+  EDIT_UNAPPROVEDSTOCKTRANSFER,
+  FETCH_ASSETREQUISITIONS,
+  FETCH_ASSETREQUISITION,
+  DELETE_ASSETREQUISITION,
+  EDIT_ASSETREQUISITION,
+  FETCH_PENDINGASSETREQUISITIONS,
+  FETCH_PENDINGASSETREQUISITION,
+  DELETE_PENDINGASSETREQUISITION,
+  EDIT_PENDINGASSETREQUISITION,
+  FETCH_WITHDRAWNASSETREQUISITIONS,
+  FETCH_WITHDRAWNASSETREQUISITION,
+  DELETE_WITHDRAWNASSETREQUISITION,
+  EDIT_WITHDRAWNASSETREQUISITION,
+  FETCH_ABORTEDASSETREQUISITIONS,
+  FETCH_ABORTEDASSETREQUISITION,
+  DELETE_ABORTEDASSETREQUISITION,
+  EDIT_ABORTEDASSETREQUISITION,
+  FETCH_RETURNASSETPOSTREQUISITIONS,
+  FETCH_RETURNASSETPOSTREQUISITION,
+  EDIT_RETURNASSETPOSTREQUISITION,
+  DELETE_RETURNASSETPOSTREQUISITION,
 } from "./types";
 
 //authentication and authorization  operations
@@ -1640,5 +1699,661 @@ export const deleteExecApprovedProcurement = (id, token) => {
   return async (dispatch) => {
     await data.delete(`/officeoperations/${id}`);
     dispatch({ type: DELETE_EXECAPPROVEDPROCUREMENT, payload: id });
+  };
+};
+
+//////////////////////////// UNAPPROVED ASSETS MAINTENANCE /////////////////////////
+
+export const createUnapprovedMaintenance = (formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.post("/officeoperations", formValues);
+
+    dispatch({
+      type: CREATE_UNAPPROVEDMAINTENANCE,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchUnapprovedMaintenances = (tokens) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
+  return async (dispatch) => {
+    const response = await data.get("/officeoperations");
+
+    dispatch({
+      type: FETCH_UNAPPROVEDMAINTENANCES,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchUnapprovedMaintenance = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.get(`/officeoperations/${id}`);
+    dispatch({
+      type: FETCH_UNAPPROVEDMAINTENANCE,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const editUnapprovedMaintenance = (id, formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    dispatch({
+      type: EDIT_UNAPPROVEDMAINTENANCE,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const deleteUnapprovedMaintenance = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    await data.delete(`/officeoperations/${id}`);
+    dispatch({ type: DELETE_UNAPPROVEDMAINTENANCE, payload: id });
+  };
+};
+
+//////////////////////////////////// APPROVED ASSET MAINTENANCES ////////////////////
+
+export const createApprovedMaintenance = (formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.post("/officeoperations", formValues);
+
+    dispatch({
+      type: CREATE_APPROVEDMAINTENANCE,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchApprovedMaintenances = (tokens) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
+  return async (dispatch) => {
+    const response = await data.get("/officeoperations");
+
+    dispatch({
+      type: FETCH_APPROVEDMAINTENANCES,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchApprovedMaintenance = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.get(`/officeoperations/${id}`);
+    dispatch({
+      type: FETCH_APPROVEDMAINTENANCE,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const editApprovedMaintenance = (id, formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    dispatch({
+      type: EDIT_APPROVEDMAINTENANCE,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const deleteApprovedMaintenance = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    await data.delete(`/officeoperations/${id}`);
+    dispatch({ type: DELETE_APPROVEDMAINTENANCE, payload: id });
+  };
+};
+
+///////////////////////////// EXECUTED ASSET MAINTENNACES ACTION CREATORS //////////////////
+
+export const createExecutedMaintenance = (formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.post("/officeoperations", formValues);
+
+    dispatch({
+      type: CREATE_EXECUTEDMAINTENANCE,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchExecutedMaintenances = (tokens) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
+  return async (dispatch) => {
+    const response = await data.get("/officeoperations");
+
+    dispatch({
+      type: FETCH_EXECUTEDMAINTENANCES,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchExecutedMaintenance = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.get(`/officeoperations/${id}`);
+    dispatch({
+      type: FETCH_EXECUTEDMAINTENANCE,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const editExecutedMaintenance = (id, formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    dispatch({
+      type: EDIT_EXECUTEDMAINTENANCE,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const deleteExecutedMaintenance = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    await data.delete(`/officeoperations/${id}`);
+    dispatch({ type: DELETE_EXECUTEDMAINTENANCE, payload: id });
+  };
+};
+
+///////////////////////////// INVENTORY STOCK ACTION CREATORS //////////////////
+
+export const makeinventoryStockRequisitionRequest = (formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.post("/officeoperations", formValues);
+
+    dispatch({
+      type: MAKE_INVENTORYREQUISITIONREQUEST,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const makeinventoryStockRetirementRequest = (formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.post("/officeoperations", formValues);
+
+    dispatch({
+      type: MAKE_INVENTORYRETIREMENTREQUEST,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const makeinventoryStockDispositionRequest = (formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.post("/officeoperations", formValues);
+
+    dispatch({
+      type: MAKE_INVENTORYDISPOSALREQUEST,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const makeinventoryStockTransferRequest = (formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.post("/officeoperations", formValues);
+
+    dispatch({
+      type: MAKE_INVENTORYTRANSFERREQUEST,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchInventoryStocks = (tokens) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
+  return async (dispatch) => {
+    const response = await data.get("/officeoperations");
+
+    dispatch({
+      type: FETCH_INVENTORYSTOCKS,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchInventoryStock = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.get(`/officeoperations/${id}`);
+    dispatch({
+      type: FETCH_INVENTORYSTOCK,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const editInventoryStock = (id, formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    dispatch({
+      type: EDIT_INVENTORYSTOCK,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const deleteInventoryStock = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    await data.delete(`/officeoperations/${id}`);
+    dispatch({ type: DELETE_INVENTORYSTOCK, payload: id });
+  };
+};
+
+////////////////////////UNAPPROVED STOCK REQUISITION ///////////////////////////
+
+export const fetchUnapprovedStockRequisitions = (tokens) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
+  return async (dispatch) => {
+    const response = await data.get("/officeoperations");
+
+    dispatch({
+      type: FETCH_UNAPPROVEDSTOCKREQUISITIONS,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchUnapprovedStockRequisition = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.get(`/officeoperations/${id}`);
+    dispatch({
+      type: FETCH_UNAPPROVEDSTOCKREQUISITION,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const editUnapprovedStockRequisition = (id, formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    dispatch({
+      type: EDIT_UNAPPROVEDSTOCKREQUISITION,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const deleteUnapprovedStockRequisition = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    await data.delete(`/officeoperations/${id}`);
+    dispatch({ type: DELETE_UNAPPROVEDSTOCKREQUISITION, payload: id });
+  };
+};
+
+////////////////////////UNAPPROVED STOCK RETIREMENT ///////////////////////////
+
+export const fetchUnapprovedStockRetirements = (tokens) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
+  return async (dispatch) => {
+    const response = await data.get("/officeoperations");
+
+    dispatch({
+      type: FETCH_UNAPPROVEDSTOCKRETIREMENTS,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchUnapprovedStockRetirement = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.get(`/officeoperations/${id}`);
+    dispatch({
+      type: FETCH_UNAPPROVEDSTOCKRETIREMENT,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const editUnapprovedStockRetirement = (id, formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    dispatch({
+      type: EDIT_UNAPPROVEDSTOCKRETIREMENT,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const deleteUnapprovedStockRetirement = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    await data.delete(`/officeoperations/${id}`);
+    dispatch({ type: DELETE_UNAPPROVEDSTOCKRETIREMENT, payload: id });
+  };
+};
+
+////////////////////////UNAPPROVED STOCK DISPOSAL ///////////////////////////
+
+export const fetchUnapprovedStockDisposals = (tokens) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
+  return async (dispatch) => {
+    const response = await data.get("/officeoperations");
+
+    dispatch({
+      type: FETCH_UNAPPROVEDSTOCKDISPOSITIONS,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchUnapprovedStockDisposal = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.get(`/officeoperations/${id}`);
+    dispatch({
+      type: FETCH_UNAPPROVEDSTOCKDISPOSITION,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const editUnapprovedStockDisposal = (id, formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    dispatch({
+      type: EDIT_UNAPPROVEDSTOCKDISPOSITION,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const deleteUnapprovedStockDisposal = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    await data.delete(`/officeoperations/${id}`);
+    dispatch({ type: DELETE_UNAPPROVEDSTOCKDISPOSITION, payload: id });
+  };
+};
+
+/////////////////////////////////////////INVENTORY TRANSFERS & LEASE ///////////////////
+
+export const fetchUnapprovedStockTransfers = (tokens) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
+  return async (dispatch) => {
+    const response = await data.get("/officeoperations");
+
+    dispatch({
+      type: FETCH_UNAPPROVEDSTOCKTRANSFERS,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchUnapprovedStockTransfer = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.get(`/officeoperations/${id}`);
+    dispatch({
+      type: FETCH_UNAPPROVEDSTOCKTRANSFER,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const editUnapprovedStockTransfer = (id, formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    dispatch({
+      type: EDIT_UNAPPROVEDSTOCKTRANSFER,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const deleteUnapprovedStockTransfer = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    await data.delete(`/officeoperations/${id}`);
+    dispatch({ type: DELETE_UNAPPROVEDSTOCKTRANSFER, payload: id });
+  };
+};
+
+/////////////////////////////////////////ASSET REQUISITIONS ACTION CREATORS ///////////////////
+
+export const fetchAssetRequisitions = (tokens) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
+  return async (dispatch) => {
+    const response = await data.get("/officeoperations");
+
+    dispatch({
+      type: FETCH_ASSETREQUISITIONS,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchAssetRequisition = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.get(`/officeoperations/${id}`);
+    dispatch({
+      type: FETCH_ASSETREQUISITION,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const editAssetRequisition = (id, formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    dispatch({
+      type: EDIT_ASSETREQUISITION,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const deleteAssetRequisition = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    await data.delete(`/officeoperations/${id}`);
+    dispatch({ type: DELETE_ASSETREQUISITION, payload: id });
+  };
+};
+
+/////////////////////////////////////////PENDING ASSET REQUISITIONS ACTION CREATORS ///////////////////
+
+export const fetchPendingAssetRequisitions = (tokens) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
+  return async (dispatch) => {
+    const response = await data.get("/officeoperations");
+
+    dispatch({
+      type: FETCH_PENDINGASSETREQUISITIONS,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchPendingAssetRequisition = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.get(`/officeoperations/${id}`);
+    dispatch({
+      type: FETCH_PENDINGASSETREQUISITION,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const editPendingAssetRequisition = (id, formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    dispatch({
+      type: EDIT_PENDINGASSETREQUISITION,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const deletePendingAssetRequisition = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    await data.delete(`/officeoperations/${id}`);
+    dispatch({ type: DELETE_PENDINGASSETREQUISITION, payload: id });
+  };
+};
+
+/////////////////////////////////////////WITHDRAWN ASSET REQUISITIONS ACTION CREATORS ///////////////////
+
+export const fetchWithdrawnAssetRequisitions = (tokens) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
+  return async (dispatch) => {
+    const response = await data.get("/officeoperations");
+
+    dispatch({
+      type: FETCH_WITHDRAWNASSETREQUISITIONS,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchWithdrawnAssetRequisition = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.get(`/officeoperations/${id}`);
+    dispatch({
+      type: FETCH_WITHDRAWNASSETREQUISITION,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const editWithdrawnAssetRequisition = (id, formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    dispatch({
+      type: EDIT_WITHDRAWNASSETREQUISITION,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const deleteWithdrawnAssetRequisition = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    await data.delete(`/officeoperations/${id}`);
+    dispatch({ type: DELETE_WITHDRAWNASSETREQUISITION, payload: id });
+  };
+};
+
+/////////////////////////////////////////ABORTED ASSET REQUISITIONS ACTION CREATORS ///////////////////
+
+export const fetchAbortedAssetRequisitions = (tokens) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
+  return async (dispatch) => {
+    const response = await data.get("/officeoperations");
+
+    dispatch({
+      type: FETCH_ABORTEDASSETREQUISITIONS,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchAbortedAssetRequisition = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.get(`/officeoperations/${id}`);
+    dispatch({
+      type: FETCH_ABORTEDASSETREQUISITION,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const editAbortedAssetRequisition = (id, formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    dispatch({
+      type: EDIT_ABORTEDASSETREQUISITION,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const deleteAbortedAssetRequisition = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    await data.delete(`/officeoperations/${id}`);
+    dispatch({ type: DELETE_ABORTEDASSETREQUISITION, payload: id });
+  };
+};
+
+/////////////////////////////////////////RETURN ASSET POST REQUISITIONS ACTION CREATORS ///////////////////
+
+export const fetchReturnAssetPostRequisitions = (tokens) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
+  return async (dispatch) => {
+    const response = await data.get("/officeoperations");
+
+    dispatch({
+      type: FETCH_RETURNASSETPOSTREQUISITIONS,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchReturnAssetPostRequisition = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.get(`/officeoperations/${id}`);
+    dispatch({
+      type: FETCH_RETURNASSETPOSTREQUISITION,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const editReturnAssetPostRequisition = (id, formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    dispatch({
+      type: EDIT_RETURNASSETPOSTREQUISITION,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const deleteReturnAssetPostRequisition = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    await data.delete(`/officeoperations/${id}`);
+    dispatch({ type: DELETE_RETURNASSETPOSTREQUISITION, payload: id });
   };
 };

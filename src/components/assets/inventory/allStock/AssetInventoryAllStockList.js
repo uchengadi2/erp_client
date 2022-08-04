@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import Dialog from "@material-ui/core/Dialog";
+import Snackbar from "@material-ui/core/Snackbar";
 import DialogContent from "@material-ui/core/DialogContent";
 import EditRoundedIcon from "@material-ui/icons/EditRounded";
 import DeleteRoundedIcon from "@material-ui/icons/DeleteRounded";
@@ -8,11 +9,11 @@ import CancelRoundedIcon from "@material-ui/icons/CancelRounded";
 import AssignmentIcon from "@material-ui/icons/Assignment";
 import Typography from "@material-ui/core/Typography";
 import history from "../../../../history";
-import { fetchOrders } from "../../../../actions";
+import { fetchInventoryStocks } from "../../../../actions";
 import DataGridContainer from "../../../DataGridContainer";
-// import OrderAssignmentFormContainer from "./OrderAssignmentFormContainer";
-// import OrdersEdit from "./OrdersEdit";
-// import OrderDelete from "./OrdersDelete";
+
+import AssetInventoryDelete from "./AssetInventoryDelete";
+import AssetInventoryEditForm from "./AssetInventoryEditForm";
 
 class AssetInventoryAllStockList extends React.Component {
   constructor(props) {
@@ -24,10 +25,15 @@ class AssetInventoryAllStockList extends React.Component {
       assignOpen: false,
       id: null,
       params: {},
+      alert: {
+        open: false,
+        message: "",
+        backgroundColor: "",
+      },
     };
   }
   componentDidMount() {
-    //this.props.fetchOrders(this.props.token, this.props.status);
+    this.props.fetchInventoryStocks(this.props.token);
   }
 
   handleDialogOpenStatus = () => {
@@ -37,6 +43,29 @@ class AssetInventoryAllStockList extends React.Component {
 
   handleEditDialogOpenStatus = () => {
     // history.push("/categories/new");
+    this.setState({ editOpen: false });
+  };
+
+  handleSuccessfulEditSnackbar = (message) => {
+    // history.push("/categories/new");
+    this.setState({ editOpen: false });
+    this.setState({
+      alert: {
+        open: true,
+        message: message,
+        backgroundColor: "#4BB543",
+      },
+    });
+  };
+
+  handleFailedSnackbar = (message) => {
+    this.setState({
+      alert: {
+        open: true,
+        message: message,
+        backgroundColor: "#FF3232",
+      },
+    });
     this.setState({ editOpen: false });
   };
 
@@ -53,11 +82,14 @@ class AssetInventoryAllStockList extends React.Component {
           ]}
         >
           <DialogContent>
-            {/* <OrdersEdit
+            <AssetInventoryEditForm
               token={this.props.token}
+              userId={this.props.userId}
               params={this.state.params}
               handleEditDialogOpenStatus={this.handleEditDialogOpenStatus}
-            /> */}
+              handleSuccessfulEditSnackbar={this.handleSuccessfulEditSnackbar}
+              handleFailedSnackbar={this.handleFailedSnackbar}
+            />
           </DialogContent>
         </Dialog>
       </>
@@ -77,11 +109,12 @@ class AssetInventoryAllStockList extends React.Component {
           ]}
         >
           <DialogContent>
-            {/* <OrderDelete
+            <AssetInventoryDelete
               token={this.props.token}
+              userId={this.props.userId}
               id={this.state.id}
               handleDialogOpenStatus={this.handleDialogOpenStatus}
-            /> */}
+            />
           </DialogContent>
         </Dialog>
       </>
@@ -119,39 +152,19 @@ class AssetInventoryAllStockList extends React.Component {
             this.setState({ assignOpen: false }),
             history.push(`/assets/inventories/allstocks`),
           ]}
-        >
-          <DialogContent>
-            {/* <OrderAssignmentFormContainer
-              token={this.props.token}
-              params={this.state.params}
-              handleEditDialogOpenStatus={this.handleEditDialogOpenStatus}
-            /> */}
-          </DialogContent>
-        </Dialog>
+        ></Dialog>
       </>
     );
   };
 
-  renderOrdersList = () => {
+  renderDepreciationTypesList = () => {
     let rows = [];
     let counter = 0;
     const columns = [
       { field: "numbering", headerName: "S/n", width: 60 },
-      { field: "orderNumber", headerName: "Order Number", width: 150 },
-      { field: "dateOrdered", headerName: "Date Ordered", width: 100 },
-      { field: "orderedQuantity", headerName: "Ordered Quantity", width: 80 },
-      { field: "status", headerName: "Status", width: 100 },
-      { field: "category", headerName: "Category", width: 150 },
-      {
-        field: "consignmentCountry",
-        headerName: "Source Country",
-        width: 150,
-      },
-      {
-        field: "destinationCountry",
-        headerName: "Destination Country",
-        width: 150,
-      },
+      { field: "code", headerName: "Transaction Code", width: 150 },
+      { field: "name", headerName: "Transaction Name", width: 200 },
+
       {
         field: "editaction",
         headerName: "",
@@ -173,46 +186,7 @@ class AssetInventoryAllStockList extends React.Component {
           </strong>
         ),
       },
-      {
-        field: "cancelorder",
-        headerName: "",
-        width: 30,
-        description: "Cancel Order",
-        renderCell: (params) => (
-          <strong>
-            {/* {params.value.getFullYear()} */}
-            <CancelRoundedIcon
-              style={{ color: "black" }}
-              onClick={() => [
-                this.setState({ cancelOpen: true, id: params.id }),
-                history.push(
-                  `/assets/inventories/allstocks/cancel/${params.id}`
-                ),
-              ]}
-            />
-          </strong>
-        ),
-      },
-      {
-        field: "assignorder",
-        headerName: "",
-        width: 30,
-        description: "Assign Order",
-        renderCell: (params) => (
-          <strong>
-            {/* {params.value.getFullYear()} */}
-            <AssignmentIcon
-              style={{ color: "black" }}
-              onClick={() => [
-                this.setState({ assignOpen: true, id: params.id }),
-                history.push(
-                  `/assets/inventories/allstocks/assign/${params.id}`
-                ),
-              ]}
-            />
-          </strong>
-        ),
-      },
+
       {
         field: "deleteaction",
         headerName: "",
@@ -234,21 +208,16 @@ class AssetInventoryAllStockList extends React.Component {
         ),
       },
     ];
-    // this.props.orders.map((order) => {
-    //   console.log("these are the orderrrrnew:", order);
-    //   let row = {
-    //     numbering: ++counter,
-    //     id: order.id,
-    //     orderNumber: order.orderNumber,
-    //     dateOrdered: order.dateOrdered,
-    //     orderedQuantity: order.orderQuantity,
-    //     status: order.status,
-    //     consignmentCountry: order.consignmentCountry[0],
-    //     destinationCountry: order.destinationCountry[0],
-    //     category: order.category,
-    //   };
-    //   rows.push(row);
-    // });
+    this.props.stockInventories.map((stockInventory) => {
+      let row = {
+        numbering: ++counter,
+        id: stockInventory.id,
+        code: stockInventory.code,
+        name: stockInventory.name,
+        description: stockInventory.description,
+      };
+      rows.push(row);
+    });
     return <DataGridContainer columns={columns} rows={rows} />;
   };
 
@@ -257,16 +226,26 @@ class AssetInventoryAllStockList extends React.Component {
       <>
         {this.renderDeleteDialogForm()}
         {this.renderEditDialogForm()}
-        {this.renderOrdersList()}
-        {this.renderCancelDialogForm()}
-        {this.renderAssignOrderDialogForm()}
+        {this.renderDepreciationTypesList()}
+        <Snackbar
+          open={this.state.alert.open}
+          message={this.state.alert.message}
+          ContentProps={{
+            style: { backgroundColor: this.state.alert.backgroundColor },
+          }}
+          anchorOrigin={{ vertical: "top", horizontal: "center" }}
+          onClose={() => this.setState({ alert: { ...alert, open: false } })}
+          autoHideDuration={4000}
+        />
       </>
     );
   }
 }
 
 const mapStateToProps = (state) => {
-  return { orders: Object.values(state.order) };
+  return { stockInventories: Object.values(state.stockInventory) };
 };
 
-export default connect(null, { fetchOrders })(AssetInventoryAllStockList);
+export default connect(mapStateToProps, { fetchInventoryStocks })(
+  AssetInventoryAllStockList
+);

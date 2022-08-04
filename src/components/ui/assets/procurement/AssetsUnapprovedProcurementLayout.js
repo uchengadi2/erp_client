@@ -10,6 +10,7 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import history from "../../../../history";
+import ServiceOutletFilters from "../../headerFilters/ServiceOutletFilters";
 
 import AssetsUnapprovedProcurementsList from "../../../assets/procurements/unapproved/AssetsUnapprovedProcurementsList";
 import AssetUnapprovedProcurementCreateForm from "../../../assets/procurements/unapproved/AssetUnapprovedProcurementCreateForm";
@@ -17,7 +18,7 @@ import AssetUnapprovedProcurementCreateForm from "../../../assets/procurements/u
 const useStyles = makeStyles((theme) => ({
   root: {
     marginTop: "-80px",
-    width: 1100,
+    width: 1000,
   },
   headerContainer: {
     height: 20,
@@ -33,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
   contentContainer: {
     // backgroundColor: "#ccab",
     height: "auto",
-    marginTop: 60,
+    marginTop: 10,
   },
   addButton: {
     borderRadius: 10,
@@ -56,6 +57,9 @@ const useStyles = makeStyles((theme) => ({
   toolbar: {
     padding: 5,
     margin: -10,
+  },
+  selectField: {
+    marginTop: 30,
   },
 }));
 
@@ -110,7 +114,7 @@ function AssetsUnapprovedProcurementLayout(props) {
     >
       <Grid item container direction="column" sm={width}>
         <Grid item className={classes.selectField}>
-          {/* <GeneralLedgerCodeFilter /> */}
+          <ServiceOutletFilters />
         </Grid>
         <Grid
           item
@@ -118,7 +122,7 @@ function AssetsUnapprovedProcurementLayout(props) {
           direction="row"
           className={classes.headerContainer}
         >
-          <Toolbar disableGutters className={classes.toolbar}>
+          {/* <Toolbar disableGutters className={classes.toolbar}>
             <Grid item>
               <Button
                 variant="contained"
@@ -134,7 +138,7 @@ function AssetsUnapprovedProcurementLayout(props) {
               </Button>
             </Grid>
             <Grid item></Grid>
-          </Toolbar>
+          </Toolbar> */}
         </Grid>
         <Grid item className={classes.contentContainer}>
           <AssetsUnapprovedProcurementsList

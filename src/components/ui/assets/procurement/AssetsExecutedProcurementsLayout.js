@@ -10,14 +10,14 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import history from "../../../../history";
-
+import ServiceOutletFilters from "../../headerFilters/ServiceOutletFilters";
 import AssetsExecutedProcurementList from "../../../assets/procurements/executed/AssetsExecutedProcurementList";
 import AssetExecutedProcurementCreateForm from "../../../assets/procurements/executed/AssetExecutedProcurementCreateForm";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     marginTop: "-80px",
-    width: 1100,
+    width: 1000,
   },
   headerContainer: {
     height: 20,
@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
   contentContainer: {
     // backgroundColor: "#ccab",
     height: "auto",
-    marginTop: 10,
+    marginTop: 50,
   },
   addButton: {
     borderRadius: 10,
@@ -56,6 +56,9 @@ const useStyles = makeStyles((theme) => ({
   toolbar: {
     padding: 5,
     margin: -10,
+  },
+  selectField: {
+    marginTop: 30,
   },
 }));
 
@@ -110,7 +113,7 @@ function AssetsExecutedProcurementsLayout(props) {
     >
       <Grid item container direction="column" sm={width}>
         <Grid item className={classes.selectField}>
-          {/* <GeneralLedgerCodeFilter /> */}
+          <ServiceOutletFilters />
         </Grid>
         <Grid
           item
@@ -119,20 +122,18 @@ function AssetsExecutedProcurementsLayout(props) {
           className={classes.headerContainer}
         >
           <Toolbar disableGutters className={classes.toolbar}>
-            {/* <Grid item>
+            <Grid item>
               <Button
                 variant="contained"
                 className={classes.addButton}
                 onClick={() => [
                   setOpen(true),
-                  history.push(
-                    "/assets/procurements/executedprocurements/new"
-                  ),
+                  history.push("/assets/procurements/executedprocurements/new"),
                 ]}
               >
                 Initiate Procurement Request
               </Button>
-            </Grid> */}
+            </Grid>
             <Grid item></Grid>
           </Toolbar>
         </Grid>

@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import Dialog from "@material-ui/core/Dialog";
+import Snackbar from "@material-ui/core/Snackbar";
 import DialogContent from "@material-ui/core/DialogContent";
 import EditRoundedIcon from "@material-ui/icons/EditRounded";
 import DeleteRoundedIcon from "@material-ui/icons/DeleteRounded";
@@ -8,11 +9,11 @@ import CancelRoundedIcon from "@material-ui/icons/CancelRounded";
 import AssignmentIcon from "@material-ui/icons/Assignment";
 import Typography from "@material-ui/core/Typography";
 import history from "../../../../history";
-import { fetchOrders } from "../../../../actions";
+import { fetchUnapprovedStockTransfers } from "../../../../actions";
 import DataGridContainer from "../../../DataGridContainer";
-// import OrderAssignmentFormContainer from "./OrderAssignmentFormContainer";
-// import OrdersEdit from "./OrdersEdit";
-// import OrderDelete from "./OrdersDelete";
+
+import AssetInventoryUnapprovedTransferDelete from "./AssetInventoryUnapprovedTransferDelete";
+import AssetInventoryUnapprovedTransferEditForm from "./AssetInventoryUnapprovedTransferEditForm";
 
 class AssetInventoryUnapprovedTransfersList extends React.Component {
   constructor(props) {
@@ -24,10 +25,15 @@ class AssetInventoryUnapprovedTransfersList extends React.Component {
       assignOpen: false,
       id: null,
       params: {},
+      alert: {
+        open: false,
+        message: "",
+        backgroundColor: "",
+      },
     };
   }
   componentDidMount() {
-    //this.props.fetchOrders(this.props.token, this.props.status);
+    this.props.fetchUnapprovedStockTransfers(this.props.token);
   }
 
   handleDialogOpenStatus = () => {
@@ -37,6 +43,29 @@ class AssetInventoryUnapprovedTransfersList extends React.Component {
 
   handleEditDialogOpenStatus = () => {
     // history.push("/categories/new");
+    this.setState({ editOpen: false });
+  };
+
+  handleSuccessfulEditSnackbar = (message) => {
+    // history.push("/categories/new");
+    this.setState({ editOpen: false });
+    this.setState({
+      alert: {
+        open: true,
+        message: message,
+        backgroundColor: "#4BB543",
+      },
+    });
+  };
+
+  handleFailedSnackbar = (message) => {
+    this.setState({
+      alert: {
+        open: true,
+        message: message,
+        backgroundColor: "#FF3232",
+      },
+    });
     this.setState({ editOpen: false });
   };
 
@@ -53,11 +82,14 @@ class AssetInventoryUnapprovedTransfersList extends React.Component {
           ]}
         >
           <DialogContent>
-            {/* <OrdersEdit
+            <AssetInventoryUnapprovedTransferEditForm
               token={this.props.token}
+              userId={this.props.userId}
               params={this.state.params}
               handleEditDialogOpenStatus={this.handleEditDialogOpenStatus}
-            /> */}
+              handleSuccessfulEditSnackbar={this.handleSuccessfulEditSnackbar}
+              handleFailedSnackbar={this.handleFailedSnackbar}
+            />
           </DialogContent>
         </Dialog>
       </>
@@ -77,11 +109,12 @@ class AssetInventoryUnapprovedTransfersList extends React.Component {
           ]}
         >
           <DialogContent>
-            {/* <OrderDelete
+            <AssetInventoryUnapprovedTransferDelete
               token={this.props.token}
+              userId={this.props.userId}
               id={this.state.id}
               handleDialogOpenStatus={this.handleDialogOpenStatus}
-            /> */}
+            />
           </DialogContent>
         </Dialog>
       </>
@@ -119,39 +152,19 @@ class AssetInventoryUnapprovedTransfersList extends React.Component {
             this.setState({ assignOpen: false }),
             history.push(`/assets/inventories/unapprovetransfers`),
           ]}
-        >
-          <DialogContent>
-            {/* <OrderAssignmentFormContainer
-              token={this.props.token}
-              params={this.state.params}
-              handleEditDialogOpenStatus={this.handleEditDialogOpenStatus}
-            /> */}
-          </DialogContent>
-        </Dialog>
+        ></Dialog>
       </>
     );
   };
 
-  renderOrdersList = () => {
+  renderUnapprovedStockTransfersList = () => {
     let rows = [];
     let counter = 0;
     const columns = [
       { field: "numbering", headerName: "S/n", width: 60 },
-      { field: "orderNumber", headerName: "Order Number", width: 150 },
-      { field: "dateOrdered", headerName: "Date Ordered", width: 100 },
-      { field: "orderedQuantity", headerName: "Ordered Quantity", width: 80 },
-      { field: "status", headerName: "Status", width: 100 },
-      { field: "category", headerName: "Category", width: 150 },
-      {
-        field: "consignmentCountry",
-        headerName: "Source Country",
-        width: 150,
-      },
-      {
-        field: "destinationCountry",
-        headerName: "Destination Country",
-        width: 150,
-      },
+      { field: "code", headerName: "Transaction Code", width: 150 },
+      { field: "name", headerName: "Transaction Name", width: 200 },
+
       {
         field: "editaction",
         headerName: "",
@@ -175,46 +188,7 @@ class AssetInventoryUnapprovedTransfersList extends React.Component {
           </strong>
         ),
       },
-      {
-        field: "cancelorder",
-        headerName: "",
-        width: 30,
-        description: "Cancel Order",
-        renderCell: (params) => (
-          <strong>
-            {/* {params.value.getFullYear()} */}
-            <CancelRoundedIcon
-              style={{ color: "black" }}
-              onClick={() => [
-                this.setState({ cancelOpen: true, id: params.id }),
-                history.push(
-                  `/assets/inventories/unapprovetransfers/cancel/${params.id}`
-                ),
-              ]}
-            />
-          </strong>
-        ),
-      },
-      {
-        field: "assignorder",
-        headerName: "",
-        width: 30,
-        description: "Assign Order",
-        renderCell: (params) => (
-          <strong>
-            {/* {params.value.getFullYear()} */}
-            <AssignmentIcon
-              style={{ color: "black" }}
-              onClick={() => [
-                this.setState({ assignOpen: true, id: params.id }),
-                history.push(
-                  `/assets/inventories/unapprovetransfers/assign/${params.id}`
-                ),
-              ]}
-            />
-          </strong>
-        ),
-      },
+
       {
         field: "deleteaction",
         headerName: "",
@@ -236,21 +210,18 @@ class AssetInventoryUnapprovedTransfersList extends React.Component {
         ),
       },
     ];
-    // this.props.orders.map((order) => {
-    //   console.log("these are the orderrrrnew:", order);
-    //   let row = {
-    //     numbering: ++counter,
-    //     id: order.id,
-    //     orderNumber: order.orderNumber,
-    //     dateOrdered: order.dateOrdered,
-    //     orderedQuantity: order.orderQuantity,
-    //     status: order.status,
-    //     consignmentCountry: order.consignmentCountry[0],
-    //     destinationCountry: order.destinationCountry[0],
-    //     category: order.category,
-    //   };
-    //   rows.push(row);
-    // });
+    this.props.unapprovedInventoryTransfers.map(
+      (unapprovedInventoryTransfer) => {
+        let row = {
+          numbering: ++counter,
+          id: unapprovedInventoryTransfer.id,
+          code: unapprovedInventoryTransfer.code,
+          name: unapprovedInventoryTransfer.name,
+          description: unapprovedInventoryTransfer.description,
+        };
+        rows.push(row);
+      }
+    );
     return <DataGridContainer columns={columns} rows={rows} />;
   };
 
@@ -259,18 +230,30 @@ class AssetInventoryUnapprovedTransfersList extends React.Component {
       <>
         {this.renderDeleteDialogForm()}
         {this.renderEditDialogForm()}
-        {this.renderOrdersList()}
-        {this.renderCancelDialogForm()}
-        {this.renderAssignOrderDialogForm()}
+        {this.renderUnapprovedStockTransfersList()}
+        <Snackbar
+          open={this.state.alert.open}
+          message={this.state.alert.message}
+          ContentProps={{
+            style: { backgroundColor: this.state.alert.backgroundColor },
+          }}
+          anchorOrigin={{ vertical: "top", horizontal: "center" }}
+          onClose={() => this.setState({ alert: { ...alert, open: false } })}
+          autoHideDuration={4000}
+        />
       </>
     );
   }
 }
 
 const mapStateToProps = (state) => {
-  return { orders: Object.values(state.order) };
+  return {
+    unapprovedInventoryTransfers: Object.values(
+      state.unapprovedInventoryTransfer
+    ),
+  };
 };
 
-export default connect(null, { fetchOrders })(
+export default connect(mapStateToProps, { fetchUnapprovedStockTransfers })(
   AssetInventoryUnapprovedTransfersList
 );

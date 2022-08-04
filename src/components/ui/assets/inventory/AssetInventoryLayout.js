@@ -8,15 +8,11 @@ import Box from "@material-ui/core/Box";
 import { Link } from "react-router-dom";
 import history from "./../../../../history";
 
-import AssetInventoryUnapprovedStockLayout from "./AssetInventoryUnapprovedStocksLayout";
+import AssetInventoryUnapprovedStockLayout from "./AssetInventoryUnapprovedRequisitionLayout";
 import AssetInventoryAllStocksLayout from "./AssetInventoryAllStocksLayout";
-import AssetInventoryApprovedRequisitionsLayout from "./AssetInventoryApprovedRequisitionsLayout";
 import AssetInventoryUnapprovedRetirementLayout from "./AssetInventoryUnapprovedRetirementLayout";
-import AssetInventoryApprovedRetirementLayout from "./AssetInventoryApprovedRetirementsLayout";
 import AssetInventoryUnapprovedDisposalLayout from "./AssetInventoryUnapprovedDisposalLayout";
-import AssetInventoryApprovedDisposalLayout from "./AssetInventoryApprovedDisposalLayout";
 import AssetInventoryUnapprovedTransferLayout from "./AssetInventoryUnapprovedTransferLayout";
-import AssetInventoryApprovedTransferLayout from "./AssetInventoryApprovedTransferLayout";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -59,7 +55,7 @@ function LinkTab(props) {
       //label={route.name}
       onClick={(event) => {
         event.preventDefault();
-        history.push(`/assets/inventory`);
+        history.push(`/assets/inventories`);
       }}
       {...props}
     />
@@ -116,30 +112,16 @@ function AssetInventoryLayout({ token }) {
             history.push(`/assets/inventories/unapprovedrequisitions`);
           }}
         />
-        <Tab
-          label="Approved Stock Requisition Request"
-          {...a11yProps(0)}
-          onClick={(event) => {
-            event.preventDefault();
-            history.push(`/assets/inventories/approvedrequisitions`);
-          }}
-        />
+
         <Tab
           label="Unapproved Stock Retirement Request"
           {...a11yProps(0)}
           onClick={(event) => {
             event.preventDefault();
-            history.push(`/assets/inventories/unapprovedretirement`);
+            history.push(`/assets/inventories/unapprovedretirements`);
           }}
         />
-        <Tab
-          label="Approved Stock Retirement Request"
-          {...a11yProps(0)}
-          onClick={(event) => {
-            event.preventDefault();
-            history.push(`/assets/inventories/approvedretirement`);
-          }}
-        />
+
         <Tab
           label="Unapproved Stock Disposal Request"
           {...a11yProps(0)}
@@ -148,28 +130,13 @@ function AssetInventoryLayout({ token }) {
             history.push(`/assets/inventories/unapproveddisposals`);
           }}
         />
-        <Tab
-          label="Approved Stock Disposal Request"
-          {...a11yProps(0)}
-          onClick={(event) => {
-            event.preventDefault();
-            history.push(`/assets/inventories/approveddisposals`);
-          }}
-        />
+
         <Tab
           label="Unapproved Stock Transfer or Lease Request"
           {...a11yProps(0)}
           onClick={(event) => {
             event.preventDefault();
             history.push(`/assets/inventories/unapprovetransfers`);
-          }}
-        />
-        <Tab
-          label="Approved Stock Transfer or Lease Request"
-          {...a11yProps(0)}
-          onClick={(event) => {
-            event.preventDefault();
-            history.push(`/assets/inventories/approvetransfer`);
           }}
         />
       </Tabs>
@@ -180,26 +147,16 @@ function AssetInventoryLayout({ token }) {
       <TabPanel value={value} index={1}>
         <AssetInventoryUnapprovedStockLayout token={token} />
       </TabPanel>
+
       <TabPanel value={value} index={2}>
-        <AssetInventoryApprovedRequisitionsLayout token={token} />
-      </TabPanel>
-      <TabPanel value={value} index={3}>
         <AssetInventoryUnapprovedRetirementLayout token={token} />
       </TabPanel>
-      <TabPanel value={value} index={4}>
-        <AssetInventoryApprovedRetirementLayout token={token} />
-      </TabPanel>
-      <TabPanel value={value} index={5}>
+      <TabPanel value={value} index={3}>
         <AssetInventoryUnapprovedDisposalLayout token={token} />
       </TabPanel>
-      <TabPanel value={value} index={6}>
-        <AssetInventoryApprovedDisposalLayout token={token} />
-      </TabPanel>
-      <TabPanel value={value} index={7}>
+
+      <TabPanel value={value} index={4}>
         <AssetInventoryUnapprovedTransferLayout token={token} />
-      </TabPanel>
-      <TabPanel value={value} index={8}>
-        <AssetInventoryApprovedTransferLayout token={token} />
       </TabPanel>
     </div>
   );
