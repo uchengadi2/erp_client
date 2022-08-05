@@ -255,15 +255,15 @@ const Header = (props) => {
       selectedIndex: 15,
     },
     {
-      name: "Disposition",
+      name: "Dispositions",
       link: "/assets/dispositions",
       activeIndex: 1,
       selectedIndex: 16,
     },
 
     {
-      name: "Transfer & Leasing",
-      link: "/assets/transfers",
+      name: "Movements",
+      link: "/assets/movements",
       activeIndex: 1,
       selectedIndex: 17,
     },

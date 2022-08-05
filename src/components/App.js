@@ -58,6 +58,7 @@ import ConsoleRoleLayout from "./ui/console/roles/ConsoleRoleLayout";
 import ConsoleTasksLayout from "./ui/console/tasks/ConsoleTasksLayout";
 import AssetStoreTypesLayout from "./ui/assets/utilities/AssetStoreTypesLayout";
 import AssetRequisitionLayout from "./ui/assets/requisition/AssetRequisitionLayout";
+import AssetRetirementLayout from "./ui/assets/retirement/AssetRetirementLayout";
 
 function App() {
   const { token, setToken } = useToken();
@@ -176,6 +177,9 @@ function App() {
             </Route>
             <Route path="/assets/requisitions">
               <AssetRequisitionLayout token={token} userId={userId} />
+            </Route>
+            <Route path="/assets/retirements">
+              <AssetRetirementLayout token={token} userId={userId} />
             </Route>
             <Route path="/assets/transfers">
               <AssetTransferAndLeasingLayout token={token} userId={userId} />

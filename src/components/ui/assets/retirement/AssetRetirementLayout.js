@@ -8,10 +8,10 @@ import Box from "@material-ui/core/Box";
 import { Link } from "react-router-dom";
 import history from "./../../../../history";
 
-import AssetDispositionsAllDispositionsLayout from "./AssetDispositionsAllDispositionsLayout";
-import AssetDispositionsPendingDispositionLayout from "./AssetDispositionsPendingDispositionLayout";
-import AssetDispositionsReturnAssetDispositionLayout from "./AssetDispositionsReturnAssetDispositionLayout";
-import AssetDispositionsWithdrawnDispositionLayout from "./AssetDispositionsWithdrawnDispositionLayout";
+import AssetRetirementsAllRetirementsLayout from "./AssetRetirementsAllRetirementsLayout";
+import AssetRetirementsPendingRetirementLayout from "./AssetRetirementsPendingRetirementLayout";
+import AssetRetirementsReturnAssetLayout from "./AssetRetirementsReturnAssetLayout";
+import AssetRetirementsWithdrawnRetirementLayout from "./AssetRetirementsWithdrawnRetirementLayout";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -54,7 +54,7 @@ function LinkTab(props) {
       //label={route.name}
       onClick={(event) => {
         event.preventDefault();
-        history.push(`/assets/dispositions`);
+        history.push(`/assets/retirements`);
       }}
       {...props}
     />
@@ -77,7 +77,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function AssetDispositionLayout({ token }) {
+function AssetRetirementLayout({ token }) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
@@ -96,28 +96,28 @@ function AssetDispositionLayout({ token }) {
         className={classes.tabs}
       >
         <Tab
-          label="Dispositions"
+          label="Retirements"
           {...a11yProps(0)}
           onClick={(event) => {
             event.preventDefault();
-            history.push(`/assets/dispositions/alldispositions`);
+            history.push(`/assets/retirements/allretirements`);
           }}
         />
         <Tab
-          label="Pending Dispositions"
+          label="Pending Retirements"
           {...a11yProps(0)}
           onClick={(event) => {
             event.preventDefault();
-            history.push(`/assets/dispositions/pendingdispositions`);
+            history.push(`/assets/retirements/pendingretirements`);
           }}
         />
 
         <Tab
-          label="Withdrawn Dispositions"
+          label="Withdrawn Retirements"
           {...a11yProps(0)}
           onClick={(event) => {
             event.preventDefault();
-            history.push(`/assets/dispositions/withdrawndispositions`);
+            history.push(`/assets/retirements/withdrawnretirements`);
           }}
         />
 
@@ -126,26 +126,26 @@ function AssetDispositionLayout({ token }) {
           {...a11yProps(0)}
           onClick={(event) => {
             event.preventDefault();
-            history.push(`/assets/dispositions/assetreturns`);
+            history.push(`/assets/retirements/assetreturns`);
           }}
         />
       </Tabs>
 
       <TabPanel value={value} index={0}>
-        <AssetDispositionsAllDispositionsLayout token={token} />
+        <AssetRetirementsAllRetirementsLayout token={token} />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <AssetDispositionsPendingDispositionLayout token={token} />
+        <AssetRetirementsPendingRetirementLayout token={token} />
       </TabPanel>
 
-      <TabPanel value={value} index={3}>
-        <AssetDispositionsReturnAssetDispositionLayout token={token} />
-      </TabPanel>
       <TabPanel value={value} index={2}>
-        <AssetDispositionsWithdrawnDispositionLayout token={token} />
+        <AssetRetirementsWithdrawnRetirementLayout token={token} />
+      </TabPanel>
+      <TabPanel value={value} index={3}>
+        <AssetRetirementsReturnAssetLayout token={token} />
       </TabPanel>
     </Box>
   );
 }
 
-export default AssetDispositionLayout;
+export default AssetRetirementLayout;

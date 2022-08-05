@@ -42,6 +42,14 @@ import pendingAssetRequisitionReducer from "./pendingAssetRequisitionReducer";
 import withdrawnAssetRequistionReducer from "./withdrawnAssetRequistionReducer";
 import abortedAssetRequisitionReducer from "./abortedAssetRequisitionReducer";
 import returnAssetPostRequisitionReducer from "./returnAssetPostRequisitionReducer";
+import assetRetirementReducer from "./assetRetirementReducer";
+import assetPendingRetirementReducer from "./assetPendingRetirementReducer";
+import assetWithdrawnRetirementReducer from "./assetWithdrawnRetirementReducer";
+import assetReturnPostRetirementReducer from "./assetReturnPostRetirementReducer";
+import assetDispositionReducer from "./assetDispositionReducer";
+import pendingAssetDispositionReducer from "./pendingAssetDispositionReducer";
+import withdrawnAssetDispositionReducer from "./withdrawnAssetDispositionReducer";
+import assetReturnPostDispositionReducer from "./assetReturnPostDispositionReducer";
 
 export default combineReducers({
   auth: authReducer,
@@ -87,4 +95,12 @@ export default combineReducers({
   withdrawnAssetRequisition: withdrawnAssetRequistionReducer,
   abortedAssetRequisition: abortedAssetRequisitionReducer,
   returnAssetPostRequisition: returnAssetPostRequisitionReducer,
+  assetRetirement: assetRetirementReducer,
+  assetPendingRetirement: assetPendingRetirementReducer,
+  assetWithdrawnRetirement: assetWithdrawnRetirementReducer,
+  assetReturnPostRetirement: assetReturnPostRetirementReducer,
+  assetDispostion: assetDispositionReducer,
+  pendingAssetDisposition: pendingAssetDispositionReducer,
+  withdrawnAssetDisposition: withdrawnAssetDispositionReducer,
+  assetReturnPostDisposition: assetReturnPostDispositionReducer,
 });
