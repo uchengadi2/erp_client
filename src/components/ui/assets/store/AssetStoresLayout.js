@@ -8,12 +8,13 @@ import Box from "@material-ui/core/Box";
 import { Link } from "react-router-dom";
 import history from "./../../../../history";
 
-import AssetAssetSubClassTypesLayout from "./AssetAssetSubClassTypesLayout";
-import AssetAssetTypesLayout from "./AssetAssetTypesLayout";
-import AssetDepreciationTypesLayout from "./AssetDepreciationTypesLayout";
-import AssetStoreTypesLayout from "./AssetStoreTypesLayout";
-import AssetMaintenanceTypesLayout from "./AssetMaintenanceTypesLayout";
-import AssetMeasurementUnitTypes from "./AssetMeasurementUnitTypes";
+import AssetStoresAllStoresLayout from "./AssetStoresAllStoresLayout";
+import AssetStoresAllocateSpaceLayout from "./AssetStoresAllocateSpaceLayout";
+import AssetStoresClosuresLayout from "./AssetStoresClosuresLayout";
+import AssetStoresLeaseLayout from "./AssetStoresLeaseLayout";
+import AssetStoresMaintenanceLayout from "./AssetStoresMaintenanceLayout";
+import AssetsStoresOwnershipLayout from "./AssetStoresOwnershipLayout";
+import AssetStoresSellLayout from "./AssetStoresSellLayout";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -56,7 +57,7 @@ function LinkTab(props) {
       //label={route.name}
       onClick={(event) => {
         event.preventDefault();
-        history.push(`/orders`);
+        history.push(`/assets/inventories`);
       }}
       {...props}
     />
@@ -79,7 +80,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function AssetUtilityLayout({ token, userId }) {
+function AssetStoresLayout({ token, userId }) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
@@ -88,7 +89,7 @@ function AssetUtilityLayout({ token, userId }) {
   };
 
   return (
-    <Box className={classes.root}>
+    <div className={classes.root}>
       <Tabs
         orientation="vertical"
         //variant="scrollable"
@@ -98,101 +99,89 @@ function AssetUtilityLayout({ token, userId }) {
         className={classes.tabs}
       >
         <Tab
-          label="Asset Subclass Types"
+          label="Stores"
           {...a11yProps(0)}
           onClick={(event) => {
             event.preventDefault();
-            history.push(`/assets/utilities/subclasstypes`);
+            history.push(`/assets/stores/allstores`);
           }}
         />
         <Tab
-          label="Asset Types"
+          label="Maintenances"
           {...a11yProps(0)}
           onClick={(event) => {
             event.preventDefault();
-            history.push(`/assets/utilities/assettypes`);
-          }}
-        />
-        <Tab
-          label="Asset Depreciation Types"
-          {...a11yProps(0)}
-          onClick={(event) => {
-            event.preventDefault();
-            history.push(`/assets/utilities/depreciationtypes`);
-          }}
-        />
-        <Tab
-          label="Store Types"
-          {...a11yProps(0)}
-          onClick={(event) => {
-            event.preventDefault();
-            history.push(`/assets/utilities/storetypes`);
+            history.push(`/assets/stores/maintenances`);
           }}
         />
 
         <Tab
-          label="Maintenance Types"
+          label="Lease & Rent"
           {...a11yProps(0)}
           onClick={(event) => {
             event.preventDefault();
-            history.push(`/assets/utilities/maintenancetypes`);
-          }}
-        />
-        <Tab
-          label="Asset Measurement Unit"
-          {...a11yProps(0)}
-          onClick={(event) => {
-            event.preventDefault();
-            history.push(`/assets/utilities/measurementunits`);
-          }}
-        />
-        <Tab
-          label="Movement Types"
-          {...a11yProps(0)}
-          onClick={(event) => {
-            event.preventDefault();
-            history.push(`/assets/utilities/movementtypes`);
-          }}
-        />
-        <Tab
-          label="Disposition Types"
-          {...a11yProps(0)}
-          onClick={(event) => {
-            event.preventDefault();
-            history.push(`/assets/utilities/dispositiontypes`);
+            history.push(`/assets/stores/lease`);
           }}
         />
 
         <Tab
-          label="Store Maintenance Types"
+          label="Change Ownership"
           {...a11yProps(0)}
           onClick={(event) => {
             event.preventDefault();
-            history.push(`/assets/utilities/movementtypes`);
+            history.push(`/assets/stores/ownership`);
+          }}
+        />
+        <Tab
+          label="Allocate Space"
+          {...a11yProps(0)}
+          onClick={(event) => {
+            event.preventDefault();
+            history.push(`/assets/stores/spaceallocations`);
+          }}
+        />
+        <Tab
+          label="sell"
+          {...a11yProps(0)}
+          onClick={(event) => {
+            event.preventDefault();
+            history.push(`/assets/stores/sell`);
+          }}
+        />
+        <Tab
+          label="Closures"
+          {...a11yProps(0)}
+          onClick={(event) => {
+            event.preventDefault();
+            history.push(`/assets/stores/closures`);
           }}
         />
       </Tabs>
 
       <TabPanel value={value} index={0}>
-        <AssetAssetSubClassTypesLayout token={token} userId={userId} />
+        <AssetStoresAllStoresLayout token={token} userId={userId} />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <AssetAssetTypesLayout token={token} userId={userId} />
+        <AssetStoresMaintenanceLayout token={token} userId={userId} />
       </TabPanel>
+
       <TabPanel value={value} index={2}>
-        <AssetDepreciationTypesLayout token={token} userId={userId} />
+        <AssetStoresLeaseLayout token={token} userId={userId} />
       </TabPanel>
       <TabPanel value={value} index={3}>
-        <AssetStoreTypesLayout token={token} userId={userId} />
+        <AssetsStoresOwnershipLayout token={token} userId={userId} />
       </TabPanel>
       <TabPanel value={value} index={4}>
-        <AssetMaintenanceTypesLayout token={token} userId={userId} />
+        <AssetStoresAllocateSpaceLayout token={token} userId={userId} />
       </TabPanel>
       <TabPanel value={value} index={5}>
-        <AssetMeasurementUnitTypes token={token} userId={userId} />
+        <AssetStoresSellLayout token={token} userId={userId} />
       </TabPanel>
-    </Box>
+      <TabPanel value={value} index={6}>
+        <AssetStoresClosuresLayout token={token} userId={userId} />
+      </TabPanel>
+    </div>
   );
 }
 
-export default AssetUtilityLayout;
+export default AssetStoresLayout;

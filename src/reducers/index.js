@@ -50,6 +50,18 @@ import assetDispositionReducer from "./assetDispositionReducer";
 import pendingAssetDispositionReducer from "./pendingAssetDispositionReducer";
 import withdrawnAssetDispositionReducer from "./withdrawnAssetDispositionReducer";
 import assetReturnPostDispositionReducer from "./assetReturnPostDispositionReducer";
+import assetMovementReducer from "./assetMovementReducer";
+import assetTransferMovementReducer from "./assetTransferMovementReducer";
+import assetPendingTransferMovementReducer from "./assetPendingTransferMovementReducer";
+import assetWithdrawnTransferMovementReducer from "./assetWithdrawnTransferMovementReducer";
+import assetReturnAssetPostTransferMovementReducer from "./assetReturnAssetPostTransferMovementReducer";
+import assetStoreReducer from "./assetStoreReducer";
+import assetStoreMaintenanceReducer from "./assetStoreMaintenanceReducer";
+import assetStoreLeaseReducer from "./assetStoreLeaseReducer";
+import assetStoreOwnershipReducer from "./assetStoreOwnershipReducer";
+import assetStoreSpaceAllocationReducer from "./assetStoreSpaceAllocationReducer";
+import assetSellStoreReducer from "./assetSellStoreReducer";
+import assetStoreClosureReducer from "./assetStoreClosureReducer";
 
 export default combineReducers({
   auth: authReducer,
@@ -103,4 +115,17 @@ export default combineReducers({
   pendingAssetDisposition: pendingAssetDispositionReducer,
   withdrawnAssetDisposition: withdrawnAssetDispositionReducer,
   assetReturnPostDisposition: assetReturnPostDispositionReducer,
+  assetMovement: assetMovementReducer,
+  assetTransferMovement: assetTransferMovementReducer,
+  assetPendingTransferMovement: assetPendingTransferMovementReducer,
+  assetWithdrawnTransferMovement: assetWithdrawnTransferMovementReducer,
+  assetReturnAssetPostTransferMovement:
+    assetReturnAssetPostTransferMovementReducer,
+  assetStore: assetStoreReducer,
+  assetStoreMaintenance: assetStoreMaintenanceReducer,
+  assetStoreLease: assetStoreLeaseReducer,
+  assetStoreOwnership: assetStoreOwnershipReducer,
+  assetStoreSpaceAllocation: assetStoreSpaceAllocationReducer,
+  assetSellStore: assetSellStoreReducer,
+  assetStoreClosure: assetStoreClosureReducer,
 });

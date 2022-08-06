@@ -18,13 +18,12 @@ import AccountBankDepositLayout from "./ui/Accounts/BankDeposit/AccountBankDepos
 import AccountUtilitiesLayout from "./ui/Accounts/AccountUtilities/AccountUtilitiesLayout";
 import AssetsAssetLayout from "./ui/assets/assets/AssetsAssetLayout";
 import AssetsProcurementLayout from "./ui/assets/procurement/AssetsProcurementLayout";
-import AssetDepreciationLayout from "./ui/assets/depreciation/AssetDepreciationLayout";
+
 import AssetInventoryLayout from "./ui/assets/inventory/AssetInventoryLayout";
 import AssetMaintenancesLayout from "./ui/assets/maintenances/AssetMaintenancesLayout";
 import AssetSupplyChainLayout from "./ui/assets/supplyChain/AssetSupplyChainLayout";
 import AssetDispositionLayout from "./ui/assets/disposition/AssetDispositionLayout";
-import AssetsLocationLayout from "./ui/assets/store/AssetsLocationLayout";
-import AssetTransferAndLeasingLayout from "./ui/assets/transfer/AssetTransferAndLeasingLayout";
+import AssetStoresLayout from "./ui/assets/store/AssetStoresLayout";
 import AssetUtilityLayout from "./ui/assets/utilities/AssetUtilityLayout";
 import CrmUsersLayout from "./ui/crm/users/CrmUsersLayout";
 import CrmContactsLayout from "./ui/crm/contacts/CrmContactsLayout";
@@ -59,6 +58,7 @@ import ConsoleTasksLayout from "./ui/console/tasks/ConsoleTasksLayout";
 import AssetStoreTypesLayout from "./ui/assets/utilities/AssetStoreTypesLayout";
 import AssetRequisitionLayout from "./ui/assets/requisition/AssetRequisitionLayout";
 import AssetRetirementLayout from "./ui/assets/retirement/AssetRetirementLayout";
+import AssetMovementsLayout from "./ui/assets/movements/AssetMovementsLayout";
 
 function App() {
   const { token, setToken } = useToken();
@@ -157,9 +157,7 @@ function App() {
             <Route path="/assets/procurements">
               <AssetsProcurementLayout token={token} userId={userId} />
             </Route>
-            <Route path="/assets/depreciations">
-              <AssetDepreciationLayout token={token} userId={userId} />
-            </Route>
+
             <Route path="/assets/inventories">
               <AssetInventoryLayout token={token} userId={userId} />
             </Route>
@@ -181,8 +179,11 @@ function App() {
             <Route path="/assets/retirements">
               <AssetRetirementLayout token={token} userId={userId} />
             </Route>
-            <Route path="/assets/transfers">
-              <AssetTransferAndLeasingLayout token={token} userId={userId} />
+            <Route path="/assets/movements">
+              <AssetMovementsLayout token={token} userId={userId} />
+            </Route>
+            <Route path="/assets/stores">
+              <AssetStoresLayout token={token} userId={userId} />
             </Route>
             <Route path="/assets/utilities">
               <AssetUtilityLayout token={token} userId={userId} />

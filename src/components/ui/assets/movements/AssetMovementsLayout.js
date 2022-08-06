@@ -8,12 +8,11 @@ import Box from "@material-ui/core/Box";
 import { Link } from "react-router-dom";
 import history from "./../../../../history";
 
-import AssetAssetSubClassTypesLayout from "./AssetAssetSubClassTypesLayout";
-import AssetAssetTypesLayout from "./AssetAssetTypesLayout";
-import AssetDepreciationTypesLayout from "./AssetDepreciationTypesLayout";
-import AssetStoreTypesLayout from "./AssetStoreTypesLayout";
-import AssetMaintenanceTypesLayout from "./AssetMaintenanceTypesLayout";
-import AssetMeasurementUnitTypes from "./AssetMeasurementUnitTypes";
+import AssetMovementsAllMovementsLayout from "./AssetMovementsAllMovementsLayout";
+import AssetsMovementsAllTransferslayout from "./AssetsMovementsAllTransferslayout";
+import AssetMovementsPendingTransfersLayout from "./AssetMovementsPendingTransfersLayout";
+import AssetMovementsReturnAssetsPostTransferLayout from "./AssetMovementsReturnAssetsPostTransferLayout";
+import AssetMovementsWithdrawnTranfersLayout from "./AssetMovementsWithdrawnTranfersLayout";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -56,7 +55,7 @@ function LinkTab(props) {
       //label={route.name}
       onClick={(event) => {
         event.preventDefault();
-        history.push(`/orders`);
+        history.push(`/assets/dispositions`);
       }}
       {...props}
     />
@@ -79,7 +78,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function AssetUtilityLayout({ token, userId }) {
+function AssetMovementsLayout({ token }) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
@@ -98,101 +97,67 @@ function AssetUtilityLayout({ token, userId }) {
         className={classes.tabs}
       >
         <Tab
-          label="Asset Subclass Types"
+          label="Movements"
           {...a11yProps(0)}
           onClick={(event) => {
             event.preventDefault();
-            history.push(`/assets/utilities/subclasstypes`);
+            history.push(`/assets/movements/allmovements`);
           }}
         />
         <Tab
-          label="Asset Types"
+          label="Transfers & Leases"
           {...a11yProps(0)}
           onClick={(event) => {
             event.preventDefault();
-            history.push(`/assets/utilities/assettypes`);
-          }}
-        />
-        <Tab
-          label="Asset Depreciation Types"
-          {...a11yProps(0)}
-          onClick={(event) => {
-            event.preventDefault();
-            history.push(`/assets/utilities/depreciationtypes`);
-          }}
-        />
-        <Tab
-          label="Store Types"
-          {...a11yProps(0)}
-          onClick={(event) => {
-            event.preventDefault();
-            history.push(`/assets/utilities/storetypes`);
+            history.push(`/assets/movements/alltransfers`);
           }}
         />
 
         <Tab
-          label="Maintenance Types"
+          label="Pending Transfers & Leases"
           {...a11yProps(0)}
           onClick={(event) => {
             event.preventDefault();
-            history.push(`/assets/utilities/maintenancetypes`);
-          }}
-        />
-        <Tab
-          label="Asset Measurement Unit"
-          {...a11yProps(0)}
-          onClick={(event) => {
-            event.preventDefault();
-            history.push(`/assets/utilities/measurementunits`);
-          }}
-        />
-        <Tab
-          label="Movement Types"
-          {...a11yProps(0)}
-          onClick={(event) => {
-            event.preventDefault();
-            history.push(`/assets/utilities/movementtypes`);
-          }}
-        />
-        <Tab
-          label="Disposition Types"
-          {...a11yProps(0)}
-          onClick={(event) => {
-            event.preventDefault();
-            history.push(`/assets/utilities/dispositiontypes`);
+            history.push(`/assets/movements/pendingtransfers`);
           }}
         />
 
         <Tab
-          label="Store Maintenance Types"
+          label="Withdrawn Transfers & Leases"
           {...a11yProps(0)}
           onClick={(event) => {
             event.preventDefault();
-            history.push(`/assets/utilities/movementtypes`);
+            history.push(`/assets/movements/withdrawntransfers`);
+          }}
+        />
+        <Tab
+          label="Asset Returns"
+          {...a11yProps(0)}
+          onClick={(event) => {
+            event.preventDefault();
+            history.push(`/assets/movements/assetreturns`);
           }}
         />
       </Tabs>
 
       <TabPanel value={value} index={0}>
-        <AssetAssetSubClassTypesLayout token={token} userId={userId} />
+        <AssetMovementsAllMovementsLayout token={token} />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <AssetAssetTypesLayout token={token} userId={userId} />
+        <AssetsMovementsAllTransferslayout token={token} />
       </TabPanel>
+
       <TabPanel value={value} index={2}>
-        <AssetDepreciationTypesLayout token={token} userId={userId} />
+        <AssetMovementsPendingTransfersLayout token={token} />
       </TabPanel>
       <TabPanel value={value} index={3}>
-        <AssetStoreTypesLayout token={token} userId={userId} />
+        <AssetMovementsWithdrawnTranfersLayout token={token} />
       </TabPanel>
       <TabPanel value={value} index={4}>
-        <AssetMaintenanceTypesLayout token={token} userId={userId} />
-      </TabPanel>
-      <TabPanel value={value} index={5}>
-        <AssetMeasurementUnitTypes token={token} userId={userId} />
+        <AssetMovementsReturnAssetsPostTransferLayout token={token} />
       </TabPanel>
     </Box>
   );
 }
 
-export default AssetUtilityLayout;
+export default AssetMovementsLayout;
