@@ -12,8 +12,8 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 import history from "../../../../history";
 import ServiceOutletsAndTransactionTypesFilter from "../../headerFilters/ServiceOutletsAndTransactionTypesFilter";
 
-import OperationsTransformationPhaseCreateForm from "../../../operations/utilities/transformationPhases/OperationsTransformationPhaseCreateForm";
-import OperationsTransformationPhaseList from "../../../operations/utilities/transformationPhases/OperationsTransformationPhaseList";
+import OperationsQualityAssuranceTypeCreateForm from "../../../operations/utilities/qualityAssurance/OperationsQualityAssuranceTypeCreateForm";
+import OperationsQualityAssuranceTypeList from "../../../operations/utilities/qualityAssurance/OperationsQualityAssuranceTypeList";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -63,7 +63,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function OperationsUtilityTransformationPhasesLayout(props) {
+function OperationsUtilityQualityAssuranceTypesLayout(props) {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [alert, setAlert] = useState({
@@ -130,18 +130,18 @@ function OperationsUtilityTransformationPhasesLayout(props) {
                 onClick={() => [
                   setOpen(true),
                   history.push(
-                    "/operations/utilities/transformationphases/new"
+                    "/operations/utilities/qualityassurancetypes/new"
                   ),
                 ]}
               >
-                Create Transformation Phase
+                Create Quality Assurance Type
               </Button>
             </Grid>
             <Grid item></Grid>
           </Toolbar>
         </Grid>
         <Grid item className={classes.contentContainer}>
-          <OperationsTransformationPhaseList
+          <OperationsQualityAssuranceTypeList
             token={props.token}
             userId={props.userId}
           />
@@ -155,11 +155,11 @@ function OperationsUtilityTransformationPhasesLayout(props) {
         open={open}
         onClose={() => [
           setOpen(false),
-          history.push("/operations/utilities/transformationphases"),
+          history.push("/operations/utilities/qualityassurancetypes"),
         ]}
       >
         <DialogContent>
-          <OperationsTransformationPhaseCreateForm
+          <OperationsQualityAssuranceTypeCreateForm
             token={props.token}
             userId={props.userId}
             handleDialogOpenStatus={handleDialogOpenStatus}
@@ -200,4 +200,4 @@ function OperationsUtilityTransformationPhasesLayout(props) {
   );
 }
 
-export default OperationsUtilityTransformationPhasesLayout;
+export default OperationsUtilityQualityAssuranceTypesLayout;

@@ -12,7 +12,7 @@ import OperationsUtilityFinisihingTypesLayout from "./OperationsUtilityFinisihin
 import OperationsUtilityMaintenanceTypesLayout from "./OperationsUtilityMaintenanceTypesLayout";
 import OperationsUtilityQualityAssurancePhaseEventsLayout from "./OperationsUtilityQualityAssurancePhaseEventsLayout";
 import OperationsUtilityQualityAssurancePhasesLayout from "./OperationsUtilityQualityAssurancePhasesLayout";
-import OperationsUtilityQualityAssuranceTypesLayoutt from "./OperationsUtilityQualityAssuranceTypesLayoutt";
+import OperationsUtilityQualityAssuranceTypesLayoutt from "./OperationsUtilityQualityAssuranceTypesLayout";
 import OperationsUtilityTransformationPhaseEventsLayout from "./OperationsUtilityTransformationPhaseEventsLayout";
 import OperationsUtilityTransformationPhasesLayout from "./OperationsUtilityTransformationPhasesLayout";
 import OperationsUtilityTransformationTypesLayout from "./OperationsUtilityTransformationTypesLayout";
@@ -128,7 +128,7 @@ function OperationsUtilityLayout({ token }) {
           {...a11yProps(0)}
           onClick={(event) => {
             event.preventDefault();
-            history.push(`/operations/utilities/finishings`);
+            history.push(`/operations/utilities/finishingtypes`);
           }}
         />
         <Tab

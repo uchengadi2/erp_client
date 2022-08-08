@@ -10,19 +10,18 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import history from "../../../../history";
-import ServiceOutletsAndTransactionTypesFilter from "../../headerFilters/ServiceOutletsAndTransactionTypesFilter";
 
-import OperationsTransformationPhaseCreateForm from "../../../operations/utilities/transformationPhases/OperationsTransformationPhaseCreateForm";
-import OperationsTransformationPhaseList from "../../../operations/utilities/transformationPhases/OperationsTransformationPhaseList";
+import AssetStoreMovementTypeCreateForm from "../../../assets/utilities/movementTypes/AssetStoreMovementTypeCreateForm";
+import AssetStoreMovementTypesList from "../../../assets/utilities/movementTypes/AssetStoreMovementTypesList";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     marginTop: "-80px",
-    width: 1000,
+    width: 1100,
   },
   headerContainer: {
     height: 20,
-    marginTop: 0,
+    marginTop: 10,
     height: 40,
   },
   secondContainer: {
@@ -39,10 +38,10 @@ const useStyles = makeStyles((theme) => ({
   addButton: {
     borderRadius: 10,
     height: 30,
-    width: 220,
+    width: 170,
     marginLeft: 10,
     marginTop: 50,
-    marginBottom: 20,
+    marginBottom: 10,
     fontSize: "0.75rem",
     backgroundColor: theme.palette.common.orange,
     color: "white",
@@ -58,12 +57,9 @@ const useStyles = makeStyles((theme) => ({
     padding: 5,
     margin: -10,
   },
-  selectField: {
-    marginTop: 30,
-  },
 }));
 
-function OperationsUtilityTransformationPhasesLayout(props) {
+function AssetMovementTypesLayout(props) {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [alert, setAlert] = useState({
@@ -114,7 +110,7 @@ function OperationsUtilityTransformationPhasesLayout(props) {
     >
       <Grid item container direction="column" sm={width}>
         <Grid item className={classes.selectField}>
-          <ServiceOutletsAndTransactionTypesFilter />
+          {/* <SchemeTypeFilter /> */}
         </Grid>
         <Grid
           item
@@ -129,24 +125,20 @@ function OperationsUtilityTransformationPhasesLayout(props) {
                 className={classes.addButton}
                 onClick={() => [
                   setOpen(true),
-                  history.push(
-                    "/operations/utilities/transformationphases/new"
-                  ),
+                  history.push("/assets/utilities/movementtypes/new"),
                 ]}
               >
-                Create Transformation Phase
+                Add Movement Type
               </Button>
             </Grid>
             <Grid item></Grid>
           </Toolbar>
         </Grid>
         <Grid item className={classes.contentContainer}>
-          <OperationsTransformationPhaseList
+          <AssetStoreMovementTypesList
             token={props.token}
             userId={props.userId}
           />
-          {/* {renderDataList()} */}
-          {/* <DataGridText /> */}
         </Grid>
       </Grid>
       <Dialog
@@ -155,11 +147,11 @@ function OperationsUtilityTransformationPhasesLayout(props) {
         open={open}
         onClose={() => [
           setOpen(false),
-          history.push("/operations/utilities/transformationphases"),
+          history.push("/assets/utilities/movementtypes"),
         ]}
       >
         <DialogContent>
-          <OperationsTransformationPhaseCreateForm
+          <AssetStoreMovementTypeCreateForm
             token={props.token}
             userId={props.userId}
             handleDialogOpenStatus={handleDialogOpenStatus}
@@ -200,4 +192,4 @@ function OperationsUtilityTransformationPhasesLayout(props) {
   );
 }
 
-export default OperationsUtilityTransformationPhasesLayout;
+export default AssetMovementTypesLayout;

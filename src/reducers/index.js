@@ -62,6 +62,17 @@ import assetStoreOwnershipReducer from "./assetStoreOwnershipReducer";
 import assetStoreSpaceAllocationReducer from "./assetStoreSpaceAllocationReducer";
 import assetSellStoreReducer from "./assetSellStoreReducer";
 import assetStoreClosureReducer from "./assetStoreClosureReducer";
+import storeMovementTypeReducer from "./storeMovementTypeReducer";
+import storeDispositionTypeReducer from "./storeDispositionTypeReducer";
+import storeMaintenanceTypeReducer from "./storeMaintenanceTypeReducer";
+import operationsTransformationTypesReducer from "./operationsTransformationTypesReducer";
+import operationsTransformationPhaseReducer from "./operationsTransformationPhaseReducer";
+import operationTransformationPhaseEventReducer from "./operationTransformationPhaseEventReducer";
+import operationsFinishingTypesReducer from "./operationsFinishingTypesReducer";
+import operationQualityAssuranceTypeReducer from "./operationQualityAssuranceTypeReducer";
+import operationsQualityAssurancePhaseReducer from "./operationsQualityAssurancePhaseReducer";
+import operationsQualityAssurancePhaseEventReducer from "./operationsQualityAssurancePhaseEventReducer";
+import operationMaintenanceTypeReducer from "./operationMaintenanceTypeReducer";
 
 export default combineReducers({
   auth: authReducer,
@@ -128,4 +139,16 @@ export default combineReducers({
   assetStoreSpaceAllocation: assetStoreSpaceAllocationReducer,
   assetSellStore: assetSellStoreReducer,
   assetStoreClosure: assetStoreClosureReducer,
+  storeMovementType: storeMovementTypeReducer,
+  storeDispositionType: storeDispositionTypeReducer,
+  storeMaintenanceType: storeMaintenanceTypeReducer,
+  operationsTransformationType: operationsTransformationTypesReducer,
+  operationsTransformationPhase: operationsTransformationPhaseReducer,
+  operationTransformationPhaseEvent: operationTransformationPhaseEventReducer,
+  operationsFinishingType: operationsFinishingTypesReducer,
+  operationQualityAssuranceType: operationQualityAssuranceTypeReducer,
+  operationsQualityAssurancePhase: operationsQualityAssurancePhaseReducer,
+  operationsQualityAssurancePhaseEvent:
+    operationsQualityAssurancePhaseEventReducer,
+  operationMaintenanceType: operationMaintenanceTypeReducer,
 });

@@ -14,6 +14,9 @@ import AssetDepreciationTypesLayout from "./AssetDepreciationTypesLayout";
 import AssetStoreTypesLayout from "./AssetStoreTypesLayout";
 import AssetMaintenanceTypesLayout from "./AssetMaintenanceTypesLayout";
 import AssetMeasurementUnitTypes from "./AssetMeasurementUnitTypes";
+import AssetMovementTypesLayout from "./AssetMovementTypesLayout";
+import AssetStoreMaintenanceTypesLayout from "./AssetStoreMaintenanceTypesLayout";
+import AssetDispositionTypesLayout from "./AssetDispositionTypesLayout";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -168,7 +171,7 @@ function AssetUtilityLayout({ token, userId }) {
           {...a11yProps(0)}
           onClick={(event) => {
             event.preventDefault();
-            history.push(`/assets/utilities/movementtypes`);
+            history.push(`/assets/utilities/storemaintenancetypes`);
           }}
         />
       </Tabs>
@@ -190,6 +193,15 @@ function AssetUtilityLayout({ token, userId }) {
       </TabPanel>
       <TabPanel value={value} index={5}>
         <AssetMeasurementUnitTypes token={token} userId={userId} />
+      </TabPanel>
+      <TabPanel value={value} index={6}>
+        <AssetMovementTypesLayout token={token} userId={userId} />
+      </TabPanel>
+      <TabPanel value={value} index={7}>
+        <AssetDispositionTypesLayout token={token} userId={userId} />
+      </TabPanel>
+      <TabPanel value={value} index={8}>
+        <AssetStoreMaintenanceTypesLayout token={token} userId={userId} />
       </TabPanel>
     </Box>
   );
