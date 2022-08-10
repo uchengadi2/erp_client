@@ -130,7 +130,7 @@ function OperationsUtilityTransformationPhaseEventsLayout(props) {
                 onClick={() => [
                   setOpen(true),
                   history.push(
-                    "/operations/utilities/transformationphaseevents/new"
+                    "/operations/utilities/processingphaseevents/new"
                   ),
                 ]}
               >
@@ -155,7 +155,7 @@ function OperationsUtilityTransformationPhaseEventsLayout(props) {
         open={open}
         onClose={() => [
           setOpen(false),
-          history.push("/operations/utilities/transformationphaseevents"),
+          history.push("/operations/utilities/processingphaseevents"),
         ]}
       >
         <DialogContent>

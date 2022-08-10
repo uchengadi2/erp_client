@@ -6,9 +6,9 @@ import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import { Link } from "react-router-dom";
-import history from "./../../../../history";
+import history from "../../../../history";
 
-import OperationsAllProjectsLayout from "./OperationsAllProjectsLayout";
+import OperationsOperationsOperationsLayout from "./OperationsOperationsOperationsLayout";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -74,7 +74,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function OperationsProjectLayout({ token }) {
+function OperationsOperationLayout({ token }) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
@@ -93,20 +93,20 @@ function OperationsProjectLayout({ token }) {
         className={classes.tabs}
       >
         <Tab
-          label="Projects"
+          label="Operations"
           {...a11yProps(0)}
           onClick={(event) => {
             event.preventDefault();
-            history.push(`/operations/projects/projects`);
+            history.push(`/operations/operations/operations`);
           }}
         />
       </Tabs>
 
       <TabPanel value={value} index={0}>
-        <OperationsAllProjectsLayout token={token} />
+        <OperationsOperationsOperationsLayout token={token} />
       </TabPanel>
     </div>
   );
 }
 
-export default OperationsProjectLayout;
+export default OperationsOperationLayout;

@@ -283,14 +283,14 @@ const Header = (props) => {
 
   const operationsOptions = [
     {
-      name: "Projects",
-      link: "/operations/projects",
+      name: "Operations",
+      link: "/operations/operations",
       activeIndex: 2,
       selectedIndex: 20,
     },
     {
-      name: "Transformation",
-      link: "/operations/transformations",
+      name: "Processings",
+      link: "/operations/processings",
       activeIndex: 2,
       selectedIndex: 21,
     },
@@ -301,7 +301,7 @@ const Header = (props) => {
       selectedIndex: 22,
     },
     {
-      name: "Quality Assurance",
+      name: "Quality Assurances",
       link: "/operations/qualityassurances",
       activeIndex: 2,
       selectedIndex: 23,

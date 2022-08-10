@@ -78,7 +78,7 @@ class OperationsTransformationPhaseEventsList extends React.Component {
           open={this.state.editOpen}
           onClose={() => [
             this.setState({ editOpen: false }),
-            history.push("/operations/utilities/transformationphaseevents"),
+            history.push("/operations/utilities/processingphaseevents"),
           ]}
         >
           <DialogContent>
@@ -105,7 +105,7 @@ class OperationsTransformationPhaseEventsList extends React.Component {
           open={this.state.deleteOpen}
           onClose={() => [
             this.setState({ deleteOpen: false }),
-            history.push(`/operations/utilities/transformationphaseevents`),
+            history.push(`/operations/utilities/processingphaseevents`),
           ]}
         >
           <DialogContent>
@@ -130,7 +130,7 @@ class OperationsTransformationPhaseEventsList extends React.Component {
           open={this.state.cancelOpen}
           onClose={() => [
             this.setState({ cancelOpen: false }),
-            history.push(`/operations/utilities/transformationphaseevents`),
+            history.push(`/operations/utilities/processingphaseevents`),
           ]}
         >
           <DialogContent>
@@ -150,7 +150,7 @@ class OperationsTransformationPhaseEventsList extends React.Component {
           open={this.state.assignOpen}
           onClose={() => [
             this.setState({ assignOpen: false }),
-            history.push(`/operations/utilities/transformationphaseevents`),
+            history.push(`/operations/utilities/processingphaseevents`),
           ]}
         ></Dialog>
       </>
@@ -181,7 +181,7 @@ class OperationsTransformationPhaseEventsList extends React.Component {
                   params: params.row,
                 }),
                 history.push(
-                  `/operations/utilities/transformationphaseevents/edit/${params.id}`
+                  `/operations/utilities/processingphaseevents/edit/${params.id}`
                 ),
               ]}
             />
@@ -202,7 +202,7 @@ class OperationsTransformationPhaseEventsList extends React.Component {
               onClick={() => [
                 this.setState({ deleteOpen: true, id: params.id }),
                 history.push(
-                  `/operations/utilities/transformationphaseevents/delete/${params.id}`
+                  `/operations/utilities/processingphaseevents/delete/${params.id}`
                 ),
               ]}
             />

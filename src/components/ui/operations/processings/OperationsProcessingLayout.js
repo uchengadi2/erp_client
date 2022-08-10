@@ -8,7 +8,7 @@ import Box from "@material-ui/core/Box";
 import { Link } from "react-router-dom";
 import history from "./../../../../history";
 
-import OperationsProcessTransformationLayout from "./OperationsProcessTransformationLayout";
+import OperationsProcessingProcessingsLayout from "./OperationsProcessingProcessingsLayout";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -74,7 +74,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function OperationsTransformationLayout({ token }) {
+function OperationsProcessingLayout({ token }) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
@@ -93,20 +93,20 @@ function OperationsTransformationLayout({ token }) {
         className={classes.tabs}
       >
         <Tab
-          label="Transform"
+          label="Processing"
           {...a11yProps(0)}
           onClick={(event) => {
             event.preventDefault();
-            history.push(`/operations/transformations/transforms`);
+            history.push(`/operations/processings/processings`);
           }}
         />
       </Tabs>
 
       <TabPanel value={value} index={0}>
-        <OperationsProcessTransformationLayout token={token} />
+        <OperationsProcessingProcessingsLayout token={token} />
       </TabPanel>
     </div>
   );
 }
 
-export default OperationsTransformationLayout;
+export default OperationsProcessingLayout;

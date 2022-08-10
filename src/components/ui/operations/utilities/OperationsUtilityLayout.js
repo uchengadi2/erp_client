@@ -100,27 +100,27 @@ function OperationsUtilityLayout({ token }) {
         className={classes.tabs}
       >
         <Tab
-          label="Transformation Types"
+          label="Processing Types"
           {...a11yProps(0)}
           onClick={(event) => {
             event.preventDefault();
-            history.push(`/operations/utilities/transformationtypes`);
+            history.push(`/operations/utilities/processingtypes`);
           }}
         />
         <Tab
-          label="Transformation Phases"
+          label="Processing Phases"
           {...a11yProps(0)}
           onClick={(event) => {
             event.preventDefault();
-            history.push(`/operations/utilities/transformationphases`);
+            history.push(`/operations/utilities/processingphases`);
           }}
         />
         <Tab
-          label="Transformation Phase Events"
+          label="Processing Phase Events"
           {...a11yProps(0)}
           onClick={(event) => {
             event.preventDefault();
-            history.push(`/operations/utilities/transformationphaseevents`);
+            history.push(`/operations/utilities/processingphaseevents`);
           }}
         />
         <Tab

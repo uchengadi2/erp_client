@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import history from "./../../../../history";
 
 import OperationsFinishingProcessLayout from "./OperationsFinishingProcessLayout";
+import OperationsProductionFinishingLayout from "./OperationsProductionFinishingLayout";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -74,7 +75,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function OperationsFinishingLayout({ token }) {
+function OperationsFinishingLayout({ token, userId }) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
@@ -93,17 +94,28 @@ function OperationsFinishingLayout({ token }) {
         className={classes.tabs}
       >
         <Tab
-          label="Finishings"
+          label="Processings Finishings"
           {...a11yProps(0)}
           onClick={(event) => {
             event.preventDefault();
             history.push(`/operations/finishings/finishings`);
           }}
         />
+        <Tab
+          label="Production Finishings"
+          {...a11yProps(0)}
+          onClick={(event) => {
+            event.preventDefault();
+            history.push(`/operations/finishings/productionfinishings`);
+          }}
+        />
       </Tabs>
 
       <TabPanel value={value} index={0}>
-        <OperationsFinishingProcessLayout token={token} />
+        <OperationsFinishingProcessLayout token={token} userId={userId} />
+      </TabPanel>
+      <TabPanel value={value} index={1}>
+        <OperationsProductionFinishingLayout token={token} userId={userId} />
       </TabPanel>
     </div>
   );

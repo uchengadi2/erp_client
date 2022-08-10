@@ -12,8 +12,8 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 import history from "../../../../history";
 import ServiceOutletsAndTransactionTypesFilter from "../../headerFilters/ServiceOutletsAndTransactionTypesFilter";
 
-import OperationsTransformationTypeCreateForm from "../../../operations/utilities/transformationTypes/OperationsTransformationTypeCreateForm";
-import OperationsTransformationTypesList from "../../../operations/utilities/transformationTypes/OperationsTransformationTypesList";
+import OperationsProductionFinishingCreateForm from "../../../operations/finishings/productions/OperationsProductionFinishingCreateForm";
+import OperationsProductionFinishingsList from "../../../operations/finishings/productions/OperationsProductionFinishingsList";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
   addButton: {
     borderRadius: 10,
     height: 30,
-    width: 220,
+    width: 180,
     marginLeft: 10,
     marginTop: 50,
     marginBottom: 20,
@@ -63,7 +63,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function OperationsUtilityTransformationTypesLayout(props) {
+function OperationsProductionFinishingLayout(props) {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [alert, setAlert] = useState({
@@ -129,17 +129,19 @@ function OperationsUtilityTransformationTypesLayout(props) {
                 className={classes.addButton}
                 onClick={() => [
                   setOpen(true),
-                  history.push("/operations/utilities/processingtypes/new"),
+                  history.push(
+                    "/operations/finishings/productionfinishings/new"
+                  ),
                 ]}
               >
-                Create Transformation Type
+                Add Finishing
               </Button>
             </Grid>
             <Grid item></Grid>
           </Toolbar>
         </Grid>
         <Grid item className={classes.contentContainer}>
-          <OperationsTransformationTypesList
+          <OperationsProductionFinishingsList
             token={props.token}
             userId={props.userId}
           />
@@ -153,11 +155,11 @@ function OperationsUtilityTransformationTypesLayout(props) {
         open={open}
         onClose={() => [
           setOpen(false),
-          history.push("/operations/utilities/processingtypes"),
+          history.push("/operations/finishings/productionfinishings"),
         ]}
       >
         <DialogContent>
-          <OperationsTransformationTypeCreateForm
+          <OperationsProductionFinishingCreateForm
             token={props.token}
             userId={props.userId}
             handleDialogOpenStatus={handleDialogOpenStatus}
@@ -198,4 +200,4 @@ function OperationsUtilityTransformationTypesLayout(props) {
   );
 }
 
-export default OperationsUtilityTransformationTypesLayout;
+export default OperationsProductionFinishingLayout;

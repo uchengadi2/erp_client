@@ -31,9 +31,9 @@ import CrmSuppliersLayout from "./ui/crm/suppliers/CrmSuppliersLayout";
 import CrmPartnersLayout from "./ui/crm/partners/CrmPartnersLayout";
 import CrmCustomersLayout from "./ui/crm/customers/CrmCustomersLayout";
 import CrmLeadsLayout from "./ui/crm/lead/CrmLeadsLayout";
-import OperationsProjectLayout from "./ui/operations/projects/OperationsProjectLayout";
+import OperationsProjectLayout from "./ui/operations/operations/OperationsOperationLayout";
 import OperationsUtilityLayout from "./ui/operations/utilities/OperationsUtilityLayout";
-import OperationsTransformationLayout from "./ui/operations/transformations/OperationsTransformationLayout";
+import OperationsProcessingLayout from "./ui/operations/processings/OperationsProcessingLayout";
 import OperationsMaintenancesLayout from "./ui/operations/maintenances/OperationsMaintenancesLayout";
 import OperationsQualityAssuranceLayout from "./ui/operations/qualityAssurance/OperationsQualityAssuranceLayout";
 import OperationsFinishingLayout from "./ui/operations/finishings/OperationsFinishingLayout";
@@ -207,14 +207,14 @@ function App() {
               <CrmLeadsLayout token={token} userId={userId} />
             </Route>
 
-            <Route path="/operations/projects">
+            <Route path="/operations/operations">
               <OperationsProjectLayout token={token} userId={userId} />
             </Route>
             <Route path="/operations/utilities">
               <OperationsUtilityLayout token={token} userId={userId} />
             </Route>
-            <Route path="/operations/transformations">
-              <OperationsTransformationLayout token={token} userId={userId} />
+            <Route path="/operations/processings">
+              <OperationsProcessingLayout token={token} userId={userId} />
             </Route>
             <Route path="/operations/maintenances">
               <OperationsMaintenancesLayout token={token} userId={userId} />

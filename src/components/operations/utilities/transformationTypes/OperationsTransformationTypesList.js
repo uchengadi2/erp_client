@@ -78,7 +78,7 @@ class OperationsTransformationTypesList extends React.Component {
           open={this.state.editOpen}
           onClose={() => [
             this.setState({ editOpen: false }),
-            history.push("/operations/utilities/transformationtypes"),
+            history.push("/operations/utilities/processingtypes"),
           ]}
         >
           <DialogContent>
@@ -105,7 +105,7 @@ class OperationsTransformationTypesList extends React.Component {
           open={this.state.deleteOpen}
           onClose={() => [
             this.setState({ deleteOpen: false }),
-            history.push(`/operations/utilities/transformationtypes`),
+            history.push(`/operations/utilities/processingtypes`),
           ]}
         >
           <DialogContent>
@@ -130,7 +130,7 @@ class OperationsTransformationTypesList extends React.Component {
           open={this.state.cancelOpen}
           onClose={() => [
             this.setState({ cancelOpen: false }),
-            history.push(`/operations/utilities/transformationtypes`),
+            history.push(`/operations/utilities/processingtypes`),
           ]}
         >
           <DialogContent>
@@ -150,7 +150,7 @@ class OperationsTransformationTypesList extends React.Component {
           open={this.state.assignOpen}
           onClose={() => [
             this.setState({ assignOpen: false }),
-            history.push(`/operations/utilities/transformationtypes`),
+            history.push(`/operations/utilities/processingtypes`),
           ]}
         ></Dialog>
       </>
@@ -181,7 +181,7 @@ class OperationsTransformationTypesList extends React.Component {
                   params: params.row,
                 }),
                 history.push(
-                  `/operations/utilities/transformationtypes/edit/${params.id}`
+                  `/operations/utilities/processingtypes/edit/${params.id}`
                 ),
               ]}
             />
@@ -202,7 +202,7 @@ class OperationsTransformationTypesList extends React.Component {
               onClick={() => [
                 this.setState({ deleteOpen: true, id: params.id }),
                 history.push(
-                  `/operations/utilities/transformationtypes/delete/${params.id}`
+                  `/operations/utilities/processingtypes/delete/${params.id}`
                 ),
               ]}
             />

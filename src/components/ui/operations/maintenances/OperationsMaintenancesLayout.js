@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import history from "./../../../../history";
 
 import OperationsMaintenancesMaintenancesLayout from "./OperationsMaintenancesMaintenancesLayout";
+import OperationProductionsMaintenancesLayout from "./OperationProductionsMaintenancesLayout";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -74,7 +75,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function OperationsMaintenancesLayout({ token }) {
+function OperationsMaintenancesLayout({ token, userId }) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
@@ -93,17 +94,31 @@ function OperationsMaintenancesLayout({ token }) {
         className={classes.tabs}
       >
         <Tab
-          label="Maintenances"
+          label="Processing Maintenances"
           {...a11yProps(0)}
           onClick={(event) => {
             event.preventDefault();
             history.push(`/operations/maintenances/maintenances`);
           }}
         />
+        <Tab
+          label="Production Maintenances"
+          {...a11yProps(0)}
+          onClick={(event) => {
+            event.preventDefault();
+            history.push(`/operations/maintenances/productionmaintenances`);
+          }}
+        />
       </Tabs>
 
       <TabPanel value={value} index={0}>
-        <OperationsMaintenancesMaintenancesLayout token={token} />
+        <OperationsMaintenancesMaintenancesLayout
+          token={token}
+          userId={userId}
+        />
+      </TabPanel>
+      <TabPanel value={value} index={1}>
+        <OperationProductionsMaintenancesLayout token={token} userId={userId} />
       </TabPanel>
     </div>
   );

@@ -9,13 +9,13 @@ import CancelRoundedIcon from "@material-ui/icons/CancelRounded";
 import AssignmentIcon from "@material-ui/icons/Assignment";
 import Typography from "@material-ui/core/Typography";
 import history from "../../../../history";
-import { fetchTransformationPhases } from "../../../../actions";
+import { fetchProductionFinishings } from "../../../../actions";
 import DataGridContainer from "../../../DataGridContainer";
 
-import OperationsTransformationPhaseDelete from "./OperationsTransformationPhaseDelete";
-import OperationsTransformationPhaseEditForm from "./OperationsTransformationPhaseEditForm";
+import OperationsProductionFinishingDelete from "./OperationsProductionFinishingDelete";
+import OperationsProductionFinishingEditForm from "./OperationsProductionFinishingEditForm";
 
-class OperationsTransformationPhaseList extends React.Component {
+class OperationsProductionFinishingsList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -33,7 +33,7 @@ class OperationsTransformationPhaseList extends React.Component {
     };
   }
   componentDidMount() {
-    this.props.fetchTransformationPhases(this.props.token);
+    this.props.fetchProductionFinishings(this.props.token);
   }
 
   handleDialogOpenStatus = () => {
@@ -78,11 +78,11 @@ class OperationsTransformationPhaseList extends React.Component {
           open={this.state.editOpen}
           onClose={() => [
             this.setState({ editOpen: false }),
-            history.push("/operations/utilities/processingphases"),
+            history.push("/operations/finishings/productionfinishings"),
           ]}
         >
           <DialogContent>
-            <OperationsTransformationPhaseEditForm
+            <OperationsProductionFinishingEditForm
               token={this.props.token}
               userId={this.props.userId}
               params={this.state.params}
@@ -105,11 +105,11 @@ class OperationsTransformationPhaseList extends React.Component {
           open={this.state.deleteOpen}
           onClose={() => [
             this.setState({ deleteOpen: false }),
-            history.push(`/operations/utilities/processingphases`),
+            history.push(`/operations/finishings/productionfinishings`),
           ]}
         >
           <DialogContent>
-            <OperationsTransformationPhaseDelete
+            <OperationsProductionFinishingDelete
               token={this.props.token}
               userId={this.props.userId}
               id={this.state.id}
@@ -130,7 +130,7 @@ class OperationsTransformationPhaseList extends React.Component {
           open={this.state.cancelOpen}
           onClose={() => [
             this.setState({ cancelOpen: false }),
-            history.push(`/operations/utilities/processingphases`),
+            history.push(`/operations/finishings/productionfinishings`),
           ]}
         >
           <DialogContent>
@@ -150,7 +150,7 @@ class OperationsTransformationPhaseList extends React.Component {
           open={this.state.assignOpen}
           onClose={() => [
             this.setState({ assignOpen: false }),
-            history.push(`/operations/utilities/processingphases`),
+            history.push(`/operations/productionfinishings/finishings`),
           ]}
         ></Dialog>
       </>
@@ -181,7 +181,7 @@ class OperationsTransformationPhaseList extends React.Component {
                   params: params.row,
                 }),
                 history.push(
-                  `/operations/utilities/processingphases/edit/${params.id}`
+                  `/operations/finishings/productionfinishings/edit/${params.id}`
                 ),
               ]}
             />
@@ -202,7 +202,7 @@ class OperationsTransformationPhaseList extends React.Component {
               onClick={() => [
                 this.setState({ deleteOpen: true, id: params.id }),
                 history.push(
-                  `/operations/utilities/processingphases/delete/${params.id}`
+                  `/operations/finishings/productionfinishings/delete/${params.id}`
                 ),
               ]}
             />
@@ -210,14 +210,14 @@ class OperationsTransformationPhaseList extends React.Component {
         ),
       },
     ];
-    this.props.operationsTransformationPhases.map(
-      (operationsTransformationPhase) => {
+    this.props.operationProductionFinishings.map(
+      (operationProductionFinishing) => {
         let row = {
           numbering: ++counter,
-          id: operationsTransformationPhase.id,
-          code: operationsTransformationPhase.code,
-          name: operationsTransformationPhase.name,
-          description: operationsTransformationPhase.description,
+          id: operationProductionFinishing.id,
+          code: operationProductionFinishing.code,
+          name: operationProductionFinishing.name,
+          description: operationProductionFinishing.description,
         };
         rows.push(row);
       }
@@ -248,12 +248,12 @@ class OperationsTransformationPhaseList extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    operationsTransformationPhases: Object.values(
-      state.operationsTransformationPhase
+    operationProductionFinishings: Object.values(
+      state.operationProductionFinishing
     ),
   };
 };
 
-export default connect(mapStateToProps, { fetchTransformationPhases })(
-  OperationsTransformationPhaseList
+export default connect(mapStateToProps, { fetchProductionFinishings })(
+  OperationsProductionFinishingsList
 );

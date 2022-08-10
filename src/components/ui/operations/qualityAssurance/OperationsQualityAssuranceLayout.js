@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import history from "./../../../../history";
 
 import OperationsQualityAssuranceProcessingLayout from "./OperationsQualityAssuranceProcessingLayout";
+import OperationsProductionQualityAssuranceLayout from "./OperationsProductionQualityAssuranceLayout";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -74,7 +75,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function OperationsQualityAssuranceLayout({ token }) {
+function OperationsQualityAssuranceLayout({ token, userId }) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
@@ -93,17 +94,36 @@ function OperationsQualityAssuranceLayout({ token }) {
         className={classes.tabs}
       >
         <Tab
-          label="Quality Assurances"
+          label="Processings Quality Assurances"
           {...a11yProps(0)}
           onClick={(event) => {
             event.preventDefault();
             history.push(`/operations/qualityassurances/qualityassurances`);
           }}
         />
+        <Tab
+          label="Production Quality Assurances"
+          {...a11yProps(0)}
+          onClick={(event) => {
+            event.preventDefault();
+            history.push(
+              `/operations/qualityassurances/productionqualityassurances`
+            );
+          }}
+        />
       </Tabs>
 
       <TabPanel value={value} index={0}>
-        <OperationsQualityAssuranceProcessingLayout token={token} />
+        <OperationsQualityAssuranceProcessingLayout
+          token={token}
+          userId={userId}
+        />
+      </TabPanel>
+      <TabPanel value={value} index={1}>
+        <OperationsProductionQualityAssuranceLayout
+          token={token}
+          userId={userId}
+        />
       </TabPanel>
     </div>
   );

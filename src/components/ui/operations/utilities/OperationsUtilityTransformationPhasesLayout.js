@@ -129,9 +129,7 @@ function OperationsUtilityTransformationPhasesLayout(props) {
                 className={classes.addButton}
                 onClick={() => [
                   setOpen(true),
-                  history.push(
-                    "/operations/utilities/transformationphases/new"
-                  ),
+                  history.push("/operations/utilities/processingphases/new"),
                 ]}
               >
                 Create Transformation Phase
@@ -155,7 +153,7 @@ function OperationsUtilityTransformationPhasesLayout(props) {
         open={open}
         onClose={() => [
           setOpen(false),
-          history.push("/operations/utilities/transformationphases"),
+          history.push("/operations/utilities/processingphases"),
         ]}
       >
         <DialogContent>

@@ -73,6 +73,14 @@ import operationQualityAssuranceTypeReducer from "./operationQualityAssuranceTyp
 import operationsQualityAssurancePhaseReducer from "./operationsQualityAssurancePhaseReducer";
 import operationsQualityAssurancePhaseEventReducer from "./operationsQualityAssurancePhaseEventReducer";
 import operationMaintenanceTypeReducer from "./operationMaintenanceTypeReducer";
+import operationFinishingReducer from "./operationFinishingReducer";
+import operationQualityAssuranceReducer from "./operationQualityAssuranceReducer";
+import operationMaintenanceReducer from "./operationMaintenanceReducer";
+import operationProcessingReducer from "./operationProcessingReducer";
+import operationOperationReducer from "./operationOperationReducer";
+import operationProductionMaintenanceReducer from "./operationProductionMaintenanceReducer";
+import operationProductionQualityAssuranceReducer from "./operationProductionQualityAssuranceReducer";
+import operationProductionFinishingReducer from "./operationProductionFinishingReducer";
 
 export default combineReducers({
   auth: authReducer,
@@ -151,4 +159,13 @@ export default combineReducers({
   operationsQualityAssurancePhaseEvent:
     operationsQualityAssurancePhaseEventReducer,
   operationMaintenanceType: operationMaintenanceTypeReducer,
+  operationFinishing: operationFinishingReducer,
+  operationQualityAssurance: operationQualityAssuranceReducer,
+  operationMaintenance: operationMaintenanceReducer,
+  operationProcessing: operationProcessingReducer,
+  operationOperation: operationOperationReducer,
+  operationProductionMaintenance: operationProductionMaintenanceReducer,
+  operationProductionQualityAssurance:
+    operationProductionQualityAssuranceReducer,
+  operationProductionFinishing: operationProductionFinishingReducer,
 });

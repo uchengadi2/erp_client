@@ -354,6 +354,46 @@ import {
   FETCH_OPERATIONMAINTENANCETYPE,
   EDIT_OPERATIONMAINTENANCETYPE,
   DELETE_OPERATIONMAINTENANCETYPE,
+  CREATE_FINISHING,
+  FETCH_FINISHINGS,
+  FETCH_FINISHING,
+  EDIT_FINISHING,
+  DELETE_FINISHING,
+  CREATE_QUALITYASSURANCE,
+  FETCH_QUALITYASSURANCES,
+  FETCH_QUALITYASSURANCE,
+  EDIT_QUALITYASSURANCE,
+  DELETE_QUALITYASSURANCE,
+  CREATE_OPERATIONMAINTENANCE,
+  FETCH_OPERATIONMAINTENANCES,
+  FETCH_OPERATIONMAINTENANCE,
+  EDIT_OPERATIONMAINTENANCE,
+  DELETE_OPERATIONMAINTENANCE,
+  CREATE_OPERATIONPROCESSING,
+  FETCH_OPERATIONPROCESSINGS,
+  FETCH_OPERATIONPROCESSING,
+  EDIT_OPERATIONPROCESSING,
+  DELETE_OPERATIONPROCESSING,
+  CREATE_OPERATIONOPERATION,
+  FETCH_OPERATIONOPERATIONS,
+  FETCH_OPERATIONOPERATION,
+  EDIT_OPERATIONOPERATION,
+  DELETE_OPERATIONOPERATION,
+  CREATE_OPERATIONPRODUCTIONMAINTENANCE,
+  FETCH_OPERATIONPRODUCTIONMAINTENANCES,
+  FETCH_OPERATIONPRODUCTIONMAINTENANCE,
+  EDIT_OPERATIONPRODUCTIONMAINTENANCE,
+  DELETE_OPERATIONPRODUCTIONMAINTENANCE,
+  CREATE_PRODUCTIONQUALITYASSURANCE,
+  FETCH_PRODUCTIONQUALITYASSURANCES,
+  FETCH_PRODUCTIONQUALITYASSURANCE,
+  EDIT_PRODUCTIONQUALITYASSURANCE,
+  DELETE_PRODUCTIONQUALITYASSURANCE,
+  CREATE_PRODUCTIONFINISHING,
+  FETCH_PRODUCTIONFINISHINGS,
+  FETCH_PRODUCTIONFINISHING,
+  EDIT_PRODUCTIONFINISHING,
+  DELETE_PRODUCTIONFINISHING,
 } from "./types";
 
 //authentication and authorization  operations
@@ -4142,5 +4182,460 @@ export const deleteOperationMaintenanceType = (id, token) => {
   return async (dispatch) => {
     await data.delete(`/officeoperations/${id}`);
     dispatch({ type: DELETE_OPERATIONMAINTENANCETYPE, payload: id });
+  };
+};
+
+//////////////////////////////////  OPERATIONS ON FINISHING ////////////////////
+
+export const createFinishing = (formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.post("/officeoperations", formValues);
+
+    dispatch({
+      type: CREATE_FINISHING,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchFinishings = (tokens) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
+  return async (dispatch) => {
+    const response = await data.get("/officeoperations");
+
+    dispatch({
+      type: FETCH_FINISHINGS,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchFinishing = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.get(`/officeoperations/${id}`);
+    dispatch({
+      type: FETCH_FINISHING,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const editFinishing = (id, formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    dispatch({
+      type: EDIT_FINISHING,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const deleteFinishing = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    await data.delete(`/officeoperations/${id}`);
+    dispatch({ type: DELETE_FINISHING, payload: id });
+  };
+};
+
+//////////////////////////////////  OPERATIONS ON  QUALITY ASSURANCE ////////////////////
+
+export const createQualityAssurance = (formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.post("/officeoperations", formValues);
+
+    dispatch({
+      type: CREATE_QUALITYASSURANCE,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchQualityAssurances = (tokens) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
+  return async (dispatch) => {
+    const response = await data.get("/officeoperations");
+
+    dispatch({
+      type: FETCH_QUALITYASSURANCES,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchQualityAssurance = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.get(`/officeoperations/${id}`);
+    dispatch({
+      type: FETCH_QUALITYASSURANCE,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const editQualityAssurance = (id, formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    dispatch({
+      type: EDIT_QUALITYASSURANCE,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const deleteQualityAssurance = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    await data.delete(`/officeoperations/${id}`);
+    dispatch({ type: DELETE_QUALITYASSURANCE, payload: id });
+  };
+};
+
+/////////////////////////////////  OPERATIONS MAINTENANCE ////////////////////
+
+export const createOperationMaintenance = (formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.post("/officeoperations", formValues);
+
+    dispatch({
+      type: CREATE_OPERATIONMAINTENANCE,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchOperationMaintenances = (tokens) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
+  return async (dispatch) => {
+    const response = await data.get("/officeoperations");
+
+    dispatch({
+      type: FETCH_OPERATIONMAINTENANCES,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchOperationMaintenance = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.get(`/officeoperations/${id}`);
+    dispatch({
+      type: FETCH_OPERATIONMAINTENANCE,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const editOperationMaintenance = (id, formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    dispatch({
+      type: EDIT_OPERATIONMAINTENANCE,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const deleteOperationMaintenance = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    await data.delete(`/officeoperations/${id}`);
+    dispatch({ type: DELETE_OPERATIONMAINTENANCE, payload: id });
+  };
+};
+
+/////////////////////////////////  OPERATIONS PROCESSING ////////////////////
+
+export const createOperationProcessing = (formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.post("/officeoperations", formValues);
+
+    dispatch({
+      type: CREATE_OPERATIONPROCESSING,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchOperationProcessings = (tokens) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
+  return async (dispatch) => {
+    const response = await data.get("/officeoperations");
+
+    dispatch({
+      type: FETCH_OPERATIONPROCESSINGS,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchOperationProcessing = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.get(`/officeoperations/${id}`);
+    dispatch({
+      type: FETCH_OPERATIONPROCESSING,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const editOperationProcessing = (id, formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    dispatch({
+      type: EDIT_OPERATIONPROCESSING,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const deleteOperationProcessing = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    await data.delete(`/officeoperations/${id}`);
+    dispatch({ type: DELETE_OPERATIONPROCESSING, payload: id });
+  };
+};
+
+/////////////////////////////////  OPERATIONS OPERATIONS ////////////////////
+
+export const createOperationOperation = (formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.post("/officeoperations", formValues);
+
+    dispatch({
+      type: CREATE_OPERATIONOPERATION,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchOperationOperations = (tokens) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
+  return async (dispatch) => {
+    const response = await data.get("/officeoperations");
+
+    dispatch({
+      type: FETCH_OPERATIONOPERATIONS,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchOperationOperation = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.get(`/officeoperations/${id}`);
+    dispatch({
+      type: FETCH_OPERATIONOPERATION,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const editOperationOperation = (id, formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    dispatch({
+      type: EDIT_OPERATIONOPERATION,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const deleteOperationOperation = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    await data.delete(`/officeoperations/${id}`);
+    dispatch({ type: DELETE_OPERATIONOPERATION, payload: id });
+  };
+};
+
+/////////////////////////////////  OPERATIONS PRODUCTION MAINTENANCE ////////////////////
+
+export const createOperationProductionMaintenance = (formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.post("/officeoperations", formValues);
+
+    dispatch({
+      type: CREATE_OPERATIONPRODUCTIONMAINTENANCE,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchOperationProductionMaintenances = (tokens) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
+  return async (dispatch) => {
+    const response = await data.get("/officeoperations");
+
+    dispatch({
+      type: FETCH_OPERATIONPRODUCTIONMAINTENANCES,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchOperationProductionMaintenance = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.get(`/officeoperations/${id}`);
+    dispatch({
+      type: FETCH_OPERATIONPRODUCTIONMAINTENANCE,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const editOperationProductionMaintenance = (id, formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    dispatch({
+      type: EDIT_OPERATIONPRODUCTIONMAINTENANCE,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const deleteOperationProductionMaintenance = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    await data.delete(`/officeoperations/${id}`);
+    dispatch({ type: DELETE_OPERATIONPRODUCTIONMAINTENANCE, payload: id });
+  };
+};
+
+/////////////////////////////////  OPERATIONS PRODUCTION QUALITY ASSURANCE ////////////////////
+
+export const createOperationProductionQualityAssurance = (
+  formValues,
+  token
+) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.post("/officeoperations", formValues);
+
+    dispatch({
+      type: CREATE_PRODUCTIONQUALITYASSURANCE,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchOperationProductionQualityAssurances = (tokens) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
+  return async (dispatch) => {
+    const response = await data.get("/officeoperations");
+
+    dispatch({
+      type: FETCH_PRODUCTIONQUALITYASSURANCES,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchOperationProductionQualityAssurance = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.get(`/officeoperations/${id}`);
+    dispatch({
+      type: FETCH_PRODUCTIONQUALITYASSURANCE,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const editOperationProductionQualityAssurance = (
+  id,
+  formValues,
+  token
+) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    dispatch({
+      type: EDIT_PRODUCTIONQUALITYASSURANCE,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const deleteOperationProductionQualityAssurance = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    await data.delete(`/officeoperations/${id}`);
+    dispatch({ type: DELETE_PRODUCTIONQUALITYASSURANCE, payload: id });
+  };
+};
+
+//////////////////////////////////  OPERATIONS ON PRODUCTION FINISHING ////////////////////
+
+export const createProductionFinishing = (formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.post("/officeoperations", formValues);
+
+    dispatch({
+      type: CREATE_PRODUCTIONFINISHING,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchProductionFinishings = (tokens) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
+  return async (dispatch) => {
+    const response = await data.get("/officeoperations");
+
+    dispatch({
+      type: FETCH_PRODUCTIONFINISHINGS,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchProductionFinishing = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.get(`/officeoperations/${id}`);
+    dispatch({
+      type: FETCH_PRODUCTIONFINISHING,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const editProductionFinishing = (id, formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    dispatch({
+      type: EDIT_PRODUCTIONFINISHING,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const deleteProductionFinishing = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    await data.delete(`/officeoperations/${id}`);
+    dispatch({ type: DELETE_PRODUCTIONFINISHING, payload: id });
   };
 };
