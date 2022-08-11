@@ -10,8 +10,7 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import history from "../../../../history";
-import ServiceOutletsAndTransactionTypesFilter from "../../headerFilters/ServiceOutletsAndTransactionTypesFilter";
-
+import CrmContactTypesFilter from "../../headerFilters/CrmContactTypesFilter";
 import CrmContactsContactsList from "../../../crm/contacts/contacts/CrmContactsContactsList";
 import CrmContactsContactsCreateForm from "../../../crm/contacts/contacts/CrmContactsContactsCreateForm";
 
@@ -114,7 +113,7 @@ function CrmContactContactsLayout(props) {
     >
       <Grid item container direction="column" sm={width}>
         <Grid item className={classes.selectField}>
-          <ServiceOutletsAndTransactionTypesFilter />
+          <CrmContactTypesFilter />
         </Grid>
         <Grid
           item

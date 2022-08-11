@@ -10,8 +10,7 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import history from "../../../../history";
-import ServiceOutletsAndTransactionTypesFilter from "../../headerFilters/ServiceOutletsAndTransactionTypesFilter";
-
+import CrmCustomerTypeFilter from "../../headerFilters/CrmCustomerTypeFilter";
 import CrmCustomersCustomersCreateForm from "../../../crm/customers/customers/CrmCustomersCustomersCreateForm";
 import CrmCustomersCustomersList from "../../../crm/customers/customers/CrmCustomersCustomersList";
 
@@ -114,7 +113,7 @@ function CrmCustomerCustomersLayout(props) {
     >
       <Grid item container direction="column" sm={width}>
         <Grid item className={classes.selectField}>
-          <ServiceOutletsAndTransactionTypesFilter />
+          <CrmCustomerTypeFilter />
         </Grid>
         <Grid
           item

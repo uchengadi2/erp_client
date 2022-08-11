@@ -10,8 +10,7 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import history from "../../../../history";
-import ServiceOutletsAndTransactionTypesFilter from "../../headerFilters/ServiceOutletsAndTransactionTypesFilter";
-
+import CrmPartnerTypeFilter from "../../headerFilters/CrmPartnerTypeFilter";
 import CrmPartnersPartnersCreateForm from "../../../crm/partners/partners/CrmPartnersPartnersCreateForm";
 import CrmPartnersPartnersList from "../../../crm/partners/partners/CrmPartnersPartnersList";
 
@@ -114,7 +113,7 @@ function CrmPartnerPartnersLayout(props) {
     >
       <Grid item container direction="column" sm={width}>
         <Grid item className={classes.selectField}>
-          <ServiceOutletsAndTransactionTypesFilter />
+          <CrmPartnerTypeFilter />
         </Grid>
         <Grid
           item

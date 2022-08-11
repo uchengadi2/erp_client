@@ -10,8 +10,7 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import history from "../../../../history";
-import ServiceOutletsAndTransactionTypesFilter from "../../headerFilters/ServiceOutletsAndTransactionTypesFilter";
-
+import CrmSupplierTypeFilter from "../../headerFilters/CrmSupplierTypeFilter";
 import CrmSuppliersSuppliersCreateForm from "../../../crm/suppliers/supplier/CrmSuppliersSuppliersCreateForm";
 import CrmSuppliersSuppliersList from "../../../crm/suppliers/supplier/CrmSuppliersSuppliersList";
 const useStyles = makeStyles((theme) => ({
@@ -113,7 +112,7 @@ function CrmSupplierSuppliersLayout(props) {
     >
       <Grid item container direction="column" sm={width}>
         <Grid item className={classes.selectField}>
-          <ServiceOutletsAndTransactionTypesFilter />
+          <CrmSupplierTypeFilter />
         </Grid>
         <Grid
           item
