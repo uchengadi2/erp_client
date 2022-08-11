@@ -8,8 +8,7 @@ import Box from "@material-ui/core/Box";
 import { Link } from "react-router-dom";
 import history from "./../../../../history";
 
-import CrmLocalCustomersLayout from "./CrmLocalCustomersLayout";
-import CrmForeignCustomerLayout from "./CrmForeignCustomersLayout";
+import CrmCustomerCustomersLayout from "./CrmCustomerCustomersLayout";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -94,28 +93,17 @@ function CrmCustomersLayout({ token }) {
         className={classes.tabs}
       >
         <Tab
-          label="Customers Within The Country"
+          label="Customers"
           {...a11yProps(0)}
           onClick={(event) => {
             event.preventDefault();
-            history.push(`/crm/customers/local`);
-          }}
-        />
-        <Tab
-          label="Customers Outside The Country "
-          {...a11yProps(0)}
-          onClick={(event) => {
-            event.preventDefault();
-            history.push(`/crm/customers/foreign`);
+            history.push(`/crm/customers/customers`);
           }}
         />
       </Tabs>
 
       <TabPanel value={value} index={0}>
-        <CrmLocalCustomersLayout token={token} />
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-        <CrmForeignCustomerLayout token={token} />
+        <CrmCustomerCustomersLayout token={token} />
       </TabPanel>
     </div>
   );

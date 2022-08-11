@@ -454,6 +454,26 @@ import {
   FETCH_PROJECTMONITORINGACTIVITY,
   EDIT_PROJECTMONITORINGACTIVITY,
   DELETE_PROJECTMONITORINGACTIVITY,
+  CREATE_CONTACT,
+  FETCH_CONTACTS,
+  FETCH_CONTACT,
+  EDIT_CONTACT,
+  DELETE_CONTACT,
+  CREATE_CUSTOMER,
+  FETCH_CUSTOMERS,
+  FETCH_CUSTOMER,
+  EDIT_CUSTOMER,
+  DELETE_CUSTOMER,
+  CREATE_PARTNER,
+  FETCH_PARTNERS,
+  FETCH_PARTNER,
+  EDIT_PARTNER,
+  DELETE_PARTNER,
+  CREATE_SUPPLIER,
+  FETCH_SUPPLIERS,
+  FETCH_SUPPLIER,
+  EDIT_SUPPLIER,
+  DELETE_SUPPLIER,
 } from "./types";
 
 //authentication and authorization  operations
@@ -5369,5 +5389,229 @@ export const deleteProjectMonitoringActivity = (id, token) => {
   return async (dispatch) => {
     await data.delete(`/officeoperations/${id}`);
     dispatch({ type: DELETE_PROJECTMONITORINGACTIVITY, payload: id });
+  };
+};
+
+//////////////////////////////////  CRM CONTACTS ////////////////////
+
+export const createContact = (formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.post("/officeoperations", formValues);
+
+    dispatch({
+      type: CREATE_CONTACT,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchContacts = (tokens) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
+  return async (dispatch) => {
+    const response = await data.get("/officeoperations");
+
+    dispatch({
+      type: FETCH_CONTACTS,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchContact = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.get(`/officeoperations/${id}`);
+    dispatch({
+      type: FETCH_CONTACT,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const editContact = (id, formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    dispatch({
+      type: EDIT_CONTACT,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const deleteContact = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    await data.delete(`/officeoperations/${id}`);
+    dispatch({ type: DELETE_CONTACT, payload: id });
+  };
+};
+
+//////////////////////////////////  CRM CUSTOMER ////////////////////
+
+export const createCustomer = (formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.post("/officeoperations", formValues);
+
+    dispatch({
+      type: CREATE_CUSTOMER,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchCustomers = (tokens) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
+  return async (dispatch) => {
+    const response = await data.get("/officeoperations");
+
+    dispatch({
+      type: FETCH_CUSTOMERS,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchCustomer = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.get(`/officeoperations/${id}`);
+    dispatch({
+      type: FETCH_CUSTOMER,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const editCustomer = (id, formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    dispatch({
+      type: EDIT_CUSTOMER,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const deleteCustomer = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    await data.delete(`/officeoperations/${id}`);
+    dispatch({ type: DELETE_CUSTOMER, payload: id });
+  };
+};
+
+//////////////////////////////////  CRM PARTNERS ////////////////////
+
+export const createPartner = (formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.post("/officeoperations", formValues);
+
+    dispatch({
+      type: CREATE_PARTNER,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchPartners = (tokens) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
+  return async (dispatch) => {
+    const response = await data.get("/officeoperations");
+
+    dispatch({
+      type: FETCH_PARTNERS,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchPartner = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.get(`/officeoperations/${id}`);
+    dispatch({
+      type: FETCH_PARTNER,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const editPartner = (id, formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    dispatch({
+      type: EDIT_PARTNER,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const deletePartner = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    await data.delete(`/officeoperations/${id}`);
+    dispatch({ type: DELETE_PARTNER, payload: id });
+  };
+};
+
+//////////////////////////////////  CRM SUPPIERS ////////////////////
+
+export const createSupplier = (formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.post("/officeoperations", formValues);
+
+    dispatch({
+      type: CREATE_SUPPLIER,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchSuppliers = (tokens) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
+  return async (dispatch) => {
+    const response = await data.get("/officeoperations");
+
+    dispatch({
+      type: FETCH_SUPPLIERS,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchSupplier = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.get(`/officeoperations/${id}`);
+    dispatch({
+      type: FETCH_SUPPLIER,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const editSupplier = (id, formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    dispatch({
+      type: EDIT_SUPPLIER,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const deleteSupplier = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    await data.delete(`/officeoperations/${id}`);
+    dispatch({ type: DELETE_SUPPLIER, payload: id });
   };
 };

@@ -8,8 +8,7 @@ import Box from "@material-ui/core/Box";
 import { Link } from "react-router-dom";
 import history from "./../../../../history";
 
-import CrmLocalSuppliersLayout from "./CrmLocalSuppliersLayout";
-import CrmForeignSuppliersLayout from "./CrmForeignSuppliersLayout";
+import CrmSupplierSuppliersLayout from "./CrmSupplierSuppliersLayout";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -94,28 +93,17 @@ function CrmSuppliersLayout({ token }) {
         className={classes.tabs}
       >
         <Tab
-          label="Local Suppliers"
+          label="Suppliers"
           {...a11yProps(0)}
           onClick={(event) => {
             event.preventDefault();
-            history.push(`/crm/suppliers/local`);
-          }}
-        />
-        <Tab
-          label="Foreign Suppliers"
-          {...a11yProps(0)}
-          onClick={(event) => {
-            event.preventDefault();
-            history.push(`/crm/suppliers/foreign`);
+            history.push(`/crm/suppliers/suppliers`);
           }}
         />
       </Tabs>
 
       <TabPanel value={value} index={0}>
-        <CrmLocalSuppliersLayout token={token} />
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-        <CrmForeignSuppliersLayout token={token} />
+        <CrmSupplierSuppliersLayout token={token} />
       </TabPanel>
     </div>
   );

@@ -8,9 +8,7 @@ import Box from "@material-ui/core/Box";
 import { Link } from "react-router-dom";
 import history from "./../../../../history";
 
-import CrmCustomerContactsLayout from "./CrmCustomerContactsLayout";
-import CrmPartnerContactsLayout from "./CrmPartnerContactsLayout";
-import CrmSupplierContactsLayout from "./CrmSupplierContactsLayout";
+import CrmContactContactsLayout from "./CrmContactContactsLayout";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -95,39 +93,17 @@ function CrmContactsLayout({ token }) {
         className={classes.tabs}
       >
         <Tab
-          label="Customer Contacts"
+          label="Contacts"
           {...a11yProps(0)}
           onClick={(event) => {
             event.preventDefault();
-            history.push(`/crm/contacts/customers`);
-          }}
-        />
-        <Tab
-          label="Partner Contacts"
-          {...a11yProps(0)}
-          onClick={(event) => {
-            event.preventDefault();
-            history.push(`/crm/contacts/partners`);
-          }}
-        />
-        <Tab
-          label="Supplier Contacts"
-          {...a11yProps(0)}
-          onClick={(event) => {
-            event.preventDefault();
-            history.push(`/crm/contacts/suppliers`);
+            history.push(`/crm/contacts/contacts`);
           }}
         />
       </Tabs>
 
       <TabPanel value={value} index={0}>
-        <CrmCustomerContactsLayout token={token} />
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-        <CrmPartnerContactsLayout token={token} />
-      </TabPanel>
-      <TabPanel value={value} index={2}>
-        <CrmSupplierContactsLayout token={token} />
+        <CrmContactContactsLayout token={token} />
       </TabPanel>
     </div>
   );

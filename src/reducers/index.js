@@ -93,6 +93,10 @@ import projectPlanningSequencingReducer from "./projectPlanningSequencingReducer
 import projectMonitoringTaskReducer from "./projectMonitoringTaskReducer";
 import projectClosureReducer from "./projectClosureReducer";
 import projectMonitoringActivityReducer from "./projectMonitoringActivityReducer";
+import crmContactReducer from "./crmContactReducer";
+import crmCustomerReducer from "./crmCustomerReducer";
+import crmPartnerReducer from "./crmPartnerReducer";
+import crmSupplierReducer from "./crmSupplierReducer";
 
 export default combineReducers({
   auth: authReducer,
@@ -192,4 +196,8 @@ export default combineReducers({
   projectMonitoringTask: projectMonitoringTaskReducer,
   projectClosure: projectClosureReducer,
   projectMonitoringActivity: projectMonitoringActivityReducer,
+  crmContact: crmContactReducer,
+  crmCustomer: crmCustomerReducer,
+  crmPartner: crmPartnerReducer,
+  crmSupplier: crmSupplierReducer,
 });
