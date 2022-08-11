@@ -81,6 +81,18 @@ import operationOperationReducer from "./operationOperationReducer";
 import operationProductionMaintenanceReducer from "./operationProductionMaintenanceReducer";
 import operationProductionQualityAssuranceReducer from "./operationProductionQualityAssuranceReducer";
 import operationProductionFinishingReducer from "./operationProductionFinishingReducer";
+import projectProjectReducer from "./projectProjectReducer";
+import projectProjectResourceReducer from "./projectProjectResourceReducer";
+import projectProjectBudgetingReducer from "./projectProjectBudgetingReducer";
+import projectPlanningTaskReducer from "./projectPlanningTaskReducer";
+import projectPlanningActivityReducer from "./projectPlanningActivityReducer";
+import projectPlanningSchedulingReducer from "./projectPlanningSchedulingReducer";
+import projectExecutionActivityReducer from "./projectExecutionActivityReducer";
+import projectPlanningStepReducer from "./projectPlanningStepReducer";
+import projectPlanningSequencingReducer from "./projectPlanningSequencingReducer";
+import projectMonitoringTaskReducer from "./projectMonitoringTaskReducer";
+import projectClosureReducer from "./projectClosureReducer";
+import projectMonitoringActivityReducer from "./projectMonitoringActivityReducer";
 
 export default combineReducers({
   auth: authReducer,
@@ -168,4 +180,16 @@ export default combineReducers({
   operationProductionQualityAssurance:
     operationProductionQualityAssuranceReducer,
   operationProductionFinishing: operationProductionFinishingReducer,
+  projectProject: projectProjectReducer,
+  projectProjectResource: projectProjectResourceReducer,
+  projectProjectBudgeting: projectProjectBudgetingReducer,
+  projectPlanningTask: projectPlanningTaskReducer,
+  projectPlanningActivity: projectPlanningActivityReducer,
+  projectPlanningScheduling: projectPlanningSchedulingReducer,
+  projectExecutionActivity: projectExecutionActivityReducer,
+  projectPlanningStep: projectPlanningStepReducer,
+  projectPlanningSequencing: projectPlanningSequencingReducer,
+  projectMonitoringTask: projectMonitoringTaskReducer,
+  projectClosure: projectClosureReducer,
+  projectMonitoringActivity: projectMonitoringActivityReducer,
 });

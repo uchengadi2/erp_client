@@ -394,6 +394,66 @@ import {
   FETCH_PRODUCTIONFINISHING,
   EDIT_PRODUCTIONFINISHING,
   DELETE_PRODUCTIONFINISHING,
+  CREATE_PROJECTPROJECT,
+  FETCH_PROJECTPROJECTS,
+  FETCH_PROJECTPROJECT,
+  EDIT_PROJECTPROJECT,
+  DELETE_PROJECTPROJECT,
+  CREATE_PROJECTPROJECTRESOURCE,
+  FETCH_PROJECTPROJECTRESOURCES,
+  FETCH_PROJECTPROJECTRESOURCE,
+  EDIT_PROJECTPROJECTRESOURCE,
+  DELETE_PROJECTPROJECTRESOURCE,
+  CREATE_PROJECTPROJECTBUDGETING,
+  FETCH_PROJECTPROJECTBUDGETINGS,
+  FETCH_PROJECTPROJECTBUDGETING,
+  EDIT_PROJECTPROJECTBUDGETING,
+  DELETE_PROJECTPROJECTBUDGETING,
+  CREATE_PROJECTPLANNINGTASK,
+  FETCH_PROJECTPLANNINGTASKS,
+  FETCH_PROJECTPLANNINGTASK,
+  EDIT_PROJECTPLANNINGTASK,
+  DELETE_PROJECTPLANNINGTASK,
+  CREATE_PROJECTPLANNINGACTIVITY,
+  FETCH_PROJECTPLANNINGACTIVITIES,
+  FETCH_PROJECTPLANNINGACTIVITY,
+  EDIT_PROJECTPLANNINGACTIVITY,
+  DELETE_PROJECTPLANNINGACTIVITY,
+  CREATE_PROJECTPLANNINGSCHEDULING,
+  FETCH_PROJECTPLANNINGSCHEDULINGS,
+  FETCH_PROJECTPLANNINGSCHEDULING,
+  EDIT_PROJECTPLANNINGSCHEDULING,
+  DELETE_PROJECTPLANNINGSCHEDULING,
+  CREATE_PROJECTEXECUTIONACTIVITY,
+  FETCH_PROJECTEXECUTIONACTIVITIES,
+  FETCH_PROJECTEXECUTIONACTIVITY,
+  EDIT_PROJECTEXECUTIONACTIVITY,
+  DELETE_PROJECTEXECUTIONACTIVITY,
+  CREATE_PROJECTPLANNINGSTEP,
+  FETCH_PROJECTPLANNINGSTEPS,
+  FETCH_PROJECTPLANNINGSTEP,
+  EDIT_PROJECTPLANNINGSTEP,
+  DELETE_PROJECTPLANNINGSTEP,
+  CREATE_PROJECTPLANNINGSEQUENCING,
+  FETCH_PROJECTPLANNINGSEQUENCINGS,
+  FETCH_PROJECTPLANNINGSEQUENCING,
+  EDIT_PROJECTPLANNINGSEQUENCING,
+  DELETE_PROJECTPLANNINGSEQUENCING,
+  CREATE_PROJECTMONITORINGTASK,
+  FETCH_PROJECTMONITORINGTASKS,
+  FETCH_PROJECTMONITORINGTASK,
+  EDIT_PROJECTMONITORINGTASK,
+  DELETE_PROJECTMONITORINGTASK,
+  CREATE_PROJECTCLOSURE,
+  FETCH_PROJECTCLOSURES,
+  FETCH_PROJECTCLOSURE,
+  EDIT_PROJECTCLOSURE,
+  DELETE_PROJECTCLOSURE,
+  CREATE_PROJECTMONITORINGACTIVITY,
+  FETCH_PROJECTMONITORINGACTIVITIES,
+  FETCH_PROJECTMONITORINGACTIVITY,
+  EDIT_PROJECTMONITORINGACTIVITY,
+  DELETE_PROJECTMONITORINGACTIVITY,
 } from "./types";
 
 //authentication and authorization  operations
@@ -4637,5 +4697,677 @@ export const deleteProductionFinishing = (id, token) => {
   return async (dispatch) => {
     await data.delete(`/officeoperations/${id}`);
     dispatch({ type: DELETE_PRODUCTIONFINISHING, payload: id });
+  };
+};
+
+//////////////////////////////////  PROJECT PROJECTS ////////////////////
+
+export const createProject = (formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.post("/officeoperations", formValues);
+
+    dispatch({
+      type: CREATE_PROJECTPROJECT,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchProjects = (tokens) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
+  return async (dispatch) => {
+    const response = await data.get("/officeoperations");
+
+    dispatch({
+      type: FETCH_PROJECTPROJECTS,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchProject = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.get(`/officeoperations/${id}`);
+    dispatch({
+      type: FETCH_PROJECTPROJECT,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const editProject = (id, formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    dispatch({
+      type: EDIT_PROJECTPROJECT,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const deleteProject = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    await data.delete(`/officeoperations/${id}`);
+    dispatch({ type: DELETE_PROJECTPROJECT, payload: id });
+  };
+};
+
+//////////////////////////////////  PROJECT PROJECTS RESOURCES ////////////////////
+
+export const createProjectResource = (formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.post("/officeoperations", formValues);
+
+    dispatch({
+      type: CREATE_PROJECTPROJECTRESOURCE,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchProjectResources = (tokens) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
+  return async (dispatch) => {
+    const response = await data.get("/officeoperations");
+
+    dispatch({
+      type: FETCH_PROJECTPROJECTRESOURCES,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchProjectResource = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.get(`/officeoperations/${id}`);
+    dispatch({
+      type: FETCH_PROJECTPROJECTRESOURCE,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const editProjectResource = (id, formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    dispatch({
+      type: EDIT_PROJECTPROJECTRESOURCE,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const deleteProjectResource = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    await data.delete(`/officeoperations/${id}`);
+    dispatch({ type: DELETE_PROJECTPROJECTRESOURCE, payload: id });
+  };
+};
+
+//////////////////////////////////  PROJECT PROJECTS BUDGETING ////////////////////
+
+export const createProjectBudgeting = (formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.post("/officeoperations", formValues);
+
+    dispatch({
+      type: CREATE_PROJECTPROJECTBUDGETING,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchProjectBudgetings = (tokens) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
+  return async (dispatch) => {
+    const response = await data.get("/officeoperations");
+
+    dispatch({
+      type: FETCH_PROJECTPROJECTBUDGETINGS,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchProjectBudgeting = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.get(`/officeoperations/${id}`);
+    dispatch({
+      type: FETCH_PROJECTPROJECTBUDGETING,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const editProjectBudgeting = (id, formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    dispatch({
+      type: EDIT_PROJECTPROJECTBUDGETING,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const deleteProjectBudgeting = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    await data.delete(`/officeoperations/${id}`);
+    dispatch({ type: DELETE_PROJECTPROJECTBUDGETING, payload: id });
+  };
+};
+
+//////////////////////////////////  PROJECT PROJECTS PLANNING TASK ////////////////////
+
+export const createProjectPlanningTask = (formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.post("/officeoperations", formValues);
+
+    dispatch({
+      type: CREATE_PROJECTPLANNINGTASK,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchProjectPlanningTasks = (tokens) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
+  return async (dispatch) => {
+    const response = await data.get("/officeoperations");
+
+    dispatch({
+      type: FETCH_PROJECTPLANNINGTASKS,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchProjectPlanningTask = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.get(`/officeoperations/${id}`);
+    dispatch({
+      type: FETCH_PROJECTPLANNINGTASK,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const editProjectPlanningTask = (id, formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    dispatch({
+      type: EDIT_PROJECTPLANNINGTASK,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const deleteProjectPlanningTask = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    await data.delete(`/officeoperations/${id}`);
+    dispatch({ type: DELETE_PROJECTPLANNINGTASK, payload: id });
+  };
+};
+
+//////////////////////////////////  PROJECT PLANNING ACTIVITIES  ////////////////////
+
+export const createProjectPlanningActivity = (formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.post("/officeoperations", formValues);
+
+    dispatch({
+      type: CREATE_PROJECTPLANNINGACTIVITY,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchProjectPlanningActivities = (tokens) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
+  return async (dispatch) => {
+    const response = await data.get("/officeoperations");
+
+    dispatch({
+      type: FETCH_PROJECTPLANNINGACTIVITIES,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchProjectPlanningActivity = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.get(`/officeoperations/${id}`);
+    dispatch({
+      type: FETCH_PROJECTPLANNINGACTIVITY,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const editProjectPlanningActivity = (id, formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    dispatch({
+      type: EDIT_PROJECTPLANNINGACTIVITY,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const deleteProjectPlanningActivity = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    await data.delete(`/officeoperations/${id}`);
+    dispatch({ type: DELETE_PROJECTPLANNINGACTIVITY, payload: id });
+  };
+};
+
+//////////////////////////////////  PROJECT PLANNING SCHEDULINGS  ////////////////////
+
+export const createProjectPlanningScheduling = (formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.post("/officeoperations", formValues);
+
+    dispatch({
+      type: CREATE_PROJECTPLANNINGSCHEDULING,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchProjectPlanningSchedulings = (tokens) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
+  return async (dispatch) => {
+    const response = await data.get("/officeoperations");
+
+    dispatch({
+      type: FETCH_PROJECTPLANNINGSCHEDULINGS,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchProjectPlanningScheduling = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.get(`/officeoperations/${id}`);
+    dispatch({
+      type: FETCH_PROJECTPLANNINGSCHEDULING,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const editProjectPlanningScheduling = (id, formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    dispatch({
+      type: EDIT_PROJECTPLANNINGSCHEDULING,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const deleteProjectPlanningScheduling = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    await data.delete(`/officeoperations/${id}`);
+    dispatch({ type: DELETE_PROJECTPLANNINGSCHEDULING, payload: id });
+  };
+};
+
+//////////////////////////////////  PROJECT EXECUTION ACTIVITIES ////////////////////
+
+export const createProjectExecutionActivity = (formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.post("/officeoperations", formValues);
+
+    dispatch({
+      type: CREATE_PROJECTEXECUTIONACTIVITY,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchProjectExecutionActivities = (tokens) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
+  return async (dispatch) => {
+    const response = await data.get("/officeoperations");
+
+    dispatch({
+      type: FETCH_PROJECTEXECUTIONACTIVITIES,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchProjectExecutionActivity = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.get(`/officeoperations/${id}`);
+    dispatch({
+      type: FETCH_PROJECTEXECUTIONACTIVITY,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const editProjectExecutionActivity = (id, formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    dispatch({
+      type: EDIT_PROJECTEXECUTIONACTIVITY,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const deleteProjectExecutionActivity = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    await data.delete(`/officeoperations/${id}`);
+    dispatch({ type: DELETE_PROJECTEXECUTIONACTIVITY, payload: id });
+  };
+};
+
+//////////////////////////////////  PROJECT PLANNING STEPS ////////////////////
+
+export const createProjectPlanningStep = (formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.post("/officeoperations", formValues);
+
+    dispatch({
+      type: CREATE_PROJECTPLANNINGSTEP,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchProjectPlanningSteps = (tokens) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
+  return async (dispatch) => {
+    const response = await data.get("/officeoperations");
+
+    dispatch({
+      type: FETCH_PROJECTPLANNINGSTEPS,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchProjectPlanningStep = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.get(`/officeoperations/${id}`);
+    dispatch({
+      type: FETCH_PROJECTPLANNINGSTEP,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const editProjectPlanningStep = (id, formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    dispatch({
+      type: EDIT_PROJECTPLANNINGSTEP,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const deleteProjectPlanningStep = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    await data.delete(`/officeoperations/${id}`);
+    dispatch({ type: DELETE_PROJECTPLANNINGSTEP, payload: id });
+  };
+};
+
+//////////////////////////////////  PROJECT PLANNING SEQUENCING ////////////////////
+
+export const createProjectPlanningSequencing = (formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.post("/officeoperations", formValues);
+
+    dispatch({
+      type: CREATE_PROJECTPLANNINGSEQUENCING,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchProjectPlanningSequencings = (tokens) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
+  return async (dispatch) => {
+    const response = await data.get("/officeoperations");
+
+    dispatch({
+      type: FETCH_PROJECTPLANNINGSEQUENCINGS,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchProjectPlanningSequencing = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.get(`/officeoperations/${id}`);
+    dispatch({
+      type: FETCH_PROJECTPLANNINGSEQUENCING,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const editProjectPlanningSequencing = (id, formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    dispatch({
+      type: EDIT_PROJECTPLANNINGSEQUENCING,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const deleteProjectPlanningSequencing = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    await data.delete(`/officeoperations/${id}`);
+    dispatch({ type: DELETE_PROJECTPLANNINGSEQUENCING, payload: id });
+  };
+};
+
+//////////////////////////////////  PROJECT MONITORING TASK ////////////////////
+
+export const createProjectMonitoringTask = (formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.post("/officeoperations", formValues);
+
+    dispatch({
+      type: CREATE_PROJECTMONITORINGTASK,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchProjectMonitoringTasks = (tokens) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
+  return async (dispatch) => {
+    const response = await data.get("/officeoperations");
+
+    dispatch({
+      type: FETCH_PROJECTMONITORINGTASKS,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchProjectMonitoringTask = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.get(`/officeoperations/${id}`);
+    dispatch({
+      type: FETCH_PROJECTMONITORINGTASK,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const editProjectMonitoringTask = (id, formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    dispatch({
+      type: EDIT_PROJECTMONITORINGTASK,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const deleteProjectMonitoringTask = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    await data.delete(`/officeoperations/${id}`);
+    dispatch({ type: DELETE_PROJECTMONITORINGTASK, payload: id });
+  };
+};
+
+//////////////////////////////////  PROJECT CLOSURE ////////////////////
+
+export const createProjectClosure = (formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.post("/officeoperations", formValues);
+
+    dispatch({
+      type: CREATE_PROJECTCLOSURE,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchProjectClosures = (tokens) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
+  return async (dispatch) => {
+    const response = await data.get("/officeoperations");
+
+    dispatch({
+      type: FETCH_PROJECTCLOSURES,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchProjectClosure = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.get(`/officeoperations/${id}`);
+    dispatch({
+      type: FETCH_PROJECTCLOSURE,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const editProjectClosure = (id, formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    dispatch({
+      type: EDIT_PROJECTCLOSURE,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const deleteProjectClosure = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    await data.delete(`/officeoperations/${id}`);
+    dispatch({ type: DELETE_PROJECTCLOSURE, payload: id });
+  };
+};
+
+//////////////////////////////////  PROJECT MONITORING ACTIVITY ////////////////////
+
+export const createProjectMonitoringActivity = (formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.post("/officeoperations", formValues);
+
+    dispatch({
+      type: CREATE_PROJECTMONITORINGACTIVITY,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchProjectMonitoringActivities = (tokens) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
+  return async (dispatch) => {
+    const response = await data.get("/officeoperations");
+
+    dispatch({
+      type: FETCH_PROJECTMONITORINGACTIVITIES,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchProjectMonitoringActivity = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.get(`/officeoperations/${id}`);
+    dispatch({
+      type: FETCH_PROJECTMONITORINGACTIVITY,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const editProjectMonitoringActivity = (id, formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    dispatch({
+      type: EDIT_PROJECTMONITORINGACTIVITY,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const deleteProjectMonitoringActivity = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    await data.delete(`/officeoperations/${id}`);
+    dispatch({ type: DELETE_PROJECTMONITORINGACTIVITY, payload: id });
   };
 };

@@ -584,41 +584,41 @@ const Header = (props) => {
 
   const projectsOptions = [
     {
-      name: "Initiation",
-      link: "/projects/initiation",
+      name: "Projects",
+      link: "/projects/projects",
       activeIndex: 5,
       selectedIndex: 50,
     },
     {
       name: "Planning",
-      link: "/projects/planning",
+      link: "/projects/plannings",
       activeIndex: 5,
       selectedIndex: 51,
     },
-    {
-      name: "Execution",
-      link: "/projects/execution",
-      activeIndex: 5,
-      selectedIndex: 52,
-    },
+    // {
+    //   name: "Execution",
+    //   link: "/projects/executions",
+    //   activeIndex: 5,
+    //   selectedIndex: 52,
+    // },
     {
       name: "Monitoring",
-      link: "/projects/monitoring",
+      link: "/projects/monitorings",
       activeIndex: 5,
       selectedIndex: 53,
     },
     {
       name: "Closure",
-      link: "/projects/closure",
+      link: "/projects/closures",
       activeIndex: 5,
       selectedIndex: 54,
     },
-    {
-      name: "Utilities",
-      link: "/projects/utilities",
-      activeIndex: 5,
-      selectedIndex: 55,
-    },
+    // {
+    //   name: "Utilities",
+    //   link: "/projects/utilities",
+    //   activeIndex: 5,
+    //   selectedIndex: 55,
+    // },
   ];
 
   const profileOptions = [

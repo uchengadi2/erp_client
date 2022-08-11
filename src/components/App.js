@@ -59,6 +59,12 @@ import AssetStoreTypesLayout from "./ui/assets/utilities/AssetStoreTypesLayout";
 import AssetRequisitionLayout from "./ui/assets/requisition/AssetRequisitionLayout";
 import AssetRetirementLayout from "./ui/assets/retirement/AssetRetirementLayout";
 import AssetMovementsLayout from "./ui/assets/movements/AssetMovementsLayout";
+import ProjectsProjectsLayout from "./ui/projects/projects/ProjectsProjectsLayout";
+
+import ProjectsPlanningsLayout from "./ui/projects/plannings/ProjectsPlanningsLayout";
+import ProjectsExecutionLayout from "./ui/projects/execution/ProjectsExecutionLayout";
+import ProjectClosureLayout from "./ui/projects/closure/ProjectClosureLayout";
+import ProjectsMonitoringLayout from "./ui/projects/monitoring/ProjectsMonitoringLayout";
 
 function App() {
   const { token, setToken } = useToken();
@@ -275,6 +281,21 @@ function App() {
             </Route>
             <Route path="/systems/privileges">
               <ConsolePrivilegesLayout token={token} userId={userId} />
+            </Route>
+            <Route path="/projects/projects">
+              <ProjectsProjectsLayout token={token} userId={userId} />
+            </Route>
+            <Route path="/projects/plannings">
+              <ProjectsPlanningsLayout token={token} userId={userId} />
+            </Route>
+            <Route path="/projects/executions">
+              <ProjectsExecutionLayout token={token} userId={userId} />
+            </Route>
+            <Route path="/projects/monitorings">
+              <ProjectsMonitoringLayout token={token} userId={userId} />
+            </Route>
+            <Route path="/projects/closures">
+              <ProjectClosureLayout token={token} userId={userId} />
             </Route>
           </Switch>
           <Snackbar
