@@ -104,6 +104,13 @@ import salesTaskReducer from "./salesTaskReducer";
 import salesSalesReducer from "./salesSalesReducer";
 import salesInvoiceReducer from "./salesInvoiceReducer";
 import salesAccountReducer from "./salesAccountReducer";
+import hrUnitReducer from "./hrUnitReducer";
+import hrDepartmentReducer from "./hrDepartmentReducer";
+import hrGroupReducer from "./hrGroupReducer";
+import hrDivisionReducer from "./hrDivisionReducer";
+import hrDesignationReducer from "./hrDesignationReducer";
+import hrKpiSessionReducer from "./hrKpiSessionReducer";
+import hrAppraisalSeasonReducer from "./hrAppraisalSeasonReducer";
 
 export default combineReducers({
   auth: authReducer,
@@ -214,4 +221,11 @@ export default combineReducers({
   salesSales: salesSalesReducer,
   salesInvoice: salesInvoiceReducer,
   salesAccount: salesAccountReducer,
+  hrUnit: hrUnitReducer,
+  hrDepartment: hrDepartmentReducer,
+  hrGroup: hrGroupReducer,
+  hrDivision: hrDivisionReducer,
+  hrDesignation: hrDesignationReducer,
+  hrKpiSession: hrKpiSessionReducer,
+  hrAppraisalSeason: hrAppraisalSeasonReducer,
 });
