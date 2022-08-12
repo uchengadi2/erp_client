@@ -8,8 +8,7 @@ import Box from "@material-ui/core/Box";
 import { Link } from "react-router-dom";
 import history from "./../../../../history";
 
-import SalesTeamTeamLayout from "./SalesTeamTeamLayout";
-import SalesTeamMemberLayout from "./SalesTeamMemberLayout";
+import SalesInvoicesInvoicesLayout from "./SalesInvoicesInvoicesLayout";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -52,7 +51,7 @@ function LinkTab(props) {
       //label={route.name}
       onClick={(event) => {
         event.preventDefault();
-        history.push(`/sales/teams`);
+        history.push(`/sales/invoices`);
       }}
       {...props}
     />
@@ -75,7 +74,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function SalesTeamLayout({ token, userId }) {
+function SalesInvoicesLayout({ token }) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
@@ -94,31 +93,20 @@ function SalesTeamLayout({ token, userId }) {
         className={classes.tabs}
       >
         <Tab
-          label="Teams"
+          label="Invoices"
           {...a11yProps(0)}
           onClick={(event) => {
             event.preventDefault();
-            history.push(`/sales/teams/teams`);
-          }}
-        />
-        <Tab
-          label="Team Members"
-          {...a11yProps(0)}
-          onClick={(event) => {
-            event.preventDefault();
-            history.push(`/sales/teams/teammembers`);
+            history.push(`/sales/invoices/invoices`);
           }}
         />
       </Tabs>
 
       <TabPanel value={value} index={0}>
-        <SalesTeamTeamLayout token={token} userId={userId} />
-      </TabPanel>
-      <TabPanel value={value} index={1}>
-        <SalesTeamMemberLayout token={token} userId={userId} />
+        <SalesInvoicesInvoicesLayout token={token} />
       </TabPanel>
     </div>
   );
 }
 
-export default SalesTeamLayout;
+export default SalesInvoicesLayout;

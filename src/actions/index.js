@@ -474,6 +474,41 @@ import {
   FETCH_SUPPLIER,
   EDIT_SUPPLIER,
   DELETE_SUPPLIER,
+  CREATE_SALESPRODUCT,
+  FETCH_SALESPRODUCTS,
+  FETCH_SALESPRODUCT,
+  EDIT_SALESPRODUCT,
+  DELETE_SALESPRODUCT,
+  CREATE_SALESTEAM,
+  FETCH_SALESTEAMS,
+  FETCH_SALESTEAM,
+  EDIT_SALESTEAM,
+  DELETE_SALESTEAM,
+  CREATE_SALESTEAMMEMBER,
+  FETCH_SALESTEAMMEMBERS,
+  FETCH_SALESTEAMMEMBER,
+  EDIT_SALESTEAMMEMBER,
+  DELETE_SALESTEAMMEMBER,
+  CREATE_SALESTASK,
+  FETCH_SALESTASKS,
+  FETCH_SALESTASK,
+  EDIT_SALESTASK,
+  DELETE_SALESTASK,
+  CREATE_SALESSALE,
+  FETCH_SALESSALES,
+  FETCH_SALESSALE,
+  EDIT_SALESSALE,
+  DELETE_SALESSALE,
+  CREATE_SALESINVOICE,
+  FETCH_SALESINVOICES,
+  FETCH_SALESINVOICE,
+  EDIT_SALESINVOICE,
+  DELETE_SALESINVOICE,
+  CREATE_SALESACCOUNT,
+  FETCH_SALESACCOUNTS,
+  FETCH_SALESACCOUNT,
+  EDIT_SALESACCOUNT,
+  DELETE_SALESACCOUNT,
 } from "./types";
 
 //authentication and authorization  operations
@@ -5613,5 +5648,397 @@ export const deleteSupplier = (id, token) => {
   return async (dispatch) => {
     await data.delete(`/officeoperations/${id}`);
     dispatch({ type: DELETE_SUPPLIER, payload: id });
+  };
+};
+
+//////////////////////////////////  SALES PRODUCT ////////////////////
+
+export const createSalesProduct = (formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.post("/officeoperations", formValues);
+
+    dispatch({
+      type: CREATE_SALESPRODUCT,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchSalesProducts = (tokens) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
+  return async (dispatch) => {
+    const response = await data.get("/officeoperations");
+
+    dispatch({
+      type: FETCH_SALESPRODUCTS,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchSalesProduct = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.get(`/officeoperations/${id}`);
+    dispatch({
+      type: FETCH_SALESPRODUCT,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const editSalesProduct = (id, formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    dispatch({
+      type: EDIT_SALESPRODUCT,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const deleteSalesProduct = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    await data.delete(`/officeoperations/${id}`);
+    dispatch({ type: DELETE_SALESPRODUCT, payload: id });
+  };
+};
+
+//////////////////////////////////  SALES TEAM ////////////////////
+
+export const createSalesTeam = (formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.post("/officeoperations", formValues);
+
+    dispatch({
+      type: CREATE_SALESTEAM,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchSalesTeams = (tokens) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
+  return async (dispatch) => {
+    const response = await data.get("/officeoperations");
+
+    dispatch({
+      type: FETCH_SALESTEAMS,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchSalesTeam = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.get(`/officeoperations/${id}`);
+    dispatch({
+      type: FETCH_SALESTEAM,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const editSalesTeam = (id, formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    dispatch({
+      type: EDIT_SALESTEAM,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const deleteSalesTeam = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    await data.delete(`/officeoperations/${id}`);
+    dispatch({ type: DELETE_SALESTEAM, payload: id });
+  };
+};
+
+//////////////////////////////////  SALES TEAM MEMBERS ////////////////////
+
+export const createSalesTeamMember = (formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.post("/officeoperations", formValues);
+
+    dispatch({
+      type: CREATE_SALESTEAMMEMBER,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchSalesTeamMembers = (tokens) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
+  return async (dispatch) => {
+    const response = await data.get("/officeoperations");
+
+    dispatch({
+      type: FETCH_SALESTEAMMEMBERS,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchSalesTeamMember = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.get(`/officeoperations/${id}`);
+    dispatch({
+      type: FETCH_SALESTEAMMEMBER,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const editSalesTeamMember = (id, formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    dispatch({
+      type: EDIT_SALESTEAMMEMBER,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const deleteSalesTeamMember = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    await data.delete(`/officeoperations/${id}`);
+    dispatch({ type: DELETE_SALESTEAMMEMBER, payload: id });
+  };
+};
+
+/////////////////////////////////  SALES Task ////////////////////
+
+export const createSalesTask = (formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.post("/officeoperations", formValues);
+
+    dispatch({
+      type: CREATE_SALESTASK,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchSalesTasks = (tokens) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
+  return async (dispatch) => {
+    const response = await data.get("/officeoperations");
+
+    dispatch({
+      type: FETCH_SALESTASKS,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchSalesTask = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.get(`/officeoperations/${id}`);
+    dispatch({
+      type: FETCH_SALESTASK,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const editSalesTask = (id, formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    dispatch({
+      type: EDIT_SALESTASK,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const deleteSalesTask = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    await data.delete(`/officeoperations/${id}`);
+    dispatch({ type: DELETE_SALESTASK, payload: id });
+  };
+};
+
+/////////////////////////////////  SALES SALES ////////////////////
+
+export const createSalesSale = (formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.post("/officeoperations", formValues);
+
+    dispatch({
+      type: CREATE_SALESSALE,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchSalesSales = (tokens) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
+  return async (dispatch) => {
+    const response = await data.get("/officeoperations");
+
+    dispatch({
+      type: FETCH_SALESSALES,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchSalesSale = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.get(`/officeoperations/${id}`);
+    dispatch({
+      type: FETCH_SALESSALE,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const editSalesSale = (id, formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    dispatch({
+      type: EDIT_SALESSALE,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const deleteSalesSale = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    await data.delete(`/officeoperations/${id}`);
+    dispatch({ type: DELETE_SALESSALE, payload: id });
+  };
+};
+
+/////////////////////////////////  SALES INVOICES ////////////////////
+
+export const createSalesInvoice = (formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.post("/officeoperations", formValues);
+
+    dispatch({
+      type: CREATE_SALESINVOICE,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchSalesInvoices = (tokens) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
+  return async (dispatch) => {
+    const response = await data.get("/officeoperations");
+
+    dispatch({
+      type: FETCH_SALESINVOICES,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchSalesInvoice = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.get(`/officeoperations/${id}`);
+    dispatch({
+      type: FETCH_SALESINVOICE,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const editSalesInvoice = (id, formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    dispatch({
+      type: EDIT_SALESINVOICE,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const deleteSalesInvoice = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    await data.delete(`/officeoperations/${id}`);
+    dispatch({ type: DELETE_SALESINVOICE, payload: id });
+  };
+};
+
+/////////////////////////////////  SALES ACCOUNTS ////////////////////
+
+export const createSalesAccount = (formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.post("/officeoperations", formValues);
+
+    dispatch({
+      type: CREATE_SALESACCOUNT,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchSalesAccounts = (tokens) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
+  return async (dispatch) => {
+    const response = await data.get("/officeoperations");
+
+    dispatch({
+      type: FETCH_SALESACCOUNTS,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchSalesAccount = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.get(`/officeoperations/${id}`);
+    dispatch({
+      type: FETCH_SALESACCOUNT,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const editSalesAccount = (id, formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    dispatch({
+      type: EDIT_SALESACCOUNT,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const deleteSalesAccount = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    await data.delete(`/officeoperations/${id}`);
+    dispatch({ type: DELETE_SALESACCOUNT, payload: id });
   };
 };

@@ -420,12 +420,12 @@ const Header = (props) => {
       activeIndex: 4,
       selectedIndex: 45,
     },
-    {
-      name: "Utilities",
-      link: "/sales/utilities",
-      activeIndex: 4,
-      selectedIndex: 45,
-    },
+    // {
+    //   name: "Utilities",
+    //   link: "/sales/utilities",
+    //   activeIndex: 4,
+    //   selectedIndex: 45,
+    // },
   ];
 
   const hrOptions = [

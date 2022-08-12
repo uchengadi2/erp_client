@@ -97,6 +97,13 @@ import crmContactReducer from "./crmContactReducer";
 import crmCustomerReducer from "./crmCustomerReducer";
 import crmPartnerReducer from "./crmPartnerReducer";
 import crmSupplierReducer from "./crmSupplierReducer";
+import salesProductReducer from "./salesProductReducer";
+import salesTeamMemberReducer from "./salesTeamMemberReducer";
+import salesTeamReducer from "./salesTeamReducer";
+import salesTaskReducer from "./salesTaskReducer";
+import salesSalesReducer from "./salesSalesReducer";
+import salesInvoiceReducer from "./salesInvoiceReducer";
+import salesAccountReducer from "./salesAccountReducer";
 
 export default combineReducers({
   auth: authReducer,
@@ -200,4 +207,11 @@ export default combineReducers({
   crmCustomer: crmCustomerReducer,
   crmPartner: crmPartnerReducer,
   crmSupplier: crmSupplierReducer,
+  salesProduct: salesProductReducer,
+  salesTeamMember: salesTeamMemberReducer,
+  salesTeam: salesTeamReducer,
+  salesTask: salesTaskReducer,
+  salesSales: salesSalesReducer,
+  salesInvoice: salesInvoiceReducer,
+  salesAccount: salesAccountReducer,
 });

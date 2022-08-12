@@ -10,11 +10,10 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import history from "../../../../history";
+import ServiceOutletFilters from "../../headerFilters/ServiceOutletFilters";
 
-import SalesTasksFilter from "../../headerFilters/SalesTasksFilter";
-
-import SalesTaskCreateForm from "../../../sales/tasks/tasks/SalesTaskCreateForm";
-import SalesTaskList from "../../../sales/tasks/tasks/SalesTaskList";
+import SalesInvoiceInvoiceCreateForm from "../../../sales/invoices/invoice/SalesInvoiceInvoiceCreateForm";
+import SalesInvoiceInvoiceList from "../../../sales/invoices/invoice/SalesInvoiceInvoiceList";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -64,7 +63,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function SalesTasksTasksLayout(props) {
+function SalesInvoicesInvoicesLayout(props) {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [alert, setAlert] = useState({
@@ -115,7 +114,7 @@ function SalesTasksTasksLayout(props) {
     >
       <Grid item container direction="column" sm={width}>
         <Grid item className={classes.selectField}>
-          <SalesTasksFilter />
+          <ServiceOutletFilters />
         </Grid>
         <Grid
           item
@@ -130,17 +129,17 @@ function SalesTasksTasksLayout(props) {
                 className={classes.addButton}
                 onClick={() => [
                   setOpen(true),
-                  history.push("/sales/tasks/tasks/new"),
+                  history.push("/sales/invoices/invoices/new"),
                 ]}
               >
-                Add Task
+                Add Invoice
               </Button>
             </Grid>
             <Grid item></Grid>
           </Toolbar>
         </Grid>
         <Grid item className={classes.contentContainer}>
-          <SalesTaskList token={props.token} userId={props.userId} />
+          <SalesInvoiceInvoiceList token={props.token} userId={props.userId} />
           {/* {renderDataList()} */}
           {/* <DataGridText /> */}
         </Grid>
@@ -149,10 +148,13 @@ function SalesTasksTasksLayout(props) {
         //style={{ zIndex: 1302 }}
         fullScreen={matchesXS}
         open={open}
-        onClose={() => [setOpen(false), history.push("/sales/tasks/tasks")]}
+        onClose={() => [
+          setOpen(false),
+          history.push("/sales/invoices/invoices"),
+        ]}
       >
         <DialogContent>
-          <SalesTaskCreateForm
+          <SalesInvoiceInvoiceCreateForm
             token={props.token}
             userId={props.userId}
             handleDialogOpenStatus={handleDialogOpenStatus}
@@ -193,4 +195,4 @@ function SalesTasksTasksLayout(props) {
   );
 }
 
-export default SalesTasksTasksLayout;
+export default SalesInvoicesInvoicesLayout;

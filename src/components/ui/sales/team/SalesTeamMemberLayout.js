@@ -10,11 +10,10 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import history from "../../../../history";
+import ServiceOutLetAndSalesTeamFilter from "../../headerFilters/ServiceOutLetAndSalesTeamFilter";
 
-import SalesTasksFilter from "../../headerFilters/SalesTasksFilter";
-
-import SalesTaskCreateForm from "../../../sales/tasks/tasks/SalesTaskCreateForm";
-import SalesTaskList from "../../../sales/tasks/tasks/SalesTaskList";
+import SalesTeamMembersCreateForm from "../../../sales/team/teammembers/SalesTeamMembersCreateForm";
+import SalesTeamMembersList from "../../../sales/team/teammembers/SalesTeamMembersList";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -40,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
   addButton: {
     borderRadius: 10,
     height: 30,
-    width: 130,
+    width: 170,
     marginLeft: 10,
     marginTop: 50,
     marginBottom: 20,
@@ -64,7 +63,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function SalesTasksTasksLayout(props) {
+function SalesTeamMemberLayout(props) {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [alert, setAlert] = useState({
@@ -115,7 +114,7 @@ function SalesTasksTasksLayout(props) {
     >
       <Grid item container direction="column" sm={width}>
         <Grid item className={classes.selectField}>
-          <SalesTasksFilter />
+          <ServiceOutLetAndSalesTeamFilter />
         </Grid>
         <Grid
           item
@@ -130,17 +129,17 @@ function SalesTasksTasksLayout(props) {
                 className={classes.addButton}
                 onClick={() => [
                   setOpen(true),
-                  history.push("/sales/tasks/tasks/new"),
+                  history.push("/sales/teams/teammembers/new"),
                 ]}
               >
-                Add Task
+                Add Team Member
               </Button>
             </Grid>
             <Grid item></Grid>
           </Toolbar>
         </Grid>
         <Grid item className={classes.contentContainer}>
-          <SalesTaskList token={props.token} userId={props.userId} />
+          <SalesTeamMembersList token={props.token} userId={props.userId} />
           {/* {renderDataList()} */}
           {/* <DataGridText /> */}
         </Grid>
@@ -149,10 +148,13 @@ function SalesTasksTasksLayout(props) {
         //style={{ zIndex: 1302 }}
         fullScreen={matchesXS}
         open={open}
-        onClose={() => [setOpen(false), history.push("/sales/tasks/tasks")]}
+        onClose={() => [
+          setOpen(false),
+          history.push("/sales/teams/teammembers"),
+        ]}
       >
         <DialogContent>
-          <SalesTaskCreateForm
+          <SalesTeamMembersCreateForm
             token={props.token}
             userId={props.userId}
             handleDialogOpenStatus={handleDialogOpenStatus}
@@ -193,4 +195,4 @@ function SalesTasksTasksLayout(props) {
   );
 }
 
-export default SalesTasksTasksLayout;
+export default SalesTeamMemberLayout;

@@ -66,6 +66,8 @@ import ProjectsExecutionLayout from "./ui/projects/execution/ProjectsExecutionLa
 import ProjectClosureLayout from "./ui/projects/closure/ProjectClosureLayout";
 import ProjectsMonitoringLayout from "./ui/projects/monitoring/ProjectsMonitoringLayout";
 
+import SalesInvoicesLayout from "./ui/sales/invoices/SalesInvoicesLayout";
+
 function App() {
   const { token, setToken } = useToken();
   const { userId, setUserId } = useUserId();
@@ -296,6 +298,9 @@ function App() {
             </Route>
             <Route path="/projects/closures">
               <ProjectClosureLayout token={token} userId={userId} />
+            </Route>
+            <Route path="/sales/invoices">
+              <SalesInvoicesLayout token={token} userId={userId} />
             </Route>
           </Switch>
           <Snackbar
