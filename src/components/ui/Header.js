@@ -431,7 +431,7 @@ const Header = (props) => {
   const hrOptions = [
     {
       name: "Planning",
-      link: "/hr/planning",
+      link: "/hr/plannings",
       activeIndex: 6,
       selectedIndex: 60,
     },

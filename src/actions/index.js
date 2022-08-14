@@ -544,6 +544,46 @@ import {
   FETCH_HRAPPRAISALSEASON,
   EDIT_HRAPPRAISALSEASON,
   DELETE_HRAPPRAISALSEASON,
+  CREATE_HRROLE,
+  FETCH_HRROLES,
+  FETCH_HRROLE,
+  EDIT_HRROLE,
+  DELETE_HRROLE,
+  CREATE_HRJOBDESCRIPTION,
+  FETCH_HRJOBDESCRIPTIONS,
+  FETCH_HRJOBDESCRIPTION,
+  EDIT_HRJOBDESCRIPTION,
+  DELETE_HRJOBDESCRIPTION,
+  CREATE_HRPLANNINGSKILLSET,
+  FETCH_HRPLANNINGSKILLSETS,
+  FETCH_HRPLANNINGSKILLSET,
+  EDIT_HRPLANNINGSKILLSET,
+  DELETE_HRPLANNINGSKILLSET,
+  CREATE_HRRECRUITMENTINITIATION,
+  FETCH_HRRECRUITMENTINITIATIONS,
+  FETCH_HRRECRUITMENTINITIATION,
+  EDIT_HRRECRUITMENTINITIATION,
+  DELETE_HRRECRUITMENTINITIATION,
+  CREATE_HRRECRUITMENTINTERVIEW,
+  FETCH_HRRECRUITMENTINTERVIEWS,
+  FETCH_HRRECRUITMENTINTERVIEW,
+  EDIT_HRRECRUITMENTINTERVIEW,
+  DELETE_HRRECRUITMENTINTERVIEW,
+  CREATE_HRRECRUITMENTSELECTION,
+  FETCH_HRRECRUITMENTSELECTIONS,
+  FETCH_HRRECRUITMENTSELECTION,
+  EDIT_HRRECRUITMENTSELECTION,
+  DELETE_HRRECRUITMENTSELECTION,
+  CREATE_HRRECRUITMENTONBOARD,
+  FETCH_HRRECRUITMENTONBOARDS,
+  FETCH_HRRECRUITMENTONBOARD,
+  EDIT_HRRECRUITMENTONBOARD,
+  DELETE_HRRECRUITMENTONBOARD,
+  CREATE_HRRECRUITMENTPLACEMENT,
+  FETCH_HRRECRUITMENTPLACEMENTS,
+  FETCH_HRRECRUITMENTPLACEMENT,
+  EDIT_HRRECRUITMENTPLACEMENT,
+  DELETE_HRRECRUITMENTPLACEMENT,
 } from "./types";
 
 //authentication and authorization  operations
@@ -6467,5 +6507,453 @@ export const deleteHrAppraisalSeason = (id, token) => {
   return async (dispatch) => {
     await data.delete(`/officeoperations/${id}`);
     dispatch({ type: DELETE_HRAPPRAISALSEASON, payload: id });
+  };
+};
+
+////////////////////////////////  HR ROLES ////////////////////
+
+export const createHrRole = (formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.post("/officeoperations", formValues);
+
+    dispatch({
+      type: CREATE_HRROLE,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchHrRoles = (tokens) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
+  return async (dispatch) => {
+    const response = await data.get("/officeoperations");
+
+    dispatch({
+      type: FETCH_HRROLES,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchHrRole = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.get(`/officeoperations/${id}`);
+    dispatch({
+      type: FETCH_HRROLE,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const editHrRole = (id, formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    dispatch({
+      type: EDIT_HRROLE,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const deleteHrRole = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    await data.delete(`/officeoperations/${id}`);
+    dispatch({ type: DELETE_HRROLE, payload: id });
+  };
+};
+
+////////////////////////////////  HR JOB DESCRIPTION ////////////////////
+
+export const createHrJobDescription = (formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.post("/officeoperations", formValues);
+
+    dispatch({
+      type: CREATE_HRJOBDESCRIPTION,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchHrJobDescriptions = (tokens) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
+  return async (dispatch) => {
+    const response = await data.get("/officeoperations");
+
+    dispatch({
+      type: FETCH_HRJOBDESCRIPTIONS,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchHrJobDescription = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.get(`/officeoperations/${id}`);
+    dispatch({
+      type: FETCH_HRJOBDESCRIPTION,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const editHrJobDescription = (id, formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    dispatch({
+      type: EDIT_HRJOBDESCRIPTION,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const deleteHrJobDescription = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    await data.delete(`/officeoperations/${id}`);
+    dispatch({ type: DELETE_HRJOBDESCRIPTION, payload: id });
+  };
+};
+
+////////////////////////////////  HR SKILLSET ////////////////////
+
+export const createHrPlanningSkillset = (formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.post("/officeoperations", formValues);
+
+    dispatch({
+      type: CREATE_HRPLANNINGSKILLSET,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchHrPlanningSkillsets = (tokens) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
+  return async (dispatch) => {
+    const response = await data.get("/officeoperations");
+
+    dispatch({
+      type: FETCH_HRPLANNINGSKILLSETS,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchHrPlanningSkillset = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.get(`/officeoperations/${id}`);
+    dispatch({
+      type: FETCH_HRPLANNINGSKILLSET,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const editHrPlanningSkillset = (id, formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    dispatch({
+      type: EDIT_HRPLANNINGSKILLSET,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const deleteHrPlanningSkillset = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    await data.delete(`/officeoperations/${id}`);
+    dispatch({ type: DELETE_HRPLANNINGSKILLSET, payload: id });
+  };
+};
+
+////////////////////////////////  HR RECRUITMENT INITIATION ////////////////////
+
+export const createHrRecruitmentInitiation = (formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.post("/officeoperations", formValues);
+
+    dispatch({
+      type: CREATE_HRRECRUITMENTINITIATION,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchHrRecruitmentInitiations = (tokens) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
+  return async (dispatch) => {
+    const response = await data.get("/officeoperations");
+
+    dispatch({
+      type: FETCH_HRRECRUITMENTINITIATIONS,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchHrRecruitmentInitiation = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.get(`/officeoperations/${id}`);
+    dispatch({
+      type: FETCH_HRRECRUITMENTINITIATION,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const editHrRecruitmentInitiation = (id, formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    dispatch({
+      type: EDIT_HRRECRUITMENTINITIATION,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const deleteHrRecruitmentInitiation = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    await data.delete(`/officeoperations/${id}`);
+    dispatch({ type: DELETE_HRRECRUITMENTINITIATION, payload: id });
+  };
+};
+
+////////////////////////////////  HR RECRUITMENT INTERVIEWS ////////////////////
+
+export const createHrRecruitmentInterview = (formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.post("/officeoperations", formValues);
+
+    dispatch({
+      type: CREATE_HRRECRUITMENTINTERVIEW,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchHrRecruitmentInterviews = (tokens) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
+  return async (dispatch) => {
+    const response = await data.get("/officeoperations");
+
+    dispatch({
+      type: FETCH_HRRECRUITMENTINTERVIEWS,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchHrRecruitmentInterview = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.get(`/officeoperations/${id}`);
+    dispatch({
+      type: FETCH_HRRECRUITMENTINTERVIEW,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const editHrRecruitmentInterview = (id, formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    dispatch({
+      type: EDIT_HRRECRUITMENTINTERVIEW,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const deleteHrRecruitmentInterview = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    await data.delete(`/officeoperations/${id}`);
+    dispatch({ type: DELETE_HRRECRUITMENTINTERVIEW, payload: id });
+  };
+};
+
+////////////////////////////////  HR RECRUITMENT SELECTIONS ////////////////////
+
+export const createHrRecruitmentSelection = (formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.post("/officeoperations", formValues);
+
+    dispatch({
+      type: CREATE_HRRECRUITMENTSELECTION,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchHrRecruitmentSelections = (tokens) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
+  return async (dispatch) => {
+    const response = await data.get("/officeoperations");
+
+    dispatch({
+      type: FETCH_HRRECRUITMENTSELECTIONS,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchHrRecruitmentSelection = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.get(`/officeoperations/${id}`);
+    dispatch({
+      type: FETCH_HRRECRUITMENTSELECTION,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const editHrRecruitmentSelection = (id, formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    dispatch({
+      type: EDIT_HRRECRUITMENTSELECTION,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const deleteHrRecruitmentSelection = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    await data.delete(`/officeoperations/${id}`);
+    dispatch({ type: DELETE_HRRECRUITMENTSELECTION, payload: id });
+  };
+};
+
+////////////////////////////////  HR RECRUITMENT ONBOARD ////////////////////
+
+export const createHrRecruitmentOnboard = (formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.post("/officeoperations", formValues);
+
+    dispatch({
+      type: CREATE_HRRECRUITMENTONBOARD,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchHrRecruitmentOnboards = (tokens) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
+  return async (dispatch) => {
+    const response = await data.get("/officeoperations");
+
+    dispatch({
+      type: FETCH_HRRECRUITMENTONBOARDS,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchHrRecruitmentOnboard = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.get(`/officeoperations/${id}`);
+    dispatch({
+      type: FETCH_HRRECRUITMENTONBOARD,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const editHrRecruitmentOnboard = (id, formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    dispatch({
+      type: EDIT_HRRECRUITMENTONBOARD,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const deleteHrRecruitmentOnboard = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    await data.delete(`/officeoperations/${id}`);
+    dispatch({ type: DELETE_HRRECRUITMENTONBOARD, payload: id });
+  };
+};
+
+////////////////////////////////  HR RECRUITMENT PLACEMENT ////////////////////
+
+export const createHrRecruitmentPlacement = (formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.post("/officeoperations", formValues);
+
+    dispatch({
+      type: CREATE_HRRECRUITMENTPLACEMENT,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchHrRecruitmentPlacements = (tokens) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
+  return async (dispatch) => {
+    const response = await data.get("/officeoperations");
+
+    dispatch({
+      type: FETCH_HRRECRUITMENTPLACEMENTS,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchHrRecruitmentPlacement = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.get(`/officeoperations/${id}`);
+    dispatch({
+      type: FETCH_HRRECRUITMENTPLACEMENT,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const editHrRecruitmentPlacement = (id, formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    dispatch({
+      type: EDIT_HRRECRUITMENTPLACEMENT,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const deleteHrRecruitmentPlacement = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    await data.delete(`/officeoperations/${id}`);
+    dispatch({ type: DELETE_HRRECRUITMENTPLACEMENT, payload: id });
   };
 };

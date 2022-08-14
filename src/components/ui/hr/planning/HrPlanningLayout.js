@@ -10,6 +10,7 @@ import history from "./../../../../history";
 
 import HrPlanningJobDescriptionsLayout from "./HrPlanningJobDescriptionsLayout";
 import HrPlanningRolesLayout from "./HrPlanningRolesLayout";
+import HrPlanningSkillsetsLayout from "./HrPlanningSkillsetsLayout";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -98,7 +99,7 @@ function HrPlanningLayout({ token }) {
           {...a11yProps(0)}
           onClick={(event) => {
             event.preventDefault();
-            history.push(`/hr/planning/roles`);
+            history.push(`/hr/plannings/roles`);
           }}
         />
         <Tab
@@ -106,7 +107,15 @@ function HrPlanningLayout({ token }) {
           {...a11yProps(0)}
           onClick={(event) => {
             event.preventDefault();
-            history.push(`/hr/planning/jobdescriptions`);
+            history.push(`/hr/plannings/jobdescriptions`);
+          }}
+        />
+        <Tab
+          label="Skillsets"
+          {...a11yProps(0)}
+          onClick={(event) => {
+            event.preventDefault();
+            history.push(`/hr/plannings/skillsets`);
           }}
         />
       </Tabs>
@@ -116,6 +125,9 @@ function HrPlanningLayout({ token }) {
       </TabPanel>
       <TabPanel value={value} index={1}>
         <HrPlanningJobDescriptionsLayout token={token} />
+      </TabPanel>
+      <TabPanel value={value} index={2}>
+        <HrPlanningSkillsetsLayout token={token} />
       </TabPanel>
     </div>
   );

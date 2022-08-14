@@ -12,8 +12,8 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 import history from "../../../../history";
 import CrmPartnerTypeFilter from "../../headerFilters/CrmPartnerTypeFilter";
 
-import HrPlanningJobDescriptionCreateForm from "../../../hr/planning/jobDescription/HrPlanningJobDescriptionCreateForm";
-import HrPlanningJobDescriptionList from "../../../hr/planning/jobDescription/HrPlanningJobDescriptionList";
+import HrRecruitmentsSelectionCreateForm from "../../../hr/recruitments/selections/HrRecruitmentsSelectionCreateForm";
+import HrRecruitmentsSelectionList from "../../../hr/recruitments/selections/HrRecruitmentsSelectionList";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
   addButton: {
     borderRadius: 10,
     height: 30,
-    width: 200,
+    width: 130,
     marginLeft: 10,
     marginTop: 50,
     marginBottom: 20,
@@ -63,7 +63,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function HrPlanningJobDescriptionsLayout(props) {
+function HrRecruitmentSelectionLayout(props) {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [alert, setAlert] = useState({
@@ -129,17 +129,17 @@ function HrPlanningJobDescriptionsLayout(props) {
                 className={classes.addButton}
                 onClick={() => [
                   setOpen(true),
-                  history.push("/hr/plannings/jobdescriptions/new"),
+                  history.push("/hr/recruitments/selections/new"),
                 ]}
               >
-                Create Job Description
+                Start Selection
               </Button>
             </Grid>
             <Grid item></Grid>
           </Toolbar>
         </Grid>
         <Grid item className={classes.contentContainer}>
-          <HrPlanningJobDescriptionList
+          <HrRecruitmentsSelectionList
             token={props.token}
             userId={props.userId}
           />
@@ -153,11 +153,11 @@ function HrPlanningJobDescriptionsLayout(props) {
         open={open}
         onClose={() => [
           setOpen(false),
-          history.push("/hr/plannings/jobdescriptions"),
+          history.push("/hr/recruitments/selections"),
         ]}
       >
         <DialogContent>
-          <HrPlanningJobDescriptionCreateForm
+          <HrRecruitmentsSelectionCreateForm
             token={props.token}
             userId={props.userId}
             handleDialogOpenStatus={handleDialogOpenStatus}
@@ -198,4 +198,4 @@ function HrPlanningJobDescriptionsLayout(props) {
   );
 }
 
-export default HrPlanningJobDescriptionsLayout;
+export default HrRecruitmentSelectionLayout;

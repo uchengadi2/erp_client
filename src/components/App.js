@@ -248,7 +248,7 @@ function App() {
             <Route path="/sales/accounts">
               <SalesAccountLayout token={token} userId={userId} />
             </Route>
-            <Route path="/hr/planning">
+            <Route path="/hr/plannings">
               <HrPlanningLayout token={token} userId={userId} />
             </Route>
             <Route path="/hr/recruitments">

@@ -12,8 +12,8 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 import history from "../../../../history";
 import CrmPartnerTypeFilter from "../../headerFilters/CrmPartnerTypeFilter";
 
-import HrPlanningJobDescriptionCreateForm from "../../../hr/planning/jobDescription/HrPlanningJobDescriptionCreateForm";
-import HrPlanningJobDescriptionList from "../../../hr/planning/jobDescription/HrPlanningJobDescriptionList";
+import HrRecruitmentsInitiationList from "../../../hr/recruitments/initiations/HrRecruitmentsInitiationList";
+import HrRecuitmentsInitiationCreateForm from "../../../hr/recruitments/initiations/HrRecuitmentsInitiationCreateForm";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -63,7 +63,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function HrPlanningJobDescriptionsLayout(props) {
+function HrRecruitmentsInitiationLayout(props) {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [alert, setAlert] = useState({
@@ -129,17 +129,17 @@ function HrPlanningJobDescriptionsLayout(props) {
                 className={classes.addButton}
                 onClick={() => [
                   setOpen(true),
-                  history.push("/hr/plannings/jobdescriptions/new"),
+                  history.push("/hr/recruitments/initiations/new"),
                 ]}
               >
-                Create Job Description
+                Initiate Recruitment
               </Button>
             </Grid>
             <Grid item></Grid>
           </Toolbar>
         </Grid>
         <Grid item className={classes.contentContainer}>
-          <HrPlanningJobDescriptionList
+          <HrRecruitmentsInitiationList
             token={props.token}
             userId={props.userId}
           />
@@ -153,11 +153,11 @@ function HrPlanningJobDescriptionsLayout(props) {
         open={open}
         onClose={() => [
           setOpen(false),
-          history.push("/hr/plannings/jobdescriptions"),
+          history.push("/hr/recruitments/initiations"),
         ]}
       >
         <DialogContent>
-          <HrPlanningJobDescriptionCreateForm
+          <HrRecuitmentsInitiationCreateForm
             token={props.token}
             userId={props.userId}
             handleDialogOpenStatus={handleDialogOpenStatus}
@@ -198,4 +198,4 @@ function HrPlanningJobDescriptionsLayout(props) {
   );
 }
 
-export default HrPlanningJobDescriptionsLayout;
+export default HrRecruitmentsInitiationLayout;

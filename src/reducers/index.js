@@ -111,6 +111,14 @@ import hrDivisionReducer from "./hrDivisionReducer";
 import hrDesignationReducer from "./hrDesignationReducer";
 import hrKpiSessionReducer from "./hrKpiSessionReducer";
 import hrAppraisalSeasonReducer from "./hrAppraisalSeasonReducer";
+import hrPlanningRoleReducer from "./hrPlanningRoleReducer";
+import hrPlanningJobDescriptionReducer from "./hrPlanningJobDescriptionReducer";
+import hrPlanningSkillsetReducer from "./hrPlanningSkillsetReducer";
+import hrRecruitmentInitiationReducer from "./hrRecruitmentInitiationReducer";
+import hrRecruitmentInteviewReducer from "./hrRecruitmentInteviewReducer";
+import hrRecruitmentSelectionReducer from "./hrRecruitmentSelectionReducer";
+import hrRecruitmentOnboardReducer from "./hrRecruitmentOnboardReducer";
+import hrRecruitmentPlacementReducer from "./hrRecruitmentPlacementReducer";
 
 export default combineReducers({
   auth: authReducer,
@@ -228,4 +236,12 @@ export default combineReducers({
   hrDesignation: hrDesignationReducer,
   hrKpiSession: hrKpiSessionReducer,
   hrAppraisalSeason: hrAppraisalSeasonReducer,
+  hrPlanningRole: hrPlanningRoleReducer,
+  hrPlanningJobDescription: hrPlanningJobDescriptionReducer,
+  hrPlanningSkillset: hrPlanningSkillsetReducer,
+  hrRecruitmentInitiation: hrRecruitmentInitiationReducer,
+  hrRecruitmentInteview: hrRecruitmentInteviewReducer,
+  hrRecruitmentSelection: hrRecruitmentSelectionReducer,
+  hrRecruitmentOnboard: hrRecruitmentOnboardReducer,
+  hrRecruitmentPlacement: hrRecruitmentPlacementReducer,
 });
