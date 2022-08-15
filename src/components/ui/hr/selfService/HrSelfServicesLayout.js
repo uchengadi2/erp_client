@@ -127,6 +127,30 @@ function HrSelfServicesLayout({ token }) {
             history.push(`/hr/selfservices/exit`);
           }}
         />
+        <Tab
+          label="Overtimes"
+          {...a11yProps(0)}
+          onClick={(event) => {
+            event.preventDefault();
+            history.push(`/hr/selfservices/overtimes`);
+          }}
+        />
+        <Tab
+          label="Salary Advance"
+          {...a11yProps(0)}
+          onClick={(event) => {
+            event.preventDefault();
+            history.push(`/hr/selfservices/salaryadvances`);
+          }}
+        />
+        <Tab
+          label="Appraisal"
+          {...a11yProps(0)}
+          onClick={(event) => {
+            event.preventDefault();
+            history.push(`/hr/selfservices/appaisals`);
+          }}
+        />
       </Tabs>
 
       <TabPanel value={value} index={0}>

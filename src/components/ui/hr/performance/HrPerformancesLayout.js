@@ -8,8 +8,8 @@ import Box from "@material-ui/core/Box";
 import { Link } from "react-router-dom";
 import history from "../../../../history";
 
-import HrPerformancesPendingAppraisalsLayout from "./HrPerformancesPendingAppraisalsLayout";
-import HrPerformancesKpiLayout from "./HrPerformancesKpiLayout";
+import HrPerformanceAppraisalLayout from "./HrPerformanceAppraisalLayout";
+import HrPerformancesPerformanceLayout from "./HrPerformancesPerformanceLayout";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -94,28 +94,28 @@ function HrPerformancesLayout({ token }) {
         className={classes.tabs}
       >
         <Tab
-          label="Key Performances Indicators"
+          label="Appraisals"
           {...a11yProps(0)}
           onClick={(event) => {
             event.preventDefault();
-            history.push(`/hr/performances/kpis`);
+            history.push(`/hr/performances/appraisal`);
           }}
         />
         <Tab
-          label="Pending Appraisals"
+          label="Performances"
           {...a11yProps(0)}
           onClick={(event) => {
             event.preventDefault();
-            history.push(`/hr/performances/pendingappraisals`);
+            history.push(`/hr/performances/performances`);
           }}
         />
       </Tabs>
 
       <TabPanel value={value} index={0}>
-        <HrPerformancesKpiLayout token={token} />
+        <HrPerformanceAppraisalLayout token={token} />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <HrPerformancesPendingAppraisalsLayout token={token} />
+        <HrPerformancesPerformanceLayout token={token} />
       </TabPanel>
     </div>
   );

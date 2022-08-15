@@ -119,6 +119,19 @@ import hrRecruitmentInteviewReducer from "./hrRecruitmentInteviewReducer";
 import hrRecruitmentSelectionReducer from "./hrRecruitmentSelectionReducer";
 import hrRecruitmentOnboardReducer from "./hrRecruitmentOnboardReducer";
 import hrRecruitmentPlacementReducer from "./hrRecruitmentPlacementReducer";
+import hrCompensationSalaryReducer from "./hrCompensationSalaryReducer";
+import hrCompensationBonusReducer from "./hrCompensationBonusReducer";
+import hrCompensationLeaveAllowanceReducer from "./hrCompensationLeaveAllowanceReducer";
+import hrCompensationOvertimeReducer from "./hrCompensationOvertimeReducer";
+import hrCompensationStaffLoanReducer from "./hrCompensationStaffLoanReducer";
+import hrCompensationSalaryAdvanceReducer from "./hrCompensationSalaryAdvanceReducer";
+import hrCompensationCertRefundReducer from "./hrCompensationCertRefundReducer";
+import hrLeavesLeaveReducer from "./hrLeavesLeaveReducer";
+import hrExitExitReducer from "./hrExitExitReducer";
+import hrExitClearanceReducer from "./hrExitClearanceReducer";
+import hrPerformanceAppraisalReducer from "./hrPerformanceAppraisalReducer";
+import hrPerformancePerformanceReducer from "./hrPerformancePerformanceReducer";
+import hrSelfServiceLeaveReducer from "./hrSelfServiceLeaveReducer";
 
 export default combineReducers({
   auth: authReducer,
@@ -244,4 +257,17 @@ export default combineReducers({
   hrRecruitmentSelection: hrRecruitmentSelectionReducer,
   hrRecruitmentOnboard: hrRecruitmentOnboardReducer,
   hrRecruitmentPlacement: hrRecruitmentPlacementReducer,
+  hrCompensationSalary: hrCompensationSalaryReducer,
+  hrCompensationBonus: hrCompensationBonusReducer,
+  hrCompensationLeaveAllowance: hrCompensationLeaveAllowanceReducer,
+  hrCompensationOvertime: hrCompensationOvertimeReducer,
+  hrCompensationStaffLoan: hrCompensationStaffLoanReducer,
+  hrCompensationSalaryAdvance: hrCompensationSalaryAdvanceReducer,
+  hrCompensationCertRefund: hrCompensationCertRefundReducer,
+  hrLeavesLeave: hrLeavesLeaveReducer,
+  hrExitExit: hrExitExitReducer,
+  hrExitClearance: hrExitClearanceReducer,
+  hrPerformanceAppraisal: hrPerformanceAppraisalReducer,
+  hrPerformancePerformance: hrPerformancePerformanceReducer,
+  hrSelfServiceLeave: hrSelfServiceLeaveReducer,
 });

@@ -154,6 +154,38 @@ function HrUtilityLayout({ token }) {
             history.push(`/hr/utilities/appraisalseasons`);
           }}
         />
+        <Tab
+          label="Emolument Periods"
+          {...a11yProps(0)}
+          onClick={(event) => {
+            event.preventDefault();
+            history.push(`/hr/utilities/emolumentperiods`);
+          }}
+        />
+        <Tab
+          label="Bonus rates"
+          {...a11yProps(0)}
+          onClick={(event) => {
+            event.preventDefault();
+            history.push(`/hr/utilities/bonusrates`);
+          }}
+        />
+        <Tab
+          label="Overtime Rates"
+          {...a11yProps(0)}
+          onClick={(event) => {
+            event.preventDefault();
+            history.push(`/hr/utilities/overtimerates`);
+          }}
+        />
+        <Tab
+          label="Organization Levels"
+          {...a11yProps(0)}
+          onClick={(event) => {
+            event.preventDefault();
+            history.push(`/hr/utilities/organizationlevels`);
+          }}
+        />
       </Tabs>
 
       <TabPanel value={value} index={0}>

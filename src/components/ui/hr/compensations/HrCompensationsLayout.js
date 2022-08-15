@@ -146,6 +146,14 @@ function HrCompensationsLayout({ token }) {
             history.push(`/hr/compensations/salaryadvances`);
           }}
         />
+        <Tab
+          label="Certificate Refunds"
+          {...a11yProps(0)}
+          onClick={(event) => {
+            event.preventDefault();
+            history.push(`/hr/compensations/certificaterefunds`);
+          }}
+        />
       </Tabs>
 
       <TabPanel value={value} index={0}>
@@ -165,6 +173,9 @@ function HrCompensationsLayout({ token }) {
       </TabPanel>
       <TabPanel value={value} index={5}>
         <HrCompensationSalaryAdvanceLayout token={token} />
+      </TabPanel>
+      <TabPanel value={value} index={6}>
+        <HrCompensationCertificateRefundsLayout token={token} />
       </TabPanel>
     </div>
   );

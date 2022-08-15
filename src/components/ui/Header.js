@@ -474,7 +474,7 @@ const Header = (props) => {
 
     {
       name: "Exit",
-      link: "/hr/Exit",
+      link: "/hr/exits",
       activeIndex: 6,
       selectedIndex: 67,
     },

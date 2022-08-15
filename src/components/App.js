@@ -263,7 +263,7 @@ function App() {
             <Route path="/hr/leaves">
               <HrLeavesLayout token={token} userId={userId} />
             </Route>
-            <Route path="/hr/exit">
+            <Route path="/hr/exits">
               <HrExittedLayout token={token} userId={userId} />
             </Route>
             <Route path="/hr/selfservices">

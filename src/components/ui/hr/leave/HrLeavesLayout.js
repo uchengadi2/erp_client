@@ -101,14 +101,14 @@ function HrLeavesLayout({ token }) {
             history.push(`/hr/leaves/leaves`);
           }}
         />
-        <Tab
-          label="Unapproved Leaves"
+        {/* <Tab
+          label="Pending Leaves"
           {...a11yProps(0)}
           onClick={(event) => {
             event.preventDefault();
-            history.push(`/hr/leaves/unapprovedleaves`);
+            history.push(`/hr/leaves/pendingleaves`);
           }}
-        />
+        /> */}
       </Tabs>
 
       <TabPanel value={value} index={0}>

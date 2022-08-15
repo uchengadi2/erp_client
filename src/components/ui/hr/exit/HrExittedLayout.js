@@ -8,8 +8,8 @@ import Box from "@material-ui/core/Box";
 import { Link } from "react-router-dom";
 import history from "../../../../history";
 
-import HrExittedStaffLayout from "./HrExittedStaffLayout";
-import HrExittedUnapprovedLayout from "./HrExittedUnapprovedLayout";
+import HrExitClearanceLayout from "./HrExitClearanceLayout";
+import HrExitExitLayout from "./HrExitExitLayout";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -52,7 +52,7 @@ function LinkTab(props) {
       //label={route.name}
       onClick={(event) => {
         event.preventDefault();
-        history.push(`/crm`);
+        history.push(`/hr/exits`);
       }}
       {...props}
     />
@@ -94,28 +94,28 @@ function HrExittedLayout({ token }) {
         className={classes.tabs}
       >
         <Tab
-          label="Exitted Staffers"
+          label="Exits"
           {...a11yProps(0)}
           onClick={(event) => {
             event.preventDefault();
-            history.push(`/hr/exit/exitted`);
+            history.push(`/hr/exits/exits`);
           }}
         />
         <Tab
-          label="Unapproved Exit Request"
+          label="Clearance"
           {...a11yProps(0)}
           onClick={(event) => {
             event.preventDefault();
-            history.push(`/hr/exit/unapprovedexit`);
+            history.push(`/hr/exits/clearnces`);
           }}
         />
       </Tabs>
 
       <TabPanel value={value} index={0}>
-        <HrExittedStaffLayout token={token} />
+        <HrExitExitLayout token={token} />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <HrExittedUnapprovedLayout token={token} />
+        <HrExitClearanceLayout token={token} />
       </TabPanel>
     </div>
   );
