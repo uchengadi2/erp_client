@@ -12,8 +12,8 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 import history from "../../../../history";
 import CrmPartnerTypeFilter from "../../headerFilters/CrmPartnerTypeFilter";
 
-import HrSelfServiceAppraisalCreateForm from "../../../hr/selfService/appraisal/HrSelfServiceAppraisalCreateForm";
-import HrSelfServiceAppraisalList from "../../../hr/selfService/appraisal/HrSelfServiceAppraisalList";
+import HrSelfServicePayslipViewForm from "../../../hr/selfService/payslip/HrSelfServicePayslipViewForm";
+import HrSelfServicePayslipList from "../../../hr/selfService/payslip/HrSelfServicePayslipList";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
   addButton: {
     borderRadius: 10,
     height: 30,
-    width: 150,
+    width: 130,
     marginLeft: 10,
     marginTop: 50,
     marginBottom: 20,
@@ -63,7 +63,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function HrSelfServicesAppraisalsLayout(props) {
+function HrSelfServicePayslipLayout(props) {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [alert, setAlert] = useState({
@@ -129,20 +129,17 @@ function HrSelfServicesAppraisalsLayout(props) {
                 className={classes.addButton}
                 onClick={() => [
                   setOpen(true),
-                  history.push("/hr/selfservices/appraisals/new"),
+                  history.push("/hr/selfservices/payslips/new"),
                 ]}
               >
-                Self Appraise
+                View Payslip
               </Button>
             </Grid>
             <Grid item></Grid>
           </Toolbar>
         </Grid>
         <Grid item className={classes.contentContainer}>
-          <HrSelfServiceAppraisalList
-            token={props.token}
-            userId={props.userId}
-          />
+          <HrSelfServicePayslipList token={props.token} userId={props.userId} />
           {/* {renderDataList()} */}
           {/* <DataGridText /> */}
         </Grid>
@@ -153,11 +150,11 @@ function HrSelfServicesAppraisalsLayout(props) {
         open={open}
         onClose={() => [
           setOpen(false),
-          history.push("/hr/selfservices/appraisals"),
+          history.push("/hr/selfservices/payslips"),
         ]}
       >
         <DialogContent>
-          <HrSelfServiceAppraisalCreateForm
+          <HrSelfServicePayslipViewForm
             token={props.token}
             userId={props.userId}
             handleDialogOpenStatus={handleDialogOpenStatus}
@@ -198,4 +195,4 @@ function HrSelfServicesAppraisalsLayout(props) {
   );
 }
 
-export default HrSelfServicesAppraisalsLayout;
+export default HrSelfServicePayslipLayout;

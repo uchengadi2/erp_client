@@ -132,6 +132,13 @@ import hrExitClearanceReducer from "./hrExitClearanceReducer";
 import hrPerformanceAppraisalReducer from "./hrPerformanceAppraisalReducer";
 import hrPerformancePerformanceReducer from "./hrPerformancePerformanceReducer";
 import hrSelfServiceLeaveReducer from "./hrSelfServiceLeaveReducer";
+import hrSelfServiceStaffLoanReducer from "./hrSelfServiceStaffLoanReducer";
+import hrSelfServiceCertificateRefundReducer from "./hrSelfServiceCertificateRefundReducer";
+import hrSelfServiceExitReducer from "./hrSelfServiceExitReducer";
+import hrSelfServiceOvertimeReducer from "./hrSelfServiceOvertimeReducer";
+import hrSelfServiceSalaryAdvanceReducer from "./hrSelfServiceSalaryAdvanceReducer";
+import hrSelfServiceAppraisalReducer from "./hrSelfServiceAppraisalReducer";
+import hrSelfServicePayslipReducer from "./hrSelfServicePayslipReducer";
 
 export default combineReducers({
   auth: authReducer,
@@ -270,4 +277,11 @@ export default combineReducers({
   hrPerformanceAppraisal: hrPerformanceAppraisalReducer,
   hrPerformancePerformance: hrPerformancePerformanceReducer,
   hrSelfServiceLeave: hrSelfServiceLeaveReducer,
+  hrSelfServiceStaffLoan: hrSelfServiceStaffLoanReducer,
+  hrSelfServiceCertificateRefund: hrSelfServiceCertificateRefundReducer,
+  hrSelfServiceExit: hrSelfServiceExitReducer,
+  hrSelfServiceOvertime: hrSelfServiceOvertimeReducer,
+  hrSelfServiceSalaryAdvance: hrSelfServiceSalaryAdvanceReducer,
+  hrSelfServiceAppraisal: hrSelfServiceAppraisalReducer,
+  hrSelfServicePayslip: hrSelfServicePayslipReducer,
 });

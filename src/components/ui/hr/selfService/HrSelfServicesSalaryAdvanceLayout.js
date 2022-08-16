@@ -12,8 +12,8 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 import history from "../../../../history";
 import CrmPartnerTypeFilter from "../../headerFilters/CrmPartnerTypeFilter";
 
-import HrSelfServiceAppraisalCreateForm from "../../../hr/selfService/appraisal/HrSelfServiceAppraisalCreateForm";
-import HrSelfServiceAppraisalList from "../../../hr/selfService/appraisal/HrSelfServiceAppraisalList";
+import HrSelfServiceSalaryAdvanceCreateForm from "../../../hr/selfService/salaryAdvance/HrSelfServiceSalaryAdvanceCreateForm";
+import HrSelfServiceSalaryAdvanceList from "../../../hr/selfService/salaryAdvance/HrSelfServiceSalaryAdvanceList";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
   addButton: {
     borderRadius: 10,
     height: 30,
-    width: 150,
+    width: 200,
     marginLeft: 10,
     marginTop: 50,
     marginBottom: 20,
@@ -63,7 +63,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function HrSelfServicesAppraisalsLayout(props) {
+function HrSelfServicesSalaryAdvanceLayout(props) {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [alert, setAlert] = useState({
@@ -129,17 +129,17 @@ function HrSelfServicesAppraisalsLayout(props) {
                 className={classes.addButton}
                 onClick={() => [
                   setOpen(true),
-                  history.push("/hr/selfservices/appraisals/new"),
+                  history.push("/hr/selfservices/salaryadvances/new"),
                 ]}
               >
-                Self Appraise
+                Apply for Salary Advance
               </Button>
             </Grid>
             <Grid item></Grid>
           </Toolbar>
         </Grid>
         <Grid item className={classes.contentContainer}>
-          <HrSelfServiceAppraisalList
+          <HrSelfServiceSalaryAdvanceList
             token={props.token}
             userId={props.userId}
           />
@@ -153,11 +153,11 @@ function HrSelfServicesAppraisalsLayout(props) {
         open={open}
         onClose={() => [
           setOpen(false),
-          history.push("/hr/selfservices/appraisals"),
+          history.push("/hr/selfservices/salaryadvances"),
         ]}
       >
         <DialogContent>
-          <HrSelfServiceAppraisalCreateForm
+          <HrSelfServiceSalaryAdvanceCreateForm
             token={props.token}
             userId={props.userId}
             handleDialogOpenStatus={handleDialogOpenStatus}
@@ -198,4 +198,4 @@ function HrSelfServicesAppraisalsLayout(props) {
   );
 }
 
-export default HrSelfServicesAppraisalsLayout;
+export default HrSelfServicesSalaryAdvanceLayout;

@@ -649,6 +649,41 @@ import {
   FETCH_HRSELFSERVICELEAVE,
   EDIT_HRSELFSERVICELEAVE,
   DELETE_HRSELFSERVICELEAVE,
+  CREATE_HRSELFSERVICESTAFFLOAN,
+  FETCH_HRSELFSERVICESTAFFLOANS,
+  FETCH_HRSELFSERVICESTAFFLOAN,
+  EDIT_HRSELFSERVICESTAFFLOAN,
+  DELETE_HRSELFSERVICESTAFFLOAN,
+  CREATE_HRSELFSERVICECERTREFUND,
+  FETCH_HRSELFSERVICECERTREFUNDS,
+  FETCH_HRSELFSERVICECERTREFUND,
+  EDIT_HRSELFSERVICECERTREFUND,
+  DELETE_HRSELFSERVICECERTREFUND,
+  CREATE_HRSELFSERVICEEXIT,
+  FETCH_HRSELFSERVICEEXITS,
+  FETCH_HRSELFSERVICEEXIT,
+  EDIT_HRSELFSERVICEEXIT,
+  DELETE_HRSELFSERVICEEXIT,
+  CREATE_HRSELFSERVICEOVERTIME,
+  FETCH_HRSELFSERVICEOVERTIMES,
+  FETCH_HRSELFSERVICEOVERTIME,
+  EDIT_HRSELFSERVICEOVERTIME,
+  DELETE_HRSELFSERVICEOVERTIME,
+  CREATE_HRSELFSERVICESALARYADVANCE,
+  FETCH_HRSELFSERVICESALARYADVANCES,
+  FETCH_HRSELFSERVICESALARYADVANCE,
+  EDIT_HRSELFSERVICESALARYADVANCE,
+  DELETE_HRSELFSERVICESALARYADVANCE,
+  CREATE_HRSELFSERVICEAPPRAISAL,
+  FETCH_HRSELFSERVICEAPPRAISALS,
+  FETCH_HRSELFSERVICEAPPRAISAL,
+  EDIT_HRSELFSERVICEAPPRAISAL,
+  DELETE_HRSELFSERVICEAPPRAISAL,
+  CREATE_HRSELFSERVICEPAYSLIP,
+  FETCH_HRSELFSERVICEPAYSLIPS,
+  FETCH_HRSELFSERVICEPAYSLIP,
+  EDIT_HRSELFSERVICEPAYSLIP,
+  DELETE_HRSELFSERVICEPAYSLIP,
 } from "./types";
 
 //authentication and authorization  operations
@@ -7748,5 +7783,397 @@ export const deleteHrSelfServiceLeave = (id, token) => {
   return async (dispatch) => {
     await data.delete(`/officeoperations/${id}`);
     dispatch({ type: DELETE_HRSELFSERVICELEAVE, payload: id });
+  };
+};
+
+///////////////////////////////  HR SELF SERVICE/staff loan ////////////////////
+
+export const createHrSelfServiceStaffLoan = (formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.post("/officeoperations", formValues);
+
+    dispatch({
+      type: CREATE_HRSELFSERVICESTAFFLOAN,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchHrSelfServiceStaffLoans = (tokens) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
+  return async (dispatch) => {
+    const response = await data.get("/officeoperations");
+
+    dispatch({
+      type: FETCH_HRSELFSERVICESTAFFLOANS,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchHrSelfServiceStaffLoan = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.get(`/officeoperations/${id}`);
+    dispatch({
+      type: FETCH_HRSELFSERVICESTAFFLOAN,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const editHrSelfServiceStaffLoan = (id, formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    dispatch({
+      type: EDIT_HRSELFSERVICESTAFFLOAN,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const deleteHrSelfServiceStaffLoan = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    await data.delete(`/officeoperations/${id}`);
+    dispatch({ type: DELETE_HRSELFSERVICESTAFFLOAN, payload: id });
+  };
+};
+
+///////////////////////////////  HR SELF SERVICE/CERTIFICTE REFUNDS ////////////////////
+
+export const createHrSelfServiceCertificateRefund = (formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.post("/officeoperations", formValues);
+
+    dispatch({
+      type: CREATE_HRSELFSERVICECERTREFUND,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchHrSelfServiceCertificateRefunds = (tokens) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
+  return async (dispatch) => {
+    const response = await data.get("/officeoperations");
+
+    dispatch({
+      type: FETCH_HRSELFSERVICECERTREFUNDS,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchHrSelfServiceCertificateRefund = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.get(`/officeoperations/${id}`);
+    dispatch({
+      type: FETCH_HRSELFSERVICECERTREFUND,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const editHrSelfServiceCertificateRefund = (id, formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    dispatch({
+      type: EDIT_HRSELFSERVICECERTREFUND,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const deleteHrSelfServiceCertificateRefund = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    await data.delete(`/officeoperations/${id}`);
+    dispatch({ type: DELETE_HRSELFSERVICECERTREFUND, payload: id });
+  };
+};
+
+///////////////////////////////  HR SELF SERVICE/EXIT ////////////////////
+
+export const createHrSelfServiceExit = (formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.post("/officeoperations", formValues);
+
+    dispatch({
+      type: CREATE_HRSELFSERVICEEXIT,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchHrSelfServiceExits = (tokens) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
+  return async (dispatch) => {
+    const response = await data.get("/officeoperations");
+
+    dispatch({
+      type: FETCH_HRSELFSERVICEEXITS,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchHrSelfServiceExit = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.get(`/officeoperations/${id}`);
+    dispatch({
+      type: FETCH_HRSELFSERVICEEXIT,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const editHrSelfServiceExit = (id, formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    dispatch({
+      type: EDIT_HRSELFSERVICEEXIT,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const deleteHrSelfServiceExit = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    await data.delete(`/officeoperations/${id}`);
+    dispatch({ type: DELETE_HRSELFSERVICEEXIT, payload: id });
+  };
+};
+
+///////////////////////////////  HR SELF SERVICE/OVERTIME ////////////////////
+
+export const createHrSelfServiceOvertime = (formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.post("/officeoperations", formValues);
+
+    dispatch({
+      type: CREATE_HRSELFSERVICEOVERTIME,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchHrSelfServiceOvertimes = (tokens) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
+  return async (dispatch) => {
+    const response = await data.get("/officeoperations");
+
+    dispatch({
+      type: FETCH_HRSELFSERVICEOVERTIMES,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchHrSelfServiceOvertime = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.get(`/officeoperations/${id}`);
+    dispatch({
+      type: FETCH_HRSELFSERVICEOVERTIME,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const editHrSelfServiceOvertime = (id, formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    dispatch({
+      type: EDIT_HRSELFSERVICEOVERTIME,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const deleteHrSelfServiceOvertime = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    await data.delete(`/officeoperations/${id}`);
+    dispatch({ type: DELETE_HRSELFSERVICEOVERTIME, payload: id });
+  };
+};
+
+///////////////////////////////  HR SELF SERVICE/SALARY ADVANCE ////////////////////
+
+export const createHrSelfServiceSalaryAdvance = (formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.post("/officeoperations", formValues);
+
+    dispatch({
+      type: CREATE_HRSELFSERVICESALARYADVANCE,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchHrSelfServiceSalaryAdvances = (tokens) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
+  return async (dispatch) => {
+    const response = await data.get("/officeoperations");
+
+    dispatch({
+      type: FETCH_HRSELFSERVICESALARYADVANCES,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchHrSelfServiceSalaryAdvance = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.get(`/officeoperations/${id}`);
+    dispatch({
+      type: FETCH_HRSELFSERVICESALARYADVANCE,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const editHrSelfServiceSalaryAdvance = (id, formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    dispatch({
+      type: EDIT_HRSELFSERVICESALARYADVANCE,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const deleteHrSelfServiceSalaryAdvance = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    await data.delete(`/officeoperations/${id}`);
+    dispatch({ type: DELETE_HRSELFSERVICESALARYADVANCE, payload: id });
+  };
+};
+
+///////////////////////////////  HR SELF SERVICE/APPRAISAL ////////////////////
+
+export const createHrSelfServiceAppraisal = (formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.post("/officeoperations", formValues);
+
+    dispatch({
+      type: CREATE_HRSELFSERVICEAPPRAISAL,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchHrSelfServiceAppraisals = (tokens) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
+  return async (dispatch) => {
+    const response = await data.get("/officeoperations");
+
+    dispatch({
+      type: FETCH_HRSELFSERVICEAPPRAISALS,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchHrSelfServiceAppraisal = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.get(`/officeoperations/${id}`);
+    dispatch({
+      type: FETCH_HRSELFSERVICEAPPRAISAL,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const editHrSelfServiceAppraisal = (id, formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    dispatch({
+      type: EDIT_HRSELFSERVICEAPPRAISAL,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const deleteHrSelfServiceAppraisal = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    await data.delete(`/officeoperations/${id}`);
+    dispatch({ type: DELETE_HRSELFSERVICEAPPRAISAL, payload: id });
+  };
+};
+
+///////////////////////////////  HR SELF SERVICE/PAYSLIP ////////////////////
+
+export const createHrSelfServicePayslip = (formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.post("/officeoperations", formValues);
+
+    dispatch({
+      type: CREATE_HRSELFSERVICEPAYSLIP,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchHrSelfServicePayslips = (tokens) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
+  return async (dispatch) => {
+    const response = await data.get("/officeoperations");
+
+    dispatch({
+      type: FETCH_HRSELFSERVICEPAYSLIPS,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchHrSelfServicePayslip = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.get(`/officeoperations/${id}`);
+    dispatch({
+      type: FETCH_HRSELFSERVICEPAYSLIP,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const editHrSelfServicePayslip = (id, formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    dispatch({
+      type: EDIT_HRSELFSERVICEPAYSLIP,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const deleteHrSelfServicePayslip = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    await data.delete(`/officeoperations/${id}`);
+    dispatch({ type: DELETE_HRSELFSERVICEPAYSLIP, payload: id });
   };
 };

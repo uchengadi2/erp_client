@@ -12,6 +12,10 @@ import HrSelfServicesAppraisalsLayout from "./HrSelfServicesAppraisalsLayout";
 import HrSelfServicesExitLayout from "./HrSelfServicesExitLayout";
 import HrSelfServicesLeaveLayout from "./HrSelfServicesLeaveLayout";
 import HrSelfServicesStaffLoanLayout from "./HrSelfServicesStaffLoanLayout";
+import HrSelfServiceCertificateRefundLayout from "./HrSelfServiceCertificateRefundLayout";
+import HrSelfServiceOvertimeLayout from "./HrSelfServiceOvertimeLayout";
+import HrSelfServicesSalaryAdvanceLayout from "./HrSelfServicesSalaryAdvanceLayout";
+import HrSelfServicePayslipLayout from "./HrSelfServicePayslipLayout";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -120,7 +124,7 @@ function HrSelfServicesLayout({ token }) {
           }}
         />
         <Tab
-          label="Exit Request"
+          label="Exit"
           {...a11yProps(0)}
           onClick={(event) => {
             event.preventDefault();
@@ -151,6 +155,14 @@ function HrSelfServicesLayout({ token }) {
             history.push(`/hr/selfservices/appaisals`);
           }}
         />
+        <Tab
+          label="Payslips"
+          {...a11yProps(0)}
+          onClick={(event) => {
+            event.preventDefault();
+            history.push(`/hr/selfservices/payslips`);
+          }}
+        />
       </Tabs>
 
       <TabPanel value={value} index={0}>
@@ -160,10 +172,22 @@ function HrSelfServicesLayout({ token }) {
         <HrSelfServicesStaffLoanLayout token={token} />
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <HrSelfServicesAppraisalsLayout token={token} />
+        <HrSelfServiceCertificateRefundLayout token={token} />
       </TabPanel>
       <TabPanel value={value} index={3}>
         <HrSelfServicesExitLayout token={token} />
+      </TabPanel>
+      <TabPanel value={value} index={4}>
+        <HrSelfServiceOvertimeLayout token={token} />
+      </TabPanel>
+      <TabPanel value={value} index={5}>
+        <HrSelfServicesSalaryAdvanceLayout token={token} />
+      </TabPanel>
+      <TabPanel value={value} index={6}>
+        <HrSelfServicesAppraisalsLayout token={token} />
+      </TabPanel>
+      <TabPanel value={value} index={7}>
+        <HrSelfServicePayslipLayout token={token} />
       </TabPanel>
     </div>
   );
