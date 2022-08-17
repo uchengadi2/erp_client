@@ -139,6 +139,13 @@ import hrSelfServiceOvertimeReducer from "./hrSelfServiceOvertimeReducer";
 import hrSelfServiceSalaryAdvanceReducer from "./hrSelfServiceSalaryAdvanceReducer";
 import hrSelfServiceAppraisalReducer from "./hrSelfServiceAppraisalReducer";
 import hrSelfServicePayslipReducer from "./hrSelfServicePayslipReducer";
+import hrUtilityEmolumentPeriodReducer from "./hrUtilityEmolumentPeriodReducer";
+import hrUtilityBonusRateReducer from "./hrUtilityBonusRateReducer";
+import hrUtilityOvertimeRateReducer from "./hrUtilityOvertimeRateReducer";
+import hrUtilityOrganizationLevelReducer from "./hrUtilityOrganizationLevelReducer";
+import hrUtilitySalaryGradeReducer from "./hrUtilitySalaryGradeReducer";
+import hrUtilitySalaryGradeDeductableReducer from "./hrUtilitySalaryGradeDeductableReducer";
+import hrUtilityExtraDeductableReducer from "./hrUtilityExtraDeductableReducer";
 
 export default combineReducers({
   auth: authReducer,
@@ -284,4 +291,11 @@ export default combineReducers({
   hrSelfServiceSalaryAdvance: hrSelfServiceSalaryAdvanceReducer,
   hrSelfServiceAppraisal: hrSelfServiceAppraisalReducer,
   hrSelfServicePayslip: hrSelfServicePayslipReducer,
+  hrUtilityEmolumentPeriod: hrUtilityEmolumentPeriodReducer,
+  hrUtilityBonusRate: hrUtilityBonusRateReducer,
+  hrUtilityOvertimeRate: hrUtilityOvertimeRateReducer,
+  hrUtilityOrganizationLevel: hrUtilityOrganizationLevelReducer,
+  hrUtilitySalaryGrade: hrUtilitySalaryGradeReducer,
+  hrUtilitySalaryGradeDeductable: hrUtilitySalaryGradeDeductableReducer,
+  hrUtilityExtraDeductable: hrUtilityExtraDeductableReducer,
 });

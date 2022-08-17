@@ -15,6 +15,13 @@ import HrUtilityDivisionsLayout from "./HrUtilityDivisionsLayout";
 import HrUtilityGroupsLayout from "./HrUtilityGroupsLayout";
 import HrUtilityKpiSectionsLayout from "./HrUtilityKpiSectionsLayout";
 import HrUtilityUnitLayout from "./HrUtilityUnitLayout";
+import HrUtilityEmolumentPeriodLayout from "./HrUtilityEmolumentPeriodLayout";
+import HrUtilityBonusRateLayout from "./HrUtilityBonusRateLayout";
+import HrUtilityOvertimeRatesLayout from "./HrUtilityOvertimeRatesLayout";
+import HrUtilityOrganizationLevelLayout from "./HrUtilityOrganizationLevelLayout";
+import HrUtilitySalaryGradesLayout from "./HrUtilitySalaryGradesLayout";
+import HrUtilitySalaryGradeDeductableLayout from "./HrUtilitySalaryGradeDeductableLayout";
+import HrUtilityExtraDeductableLayout from "./HrUtilityExtraDeductableLayout";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -186,6 +193,30 @@ function HrUtilityLayout({ token }) {
             history.push(`/hr/utilities/organizationlevels`);
           }}
         />
+        <Tab
+          label="Salary Grades"
+          {...a11yProps(0)}
+          onClick={(event) => {
+            event.preventDefault();
+            history.push(`/hr/utilities/salarygrades`);
+          }}
+        />
+        <Tab
+          label="Salary Grade Deductables"
+          {...a11yProps(0)}
+          onClick={(event) => {
+            event.preventDefault();
+            history.push(`/hr/utilities/salarydeductables`);
+          }}
+        />
+        <Tab
+          label="Extra Deductables"
+          {...a11yProps(0)}
+          onClick={(event) => {
+            event.preventDefault();
+            history.push(`/hr/utilities/extradeductables`);
+          }}
+        />
       </Tabs>
 
       <TabPanel value={value} index={0}>
@@ -208,6 +239,27 @@ function HrUtilityLayout({ token }) {
       </TabPanel>
       <TabPanel value={value} index={6}>
         <HrUtilityAppraisalSeasonsLayout token={token} />
+      </TabPanel>
+      <TabPanel value={value} index={7}>
+        <HrUtilityEmolumentPeriodLayout token={token} />
+      </TabPanel>
+      <TabPanel value={value} index={8}>
+        <HrUtilityBonusRateLayout token={token} />
+      </TabPanel>
+      <TabPanel value={value} index={9}>
+        <HrUtilityOvertimeRatesLayout token={token} />
+      </TabPanel>
+      <TabPanel value={value} index={10}>
+        <HrUtilityOrganizationLevelLayout token={token} />
+      </TabPanel>
+      <TabPanel value={value} index={11}>
+        <HrUtilitySalaryGradesLayout token={token} />
+      </TabPanel>
+      <TabPanel value={value} index={12}>
+        <HrUtilitySalaryGradeDeductableLayout token={token} />
+      </TabPanel>
+      <TabPanel value={value} index={13}>
+        <HrUtilityExtraDeductableLayout token={token} />
       </TabPanel>
     </div>
   );

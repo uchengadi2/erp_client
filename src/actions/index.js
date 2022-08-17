@@ -684,6 +684,41 @@ import {
   FETCH_HRSELFSERVICEPAYSLIP,
   EDIT_HRSELFSERVICEPAYSLIP,
   DELETE_HRSELFSERVICEPAYSLIP,
+  CREATE_HRUTILITYEMOLUMENTPERIOD,
+  FETCH_HRUTILITYEMOLUMENTPERIODS,
+  FETCH_HRUTILITYEMOLUMENTPERIOD,
+  EDIT_HRUTILITYEMOLUMENTPERIOD,
+  DELETE_HRUTILITYEMOLUMENTPERIOD,
+  CREATE_HRUTILITYBONUSRATE,
+  FETCH_HRUTILITYBONUSRATES,
+  FETCH_HRUTILITYBONUSRATE,
+  EDIT_HRUTILITYBONUSRATE,
+  DELETE_HRUTILITYBONUSRATE,
+  CREATE_HRUTILITYOVERTIMERATE,
+  FETCH_HRUTILITYOVERTIMERATES,
+  FETCH_HRUTILITYOVERTIMERATE,
+  EDIT_HRUTILITYOVERTIMERATE,
+  DELETE_HRUTILITYOVERTIMERATE,
+  CREATE_HRUTILITYORGANIZATIONLEVEL,
+  FETCH_HRUTILITYORGANIZATIONLEVELS,
+  FETCH_HRUTILITYORGANIZATIONLEVEL,
+  EDIT_HRUTILITYORGANIZATIONLEVEL,
+  DELETE_HRUTILITYORGANIZATIONLEVEL,
+  CREATE_HRUTILITYSALARYGRADE,
+  FETCH_HRUTILITYSALARYGRADES,
+  FETCH_HRUTILITYSALARYGRADE,
+  EDIT_HRUTILITYSALARYGRADE,
+  DELETE_HRUTILITYSALARYGRADE,
+  CREATE_HRUTILITYSALARYGRADEDEDUCTABLE,
+  FETCH_HRUTILITYSALARYGRADEDEDUCTABLES,
+  FETCH_HRUTILITYSALARYGRADEDEDUCTABLE,
+  EDIT_HRUTILITYSALARYGRADEDEDUCTABLE,
+  DELETE_HRUTILITYSALARYGRADEDEDUCTABLE,
+  CREATE_HRUTILITYEXTRADEDUCTABLE,
+  FETCH_HRUTILITYEXTRADEDUCTABLES,
+  FETCH_HRUTILITYEXTRADEDUCTABLE,
+  EDIT_HRUTILITYEXTRADEDUCTABLE,
+  DELETE_HRUTILITYEXTRADEDUCTABLE,
 } from "./types";
 
 //authentication and authorization  operations
@@ -8175,5 +8210,397 @@ export const deleteHrSelfServicePayslip = (id, token) => {
   return async (dispatch) => {
     await data.delete(`/officeoperations/${id}`);
     dispatch({ type: DELETE_HRSELFSERVICEPAYSLIP, payload: id });
+  };
+};
+
+///////////////////////////////  HR UTILITY/EMOLUMENT PERIOD ////////////////////
+
+export const createHrUtilityEmolumentPeriod = (formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.post("/officeoperations", formValues);
+
+    dispatch({
+      type: CREATE_HRUTILITYEMOLUMENTPERIOD,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchHrUtilityEmolumentPeriods = (tokens) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
+  return async (dispatch) => {
+    const response = await data.get("/officeoperations");
+
+    dispatch({
+      type: FETCH_HRUTILITYEMOLUMENTPERIODS,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchHrUtilityEmolumentPeriod = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.get(`/officeoperations/${id}`);
+    dispatch({
+      type: FETCH_HRUTILITYEMOLUMENTPERIOD,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const editHrUtilityEmolumentPeriod = (id, formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    dispatch({
+      type: EDIT_HRUTILITYEMOLUMENTPERIOD,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const deleteHrUtilityEmolumentPeriod = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    await data.delete(`/officeoperations/${id}`);
+    dispatch({ type: DELETE_HRUTILITYEMOLUMENTPERIOD, payload: id });
+  };
+};
+
+///////////////////////////////  HR UTILITY/BONUS RATE ////////////////////
+
+export const createHrUtilityBonusRate = (formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.post("/officeoperations", formValues);
+
+    dispatch({
+      type: CREATE_HRUTILITYBONUSRATE,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchHrUtilityBonusRates = (tokens) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
+  return async (dispatch) => {
+    const response = await data.get("/officeoperations");
+
+    dispatch({
+      type: FETCH_HRUTILITYBONUSRATES,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchHrUtilityBonusRate = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.get(`/officeoperations/${id}`);
+    dispatch({
+      type: FETCH_HRUTILITYBONUSRATE,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const editHrUtilityBonusRate = (id, formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    dispatch({
+      type: EDIT_HRUTILITYBONUSRATE,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const deleteHrUtilityBonusRate = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    await data.delete(`/officeoperations/${id}`);
+    dispatch({ type: DELETE_HRUTILITYBONUSRATE, payload: id });
+  };
+};
+
+///////////////////////////////  HR UTILITY/OVERTIME RATE ////////////////////
+
+export const createHrUtilityOvertimeRate = (formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.post("/officeoperations", formValues);
+
+    dispatch({
+      type: CREATE_HRUTILITYOVERTIMERATE,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchHrUtilityOvertimeRates = (tokens) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
+  return async (dispatch) => {
+    const response = await data.get("/officeoperations");
+
+    dispatch({
+      type: FETCH_HRUTILITYOVERTIMERATES,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchHrUtilityOvertimeRate = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.get(`/officeoperations/${id}`);
+    dispatch({
+      type: FETCH_HRUTILITYOVERTIMERATE,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const editHrUtilityOvertimeRate = (id, formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    dispatch({
+      type: EDIT_HRUTILITYOVERTIMERATE,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const deleteHrUtilityOvertimeRate = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    await data.delete(`/officeoperations/${id}`);
+    dispatch({ type: DELETE_HRUTILITYOVERTIMERATE, payload: id });
+  };
+};
+
+///////////////////////////////  HR UTILITY/ORGANIZATION LEVEL ////////////////////
+
+export const createHrUtilityOrganizationLevel = (formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.post("/officeoperations", formValues);
+
+    dispatch({
+      type: CREATE_HRUTILITYORGANIZATIONLEVEL,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchHrUtilityOrganizationLevels = (tokens) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
+  return async (dispatch) => {
+    const response = await data.get("/officeoperations");
+
+    dispatch({
+      type: FETCH_HRUTILITYORGANIZATIONLEVELS,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchHrUtilityOrganizationLevel = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.get(`/officeoperations/${id}`);
+    dispatch({
+      type: FETCH_HRUTILITYORGANIZATIONLEVEL,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const editHrUtilityOrganizationLevel = (id, formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    dispatch({
+      type: EDIT_HRUTILITYORGANIZATIONLEVEL,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const deleteHrUtilityOrganizationLevel = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    await data.delete(`/officeoperations/${id}`);
+    dispatch({ type: DELETE_HRUTILITYORGANIZATIONLEVEL, payload: id });
+  };
+};
+
+///////////////////////////////  HR UTILITY/Salary grade ////////////////////
+
+export const createHrUtilitySalaryGrade = (formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.post("/officeoperations", formValues);
+
+    dispatch({
+      type: CREATE_HRUTILITYSALARYGRADE,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchHrUtilitySalaryGrades = (tokens) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
+  return async (dispatch) => {
+    const response = await data.get("/officeoperations");
+
+    dispatch({
+      type: FETCH_HRUTILITYSALARYGRADES,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchHrUtilitySalaryGrade = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.get(`/officeoperations/${id}`);
+    dispatch({
+      type: FETCH_HRUTILITYSALARYGRADE,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const editHrUtilitySalaryGrade = (id, formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    dispatch({
+      type: EDIT_HRUTILITYSALARYGRADE,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const deleteHrUtilitySalaryGrade = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    await data.delete(`/officeoperations/${id}`);
+    dispatch({ type: DELETE_HRUTILITYSALARYGRADE, payload: id });
+  };
+};
+
+///////////////////////////////  HR UTILITY/Salary grade DEDUCTABELS ////////////////////
+
+export const createHrUtilitySalaryGradeDeductable = (formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.post("/officeoperations", formValues);
+
+    dispatch({
+      type: CREATE_HRUTILITYSALARYGRADEDEDUCTABLE,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchHrUtilitySalaryGradeDeductables = (tokens) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
+  return async (dispatch) => {
+    const response = await data.get("/officeoperations");
+
+    dispatch({
+      type: FETCH_HRUTILITYSALARYGRADEDEDUCTABLES,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchHrUtilitySalaryGradeDeductable = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.get(`/officeoperations/${id}`);
+    dispatch({
+      type: FETCH_HRUTILITYSALARYGRADEDEDUCTABLE,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const editHrUtilitySalaryGradeDeductable = (id, formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    dispatch({
+      type: EDIT_HRUTILITYSALARYGRADEDEDUCTABLE,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const deleteHrUtilitySalaryGradeDeductable = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    await data.delete(`/officeoperations/${id}`);
+    dispatch({ type: DELETE_HRUTILITYSALARYGRADEDEDUCTABLE, payload: id });
+  };
+};
+
+///////////////////////////////  HR UTILITY/Extra DEDUCTABELS ////////////////////
+
+export const createHrUtilityExtraDeductable = (formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.post("/officeoperations", formValues);
+
+    dispatch({
+      type: CREATE_HRUTILITYEXTRADEDUCTABLE,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchHrUtilityExtraDeductables = (tokens) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
+  return async (dispatch) => {
+    const response = await data.get("/officeoperations");
+
+    dispatch({
+      type: FETCH_HRUTILITYEXTRADEDUCTABLES,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchHrUtilityExtraDeductable = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.get(`/officeoperations/${id}`);
+    dispatch({
+      type: FETCH_HRUTILITYEXTRADEDUCTABLE,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const editHrUtilityExtraDeductable = (id, formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    dispatch({
+      type: EDIT_HRUTILITYEXTRADEDUCTABLE,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const deleteHrUtilityExtraDeductable = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    await data.delete(`/officeoperations/${id}`);
+    dispatch({ type: DELETE_HRUTILITYEXTRADEDUCTABLE, payload: id });
   };
 };
