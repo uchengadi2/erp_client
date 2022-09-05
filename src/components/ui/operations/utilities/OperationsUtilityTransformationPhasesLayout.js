@@ -132,7 +132,7 @@ function OperationsUtilityTransformationPhasesLayout(props) {
                   history.push("/operations/utilities/processingphases/new"),
                 ]}
               >
-                Create Transformation Phase
+                Create Processing Phase
               </Button>
             </Grid>
             <Grid item></Grid>

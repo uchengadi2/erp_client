@@ -26,9 +26,9 @@ import assetMaintenanceTypeReducer from "./assetMaintenanceTypeReducer";
 import measurementUnitReducer from "./measurementUnitReducer";
 import stockReducer from "./stockReducer";
 import otherAssetReducer from "./otherAssetReducer";
-import unapprovedProcurementReducer from "./unapprovedProcurementReducer";
+import unApprovedAssetProcurementReducer from "./unApprovedAssetProcurementReducer";
 import approvedProcurementReducer from "./approvedProcurementReducer";
-import executedProcurementReducer from "./executedProcurementReducer";
+import executedProcurementReducer from "./unApprovedAssetProcurementReducer";
 import unapprovedMaintenanceReducer from "./unapprovedMaintenanceReducer";
 import approvedMaintenanceReducer from "./approvedMaintenanceReducer";
 import executedMaintenanceReducer from "./executedMaintenanceReducer";
@@ -146,6 +146,9 @@ import hrUtilityOrganizationLevelReducer from "./hrUtilityOrganizationLevelReduc
 import hrUtilitySalaryGradeReducer from "./hrUtilitySalaryGradeReducer";
 import hrUtilitySalaryGradeDeductableReducer from "./hrUtilitySalaryGradeDeductableReducer";
 import hrUtilityExtraDeductableReducer from "./hrUtilityExtraDeductableReducer";
+import assetProcurementReducer from "./assetProcurementReducer";
+import assetSetReducer from "./assetSetReducer";
+import assetSetBatchReducer from "./assetSetBatchReducer";
 
 export default combineReducers({
   auth: authReducer,
@@ -175,7 +178,7 @@ export default combineReducers({
   measurementUnit: measurementUnitReducer,
   stock: stockReducer,
   otherAsset: otherAssetReducer,
-  unapprovedProcurement: unapprovedProcurementReducer,
+  unApprovedAssetProcurement: unApprovedAssetProcurementReducer,
   approvedProcurement: approvedProcurementReducer,
   executedProcurement: executedProcurementReducer,
   unapprovedMaintenance: unapprovedMaintenanceReducer,
@@ -298,4 +301,7 @@ export default combineReducers({
   hrUtilitySalaryGrade: hrUtilitySalaryGradeReducer,
   hrUtilitySalaryGradeDeductable: hrUtilitySalaryGradeDeductableReducer,
   hrUtilityExtraDeductable: hrUtilityExtraDeductableReducer,
+  assetProcurement: assetProcurementReducer,
+  assetSet: assetSetReducer,
+  assetSetBatch: assetSetBatchReducer,
 });

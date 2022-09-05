@@ -128,7 +128,7 @@ function AssetsExecutedProcurementsLayout(props) {
                 className={classes.addButton}
                 onClick={() => [
                   setOpen(true),
-                  history.push("/assets/procurements/executedprocurements/new"),
+                  history.push("/assets/procurements/assetprocurements/new"),
                 ]}
               >
                 Initiate Procurement Request
@@ -152,7 +152,7 @@ function AssetsExecutedProcurementsLayout(props) {
         open={open}
         onClose={() => [
           setOpen(false),
-          history.push("/assets/procurements/executedprocurements"),
+          history.push("/assets/procurements/assetprocurements"),
         ]}
       >
         <DialogContent>

@@ -9,6 +9,8 @@ import { Link } from "react-router-dom";
 import history from "./../../../../history";
 import AssetsAssetStockLayout from "./AssetsAssetStockLayout";
 import AssetsAssetsOtherAssetsLayout from "./AssetsAssetsOtherAssetsLayout";
+import AssetsSetsLayout from "./AssetsSetsLayout";
+import AssetSetBatchesLayout from "./AssetSetBatchesLayout";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -108,6 +110,31 @@ function AssetsAssetLayout({ token, userId }) {
             history.push(`/assets/assets/otherassets`);
           }}
         />
+        <Tab
+          label="=========================================="
+          {...a11yProps(0)}
+          disabled={true}
+          // onClick={(event) => {
+          //   event.preventDefault();
+          //   history.push(`/assets/assets/stocks`);
+          // }}
+        />
+        <Tab
+          label="Sets"
+          {...a11yProps(0)}
+          onClick={(event) => {
+            event.preventDefault();
+            history.push(`/assets/assets/sets`);
+          }}
+        />
+        <Tab
+          label="Batches"
+          {...a11yProps(0)}
+          onClick={(event) => {
+            event.preventDefault();
+            history.push(`/assets/assets/batches`);
+          }}
+        />
       </Tabs>
 
       <TabPanel value={value} index={0}>
@@ -115,6 +142,12 @@ function AssetsAssetLayout({ token, userId }) {
       </TabPanel>
       <TabPanel value={value} index={1}>
         <AssetsAssetsOtherAssetsLayout token={token} userId={userId} />
+      </TabPanel>
+      <TabPanel value={value} index={3}>
+        <AssetsSetsLayout token={token} userId={userId} />
+      </TabPanel>
+      <TabPanel value={value} index={4}>
+        <AssetSetBatchesLayout token={token} userId={userId} />
       </TabPanel>
     </div>
   );

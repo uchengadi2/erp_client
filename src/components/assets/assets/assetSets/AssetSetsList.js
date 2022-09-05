@@ -9,13 +9,13 @@ import CancelRoundedIcon from "@material-ui/icons/CancelRounded";
 import AssignmentIcon from "@material-ui/icons/Assignment";
 import Typography from "@material-ui/core/Typography";
 import history from "../../../../history";
-import { fetchAssetStoreSpaceAllocations } from "../../../../actions";
+import { fetchAssetSets } from "../../../../actions";
 import DataGridContainer from "../../../DataGridContainer";
 
-import AssetStoreAllocationStoreSpaceDelete from "./AssetStoreAllocationStoreSpaceDelete";
-import AssetStoreAllocationStoreSpaceEditForm from "./AssetStoreAllocationStoreSpaceEditForm";
+import AssetSetDelete from "./AssetSetDelete";
+import AssetSetEditForm from "./AssetSetEditForm";
 
-class AssetStoreAllocateStoreSpaceList extends React.Component {
+class AssetSetsList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -24,9 +24,6 @@ class AssetStoreAllocateStoreSpaceList extends React.Component {
       cancelOpen: false,
       assignOpen: false,
       id: null,
-      storeId: null,
-      storeAllocatedSpace: null,
-
       params: {},
       alert: {
         open: false,
@@ -36,7 +33,7 @@ class AssetStoreAllocateStoreSpaceList extends React.Component {
     };
   }
   componentDidMount() {
-    this.props.fetchAssetStoreSpaceAllocations(this.props.token);
+    this.props.fetchAssetSets(this.props.token);
   }
 
   handleDialogOpenStatus = () => {
@@ -81,11 +78,11 @@ class AssetStoreAllocateStoreSpaceList extends React.Component {
           open={this.state.editOpen}
           onClose={() => [
             this.setState({ editOpen: false }),
-            history.push("/assets/stores/spaceallocations"),
+            history.push("/assets/assets/sets"),
           ]}
         >
           <DialogContent>
-            <AssetStoreAllocationStoreSpaceEditForm
+            <AssetSetEditForm
               token={this.props.token}
               userId={this.props.userId}
               params={this.state.params}
@@ -101,7 +98,6 @@ class AssetStoreAllocateStoreSpaceList extends React.Component {
 
   renderDeleteDialogForm = () => {
     //token will be used here
-
     return (
       <>
         <Dialog
@@ -109,16 +105,14 @@ class AssetStoreAllocateStoreSpaceList extends React.Component {
           open={this.state.deleteOpen}
           onClose={() => [
             this.setState({ deleteOpen: false }),
-            history.push(`/assets/stores/spaceallocations`),
+            history.push(`/assets/assets/sets`),
           ]}
         >
           <DialogContent>
-            <AssetStoreAllocationStoreSpaceDelete
+            <AssetSetDelete
               token={this.props.token}
               userId={this.props.userId}
               id={this.state.id}
-              storeId={this.state.storeId}
-              storeAllocatedSpace={this.state.storeAllocatedSpace}
               handleDialogOpenStatus={this.handleDialogOpenStatus}
             />
           </DialogContent>
@@ -136,7 +130,7 @@ class AssetStoreAllocateStoreSpaceList extends React.Component {
           open={this.state.cancelOpen}
           onClose={() => [
             this.setState({ cancelOpen: false }),
-            history.push(`/assets/stores/spaceallocations`),
+            history.push(`/assets/assets/sets`),
           ]}
         >
           <DialogContent>
@@ -156,33 +150,34 @@ class AssetStoreAllocateStoreSpaceList extends React.Component {
           open={this.state.assignOpen}
           onClose={() => [
             this.setState({ assignOpen: false }),
-            history.push(`/assets/stores/spaceallocations`),
+            history.push(`/assets/assets/sets`),
           ]}
         ></Dialog>
       </>
     );
   };
 
-  renderAssetStoreSpaceAllocationList = () => {
+  renderDataList = () => {
     let rows = [];
     let counter = 0;
     const columns = [
       { field: "numbering", headerName: "S/n", width: 60 },
+
+      { field: "label", headerName: "Set Label", width: 160 },
+      { field: "setRefNumber", headerName: "Ref Number", width: 160 },
+      { field: "assetType", headerName: "Asset Type", width: 160 },
+      { field: "quantity", headerName: "Quantity", width: 160 },
       {
-        field: "serviceOutlet",
-        headerName: "Owner Service Outlet",
-        width: 150,
+        field: "remainingQuantity",
+        headerName: "Unallocated Quantity",
+        width: 160,
       },
-      { field: "store", headerName: "Store", width: 200 },
-      { field: "storeType", headerName: "Store Type", width: 200 },
-      { field: "spaceAllocated", headerName: "Space Allocated", width: 200 },
       {
-        field: "beneficiaryServiceOutlet",
-        headerName: "Allocation Beneficiary",
-        width: 200,
+        field: "assetMeasurementUnit",
+        headerName: "Asset Measurement Unit",
+        width: 160,
       },
-      { field: "dateAllocated", headerName: "Allocation Date", width: 200 },
-      { field: "allocationCost", headerName: "Allocation Cost", width: 200 },
+      { field: "acquisitionDate", headerName: "Acquisition Date", width: 160 },
 
       {
         field: "editaction",
@@ -199,9 +194,7 @@ class AssetStoreAllocateStoreSpaceList extends React.Component {
                   id: params.id,
                   params: params.row,
                 }),
-                history.push(
-                  `/assets/stores/spaceallocations/edit/${params.id}`
-                ),
+                history.push(`/assets/assets/sets/edit/${params.id}`),
               ]}
             />
           </strong>
@@ -215,41 +208,31 @@ class AssetStoreAllocateStoreSpaceList extends React.Component {
         description: "Delete row",
         renderCell: (params) => (
           <strong>
-            {/* {console.log("inside list params:", params)} */}
+            {/* {params.value.getFullYear()} */}
             <DeleteRoundedIcon
               style={{ color: "red" }}
               onClick={() => [
-                this.setState({
-                  deleteOpen: true,
-                  id: params.id,
-                  storeId: params.row.store,
-                  storeAllocatedSpace: params.row.spaceAllocated,
-                }),
-                history.push(
-                  `/assets/stores/spaceallocations/delete/${params.id}`
-                ),
+                this.setState({ deleteOpen: true, id: params.id }),
+                history.push(`/assets/assets/sets/delete/${params.id}`),
               ]}
             />
           </strong>
         ),
       },
     ];
-    this.props.assetStoreSpaceAllocations.map((assetStoreSpaceAllocation) => {
+
+    this.props.assetSets.map((assetSet) => {
       let row = {
         numbering: ++counter,
-        id: assetStoreSpaceAllocation.id,
-        serviceOutlet: assetStoreSpaceAllocation.serviceOutlet,
-        storeType: assetStoreSpaceAllocation.storeType,
-        store: assetStoreSpaceAllocation.store,
-        beneficiaryServiceOutlet:
-          assetStoreSpaceAllocation.beneficiaryServiceOutlet,
-        allocationCost: assetStoreSpaceAllocation.allocationCost,
-        dateAllocated: assetStoreSpaceAllocation.dateAllocated,
-        spaceAllocated: assetStoreSpaceAllocation.spaceAllocated,
-        allocationCommencementDate:
-          assetStoreSpaceAllocation.allocationCommencementDate,
-        allocationEndDate: assetStoreSpaceAllocation.allocationEndDate,
-        description: assetStoreSpaceAllocation.description,
+        id: assetSet.id,
+        assetType: assetSet.assetType,
+        label: assetSet.label,
+        setRefNumber: assetSet.setRefNumber,
+        description: assetSet.description,
+        quantity: assetSet.quantity,
+        acquisitionDate: assetSet.acquisitionDate,
+        assetMeasurementUnit: assetSet.assetMeasurementUnit,
+        remainingQuantity: assetSet.remainingQuantity,
       };
       rows.push(row);
     });
@@ -261,7 +244,7 @@ class AssetStoreAllocateStoreSpaceList extends React.Component {
       <>
         {this.renderDeleteDialogForm()}
         {this.renderEditDialogForm()}
-        {this.renderAssetStoreSpaceAllocationList()}
+        {this.renderDataList()}
         <Snackbar
           open={this.state.alert.open}
           message={this.state.alert.message}
@@ -278,11 +261,7 @@ class AssetStoreAllocateStoreSpaceList extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return {
-    assetStoreSpaceAllocations: Object.values(state.assetStoreSpaceAllocation),
-  };
+  return { assetSets: Object.values(state.assetSet) };
 };
 
-export default connect(mapStateToProps, { fetchAssetStoreSpaceAllocations })(
-  AssetStoreAllocateStoreSpaceList
-);
+export default connect(mapStateToProps, { fetchAssetSets })(AssetSetsList);

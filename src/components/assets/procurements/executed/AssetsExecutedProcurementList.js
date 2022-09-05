@@ -9,7 +9,7 @@ import CancelRoundedIcon from "@material-ui/icons/CancelRounded";
 import AssignmentIcon from "@material-ui/icons/Assignment";
 import Typography from "@material-ui/core/Typography";
 import history from "../../../../history";
-import { fetchExecApprovedProcurements } from "../../../../actions";
+import { fetchAssetProcurements } from "../../../../actions";
 import DataGridContainer from "../../../DataGridContainer";
 
 import AssetExecutedProcurementDelete from "./AssetExecutedProcurementDelete";
@@ -33,7 +33,7 @@ class AssetsExecutedProcurementList extends React.Component {
     };
   }
   componentDidMount() {
-    this.props.fetchExecApprovedProcurements(this.props.token);
+    this.props.fetchAssetProcurements(this.props.token);
   }
 
   handleDialogOpenStatus = () => {
@@ -78,7 +78,7 @@ class AssetsExecutedProcurementList extends React.Component {
           open={this.state.editOpen}
           onClose={() => [
             this.setState({ editOpen: false }),
-            history.push("/assets/procurements/executedprocurements"),
+            history.push("/assets/procurements/assetprocurements"),
           ]}
         >
           <DialogContent>
@@ -105,7 +105,7 @@ class AssetsExecutedProcurementList extends React.Component {
           open={this.state.deleteOpen}
           onClose={() => [
             this.setState({ deleteOpen: false }),
-            history.push(`/assets/procurements/executedprocurements`),
+            history.push(`/assets/procurements/assetprocurements`),
           ]}
         >
           <DialogContent>
@@ -130,7 +130,7 @@ class AssetsExecutedProcurementList extends React.Component {
           open={this.state.cancelOpen}
           onClose={() => [
             this.setState({ cancelOpen: false }),
-            history.push(`/assets/procurements/executedprocurements`),
+            history.push(`/assets/procurements/assetprocurements`),
           ]}
         >
           <DialogContent>
@@ -150,7 +150,7 @@ class AssetsExecutedProcurementList extends React.Component {
           open={this.state.assignOpen}
           onClose={() => [
             this.setState({ assignOpen: false }),
-            history.push(`/assets/procurements/executedprocurements`),
+            history.push(`/assets/procurements/assetprocurements`),
           ]}
         ></Dialog>
       </>
@@ -181,7 +181,7 @@ class AssetsExecutedProcurementList extends React.Component {
                   params: params.row,
                 }),
                 history.push(
-                  `/assets/procurements/executedprocurements/edit/${params.id}`
+                  `/assets/procurements/assetprocurements/edit/${params.id}`
                 ),
               ]}
             />
@@ -202,7 +202,7 @@ class AssetsExecutedProcurementList extends React.Component {
               onClick={() => [
                 this.setState({ deleteOpen: true, id: params.id }),
                 history.push(
-                  `/assets/procurements/executedprocurements/delete/${params.id}`
+                  `/assets/procurements/assetprocurements/delete/${params.id}`
                 ),
               ]}
             />
@@ -210,13 +210,13 @@ class AssetsExecutedProcurementList extends React.Component {
         ),
       },
     ];
-    this.props.executedProcurements.map((executedProcurement) => {
+    this.props.assetProcurements.map((assetProcurement) => {
       let row = {
         numbering: ++counter,
-        id: executedProcurement.id,
-        code: executedProcurement.code,
-        name: executedProcurement.name,
-        description: executedProcurement.description,
+        id: assetProcurement.id,
+        code: assetProcurement.code,
+        name: assetProcurement.name,
+        description: assetProcurement.description,
       };
       rows.push(row);
     });
@@ -245,9 +245,9 @@ class AssetsExecutedProcurementList extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return { executedProcurements: Object.values(state.executedProcurement) };
+  return { assetProcurements: Object.values(state.assetProcurement) };
 };
 
-export default connect(mapStateToProps, { fetchExecApprovedProcurements })(
+export default connect(mapStateToProps, { fetchAssetProcurements })(
   AssetsExecutedProcurementList
 );

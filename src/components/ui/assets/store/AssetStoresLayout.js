@@ -124,14 +124,14 @@ function AssetStoresLayout({ token, userId }) {
           }}
         />
 
-        <Tab
+        {/* <Tab
           label="Change Ownership"
           {...a11yProps(0)}
           onClick={(event) => {
             event.preventDefault();
             history.push(`/assets/stores/ownership`);
           }}
-        />
+        /> */}
         <Tab
           label="Allocate Space"
           {...a11yProps(0)}
@@ -140,7 +140,7 @@ function AssetStoresLayout({ token, userId }) {
             history.push(`/assets/stores/spaceallocations`);
           }}
         />
-        <Tab
+        {/* <Tab
           label="sell"
           {...a11yProps(0)}
           onClick={(event) => {
@@ -155,7 +155,7 @@ function AssetStoresLayout({ token, userId }) {
             event.preventDefault();
             history.push(`/assets/stores/closures`);
           }}
-        />
+        /> */}
       </Tabs>
 
       <TabPanel value={value} index={0}>
@@ -168,18 +168,18 @@ function AssetStoresLayout({ token, userId }) {
       <TabPanel value={value} index={2}>
         <AssetStoresLeaseLayout token={token} userId={userId} />
       </TabPanel>
-      <TabPanel value={value} index={3}>
+      {/* <TabPanel value={value} index={3}>
         <AssetsStoresOwnershipLayout token={token} userId={userId} />
-      </TabPanel>
-      <TabPanel value={value} index={4}>
+      </TabPanel> */}
+      <TabPanel value={value} index={3}>
         <AssetStoresAllocateSpaceLayout token={token} userId={userId} />
       </TabPanel>
-      <TabPanel value={value} index={5}>
+      {/* <TabPanel value={value} index={5}>
         <AssetStoresSellLayout token={token} userId={userId} />
-      </TabPanel>
-      <TabPanel value={value} index={6}>
+      </TabPanel> */}
+      {/* <TabPanel value={value} index={6}>
         <AssetStoresClosuresLayout token={token} userId={userId} />
-      </TabPanel>
+      </TabPanel> */}
     </div>
   );
 }

@@ -17,7 +17,7 @@ import Select from "@material-ui/core/Select";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormHelperText from "@material-ui/core/FormHelperText";
-import data from "../../../apis/local";
+import api from "../../../apis/local";
 import { SettingsSystemDaydreamTwoTone } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
@@ -57,28 +57,39 @@ const useStyles = makeStyles((theme) => ({
 
 function AssetTypesFilter(props) {
   const classes = useStyles();
-  const [value, setValue] = useState();
+  const [assetTypeList, setAssetTypeList] = useState([]);
+  const [assetType, setAssetType] = useState();
 
-  //   useEffect(() => {
-  //     setValue(props.selectedCountry);
-  //     props.handleCountryChange(props.selectedCountry);
-  //   }, [props]);
+  useEffect(() => {
+    const fetchData = async () => {
+      let allData = [];
+      api.defaults.headers.common["Authorization"] = `Bearer ${props.token}`;
+      const response = await api.get("/assettypes");
+      const workingData = response.data.data.data;
+      workingData.map((item) => {
+        allData.push({
+          id: item._id,
+          name: `${item.name}`,
+          code: `${item.code}`,
+        });
+      });
+      setAssetTypeList(allData);
+    };
+
+    //call the function
+
+    fetchData().catch(console.error);
+  }, []);
 
   const handleChange = (event) => {
-    console.log("this is the valuettttt:", value);
-    setValue(event.target.value);
-    //     props.handleCountryChange(event.target.value);
+    setAssetType(event.target.value);
+    props.getCurrentAssetTypeHandle(event.target.value);
   };
 
-  const onStuffSelected = () => {
-    console.log("some naughty stuff was actually selected");
-  };
-
-  console.log("the props are:", props);
   const renderItemList = () => {
-    return props.selectList.map((item) => {
+    return assetTypeList.map((item) => {
       return (
-        <MenuItem key={item.id} value={item.id}>
+        <MenuItem key={item.id} value={item.code}>
           {item.name}
         </MenuItem>
       );
@@ -99,21 +110,15 @@ function AssetTypesFilter(props) {
           {/* <InputLabel id="vendor_city">City</InputLabel> */}
 
           <Select
-            labelId="value"
-            id="value"
-            value={props.selectedCountry}
+            labelId="assetType"
+            id="assetType"
+            value={assetType}
             // onChange={props.handleCountryChange}
             onChange={handleChange}
-            label="Country"
+            label="Asset Type"
             style={{ width: 300, marginLeft: 10, marginTop: 30, height: 40 }}
           >
-            <MenuItem value="">
-              <em>All</em>
-            </MenuItem>
-            <MenuItem value="naira">Naira</MenuItem>
-            <MenuItem value="usdollars">US Dollars</MenuItem>
-            <MenuItem value="pounds">Pounds Sterling</MenuItem>
-            {/* {renderItemList()} */}
+            {renderItemList()}
           </Select>
           <FormHelperText style={{ marginLeft: 20 }}>
             Select Asset Type
@@ -124,7 +129,8 @@ function AssetTypesFilter(props) {
   };
 
   const onSubmit = (formValues) => {
-    props.onSubmit(formValues);
+    //props.onSubmit(formValues);
+    props.getCurrentAssetTypeHandle(assetType);
   };
 
   return (
@@ -153,6 +159,7 @@ function AssetTypesFilter(props) {
                 type="text"
                 component={renderAssetTypesField}
                 autoComplete="off"
+
                 //style={{ marginTop: 20 }}
               />
             </Grid>

@@ -18,7 +18,7 @@ import AssetStoreLeaseList from "../../../assets/stores/leases/AssetStoreLeaseLi
 const useStyles = makeStyles((theme) => ({
   root: {
     marginTop: "-80px",
-    width: 1000,
+    width: 1100,
   },
   headerContainer: {
     height: 20,

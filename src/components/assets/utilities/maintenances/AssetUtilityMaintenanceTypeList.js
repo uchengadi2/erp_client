@@ -162,8 +162,9 @@ class AssetUtilityMaintenanceTypeList extends React.Component {
     let counter = 0;
     const columns = [
       { field: "numbering", headerName: "S/n", width: 60 },
-      { field: "code", headerName: "Transaction Code", width: 150 },
-      { field: "name", headerName: "Transaction Name", width: 200 },
+
+      { field: "name", headerName: "Maintenance Type", width: 250 },
+      { field: "assetType", headerName: "Asset Type", width: 250 },
 
       {
         field: "editaction",
@@ -214,7 +215,7 @@ class AssetUtilityMaintenanceTypeList extends React.Component {
       let row = {
         numbering: ++counter,
         id: maintenanceType.id,
-        code: maintenanceType.code,
+        assetType: maintenanceType.assetType,
         name: maintenanceType.name,
         description: maintenanceType.description,
       };
@@ -249,5 +250,5 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, { fetchMaintenanceTypes })(
-    AssetUtilityMaintenanceTypeList
+  AssetUtilityMaintenanceTypeList
 );

@@ -162,8 +162,22 @@ class AssetStoresAllStoresList extends React.Component {
     let counter = 0;
     const columns = [
       { field: "numbering", headerName: "S/n", width: 60 },
-      { field: "code", headerName: "Transaction Code", width: 150 },
-      { field: "name", headerName: "Transaction Name", width: 200 },
+
+      { field: "name", headerName: "Name", width: 200 },
+      { field: "serviceOutlet", headerName: "Service Outlet", width: 200 },
+      { field: "storeType", headerName: "Store Type", width: 200 },
+      { field: "location", headerName: "Store Location", width: 200 },
+      { field: "serviceOutlet", headerName: "Service Outlet", width: 200 },
+      {
+        field: "totalAllocatableSpace",
+        headerName: "Total Allocatable Spaces(sq ft)",
+        width: 200,
+      },
+      {
+        field: "unallocatedSpace",
+        headerName: "Unallocated Space(sq ft)",
+        width: 200,
+      },
 
       {
         field: "editaction",
@@ -210,9 +224,24 @@ class AssetStoresAllStoresList extends React.Component {
       let row = {
         numbering: ++counter,
         id: assetStore.id,
-        code: assetStore.code,
+        serviceOutlet: assetStore.serviceOutlet,
         name: assetStore.name,
+        storeType: assetStore.storeType,
+        location: assetStore.location,
+        address: assetStore.address,
+        city: assetStore.city,
+        breadth: assetStore.breadth,
+        height: assetStore.height,
+        length: assetStore.length,
+        unuseableRegionHeight: assetStore.unuseableRegionHeight,
+        unuseableRegionLength: assetStore.unuseableRegionLength,
+        unuseableRegionBreadth: assetStore.unuseableRegionBreadth,
+        unallocatedSpace: assetStore.unallocatedSpace,
         description: assetStore.description,
+        ledger: assetStore.ledger,
+        glHead: assetStore.glHead,
+        subGlHead: assetStore.subGlHead,
+        totalAllocatableSpace: assetStore.totalAllocatableSpace,
       };
       rows.push(row);
     });

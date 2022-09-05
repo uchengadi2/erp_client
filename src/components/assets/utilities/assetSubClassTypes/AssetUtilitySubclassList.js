@@ -161,8 +161,9 @@ class AssetUtilitySubclassList extends React.Component {
     let counter = 0;
     const columns = [
       { field: "numbering", headerName: "S/n", width: 60 },
-      { field: "code", headerName: "Transaction Code", width: 150 },
-      { field: "name", headerName: "Transaction Name", width: 200 },
+
+      { field: "name", headerName: "Asset Subclass", width: 200 },
+      { field: "assetClass", headerName: "Asset Class", width: 150 },
 
       {
         field: "editaction",
@@ -213,7 +214,7 @@ class AssetUtilitySubclassList extends React.Component {
       let row = {
         numbering: ++counter,
         id: subclass.id,
-        code: subclass.code,
+        assetClass: subclass.assetClass,
         name: subclass.name,
         description: subclass.description,
       };

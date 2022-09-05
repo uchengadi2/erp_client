@@ -132,7 +132,7 @@ function OperationsUtilityTransformationTypesLayout(props) {
                   history.push("/operations/utilities/processingtypes/new"),
                 ]}
               >
-                Create Transformation Type
+                Create Processing Type
               </Button>
             </Grid>
             <Grid item></Grid>

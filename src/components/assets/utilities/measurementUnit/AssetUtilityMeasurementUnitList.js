@@ -162,8 +162,10 @@ class AssetUtilityMeasurementUnitList extends React.Component {
     let counter = 0;
     const columns = [
       { field: "numbering", headerName: "S/n", width: 60 },
-      { field: "code", headerName: "Transaction Code", width: 150 },
-      { field: "name", headerName: "Transaction Name", width: 200 },
+
+      { field: "name", headerName: "Measurement Unit", width: 250 },
+      { field: "symbol", headerName: "Measurement Symbol", width: 150 },
+      { field: "assetType", headerName: "Asset Type", width: 250 },
 
       {
         field: "editaction",
@@ -214,8 +216,9 @@ class AssetUtilityMeasurementUnitList extends React.Component {
       let row = {
         numbering: ++counter,
         id: measurementUnit.id,
-        code: measurementUnit.code,
+        symbol: measurementUnit.symbol,
         name: measurementUnit.name,
+        assetType: measurementUnit.assetType,
         description: measurementUnit.description,
       };
       rows.push(row);

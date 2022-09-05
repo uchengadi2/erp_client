@@ -98,7 +98,7 @@ function AssetMaintenancesLayout({ token }) {
           {...a11yProps(0)}
           onClick={(event) => {
             event.preventDefault();
-            history.push(`/assets/maintenances/executed`);
+            history.push(`/assets/maintenances/allmaintenances`);
           }}
         />
         <Tab
@@ -106,7 +106,7 @@ function AssetMaintenancesLayout({ token }) {
           {...a11yProps(0)}
           onClick={(event) => {
             event.preventDefault();
-            history.push(`/assets/maintenances/unapproved`);
+            history.push(`/assets/maintenances/unapprovedmaintenances`);
           }}
         />
         {/* <Tab

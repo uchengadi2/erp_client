@@ -18,7 +18,7 @@ import AssetStoresAllStoresCreateStoreForm from "../../../assets/stores/allstore
 const useStyles = makeStyles((theme) => ({
   root: {
     marginTop: "-80px",
-    width: 1000,
+    width: 1100,
   },
   headerContainer: {
     height: 20,
@@ -145,8 +145,10 @@ function AssetStoresAllStoresLayout(props) {
         </Grid>
       </Grid>
       <Dialog
-        //style={{ zIndex: 1302 }}
+        //style={{ marginTop: 10 }}
         fullScreen={matchesXS}
+        fullWidth={true}
+        maxWidth={"sm"}
         open={open}
         onClose={() => [
           setOpen(false),

@@ -18,7 +18,7 @@ import AssetStoreAllocateStoreSpaceList from "../../../assets/stores/allocateSpa
 const useStyles = makeStyles((theme) => ({
   root: {
     marginTop: "-80px",
-    width: 1000,
+    width: 1100,
   },
   headerContainer: {
     height: 20,
@@ -150,6 +150,8 @@ function AssetStoresAllocateSpaceLayout(props) {
       <Dialog
         //style={{ zIndex: 1302 }}
         fullScreen={matchesXS}
+        fullWidth={true}
+        maxWidth={"sm"}
         open={open}
         onClose={() => [
           setOpen(false),

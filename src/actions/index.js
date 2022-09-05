@@ -133,21 +133,21 @@ import {
   FETCH_OTHERASSET,
   DELETE_OTHERASSET,
   EDIT_OTHERASSET,
-  CREATE_UNAPPROVEDPROCUREMENT,
-  FETCH_UNAPPROVEDPROCUREMENTS,
-  FETCH_UNAPPROVEDPROCUREMENT,
-  DELETE_UNAPPROVEDPROCUREMENT,
-  EDIT_UNAPPROVEDPROCUREMENT,
+  CREATE_ASSETPROCUREMENT,
+  FETCH_ASSETPROCUREMENTS,
+  FETCH_ASSETPROCUREMENT,
+  DELETE_ASSETPROCUREMENT,
+  EDIT_ASSETPROCUREMENT,
   CREATE_APPROVEDPROCUREMENT,
   FETCH_APPROVEDPROCUREMENTS,
   FETCH_APPROVEDPROCUREMENT,
   DELETE_APPROVEDPROCUREMENT,
   EDIT_APPROVEDPROCUREMENT,
-  CREATE_EXECAPPROVEDPROCUREMENT,
-  FETCH_EXECAPPROVEDPROCUREMENTS,
-  FETCH_EXECAPPROVEDPROCUREMENT,
-  DELETE_EXECAPPROVEDPROCUREMENT,
-  EDIT_EXECAPPROVEDPROCUREMENT,
+  CREATE_UNAPPROVEDPROCUREMENT,
+  FETCH_UNAPPROVEDPROCUREMENTS,
+  FETCH_UNAPPROVEDPROCUREMENT,
+  DELETE_UNAPPROVEDPROCUREMENT,
+  EDIT_UNAPPROVEDPROCUREMENT,
   CREATE_UNAPPROVEDMAINTENANCE,
   FETCH_UNAPPROVEDMAINTENANCES,
   FETCH_UNAPPROVEDMAINTENANCE,
@@ -719,6 +719,16 @@ import {
   FETCH_HRUTILITYEXTRADEDUCTABLE,
   EDIT_HRUTILITYEXTRADEDUCTABLE,
   DELETE_HRUTILITYEXTRADEDUCTABLE,
+  CREATE_ASSETSET,
+  FETCH_ASSETSETS,
+  FETCH_ASSETSET,
+  EDIT_ASSETSET,
+  DELETE_ASSETSET,
+  CREATE_ASSETSETBATCH,
+  FETCH_ASSETSETBATCHES,
+  FETCH_ASSETSETBATCH,
+  EDIT_ASSETSETBATCH,
+  DELETE_ASSETSETBATCH,
 } from "./types";
 
 //authentication and authorization  operations
@@ -1635,7 +1645,7 @@ export const deleteOfficeOperation = (id, token) => {
 export const createStoreType = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post("/storetypes", formValues);
 
     dispatch({
       type: CREATE_STORETYPE,
@@ -1647,7 +1657,7 @@ export const createStoreType = (formValues, token) => {
 export const fetchStoreTypes = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/storetypes");
     console.log("trans types response:", response.data);
 
     dispatch({
@@ -1660,7 +1670,7 @@ export const fetchStoreTypes = (tokens) => {
 export const fetchStoreType = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/storetypes/${id}`);
     dispatch({ type: FETCH_STORETYPE, payload: response.data.data.data });
   };
 };
@@ -1668,7 +1678,7 @@ export const fetchStoreType = (id, token) => {
 export const editStoreType = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(`/storetypes/${id}`, formValues);
     dispatch({ type: EDIT_STORETYPE, payload: response.data.data.data });
   };
 };
@@ -1676,7 +1686,7 @@ export const editStoreType = (id, formValues, token) => {
 export const deleteStoreType = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/storetypes/${id}`);
     dispatch({ type: DELETE_STORETYPE, payload: id });
   };
 };
@@ -1686,7 +1696,7 @@ export const deleteStoreType = (id, token) => {
 export const createAssetSubclass = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post("/assetsubclasses", formValues);
 
     dispatch({
       type: CREATE_SUBCLASS,
@@ -1698,7 +1708,7 @@ export const createAssetSubclass = (formValues, token) => {
 export const fetchAssetSubclasses = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/assetsubclasses");
 
     dispatch({
       type: FETCH_SUBCLASSES,
@@ -1710,7 +1720,7 @@ export const fetchAssetSubclasses = (tokens) => {
 export const fetchAssetSubclass = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/assetsubclasses/${id}`);
     dispatch({ type: FETCH_SUBCLASS, payload: response.data.data.data });
   };
 };
@@ -1718,7 +1728,7 @@ export const fetchAssetSubclass = (id, token) => {
 export const editAssetSubclass = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(`/assetsubclasses/${id}`, formValues);
     dispatch({ type: EDIT_SUBCLASS, payload: response.data.data.data });
   };
 };
@@ -1726,7 +1736,7 @@ export const editAssetSubclass = (id, formValues, token) => {
 export const deleteAssetSubclass = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/assetsubclasses/${id}`);
     dispatch({ type: DELETE_SUBCLASS, payload: id });
   };
 };
@@ -1736,7 +1746,7 @@ export const deleteAssetSubclass = (id, token) => {
 export const createAssetType = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post("/assettypes", formValues);
 
     dispatch({
       type: CREATE_ASSETTYPE,
@@ -1748,7 +1758,7 @@ export const createAssetType = (formValues, token) => {
 export const fetchAssetTypes = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/assettypes");
 
     dispatch({
       type: FETCH_ASSETTYPES,
@@ -1760,7 +1770,7 @@ export const fetchAssetTypes = (tokens) => {
 export const fetchAssetType = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/assettypes/${id}`);
     dispatch({ type: FETCH_ASSETTYPE, payload: response.data.data.data });
   };
 };
@@ -1768,7 +1778,7 @@ export const fetchAssetType = (id, token) => {
 export const editAssetType = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(`/assettypes/${id}`, formValues);
     dispatch({ type: EDIT_ASSETTYPE, payload: response.data.data.data });
   };
 };
@@ -1776,7 +1786,7 @@ export const editAssetType = (id, formValues, token) => {
 export const deleteAssetType = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/assettypes/${id}`);
     dispatch({ type: DELETE_ASSETTYPE, payload: id });
   };
 };
@@ -1839,7 +1849,7 @@ export const deleteDepreciationType = (id, token) => {
 export const createMaintenanceType = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post("/maintenancetypes", formValues);
 
     dispatch({
       type: CREATE_MAINTENANCETYPE,
@@ -1851,7 +1861,7 @@ export const createMaintenanceType = (formValues, token) => {
 export const fetchMaintenanceTypes = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/maintenancetypes");
 
     dispatch({
       type: FETCH_MAINTENANCETYPES,
@@ -1863,7 +1873,7 @@ export const fetchMaintenanceTypes = (tokens) => {
 export const fetchMaintenanceType = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/maintenancetypes/${id}`);
     dispatch({
       type: FETCH_MAINTENANCETYPE,
       payload: response.data.data.data,
@@ -1874,7 +1884,7 @@ export const fetchMaintenanceType = (id, token) => {
 export const editMaintenanceType = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(`/maintenancetypes/${id}`, formValues);
     dispatch({ type: EDIT_MAINTENANCETYPE, payload: response.data.data.data });
   };
 };
@@ -1882,7 +1892,7 @@ export const editMaintenanceType = (id, formValues, token) => {
 export const deleteMaintenanceType = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/maintenancetypes/${id}`);
     dispatch({ type: DELETE_MAINTENANCETYPE, payload: id });
   };
 };
@@ -1892,7 +1902,7 @@ export const deleteMaintenanceType = (id, token) => {
 export const createMeasurementUnit = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post("/assetmeasurementunits", formValues);
 
     dispatch({
       type: CREATE_MEASUREMENTUNIT,
@@ -1904,7 +1914,7 @@ export const createMeasurementUnit = (formValues, token) => {
 export const fetchMeasurementUnits = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/assetmeasurementunits");
 
     dispatch({
       type: FETCH_MEASUREMENTUNITS,
@@ -1916,7 +1926,7 @@ export const fetchMeasurementUnits = (tokens) => {
 export const fetchMeasurementUnit = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/assetmeasurementunits/${id}`);
     dispatch({
       type: FETCH_MEASUREMENTUNIT,
       payload: response.data.data.data,
@@ -1927,7 +1937,10 @@ export const fetchMeasurementUnit = (id, token) => {
 export const editMeasurementUnit = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(
+      `/assetmeasurementunits/${id}`,
+      formValues
+    );
     dispatch({ type: EDIT_MEASUREMENTUNIT, payload: response.data.data.data });
   };
 };
@@ -1935,7 +1948,7 @@ export const editMeasurementUnit = (id, formValues, token) => {
 export const deleteMeasurementUnit = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/assetmeasurementunits/${id}`);
     dispatch({ type: DELETE_MEASUREMENTUNIT, payload: id });
   };
 };
@@ -1945,7 +1958,7 @@ export const deleteMeasurementUnit = (id, token) => {
 export const createStock = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post("/assetstocks", formValues);
 
     dispatch({
       type: CREATE_STOCK,
@@ -1957,7 +1970,7 @@ export const createStock = (formValues, token) => {
 export const fetchStocks = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/assetstocks");
 
     dispatch({
       type: FETCH_STOCKS,
@@ -1969,7 +1982,7 @@ export const fetchStocks = (tokens) => {
 export const fetchStock = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/assetstocks/${id}`);
     dispatch({
       type: FETCH_STOCK,
       payload: response.data.data.data,
@@ -1980,7 +1993,7 @@ export const fetchStock = (id, token) => {
 export const editStock = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(`/assetstocks/${id}`, formValues);
     dispatch({ type: EDIT_STOCK, payload: response.data.data.data });
   };
 };
@@ -1988,7 +2001,7 @@ export const editStock = (id, formValues, token) => {
 export const deleteStock = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/assetstocks/${id}`);
     dispatch({ type: DELETE_STOCK, payload: id });
   };
 };
@@ -1998,7 +2011,7 @@ export const deleteStock = (id, token) => {
 export const createOtherAsset = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post("/assets", formValues);
 
     dispatch({
       type: CREATE_OTHERASSET,
@@ -2010,7 +2023,7 @@ export const createOtherAsset = (formValues, token) => {
 export const fetchOtherAssets = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/assets");
 
     dispatch({
       type: FETCH_OTHERASSETS,
@@ -2022,7 +2035,7 @@ export const fetchOtherAssets = (tokens) => {
 export const fetchOtherAsset = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/assets/${id}`);
     dispatch({
       type: FETCH_OTHERASSET,
       payload: response.data.data.data,
@@ -2033,7 +2046,7 @@ export const fetchOtherAsset = (id, token) => {
 export const editOtherAsset = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(`/assets/${id}`, formValues);
     dispatch({ type: EDIT_OTHERASSET, payload: response.data.data.data });
   };
 };
@@ -2041,17 +2054,76 @@ export const editOtherAsset = (id, formValues, token) => {
 export const deleteOtherAsset = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/assets/${id}`);
     dispatch({ type: DELETE_OTHERASSET, payload: id });
   };
 };
 
-////////////////////////////// UNAPPROVED PROCUREMENT ACTION CREATORS /////////////////
+////////////////////////////// ASSET PROCUREMENT ACTION CREATORS /////////////////
+
+export const createAssetProcurement = (formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.post("/assetprocurements", formValues);
+
+    dispatch({
+      type: CREATE_ASSETPROCUREMENT,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchAssetProcurements = (tokens) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
+  return async (dispatch) => {
+    const response = await data.get("/assetprocurements");
+
+    dispatch({
+      type: FETCH_ASSETPROCUREMENTS,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchAssetProcurement = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.get(`/assetprocurements/${id}`);
+    dispatch({
+      type: FETCH_ASSETPROCUREMENT,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const editAssetProcurement = (id, formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.patch(`/assetprocurements/${id}`, formValues);
+    dispatch({
+      type: EDIT_ASSETPROCUREMENT,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const deleteAssetProcurement = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    await data.delete(`/assetprocurements/${id}`);
+    dispatch({ type: DELETE_ASSETPROCUREMENT, payload: id });
+  };
+};
+
+////////////////////////////// UNAPPROVED PROCUREMENT ///////////////////////////
 
 export const createUnapprovedProcurement = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post(
+      "/unapprovedassetprocurements",
+      formValues
+    );
 
     dispatch({
       type: CREATE_UNAPPROVEDPROCUREMENT,
@@ -2063,7 +2135,7 @@ export const createUnapprovedProcurement = (formValues, token) => {
 export const fetchUnapprovedProcurements = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/unapprovedassetprocurements");
 
     dispatch({
       type: FETCH_UNAPPROVEDPROCUREMENTS,
@@ -2075,7 +2147,7 @@ export const fetchUnapprovedProcurements = (tokens) => {
 export const fetchUnapprovedProcurement = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/unapprovedassetprocurements/${id}`);
     dispatch({
       type: FETCH_UNAPPROVEDPROCUREMENT,
       payload: response.data.data.data,
@@ -2086,7 +2158,10 @@ export const fetchUnapprovedProcurement = (id, token) => {
 export const editUnapprovedProcurement = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(
+      `/unapprovedassetprocurements/${id}`,
+      formValues
+    );
     dispatch({
       type: EDIT_UNAPPROVEDPROCUREMENT,
       payload: response.data.data.data,
@@ -2097,120 +2172,8 @@ export const editUnapprovedProcurement = (id, formValues, token) => {
 export const deleteUnapprovedProcurement = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/unapprovedassetprocurements/${id}`);
     dispatch({ type: DELETE_UNAPPROVEDPROCUREMENT, payload: id });
-  };
-};
-
-////////////////////////////// APPROVED PROCUREMENT ///////////////////////////
-
-export const createApprovedProcurement = (formValues, token) => {
-  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-  return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
-
-    dispatch({
-      type: CREATE_APPROVEDPROCUREMENT,
-      payload: response.data.data.data,
-    });
-  };
-};
-
-export const fetchApprovedProcurements = (tokens) => {
-  data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
-  return async (dispatch) => {
-    const response = await data.get("/officeoperations");
-
-    dispatch({
-      type: FETCH_APPROVEDPROCUREMENTS,
-      payload: response.data.data.data,
-    });
-  };
-};
-
-export const fetchApprovedProcurement = (id, token) => {
-  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-  return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
-    dispatch({
-      type: FETCH_APPROVEDPROCUREMENT,
-      payload: response.data.data.data,
-    });
-  };
-};
-
-export const editApprovedProcurement = (id, formValues, token) => {
-  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-  return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
-    dispatch({
-      type: EDIT_APPROVEDPROCUREMENT,
-      payload: response.data.data.data,
-    });
-  };
-};
-
-export const deleteApprovedProcurement = (id, token) => {
-  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-  return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
-    dispatch({ type: DELETE_APPROVEDPROCUREMENT, payload: id });
-  };
-};
-
-///////////////////////////////// EXECUTED PROCUREMENTS ACTIONS /////////////////
-
-export const createExecApprovedProcurement = (formValues, token) => {
-  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-  return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
-
-    dispatch({
-      type: CREATE_EXECAPPROVEDPROCUREMENT,
-      payload: response.data.data.data,
-    });
-  };
-};
-
-export const fetchExecApprovedProcurements = (tokens) => {
-  data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
-  return async (dispatch) => {
-    const response = await data.get("/officeoperations");
-
-    dispatch({
-      type: FETCH_EXECAPPROVEDPROCUREMENTS,
-      payload: response.data.data.data,
-    });
-  };
-};
-
-export const fetchExecApprovedProcurement = (id, token) => {
-  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-  return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
-    dispatch({
-      type: FETCH_EXECAPPROVEDPROCUREMENT,
-      payload: response.data.data.data,
-    });
-  };
-};
-
-export const editExecApprovedProcurement = (id, formValues, token) => {
-  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-  return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
-    dispatch({
-      type: EDIT_EXECAPPROVEDPROCUREMENT,
-      payload: response.data.data.data,
-    });
-  };
-};
-
-export const deleteExecApprovedProcurement = (id, token) => {
-  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-  return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
-    dispatch({ type: DELETE_EXECAPPROVEDPROCUREMENT, payload: id });
   };
 };
 
@@ -2219,7 +2182,7 @@ export const deleteExecApprovedProcurement = (id, token) => {
 export const createUnapprovedMaintenance = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post("/assetmaintenances", formValues);
 
     dispatch({
       type: CREATE_UNAPPROVEDMAINTENANCE,
@@ -2231,7 +2194,7 @@ export const createUnapprovedMaintenance = (formValues, token) => {
 export const fetchUnapprovedMaintenances = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/assetmaintenances");
 
     dispatch({
       type: FETCH_UNAPPROVEDMAINTENANCES,
@@ -2243,7 +2206,7 @@ export const fetchUnapprovedMaintenances = (tokens) => {
 export const fetchUnapprovedMaintenance = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/assetmaintenances/${id}`);
     dispatch({
       type: FETCH_UNAPPROVEDMAINTENANCE,
       payload: response.data.data.data,
@@ -2254,7 +2217,7 @@ export const fetchUnapprovedMaintenance = (id, token) => {
 export const editUnapprovedMaintenance = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(`/assetmaintenances/${id}`, formValues);
     dispatch({
       type: EDIT_UNAPPROVEDMAINTENANCE,
       payload: response.data.data.data,
@@ -2265,7 +2228,7 @@ export const editUnapprovedMaintenance = (id, formValues, token) => {
 export const deleteUnapprovedMaintenance = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/assetmaintenances/${id}`);
     dispatch({ type: DELETE_UNAPPROVEDMAINTENANCE, payload: id });
   };
 };
@@ -2275,7 +2238,7 @@ export const deleteUnapprovedMaintenance = (id, token) => {
 export const createApprovedMaintenance = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post("/assetmaintenances", formValues);
 
     dispatch({
       type: CREATE_APPROVEDMAINTENANCE,
@@ -2287,7 +2250,7 @@ export const createApprovedMaintenance = (formValues, token) => {
 export const fetchApprovedMaintenances = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/assetmaintenances");
 
     dispatch({
       type: FETCH_APPROVEDMAINTENANCES,
@@ -2299,7 +2262,7 @@ export const fetchApprovedMaintenances = (tokens) => {
 export const fetchApprovedMaintenance = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/assetmaintenances/${id}`);
     dispatch({
       type: FETCH_APPROVEDMAINTENANCE,
       payload: response.data.data.data,
@@ -2310,7 +2273,7 @@ export const fetchApprovedMaintenance = (id, token) => {
 export const editApprovedMaintenance = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(`/assetmaintenances/${id}`, formValues);
     dispatch({
       type: EDIT_APPROVEDMAINTENANCE,
       payload: response.data.data.data,
@@ -2321,7 +2284,7 @@ export const editApprovedMaintenance = (id, formValues, token) => {
 export const deleteApprovedMaintenance = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/assetmaintenances/${id}`);
     dispatch({ type: DELETE_APPROVEDMAINTENANCE, payload: id });
   };
 };
@@ -2331,7 +2294,7 @@ export const deleteApprovedMaintenance = (id, token) => {
 export const createExecutedMaintenance = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post("/assetmaintenances", formValues);
 
     dispatch({
       type: CREATE_EXECUTEDMAINTENANCE,
@@ -2343,7 +2306,7 @@ export const createExecutedMaintenance = (formValues, token) => {
 export const fetchExecutedMaintenances = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/assetmaintenances");
 
     dispatch({
       type: FETCH_EXECUTEDMAINTENANCES,
@@ -2355,7 +2318,7 @@ export const fetchExecutedMaintenances = (tokens) => {
 export const fetchExecutedMaintenance = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/assetmaintenances/${id}`);
     dispatch({
       type: FETCH_EXECUTEDMAINTENANCE,
       payload: response.data.data.data,
@@ -2366,7 +2329,7 @@ export const fetchExecutedMaintenance = (id, token) => {
 export const editExecutedMaintenance = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(`/assetmaintenances/${id}`, formValues);
     dispatch({
       type: EDIT_EXECUTEDMAINTENANCE,
       payload: response.data.data.data,
@@ -2377,7 +2340,7 @@ export const editExecutedMaintenance = (id, formValues, token) => {
 export const deleteExecutedMaintenance = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/assetmaintenances/${id}`);
     dispatch({ type: DELETE_EXECUTEDMAINTENANCE, payload: id });
   };
 };
@@ -2387,7 +2350,7 @@ export const deleteExecutedMaintenance = (id, token) => {
 export const makeinventoryStockRequisitionRequest = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post("/assetstocks", formValues);
 
     dispatch({
       type: MAKE_INVENTORYREQUISITIONREQUEST,
@@ -2399,7 +2362,7 @@ export const makeinventoryStockRequisitionRequest = (formValues, token) => {
 export const makeinventoryStockRetirementRequest = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post("/assetstocks", formValues);
 
     dispatch({
       type: MAKE_INVENTORYRETIREMENTREQUEST,
@@ -2411,7 +2374,7 @@ export const makeinventoryStockRetirementRequest = (formValues, token) => {
 export const makeinventoryStockDispositionRequest = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post("/assetstocks", formValues);
 
     dispatch({
       type: MAKE_INVENTORYDISPOSALREQUEST,
@@ -2423,7 +2386,7 @@ export const makeinventoryStockDispositionRequest = (formValues, token) => {
 export const makeinventoryStockTransferRequest = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post("/assetstocks", formValues);
 
     dispatch({
       type: MAKE_INVENTORYTRANSFERREQUEST,
@@ -2435,7 +2398,7 @@ export const makeinventoryStockTransferRequest = (formValues, token) => {
 export const fetchInventoryStocks = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/assetstocks");
 
     dispatch({
       type: FETCH_INVENTORYSTOCKS,
@@ -2447,7 +2410,7 @@ export const fetchInventoryStocks = (tokens) => {
 export const fetchInventoryStock = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/assetstocks/${id}`);
     dispatch({
       type: FETCH_INVENTORYSTOCK,
       payload: response.data.data.data,
@@ -2458,7 +2421,7 @@ export const fetchInventoryStock = (id, token) => {
 export const editInventoryStock = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(`/assetstocks/${id}`, formValues);
     dispatch({
       type: EDIT_INVENTORYSTOCK,
       payload: response.data.data.data,
@@ -2469,7 +2432,7 @@ export const editInventoryStock = (id, formValues, token) => {
 export const deleteInventoryStock = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/assetstocks/${id}`);
     dispatch({ type: DELETE_INVENTORYSTOCK, payload: id });
   };
 };
@@ -2479,7 +2442,7 @@ export const deleteInventoryStock = (id, token) => {
 export const fetchUnapprovedStockRequisitions = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/assetstocks");
 
     dispatch({
       type: FETCH_UNAPPROVEDSTOCKREQUISITIONS,
@@ -2491,7 +2454,7 @@ export const fetchUnapprovedStockRequisitions = (tokens) => {
 export const fetchUnapprovedStockRequisition = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/assetstocks/${id}`);
     dispatch({
       type: FETCH_UNAPPROVEDSTOCKREQUISITION,
       payload: response.data.data.data,
@@ -2502,7 +2465,7 @@ export const fetchUnapprovedStockRequisition = (id, token) => {
 export const editUnapprovedStockRequisition = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(`/assetstocks/${id}`, formValues);
     dispatch({
       type: EDIT_UNAPPROVEDSTOCKREQUISITION,
       payload: response.data.data.data,
@@ -2513,7 +2476,7 @@ export const editUnapprovedStockRequisition = (id, formValues, token) => {
 export const deleteUnapprovedStockRequisition = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/assetstocks/${id}`);
     dispatch({ type: DELETE_UNAPPROVEDSTOCKREQUISITION, payload: id });
   };
 };
@@ -2523,7 +2486,7 @@ export const deleteUnapprovedStockRequisition = (id, token) => {
 export const fetchUnapprovedStockRetirements = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/assetstocks");
 
     dispatch({
       type: FETCH_UNAPPROVEDSTOCKRETIREMENTS,
@@ -2535,7 +2498,7 @@ export const fetchUnapprovedStockRetirements = (tokens) => {
 export const fetchUnapprovedStockRetirement = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/assetstocks/${id}`);
     dispatch({
       type: FETCH_UNAPPROVEDSTOCKRETIREMENT,
       payload: response.data.data.data,
@@ -2546,7 +2509,7 @@ export const fetchUnapprovedStockRetirement = (id, token) => {
 export const editUnapprovedStockRetirement = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(`/assetstocks/${id}`, formValues);
     dispatch({
       type: EDIT_UNAPPROVEDSTOCKRETIREMENT,
       payload: response.data.data.data,
@@ -2557,7 +2520,7 @@ export const editUnapprovedStockRetirement = (id, formValues, token) => {
 export const deleteUnapprovedStockRetirement = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/assetstocks/${id}`);
     dispatch({ type: DELETE_UNAPPROVEDSTOCKRETIREMENT, payload: id });
   };
 };
@@ -2567,7 +2530,7 @@ export const deleteUnapprovedStockRetirement = (id, token) => {
 export const fetchUnapprovedStockDisposals = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/assetstocks");
 
     dispatch({
       type: FETCH_UNAPPROVEDSTOCKDISPOSITIONS,
@@ -2579,7 +2542,7 @@ export const fetchUnapprovedStockDisposals = (tokens) => {
 export const fetchUnapprovedStockDisposal = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/assetstocks/${id}`);
     dispatch({
       type: FETCH_UNAPPROVEDSTOCKDISPOSITION,
       payload: response.data.data.data,
@@ -2590,7 +2553,7 @@ export const fetchUnapprovedStockDisposal = (id, token) => {
 export const editUnapprovedStockDisposal = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(`/assetstocks/${id}`, formValues);
     dispatch({
       type: EDIT_UNAPPROVEDSTOCKDISPOSITION,
       payload: response.data.data.data,
@@ -2601,7 +2564,7 @@ export const editUnapprovedStockDisposal = (id, formValues, token) => {
 export const deleteUnapprovedStockDisposal = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/assetstocks/${id}`);
     dispatch({ type: DELETE_UNAPPROVEDSTOCKDISPOSITION, payload: id });
   };
 };
@@ -2611,7 +2574,7 @@ export const deleteUnapprovedStockDisposal = (id, token) => {
 export const fetchUnapprovedStockTransfers = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/assetstocks");
 
     dispatch({
       type: FETCH_UNAPPROVEDSTOCKTRANSFERS,
@@ -2623,7 +2586,7 @@ export const fetchUnapprovedStockTransfers = (tokens) => {
 export const fetchUnapprovedStockTransfer = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/assetstocks/${id}`);
     dispatch({
       type: FETCH_UNAPPROVEDSTOCKTRANSFER,
       payload: response.data.data.data,
@@ -2634,7 +2597,7 @@ export const fetchUnapprovedStockTransfer = (id, token) => {
 export const editUnapprovedStockTransfer = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(`/assetstocks/${id}`, formValues);
     dispatch({
       type: EDIT_UNAPPROVEDSTOCKTRANSFER,
       payload: response.data.data.data,
@@ -2645,7 +2608,7 @@ export const editUnapprovedStockTransfer = (id, formValues, token) => {
 export const deleteUnapprovedStockTransfer = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/assetstocks/${id}`);
     dispatch({ type: DELETE_UNAPPROVEDSTOCKTRANSFER, payload: id });
   };
 };
@@ -2655,7 +2618,7 @@ export const deleteUnapprovedStockTransfer = (id, token) => {
 export const fetchAssetRequisitions = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/assetrequisitions");
 
     dispatch({
       type: FETCH_ASSETREQUISITIONS,
@@ -2667,7 +2630,7 @@ export const fetchAssetRequisitions = (tokens) => {
 export const fetchAssetRequisition = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/assetrequisitions/${id}`);
     dispatch({
       type: FETCH_ASSETREQUISITION,
       payload: response.data.data.data,
@@ -2678,7 +2641,7 @@ export const fetchAssetRequisition = (id, token) => {
 export const editAssetRequisition = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(`/assetrequisitions/${id}`, formValues);
     dispatch({
       type: EDIT_ASSETREQUISITION,
       payload: response.data.data.data,
@@ -2689,7 +2652,7 @@ export const editAssetRequisition = (id, formValues, token) => {
 export const deleteAssetRequisition = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/assetrequisitions/${id}`);
     dispatch({ type: DELETE_ASSETREQUISITION, payload: id });
   };
 };
@@ -2699,7 +2662,7 @@ export const deleteAssetRequisition = (id, token) => {
 export const fetchPendingAssetRequisitions = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/assetrequisitions");
 
     dispatch({
       type: FETCH_PENDINGASSETREQUISITIONS,
@@ -2711,7 +2674,7 @@ export const fetchPendingAssetRequisitions = (tokens) => {
 export const fetchPendingAssetRequisition = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/assetrequisitions/${id}`);
     dispatch({
       type: FETCH_PENDINGASSETREQUISITION,
       payload: response.data.data.data,
@@ -2722,7 +2685,7 @@ export const fetchPendingAssetRequisition = (id, token) => {
 export const editPendingAssetRequisition = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(`/assetrequisitions/${id}`, formValues);
     dispatch({
       type: EDIT_PENDINGASSETREQUISITION,
       payload: response.data.data.data,
@@ -2733,7 +2696,7 @@ export const editPendingAssetRequisition = (id, formValues, token) => {
 export const deletePendingAssetRequisition = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/assetrequisitions/${id}`);
     dispatch({ type: DELETE_PENDINGASSETREQUISITION, payload: id });
   };
 };
@@ -2743,7 +2706,7 @@ export const deletePendingAssetRequisition = (id, token) => {
 export const fetchWithdrawnAssetRequisitions = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/assetrequisitions");
 
     dispatch({
       type: FETCH_WITHDRAWNASSETREQUISITIONS,
@@ -2755,7 +2718,7 @@ export const fetchWithdrawnAssetRequisitions = (tokens) => {
 export const fetchWithdrawnAssetRequisition = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/assetrequisitions/${id}`);
     dispatch({
       type: FETCH_WITHDRAWNASSETREQUISITION,
       payload: response.data.data.data,
@@ -2766,7 +2729,7 @@ export const fetchWithdrawnAssetRequisition = (id, token) => {
 export const editWithdrawnAssetRequisition = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(`/assetrequisitions/${id}`, formValues);
     dispatch({
       type: EDIT_WITHDRAWNASSETREQUISITION,
       payload: response.data.data.data,
@@ -2777,7 +2740,7 @@ export const editWithdrawnAssetRequisition = (id, formValues, token) => {
 export const deleteWithdrawnAssetRequisition = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/assetrequisitions/${id}`);
     dispatch({ type: DELETE_WITHDRAWNASSETREQUISITION, payload: id });
   };
 };
@@ -2787,7 +2750,7 @@ export const deleteWithdrawnAssetRequisition = (id, token) => {
 export const fetchAbortedAssetRequisitions = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/assetrequisitions");
 
     dispatch({
       type: FETCH_ABORTEDASSETREQUISITIONS,
@@ -2799,7 +2762,7 @@ export const fetchAbortedAssetRequisitions = (tokens) => {
 export const fetchAbortedAssetRequisition = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/assetrequisitions/${id}`);
     dispatch({
       type: FETCH_ABORTEDASSETREQUISITION,
       payload: response.data.data.data,
@@ -2810,7 +2773,7 @@ export const fetchAbortedAssetRequisition = (id, token) => {
 export const editAbortedAssetRequisition = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(`/assetrequisitions/${id}`, formValues);
     dispatch({
       type: EDIT_ABORTEDASSETREQUISITION,
       payload: response.data.data.data,
@@ -2821,7 +2784,7 @@ export const editAbortedAssetRequisition = (id, formValues, token) => {
 export const deleteAbortedAssetRequisition = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/assetrequisitions/${id}`);
     dispatch({ type: DELETE_ABORTEDASSETREQUISITION, payload: id });
   };
 };
@@ -2831,7 +2794,7 @@ export const deleteAbortedAssetRequisition = (id, token) => {
 export const fetchReturnAssetPostRequisitions = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/assetrequisitions");
 
     dispatch({
       type: FETCH_RETURNASSETPOSTREQUISITIONS,
@@ -2843,7 +2806,7 @@ export const fetchReturnAssetPostRequisitions = (tokens) => {
 export const fetchReturnAssetPostRequisition = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/assetrequisitions/${id}`);
     dispatch({
       type: FETCH_RETURNASSETPOSTREQUISITION,
       payload: response.data.data.data,
@@ -2854,7 +2817,7 @@ export const fetchReturnAssetPostRequisition = (id, token) => {
 export const editReturnAssetPostRequisition = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(`/assetrequisitions/${id}`, formValues);
     dispatch({
       type: EDIT_RETURNASSETPOSTREQUISITION,
       payload: response.data.data.data,
@@ -2865,7 +2828,7 @@ export const editReturnAssetPostRequisition = (id, formValues, token) => {
 export const deleteReturnAssetPostRequisition = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/assetrequisitions/${id}`);
     dispatch({ type: DELETE_RETURNASSETPOSTREQUISITION, payload: id });
   };
 };
@@ -2875,7 +2838,7 @@ export const deleteReturnAssetPostRequisition = (id, token) => {
 export const fetchAssetRetirements = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/assetretirements");
 
     dispatch({
       type: FETCH_ASSETRETIREMENTS,
@@ -2887,7 +2850,7 @@ export const fetchAssetRetirements = (tokens) => {
 export const fetchAssetRetirement = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/assetretirements/${id}`);
     dispatch({
       type: FETCH_ASSETRETIREMENT,
       payload: response.data.data.data,
@@ -2898,7 +2861,7 @@ export const fetchAssetRetirement = (id, token) => {
 export const editAssetRetirement = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(`/assetretirements/${id}`, formValues);
     dispatch({
       type: EDIT_ASSETRETIREMENT,
       payload: response.data.data.data,
@@ -2909,7 +2872,7 @@ export const editAssetRetirement = (id, formValues, token) => {
 export const deleteAssetRetirement = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/assetretirements/${id}`);
     dispatch({ type: DELETE_ASSETRETIREMENT, payload: id });
   };
 };
@@ -2919,7 +2882,7 @@ export const deleteAssetRetirement = (id, token) => {
 export const fetchPendingAssetRetirements = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/assetretirements");
 
     dispatch({
       type: FETCH_PENDINGASSETRETIREMENTS,
@@ -2931,7 +2894,7 @@ export const fetchPendingAssetRetirements = (tokens) => {
 export const fetchPendingAssetRetirement = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/assetretirements/${id}`);
     dispatch({
       type: FETCH_PENDINGASSETRETIREMENT,
       payload: response.data.data.data,
@@ -2942,7 +2905,7 @@ export const fetchPendingAssetRetirement = (id, token) => {
 export const editPendingAssetRetirement = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(`/assetretirements/${id}`, formValues);
     dispatch({
       type: EDIT_PENDINGASSETRETIREMENT,
       payload: response.data.data.data,
@@ -2953,7 +2916,7 @@ export const editPendingAssetRetirement = (id, formValues, token) => {
 export const deletePendingAssetRetirement = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/assetretirements/${id}`);
     dispatch({ type: DELETE_PENDINGASSETRETIREMENT, payload: id });
   };
 };
@@ -2963,7 +2926,7 @@ export const deletePendingAssetRetirement = (id, token) => {
 export const fetchWithdrawnAssetRetirements = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/assetretirements");
 
     dispatch({
       type: FETCH_WITHDRAWNASSETRETIREMENTS,
@@ -2975,7 +2938,7 @@ export const fetchWithdrawnAssetRetirements = (tokens) => {
 export const fetchWithdrawnAssetRetirement = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/assetretirements/${id}`);
     dispatch({
       type: FETCH_WITHDRAWNASSETRETIREMENT,
       payload: response.data.data.data,
@@ -2986,7 +2949,7 @@ export const fetchWithdrawnAssetRetirement = (id, token) => {
 export const editWithdrawnAssetRetirement = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(`/assetretirements/${id}`, formValues);
     dispatch({
       type: EDIT_WITHDRAWNASSETRETIREMENT,
       payload: response.data.data.data,
@@ -2997,7 +2960,7 @@ export const editWithdrawnAssetRetirement = (id, formValues, token) => {
 export const deleteWithdrawnAssetRetirement = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/assetretirements/${id}`);
     dispatch({ type: DELETE_WITHDRAWNASSETRETIREMENT, payload: id });
   };
 };
@@ -3007,7 +2970,7 @@ export const deleteWithdrawnAssetRetirement = (id, token) => {
 export const fetchReturnAssetPostRetirements = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/assetretirements");
 
     dispatch({
       type: FETCH_RETURNPOSTASSETRETIREMENTS,
@@ -3019,7 +2982,7 @@ export const fetchReturnAssetPostRetirements = (tokens) => {
 export const fetchReturnAssetPostRetirement = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/assetretirements/${id}`);
     dispatch({
       type: FETCH_RETURNPOSTASSETRETIREMENT,
       payload: response.data.data.data,
@@ -3030,7 +2993,7 @@ export const fetchReturnAssetPostRetirement = (id, token) => {
 export const editReturnAssetPostRetirement = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(`/assetretirements/${id}`, formValues);
     dispatch({
       type: EDIT_RETURNPOSTASSETRETIREMENT,
       payload: response.data.data.data,
@@ -3041,7 +3004,7 @@ export const editReturnAssetPostRetirement = (id, formValues, token) => {
 export const deleteReturnAssetPostRetirement = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/assetretirements/${id}`);
     dispatch({ type: DELETE_RETURNPOSTASSETRETIREMENT, payload: id });
   };
 };
@@ -3051,7 +3014,7 @@ export const deleteReturnAssetPostRetirement = (id, token) => {
 export const fetchAssetDispostions = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/assetdispositions");
 
     dispatch({
       type: FETCH_ASSETDISPOSITIONS,
@@ -3063,7 +3026,7 @@ export const fetchAssetDispostions = (tokens) => {
 export const fetchAssetDispostion = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/assetdispositions/${id}`);
     dispatch({
       type: FETCH_ASSETDISPOSITION,
       payload: response.data.data.data,
@@ -3074,7 +3037,7 @@ export const fetchAssetDispostion = (id, token) => {
 export const editAssetDisposition = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(`/assetdispositions/${id}`, formValues);
     dispatch({
       type: EDIT_ASSETDISPOSITION,
       payload: response.data.data.data,
@@ -3085,7 +3048,7 @@ export const editAssetDisposition = (id, formValues, token) => {
 export const deleteAssetDisposition = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/assetdispositions/${id}`);
     dispatch({ type: DELETE_ASSETDISPOSITION, payload: id });
   };
 };
@@ -3095,7 +3058,7 @@ export const deleteAssetDisposition = (id, token) => {
 export const fetchPendingAssetDispostions = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/assetdispositions");
 
     dispatch({
       type: FETCH_PENDINGASSETDISPOSITIONS,
@@ -3107,7 +3070,7 @@ export const fetchPendingAssetDispostions = (tokens) => {
 export const fetchPendingAssetDispostion = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/assetdispositions/${id}`);
     dispatch({
       type: FETCH_PENDINGASSETDISPOSITION,
       payload: response.data.data.data,
@@ -3118,7 +3081,7 @@ export const fetchPendingAssetDispostion = (id, token) => {
 export const editPendingAssetDisposition = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(`/assetdispositions/${id}`, formValues);
     dispatch({
       type: EDIT_PENDINGASSETDISPOSITION,
       payload: response.data.data.data,
@@ -3129,7 +3092,7 @@ export const editPendingAssetDisposition = (id, formValues, token) => {
 export const deletePendingAssetDisposition = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/assetdispositions/${id}`);
     dispatch({ type: DELETE_PENDINGASSETDISPOSITION, payload: id });
   };
 };
@@ -3139,7 +3102,7 @@ export const deletePendingAssetDisposition = (id, token) => {
 export const fetchWithdrawnAssetDispostions = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/assetdispositions");
 
     dispatch({
       type: FETCH_WITHDRAWNASSETDISPOSITIONS,
@@ -3151,7 +3114,7 @@ export const fetchWithdrawnAssetDispostions = (tokens) => {
 export const fetchWithdrawnAssetDispostion = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/assetdispositions/${id}`);
     dispatch({
       type: FETCH_WITHDRAWNASSETDISPOSITION,
       payload: response.data.data.data,
@@ -3162,7 +3125,7 @@ export const fetchWithdrawnAssetDispostion = (id, token) => {
 export const editWithdrawnAssetDisposition = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(`/assetdispositions/${id}`, formValues);
     dispatch({
       type: EDIT_WITHDRAWNASSETDISPOSITION,
       payload: response.data.data.data,
@@ -3173,7 +3136,7 @@ export const editWithdrawnAssetDisposition = (id, formValues, token) => {
 export const deleteWithdrawnAssetDisposition = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/assetdispositions/${id}`);
     dispatch({ type: DELETE_WITHDRAWNASSETDISPOSITION, payload: id });
   };
 };
@@ -3183,7 +3146,7 @@ export const deleteWithdrawnAssetDisposition = (id, token) => {
 export const fetchReturnAssetPostDispositions = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/assetdispositions");
 
     dispatch({
       type: FETCH_RETURNASSETPOSTDISPOSITIONS,
@@ -3195,7 +3158,7 @@ export const fetchReturnAssetPostDispositions = (tokens) => {
 export const fetchReturnAssetPostDisposition = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/assetdispositions/${id}`);
     dispatch({
       type: FETCH_RETURNASSETPOSTDISPOSITION,
       payload: response.data.data.data,
@@ -3206,7 +3169,7 @@ export const fetchReturnAssetPostDisposition = (id, token) => {
 export const editReturnAssetPostDisposition = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(`/assetdispositions/${id}`, formValues);
     dispatch({
       type: EDIT_RETURNASSETPOSTDISPOSITION,
       payload: response.data.data.data,
@@ -3217,7 +3180,7 @@ export const editReturnAssetPostDisposition = (id, formValues, token) => {
 export const deleteReturnAssetPostDisposition = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/assetdispositions/${id}`);
     dispatch({ type: DELETE_RETURNASSETPOSTDISPOSITION, payload: id });
   };
 };
@@ -3227,7 +3190,7 @@ export const deleteReturnAssetPostDisposition = (id, token) => {
 export const createAssetMovements = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post("/assetmovements", formValues);
 
     dispatch({
       type: CREATE_ASSETMOVEMENT,
@@ -3239,7 +3202,7 @@ export const createAssetMovements = (formValues, token) => {
 export const fetchAssetMovements = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/assetmovements");
 
     dispatch({
       type: FETCH_ASSETMOVEMENTS,
@@ -3251,7 +3214,7 @@ export const fetchAssetMovements = (tokens) => {
 export const fetchAssetMovement = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/assetmovements/${id}`);
     dispatch({
       type: FETCH_ASSETMOVEMENT,
       payload: response.data.data.data,
@@ -3262,7 +3225,7 @@ export const fetchAssetMovement = (id, token) => {
 export const editAssetMovement = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(`/assetmovements/${id}`, formValues);
     dispatch({
       type: EDIT_ASSETMOVEMENT,
       payload: response.data.data.data,
@@ -3273,7 +3236,7 @@ export const editAssetMovement = (id, formValues, token) => {
 export const deleteAssetMovement = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/assetmovements/${id}`);
     dispatch({ type: DELETE_ASSETMOVEMENT, payload: id });
   };
 };
@@ -3283,7 +3246,7 @@ export const deleteAssetMovement = (id, token) => {
 export const createTransferAssetMovements = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post("/assettransfers", formValues);
 
     dispatch({
       type: CREATE_TRANSFERASSETMOVEMENT,
@@ -3295,7 +3258,7 @@ export const createTransferAssetMovements = (formValues, token) => {
 export const fetchTransferAssetMovements = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/assettransfers");
 
     dispatch({
       type: FETCH_TRANSFERASSETMOVEMENTS,
@@ -3307,7 +3270,7 @@ export const fetchTransferAssetMovements = (tokens) => {
 export const fetchTransferAssetMovement = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/assettransfers/${id}`);
     dispatch({
       type: FETCH_TRANSFERASSETMOVEMENT,
       payload: response.data.data.data,
@@ -3318,7 +3281,7 @@ export const fetchTransferAssetMovement = (id, token) => {
 export const editTransferAssetMovement = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(`/assettransfers/${id}`, formValues);
     dispatch({
       type: EDIT_TRANSFERASSETMOVEMENT,
       payload: response.data.data.data,
@@ -3329,7 +3292,7 @@ export const editTransferAssetMovement = (id, formValues, token) => {
 export const deleteTransferAssetMovement = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/assettransfers/${id}`);
     dispatch({ type: DELETE_TRANSFERASSETMOVEMENT, payload: id });
   };
 };
@@ -3339,7 +3302,7 @@ export const deleteTransferAssetMovement = (id, token) => {
 export const createPendingTransferAssetMovements = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post("/assettransfers", formValues);
 
     dispatch({
       type: CREATE_PENDINGTRANSFERASSETMOVEMENT,
@@ -3351,7 +3314,7 @@ export const createPendingTransferAssetMovements = (formValues, token) => {
 export const fetchPendingTransferAssetMovements = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/assettransfers");
 
     dispatch({
       type: FETCH_PENDINGTRANSFERASSETMOVEMENTS,
@@ -3363,7 +3326,7 @@ export const fetchPendingTransferAssetMovements = (tokens) => {
 export const fetchPendingTransferAssetMovement = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/assettransfers/${id}`);
     dispatch({
       type: FETCH_PENDINGTRANSFERASSETMOVEMENT,
       payload: response.data.data.data,
@@ -3374,7 +3337,7 @@ export const fetchPendingTransferAssetMovement = (id, token) => {
 export const editPendingTransferAssetMovement = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(`/assettransfers/${id}`, formValues);
     dispatch({
       type: EDIT_PENDINGTRANSFERASSETMOVEMENT,
       payload: response.data.data.data,
@@ -3385,7 +3348,7 @@ export const editPendingTransferAssetMovement = (id, formValues, token) => {
 export const deletePendingTransferAssetMovement = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/assettransfers/${id}`);
     dispatch({ type: DELETE_PENDINGTRANSFERASSETMOVEMENT, payload: id });
   };
 };
@@ -3395,7 +3358,7 @@ export const deletePendingTransferAssetMovement = (id, token) => {
 export const createWithdrawnTransferAssetMovements = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post("/assettransfers", formValues);
 
     dispatch({
       type: CREATE_WITHDRAWNTRANSFERASSETMOVEMENT,
@@ -3407,7 +3370,7 @@ export const createWithdrawnTransferAssetMovements = (formValues, token) => {
 export const fetchWithdrawnTransferAssetMovements = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/assettransfers");
 
     dispatch({
       type: FETCH_WITHDRAWNTRANSFERASSETMOVEMENTS,
@@ -3419,7 +3382,7 @@ export const fetchWithdrawnTransferAssetMovements = (tokens) => {
 export const fetchWithdrawnTransferAssetMovement = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/assettransfers/${id}`);
     dispatch({
       type: FETCH_WITHDRAWNTRANSFERASSETMOVEMENT,
       payload: response.data.data.data,
@@ -3430,7 +3393,7 @@ export const fetchWithdrawnTransferAssetMovement = (id, token) => {
 export const editWithdrawnTransferAssetMovement = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(`/assettransfers/${id}`, formValues);
     dispatch({
       type: EDIT_WITHDRAWNTRANSFERASSETMOVEMENT,
       payload: response.data.data.data,
@@ -3441,7 +3404,7 @@ export const editWithdrawnTransferAssetMovement = (id, formValues, token) => {
 export const deleteWithdrawnTransferAssetMovement = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/assettransfers/${id}`);
     dispatch({ type: DELETE_WITHDRAWNTRANSFERASSETMOVEMENT, payload: id });
   };
 };
@@ -3451,7 +3414,7 @@ export const deleteWithdrawnTransferAssetMovement = (id, token) => {
 export const createReturnAssetPostTransferMovements = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post("/assettransfers", formValues);
 
     dispatch({
       type: CREATE_RETURNASSETPOSTTRANSFERMOVEMENT,
@@ -3463,7 +3426,7 @@ export const createReturnAssetPostTransferMovements = (formValues, token) => {
 export const fetchReturnAssetPostTransferMovements = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/assettransfers");
 
     dispatch({
       type: FETCH_RETURNASSETPOSTTRANSFERMOVEMENTS,
@@ -3475,7 +3438,7 @@ export const fetchReturnAssetPostTransferMovements = (tokens) => {
 export const fetchReturnAssetPostTransferMovement = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/assettransfers/${id}`);
     dispatch({
       type: FETCH_RETURNASSETPOSTTRANSFERMOVEMENT,
       payload: response.data.data.data,
@@ -3486,7 +3449,7 @@ export const fetchReturnAssetPostTransferMovement = (id, token) => {
 export const editReturnAssetPostTransferMovement = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(`/assettransfers/${id}`, formValues);
     dispatch({
       type: EDIT_RETURNASSETPOSTTRANSERMOVEMENT,
       payload: response.data.data.data,
@@ -3497,7 +3460,7 @@ export const editReturnAssetPostTransferMovement = (id, formValues, token) => {
 export const deleteReturnAssetPostTransferMovement = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/assettransfers/${id}`);
     dispatch({ type: DELETE_RETURNASSETPOSTTRANSFERMOVEMENT, payload: id });
   };
 };
@@ -3507,7 +3470,7 @@ export const deleteReturnAssetPostTransferMovement = (id, token) => {
 export const createAssetStore = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post("/stores", formValues);
 
     dispatch({
       type: CREATE_ASSETSTORE,
@@ -3519,7 +3482,7 @@ export const createAssetStore = (formValues, token) => {
 export const fetchAssetStores = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/stores");
 
     dispatch({
       type: FETCH_ASSETSTORES,
@@ -3531,7 +3494,7 @@ export const fetchAssetStores = (tokens) => {
 export const fetchAssetStore = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/stores/${id}`);
     dispatch({
       type: FETCH_ASSETSTORE,
       payload: response.data.data.data,
@@ -3542,7 +3505,7 @@ export const fetchAssetStore = (id, token) => {
 export const editAssetStore = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(`/stores/${id}`, formValues);
     dispatch({
       type: EDIT_ASSETSTORE,
       payload: response.data.data.data,
@@ -3553,7 +3516,7 @@ export const editAssetStore = (id, formValues, token) => {
 export const deleteAssetStore = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/stores/${id}`);
     dispatch({ type: DELETE_ASSETSTORE, payload: id });
   };
 };
@@ -3563,7 +3526,7 @@ export const deleteAssetStore = (id, token) => {
 export const createMaintenanceAssetStore = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post("/storemaintenances", formValues);
 
     dispatch({
       type: CREATE_MAINTENANCEASSETSTORE,
@@ -3575,7 +3538,7 @@ export const createMaintenanceAssetStore = (formValues, token) => {
 export const fetchMaintenanceAssetStores = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/storemaintenances");
 
     dispatch({
       type: FETCH_MAINTENANCEASSETSTORES,
@@ -3587,7 +3550,7 @@ export const fetchMaintenanceAssetStores = (tokens) => {
 export const fetchMaintenanceAssetStore = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/storemaintenances/${id}`);
     dispatch({
       type: FETCH_MAINTENANCEASSETSTORE,
       payload: response.data.data.data,
@@ -3598,7 +3561,7 @@ export const fetchMaintenanceAssetStore = (id, token) => {
 export const editMaintenanceAssetStore = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(`/storemaintenances/${id}`, formValues);
     dispatch({
       type: EDIT_MAINTENANCEASSETSTORE,
       payload: response.data.data.data,
@@ -3609,7 +3572,7 @@ export const editMaintenanceAssetStore = (id, formValues, token) => {
 export const deleteMaintenanceAssetStore = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/storemaintenances/${id}`);
     dispatch({ type: DELETE_MAINTENANCEASSETSTORE, payload: id });
   };
 };
@@ -3619,7 +3582,7 @@ export const deleteMaintenanceAssetStore = (id, token) => {
 export const createLeaseAssetStore = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post("/storeleases", formValues);
 
     dispatch({
       type: CREATE_LEASEASSETSTORE,
@@ -3631,7 +3594,7 @@ export const createLeaseAssetStore = (formValues, token) => {
 export const fetchLeaseAssetStores = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/storeleases");
 
     dispatch({
       type: FETCH_LEASEASSETSTORES,
@@ -3643,7 +3606,7 @@ export const fetchLeaseAssetStores = (tokens) => {
 export const fetchLeaseAssetStore = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/storeleases/${id}`);
     dispatch({
       type: FETCH_LEASEASSETSTORE,
       payload: response.data.data.data,
@@ -3654,7 +3617,7 @@ export const fetchLeaseAssetStore = (id, token) => {
 export const editLeaseAssetStore = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(`/storeleases/${id}`, formValues);
     dispatch({
       type: EDIT_LEASEASSETSTORE,
       payload: response.data.data.data,
@@ -3665,7 +3628,7 @@ export const editLeaseAssetStore = (id, formValues, token) => {
 export const deleteLeaseAssetStore = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/storeleases/${id}`);
     dispatch({ type: DELETE_LEASEASSETSTORE, payload: id });
   };
 };
@@ -3675,7 +3638,7 @@ export const deleteLeaseAssetStore = (id, token) => {
 export const createOwnershipAssetStore = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post("/storechangeownerships", formValues);
 
     dispatch({
       type: CREATE_OWNERSHIPASSETSTORE,
@@ -3687,7 +3650,7 @@ export const createOwnershipAssetStore = (formValues, token) => {
 export const fetchOwnershipAssetStores = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/storechangeownerships");
 
     dispatch({
       type: FETCH_OWNERSHIPASSETSTORES,
@@ -3699,7 +3662,7 @@ export const fetchOwnershipAssetStores = (tokens) => {
 export const fetchOwnershipAssetStore = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/storechangeownerships/${id}`);
     dispatch({
       type: FETCH_OWNERSHIPASSETSTORE,
       payload: response.data.data.data,
@@ -3710,7 +3673,10 @@ export const fetchOwnershipAssetStore = (id, token) => {
 export const editOwnershipAssetStore = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(
+      `/storechangeownerships/${id}`,
+      formValues
+    );
     dispatch({
       type: EDIT_OWNERSHIPASSETSTORE,
       payload: response.data.data.data,
@@ -3721,7 +3687,7 @@ export const editOwnershipAssetStore = (id, formValues, token) => {
 export const deleteOwnershipAssetStore = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/storechangeownerships/${id}`);
     dispatch({ type: DELETE_OWNERSHIPASSETSTORE, payload: id });
   };
 };
@@ -3731,7 +3697,7 @@ export const deleteOwnershipAssetStore = (id, token) => {
 export const createAssetStoreSpaceAllocation = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post("/storespaceallocations", formValues);
 
     dispatch({
       type: CREATE_ASSETSTORESPACEALLOCATION,
@@ -3743,7 +3709,7 @@ export const createAssetStoreSpaceAllocation = (formValues, token) => {
 export const fetchAssetStoreSpaceAllocations = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/storespaceallocations");
 
     dispatch({
       type: FETCH_ASSETSTORESPACEALLOCATIONS,
@@ -3755,7 +3721,7 @@ export const fetchAssetStoreSpaceAllocations = (tokens) => {
 export const fetchAssetStoreSpaceAllocation = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/storespaceallocations/${id}`);
     dispatch({
       type: FETCH_ASSETSTORESPACEALLOCATION,
       payload: response.data.data.data,
@@ -3766,7 +3732,10 @@ export const fetchAssetStoreSpaceAllocation = (id, token) => {
 export const editAssetStoreSpaceAllocation = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(
+      `/storespaceallocations/${id}`,
+      formValues
+    );
     dispatch({
       type: EDIT_ASSETSTORESPACEALLOCATION,
       payload: response.data.data.data,
@@ -3777,7 +3746,7 @@ export const editAssetStoreSpaceAllocation = (id, formValues, token) => {
 export const deleteAssetStoreSpaceAllocation = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/storespaceallocations/${id}`);
     dispatch({ type: DELETE_ASSETSTORESPACEALLOCATION, payload: id });
   };
 };
@@ -3787,7 +3756,7 @@ export const deleteAssetStoreSpaceAllocation = (id, token) => {
 export const createSellAssetStore = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post("/storesales", formValues);
 
     dispatch({
       type: CREATE_SELLASSETSTORE,
@@ -3799,7 +3768,7 @@ export const createSellAssetStore = (formValues, token) => {
 export const fetchSellAssetStores = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/storesales");
 
     dispatch({
       type: FETCH_SELLASSETSTORES,
@@ -3811,7 +3780,7 @@ export const fetchSellAssetStores = (tokens) => {
 export const fetchSellAssetStore = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/storesales/${id}`);
     dispatch({
       type: FETCH_SELLASSETSTORE,
       payload: response.data.data.data,
@@ -3822,7 +3791,7 @@ export const fetchSellAssetStore = (id, token) => {
 export const editSellAssetStore = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(`/storesales/${id}`, formValues);
     dispatch({
       type: EDIT_SELLASSETSTORE,
       payload: response.data.data.data,
@@ -3833,7 +3802,7 @@ export const editSellAssetStore = (id, formValues, token) => {
 export const deleteSellAssetStore = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/storesales/${id}`);
     dispatch({ type: DELETE_SELLASSETSTORE, payload: id });
   };
 };
@@ -3843,7 +3812,7 @@ export const deleteSellAssetStore = (id, token) => {
 export const createAssetStoreClosure = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post("/stores", formValues);
 
     dispatch({
       type: CREATE_ASSETSTORECLOSURE,
@@ -3855,7 +3824,7 @@ export const createAssetStoreClosure = (formValues, token) => {
 export const fetchAssetStoreClosures = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/stores");
 
     dispatch({
       type: FETCH_ASSETSTORECLOSURES,
@@ -3867,7 +3836,7 @@ export const fetchAssetStoreClosures = (tokens) => {
 export const fetchAssetStoreClosure = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/stores/${id}`);
     dispatch({
       type: FETCH_ASSETSTORECLOSURE,
       payload: response.data.data.data,
@@ -3878,7 +3847,7 @@ export const fetchAssetStoreClosure = (id, token) => {
 export const editAssetStoreClosure = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(`/stores/${id}`, formValues);
     dispatch({
       type: EDIT_ASSETSTORECLOSURE,
       payload: response.data.data.data,
@@ -3889,7 +3858,7 @@ export const editAssetStoreClosure = (id, formValues, token) => {
 export const deleteAssetStoreClosure = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/stores/${id}`);
     dispatch({ type: DELETE_ASSETSTORECLOSURE, payload: id });
   };
 };
@@ -3899,7 +3868,7 @@ export const deleteAssetStoreClosure = (id, token) => {
 export const createStoreAssetMovementType = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post("/movementtypes", formValues);
 
     dispatch({
       type: CREATE_STOREMOVEMENTTYPE,
@@ -3911,7 +3880,7 @@ export const createStoreAssetMovementType = (formValues, token) => {
 export const fetchStoreAssetMovementTypes = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/movementtypes");
 
     dispatch({
       type: FETCH_STOREMOVEMENTTYPES,
@@ -3923,7 +3892,7 @@ export const fetchStoreAssetMovementTypes = (tokens) => {
 export const fetchStoreAssetMovementType = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/movementtypes/${id}`);
     dispatch({
       type: FETCH_STOREMOVEMENTTYPE,
       payload: response.data.data.data,
@@ -3934,7 +3903,7 @@ export const fetchStoreAssetMovementType = (id, token) => {
 export const editStoreAssetMovementType = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(`/movementtypes/${id}`, formValues);
     dispatch({
       type: EDIT_STOREMOVEMENTTYPE,
       payload: response.data.data.data,
@@ -3945,7 +3914,7 @@ export const editStoreAssetMovementType = (id, formValues, token) => {
 export const deleteStoreAssetMovementType = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/movementtypes/${id}`);
     dispatch({ type: DELETE_STOREMOVEMENTTYPE, payload: id });
   };
 };
@@ -3955,7 +3924,7 @@ export const deleteStoreAssetMovementType = (id, token) => {
 export const createStoreAssetDispositionType = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post("/dispositiontypes", formValues);
 
     dispatch({
       type: CREATE_STOREDISPOSITIONTYPE,
@@ -3967,7 +3936,7 @@ export const createStoreAssetDispositionType = (formValues, token) => {
 export const fetchStoreAssetDispositionTypes = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/dispositiontypes");
 
     dispatch({
       type: FETCH_STOREDISPOSITIONTYPES,
@@ -3979,7 +3948,7 @@ export const fetchStoreAssetDispositionTypes = (tokens) => {
 export const fetchStoreAssetDispositionType = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/dispositiontypes/${id}`);
     dispatch({
       type: FETCH_STOREDISPOSITIONTYPE,
       payload: response.data.data.data,
@@ -3990,7 +3959,7 @@ export const fetchStoreAssetDispositionType = (id, token) => {
 export const editStoreAssetDispositionType = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(`/dispositiontypes/${id}`, formValues);
     dispatch({
       type: EDIT_STOREDISPOSITIONTYPE,
       payload: response.data.data.data,
@@ -4001,7 +3970,7 @@ export const editStoreAssetDispositionType = (id, formValues, token) => {
 export const deleteStoreAssetDispositionType = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/dispositiontypes/${id}`);
     dispatch({ type: DELETE_STOREDISPOSITIONTYPE, payload: id });
   };
 };
@@ -4011,7 +3980,7 @@ export const deleteStoreAssetDispositionType = (id, token) => {
 export const createStoreMaintenanceType = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post("/storemaintenancetypes", formValues);
 
     dispatch({
       type: CREATE_STOREMAINTENANCETYPE,
@@ -4023,7 +3992,7 @@ export const createStoreMaintenanceType = (formValues, token) => {
 export const fetchStoreMaintenanceTypes = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/storemaintenancetypes");
 
     dispatch({
       type: FETCH_STOREMAINTENANCETYPES,
@@ -4035,7 +4004,7 @@ export const fetchStoreMaintenanceTypes = (tokens) => {
 export const fetchStoreMaintenanceType = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/storemaintenancetypes/${id}`);
     dispatch({
       type: FETCH_STOREMAINTENANCETYPE,
       payload: response.data.data.data,
@@ -4046,7 +4015,10 @@ export const fetchStoreMaintenanceType = (id, token) => {
 export const editStoreMaintenanceType = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(
+      `/storemaintenancetypes/${id}`,
+      formValues
+    );
     dispatch({
       type: EDIT_STOREMAINTENANCETYPE,
       payload: response.data.data.data,
@@ -4057,7 +4029,7 @@ export const editStoreMaintenanceType = (id, formValues, token) => {
 export const deleteStoreMaintenanceType = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/storemaintenancetypes/${id}`);
     dispatch({ type: DELETE_STOREMAINTENANCETYPE, payload: id });
   };
 };
@@ -4067,7 +4039,7 @@ export const deleteStoreMaintenanceType = (id, token) => {
 export const createTransformationType = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post("/operationprocessingtypes", formValues);
 
     dispatch({
       type: CREATE_TRANSFORMATIONTYPE,
@@ -4079,7 +4051,7 @@ export const createTransformationType = (formValues, token) => {
 export const fetchTransformationTypes = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/operationprocessingtypes");
 
     dispatch({
       type: FETCH_TRANSFORMATIONTYPES,
@@ -4091,7 +4063,7 @@ export const fetchTransformationTypes = (tokens) => {
 export const fetchTransformationType = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/operationprocessingtypes/${id}`);
     dispatch({
       type: FETCH_TRANSFORMATIONTYPE,
       payload: response.data.data.data,
@@ -4102,7 +4074,10 @@ export const fetchTransformationType = (id, token) => {
 export const editTransformationType = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(
+      `/operationprocessingtypes/${id}`,
+      formValues
+    );
     dispatch({
       type: EDIT_TRANSFORMATIONTYPE,
       payload: response.data.data.data,
@@ -4113,7 +4088,7 @@ export const editTransformationType = (id, formValues, token) => {
 export const deleteTransformationType = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/operationprocessingtypes/${id}`);
     dispatch({ type: DELETE_TRANSFORMATIONTYPE, payload: id });
   };
 };
@@ -4123,7 +4098,7 @@ export const deleteTransformationType = (id, token) => {
 export const createTransformationPhase = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post("/operationprocessingphases", formValues);
 
     dispatch({
       type: CREATE_TRANSFORMATIONPHASE,
@@ -4135,7 +4110,7 @@ export const createTransformationPhase = (formValues, token) => {
 export const fetchTransformationPhases = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/operationprocessingphases");
 
     dispatch({
       type: FETCH_TRANSFORMATIONPHASES,
@@ -4147,7 +4122,7 @@ export const fetchTransformationPhases = (tokens) => {
 export const fetchTransformationPhase = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/operationprocessingphases/${id}`);
     dispatch({
       type: FETCH_TRANSFORMATIONPHASE,
       payload: response.data.data.data,
@@ -4158,7 +4133,10 @@ export const fetchTransformationPhase = (id, token) => {
 export const editTransformationPhase = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(
+      `/operationprocessingphases/${id}`,
+      formValues
+    );
     dispatch({
       type: EDIT_TRANSFORMATIONPHASE,
       payload: response.data.data.data,
@@ -4169,7 +4147,7 @@ export const editTransformationPhase = (id, formValues, token) => {
 export const deleteTransformationPhase = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/operationprocessingphases/${id}`);
     dispatch({ type: DELETE_TRANSFORMATIONPHASE, payload: id });
   };
 };
@@ -4179,7 +4157,10 @@ export const deleteTransformationPhase = (id, token) => {
 export const createTransformationPhaseEvent = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post(
+      "/operationprocessingphaseevents",
+      formValues
+    );
 
     dispatch({
       type: CREATE_TRANSFORMATIONPHASEEVENT,
@@ -4191,7 +4172,7 @@ export const createTransformationPhaseEvent = (formValues, token) => {
 export const fetchTransformationPhaseEvents = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/operationprocessingphaseevents");
 
     dispatch({
       type: FETCH_TRANSFORMATIONPHASEEVENTS,
@@ -4203,7 +4184,7 @@ export const fetchTransformationPhaseEvents = (tokens) => {
 export const fetchTransformationPhaseEvent = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/operationprocessingphaseevents/${id}`);
     dispatch({
       type: FETCH_TRANSFORMATIONPHASEEVENT,
       payload: response.data.data.data,
@@ -4214,7 +4195,10 @@ export const fetchTransformationPhaseEvent = (id, token) => {
 export const editTransformationPhaseEvent = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(
+      `/operationprocessingphaseevents/${id}`,
+      formValues
+    );
     dispatch({
       type: EDIT_TRANSFORMATIONPHASEEVENT,
       payload: response.data.data.data,
@@ -4225,7 +4209,7 @@ export const editTransformationPhaseEvent = (id, formValues, token) => {
 export const deleteTransformationPhaseEvent = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/operationprocessingphaseevents/${id}`);
     dispatch({ type: DELETE_TRANSFORMATIONPHASEEVENT, payload: id });
   };
 };
@@ -4235,7 +4219,7 @@ export const deleteTransformationPhaseEvent = (id, token) => {
 export const createFinishingType = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post("/operationfinishingtypes", formValues);
 
     dispatch({
       type: CREATE_FINISHINGTYPE,
@@ -4247,7 +4231,7 @@ export const createFinishingType = (formValues, token) => {
 export const fetchFinishingTypes = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/operationfinishingtypes");
 
     dispatch({
       type: FETCH_FINISHINGTYPES,
@@ -4259,7 +4243,7 @@ export const fetchFinishingTypes = (tokens) => {
 export const fetchFinishingType = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/operationfinishingtypes/${id}`);
     dispatch({
       type: FETCH_FINISHINGTYPE,
       payload: response.data.data.data,
@@ -4270,7 +4254,10 @@ export const fetchFinishingType = (id, token) => {
 export const editFinishingType = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(
+      `/operationfinishingtypes/${id}`,
+      formValues
+    );
     dispatch({
       type: EDIT_FINISHINGTYPE,
       payload: response.data.data.data,
@@ -4281,7 +4268,7 @@ export const editFinishingType = (id, formValues, token) => {
 export const deleteFinishingType = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/operationfinishingtypes/${id}`);
     dispatch({ type: DELETE_FINISHINGTYPE, payload: id });
   };
 };
@@ -4291,7 +4278,10 @@ export const deleteFinishingType = (id, token) => {
 export const createQualityAssuranceType = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post(
+      "/operationqualityassurancetypes",
+      formValues
+    );
 
     dispatch({
       type: CREATE_QUALITYASSURANCETYPE,
@@ -4303,7 +4293,7 @@ export const createQualityAssuranceType = (formValues, token) => {
 export const fetchQualityAssuranceTypes = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/operationqualityassurancetypes");
 
     dispatch({
       type: FETCH_QUALITYASSURANCETYPES,
@@ -4315,7 +4305,7 @@ export const fetchQualityAssuranceTypes = (tokens) => {
 export const fetchQualityAssuranceType = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/operationqualityassurancetypes/${id}`);
     dispatch({
       type: FETCH_QUALITYASSURANCETYPE,
       payload: response.data.data.data,
@@ -4326,7 +4316,10 @@ export const fetchQualityAssuranceType = (id, token) => {
 export const editQualityAssuranceType = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(
+      `/operationqualityassurancetypes/${id}`,
+      formValues
+    );
     dispatch({
       type: EDIT_QUALITYASSURANCETYPE,
       payload: response.data.data.data,
@@ -4337,7 +4330,7 @@ export const editQualityAssuranceType = (id, formValues, token) => {
 export const deleteQualityAssuranceType = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/operationqualityassurancetypes/${id}`);
     dispatch({ type: DELETE_QUALITYASSURANCETYPE, payload: id });
   };
 };
@@ -4347,7 +4340,10 @@ export const deleteQualityAssuranceType = (id, token) => {
 export const createQualityAssurancePhase = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post(
+      "/operationqualityassurancephases",
+      formValues
+    );
 
     dispatch({
       type: CREATE_QUALITYASSURANCEPHASE,
@@ -4359,7 +4355,7 @@ export const createQualityAssurancePhase = (formValues, token) => {
 export const fetchQualityAssurancePhases = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/operationqualityassurancephases");
 
     dispatch({
       type: FETCH_QUALITYASSURANCEPHASES,
@@ -4371,7 +4367,7 @@ export const fetchQualityAssurancePhases = (tokens) => {
 export const fetchQualityAssurancePhase = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/operationqualityassurancephases/${id}`);
     dispatch({
       type: FETCH_QUALITYASSURANCEPHASE,
       payload: response.data.data.data,
@@ -4382,7 +4378,10 @@ export const fetchQualityAssurancePhase = (id, token) => {
 export const editQualityAssurancePhase = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(
+      `/operationqualityassurancephases/${id}`,
+      formValues
+    );
     dispatch({
       type: EDIT_QUALITYASSURANCEPHASE,
       payload: response.data.data.data,
@@ -4393,7 +4392,7 @@ export const editQualityAssurancePhase = (id, formValues, token) => {
 export const deleteQualityAssurancePhase = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/operationqualityassurancephases/${id}`);
     dispatch({ type: DELETE_QUALITYASSURANCEPHASE, payload: id });
   };
 };
@@ -4403,7 +4402,10 @@ export const deleteQualityAssurancePhase = (id, token) => {
 export const createQualityAssurancePhaseEvent = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post(
+      "/operationqualityassurancephaseevents",
+      formValues
+    );
 
     dispatch({
       type: CREATE_QUALITYASSURANCEPHASEEVENT,
@@ -4415,7 +4417,7 @@ export const createQualityAssurancePhaseEvent = (formValues, token) => {
 export const fetchQualityAssurancePhaseEvents = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/operationqualityassurancephaseevents");
 
     dispatch({
       type: FETCH_QUALITYASSURANCEPHASEEVENTS,
@@ -4427,7 +4429,9 @@ export const fetchQualityAssurancePhaseEvents = (tokens) => {
 export const fetchQualityAssurancePhaseEvent = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(
+      `/operationqualityassurancephaseevents/${id}`
+    );
     dispatch({
       type: FETCH_QUALITYASSURANCEPHASEEVENT,
       payload: response.data.data.data,
@@ -4438,7 +4442,10 @@ export const fetchQualityAssurancePhaseEvent = (id, token) => {
 export const editQualityAssurancePhaseEvent = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(
+      `/operationqualityassurancephaseevents/${id}`,
+      formValues
+    );
     dispatch({
       type: EDIT_QUALITYASSURANCEPHASEEVENT,
       payload: response.data.data.data,
@@ -4449,7 +4456,7 @@ export const editQualityAssurancePhaseEvent = (id, formValues, token) => {
 export const deleteQualityAssurancePhaseEvent = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/operationqualityassurancephaseevents/${id}`);
     dispatch({ type: DELETE_QUALITYASSURANCEPHASEEVENT, payload: id });
   };
 };
@@ -4459,7 +4466,7 @@ export const deleteQualityAssurancePhaseEvent = (id, token) => {
 export const createOperationMaintenanceType = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post("/operationmaintenancetypes", formValues);
 
     dispatch({
       type: CREATE_OPERATIONMAINTENANCETYPE,
@@ -4471,7 +4478,7 @@ export const createOperationMaintenanceType = (formValues, token) => {
 export const fetchOperationMaintenanceTypes = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/operationmaintenancetypes");
 
     dispatch({
       type: FETCH_OPERATIONMAINTENANCETYPES,
@@ -4483,7 +4490,7 @@ export const fetchOperationMaintenanceTypes = (tokens) => {
 export const fetchOperationMaintenanceType = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/operationmaintenancetypes/${id}`);
     dispatch({
       type: FETCH_OPERATIONMAINTENANCETYPE,
       payload: response.data.data.data,
@@ -4494,7 +4501,10 @@ export const fetchOperationMaintenanceType = (id, token) => {
 export const editOperationMaintenanceType = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(
+      `/operationmaintenancetypes/${id}`,
+      formValues
+    );
     dispatch({
       type: EDIT_OPERATIONMAINTENANCETYPE,
       payload: response.data.data.data,
@@ -4505,7 +4515,7 @@ export const editOperationMaintenanceType = (id, formValues, token) => {
 export const deleteOperationMaintenanceType = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/operationmaintenancetypes/${id}`);
     dispatch({ type: DELETE_OPERATIONMAINTENANCETYPE, payload: id });
   };
 };
@@ -4515,7 +4525,10 @@ export const deleteOperationMaintenanceType = (id, token) => {
 export const createFinishing = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post(
+      "/operationprocessingfinishings",
+      formValues
+    );
 
     dispatch({
       type: CREATE_FINISHING,
@@ -4527,7 +4540,7 @@ export const createFinishing = (formValues, token) => {
 export const fetchFinishings = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/operationprocessingfinishings");
 
     dispatch({
       type: FETCH_FINISHINGS,
@@ -4539,7 +4552,7 @@ export const fetchFinishings = (tokens) => {
 export const fetchFinishing = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/operationprocessingfinishings/${id}`);
     dispatch({
       type: FETCH_FINISHING,
       payload: response.data.data.data,
@@ -4550,7 +4563,10 @@ export const fetchFinishing = (id, token) => {
 export const editFinishing = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(
+      `/operationprocessingfinishings/${id}`,
+      formValues
+    );
     dispatch({
       type: EDIT_FINISHING,
       payload: response.data.data.data,
@@ -4561,7 +4577,7 @@ export const editFinishing = (id, formValues, token) => {
 export const deleteFinishing = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/operationprocessingfinishings/${id}`);
     dispatch({ type: DELETE_FINISHING, payload: id });
   };
 };
@@ -4571,7 +4587,10 @@ export const deleteFinishing = (id, token) => {
 export const createQualityAssurance = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post(
+      "/operationprocessingqualityassurances",
+      formValues
+    );
 
     dispatch({
       type: CREATE_QUALITYASSURANCE,
@@ -4583,7 +4602,7 @@ export const createQualityAssurance = (formValues, token) => {
 export const fetchQualityAssurances = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/operationprocessingqualityassurances");
 
     dispatch({
       type: FETCH_QUALITYASSURANCES,
@@ -4595,7 +4614,9 @@ export const fetchQualityAssurances = (tokens) => {
 export const fetchQualityAssurance = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(
+      `/operationprocessingqualityassurances/${id}`
+    );
     dispatch({
       type: FETCH_QUALITYASSURANCE,
       payload: response.data.data.data,
@@ -4606,7 +4627,10 @@ export const fetchQualityAssurance = (id, token) => {
 export const editQualityAssurance = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(
+      `/operationprocessingqualityassurances/${id}`,
+      formValues
+    );
     dispatch({
       type: EDIT_QUALITYASSURANCE,
       payload: response.data.data.data,
@@ -4617,7 +4641,7 @@ export const editQualityAssurance = (id, formValues, token) => {
 export const deleteQualityAssurance = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/operationprocessingqualityassurances/${id}`);
     dispatch({ type: DELETE_QUALITYASSURANCE, payload: id });
   };
 };
@@ -4627,7 +4651,10 @@ export const deleteQualityAssurance = (id, token) => {
 export const createOperationMaintenance = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post(
+      "/operationprocessingmaintenances",
+      formValues
+    );
 
     dispatch({
       type: CREATE_OPERATIONMAINTENANCE,
@@ -4639,7 +4666,7 @@ export const createOperationMaintenance = (formValues, token) => {
 export const fetchOperationMaintenances = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/operationprocessingmaintenances");
 
     dispatch({
       type: FETCH_OPERATIONMAINTENANCES,
@@ -4651,7 +4678,7 @@ export const fetchOperationMaintenances = (tokens) => {
 export const fetchOperationMaintenance = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/operationprocessingmaintenances/${id}`);
     dispatch({
       type: FETCH_OPERATIONMAINTENANCE,
       payload: response.data.data.data,
@@ -4662,7 +4689,10 @@ export const fetchOperationMaintenance = (id, token) => {
 export const editOperationMaintenance = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(
+      `/operationprocessingmaintenances/${id}`,
+      formValues
+    );
     dispatch({
       type: EDIT_OPERATIONMAINTENANCE,
       payload: response.data.data.data,
@@ -4673,7 +4703,7 @@ export const editOperationMaintenance = (id, formValues, token) => {
 export const deleteOperationMaintenance = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/operationprocessingmaintenances/${id}`);
     dispatch({ type: DELETE_OPERATIONMAINTENANCE, payload: id });
   };
 };
@@ -4683,7 +4713,7 @@ export const deleteOperationMaintenance = (id, token) => {
 export const createOperationProcessing = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post("/operationprocessings", formValues);
 
     dispatch({
       type: CREATE_OPERATIONPROCESSING,
@@ -4695,7 +4725,7 @@ export const createOperationProcessing = (formValues, token) => {
 export const fetchOperationProcessings = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/operationprocessings");
 
     dispatch({
       type: FETCH_OPERATIONPROCESSINGS,
@@ -4707,7 +4737,7 @@ export const fetchOperationProcessings = (tokens) => {
 export const fetchOperationProcessing = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/operationprocessings/${id}`);
     dispatch({
       type: FETCH_OPERATIONPROCESSING,
       payload: response.data.data.data,
@@ -4718,7 +4748,10 @@ export const fetchOperationProcessing = (id, token) => {
 export const editOperationProcessing = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(
+      `/operationprocessings/${id}`,
+      formValues
+    );
     dispatch({
       type: EDIT_OPERATIONPROCESSING,
       payload: response.data.data.data,
@@ -4729,7 +4762,7 @@ export const editOperationProcessing = (id, formValues, token) => {
 export const deleteOperationProcessing = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/operationprocessings/${id}`);
     dispatch({ type: DELETE_OPERATIONPROCESSING, payload: id });
   };
 };
@@ -4739,7 +4772,7 @@ export const deleteOperationProcessing = (id, token) => {
 export const createOperationOperation = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post("/operationoperations", formValues);
 
     dispatch({
       type: CREATE_OPERATIONOPERATION,
@@ -4751,7 +4784,7 @@ export const createOperationOperation = (formValues, token) => {
 export const fetchOperationOperations = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/operationoperations");
 
     dispatch({
       type: FETCH_OPERATIONOPERATIONS,
@@ -4763,7 +4796,7 @@ export const fetchOperationOperations = (tokens) => {
 export const fetchOperationOperation = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/operationoperations/${id}`);
     dispatch({
       type: FETCH_OPERATIONOPERATION,
       payload: response.data.data.data,
@@ -4774,7 +4807,7 @@ export const fetchOperationOperation = (id, token) => {
 export const editOperationOperation = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(`/operationoperations/${id}`, formValues);
     dispatch({
       type: EDIT_OPERATIONOPERATION,
       payload: response.data.data.data,
@@ -4785,7 +4818,7 @@ export const editOperationOperation = (id, formValues, token) => {
 export const deleteOperationOperation = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/operationoperations/${id}`);
     dispatch({ type: DELETE_OPERATIONOPERATION, payload: id });
   };
 };
@@ -4795,7 +4828,10 @@ export const deleteOperationOperation = (id, token) => {
 export const createOperationProductionMaintenance = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post(
+      "/operationproductionmaintenances",
+      formValues
+    );
 
     dispatch({
       type: CREATE_OPERATIONPRODUCTIONMAINTENANCE,
@@ -4807,7 +4843,7 @@ export const createOperationProductionMaintenance = (formValues, token) => {
 export const fetchOperationProductionMaintenances = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/operationproductionmaintenances");
 
     dispatch({
       type: FETCH_OPERATIONPRODUCTIONMAINTENANCES,
@@ -4819,7 +4855,7 @@ export const fetchOperationProductionMaintenances = (tokens) => {
 export const fetchOperationProductionMaintenance = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/operationproductionmaintenances/${id}`);
     dispatch({
       type: FETCH_OPERATIONPRODUCTIONMAINTENANCE,
       payload: response.data.data.data,
@@ -4830,7 +4866,10 @@ export const fetchOperationProductionMaintenance = (id, token) => {
 export const editOperationProductionMaintenance = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(
+      `/operationproductionmaintenances/${id}`,
+      formValues
+    );
     dispatch({
       type: EDIT_OPERATIONPRODUCTIONMAINTENANCE,
       payload: response.data.data.data,
@@ -4841,7 +4880,7 @@ export const editOperationProductionMaintenance = (id, formValues, token) => {
 export const deleteOperationProductionMaintenance = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/operationproductionmaintenances/${id}`);
     dispatch({ type: DELETE_OPERATIONPRODUCTIONMAINTENANCE, payload: id });
   };
 };
@@ -4854,7 +4893,10 @@ export const createOperationProductionQualityAssurance = (
 ) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post(
+      "/operationproductionqualityassurances",
+      formValues
+    );
 
     dispatch({
       type: CREATE_PRODUCTIONQUALITYASSURANCE,
@@ -4866,7 +4908,7 @@ export const createOperationProductionQualityAssurance = (
 export const fetchOperationProductionQualityAssurances = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/operationproductionqualityassurances");
 
     dispatch({
       type: FETCH_PRODUCTIONQUALITYASSURANCES,
@@ -4878,7 +4920,9 @@ export const fetchOperationProductionQualityAssurances = (tokens) => {
 export const fetchOperationProductionQualityAssurance = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(
+      `/operationproductionqualityassurances/${id}`
+    );
     dispatch({
       type: FETCH_PRODUCTIONQUALITYASSURANCE,
       payload: response.data.data.data,
@@ -4893,7 +4937,10 @@ export const editOperationProductionQualityAssurance = (
 ) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(
+      `/operationproductionqualityassurances/${id}`,
+      formValues
+    );
     dispatch({
       type: EDIT_PRODUCTIONQUALITYASSURANCE,
       payload: response.data.data.data,
@@ -4904,7 +4951,7 @@ export const editOperationProductionQualityAssurance = (
 export const deleteOperationProductionQualityAssurance = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/operationproductionqualityassurances/${id}`);
     dispatch({ type: DELETE_PRODUCTIONQUALITYASSURANCE, payload: id });
   };
 };
@@ -4914,7 +4961,10 @@ export const deleteOperationProductionQualityAssurance = (id, token) => {
 export const createProductionFinishing = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post(
+      "/operationproductionfinishings",
+      formValues
+    );
 
     dispatch({
       type: CREATE_PRODUCTIONFINISHING,
@@ -4926,7 +4976,7 @@ export const createProductionFinishing = (formValues, token) => {
 export const fetchProductionFinishings = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/operationproductionfinishings");
 
     dispatch({
       type: FETCH_PRODUCTIONFINISHINGS,
@@ -4938,7 +4988,7 @@ export const fetchProductionFinishings = (tokens) => {
 export const fetchProductionFinishing = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/operationproductionfinishings/${id}`);
     dispatch({
       type: FETCH_PRODUCTIONFINISHING,
       payload: response.data.data.data,
@@ -4949,7 +4999,10 @@ export const fetchProductionFinishing = (id, token) => {
 export const editProductionFinishing = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(
+      `/operationproductionfinishings/${id}`,
+      formValues
+    );
     dispatch({
       type: EDIT_PRODUCTIONFINISHING,
       payload: response.data.data.data,
@@ -4960,7 +5013,7 @@ export const editProductionFinishing = (id, formValues, token) => {
 export const deleteProductionFinishing = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/operationproductionfinishings/${id}`);
     dispatch({ type: DELETE_PRODUCTIONFINISHING, payload: id });
   };
 };
@@ -4970,7 +5023,7 @@ export const deleteProductionFinishing = (id, token) => {
 export const createProject = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post("/projects", formValues);
 
     dispatch({
       type: CREATE_PROJECTPROJECT,
@@ -4982,7 +5035,7 @@ export const createProject = (formValues, token) => {
 export const fetchProjects = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/projects");
 
     dispatch({
       type: FETCH_PROJECTPROJECTS,
@@ -4994,7 +5047,7 @@ export const fetchProjects = (tokens) => {
 export const fetchProject = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/projects/${id}`);
     dispatch({
       type: FETCH_PROJECTPROJECT,
       payload: response.data.data.data,
@@ -5005,7 +5058,7 @@ export const fetchProject = (id, token) => {
 export const editProject = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(`/projects/${id}`, formValues);
     dispatch({
       type: EDIT_PROJECTPROJECT,
       payload: response.data.data.data,
@@ -5016,7 +5069,7 @@ export const editProject = (id, formValues, token) => {
 export const deleteProject = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/projects/${id}`);
     dispatch({ type: DELETE_PROJECTPROJECT, payload: id });
   };
 };
@@ -5026,7 +5079,7 @@ export const deleteProject = (id, token) => {
 export const createProjectResource = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post("/projectresources", formValues);
 
     dispatch({
       type: CREATE_PROJECTPROJECTRESOURCE,
@@ -5038,7 +5091,7 @@ export const createProjectResource = (formValues, token) => {
 export const fetchProjectResources = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/projectresources");
 
     dispatch({
       type: FETCH_PROJECTPROJECTRESOURCES,
@@ -5050,7 +5103,7 @@ export const fetchProjectResources = (tokens) => {
 export const fetchProjectResource = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/projectresources/${id}`);
     dispatch({
       type: FETCH_PROJECTPROJECTRESOURCE,
       payload: response.data.data.data,
@@ -5061,7 +5114,7 @@ export const fetchProjectResource = (id, token) => {
 export const editProjectResource = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(`/projectresources/${id}`, formValues);
     dispatch({
       type: EDIT_PROJECTPROJECTRESOURCE,
       payload: response.data.data.data,
@@ -5072,7 +5125,7 @@ export const editProjectResource = (id, formValues, token) => {
 export const deleteProjectResource = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/projectresources/${id}`);
     dispatch({ type: DELETE_PROJECTPROJECTRESOURCE, payload: id });
   };
 };
@@ -5082,7 +5135,7 @@ export const deleteProjectResource = (id, token) => {
 export const createProjectBudgeting = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post("/projectbudgets", formValues);
 
     dispatch({
       type: CREATE_PROJECTPROJECTBUDGETING,
@@ -5094,7 +5147,7 @@ export const createProjectBudgeting = (formValues, token) => {
 export const fetchProjectBudgetings = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/projectbudgets");
 
     dispatch({
       type: FETCH_PROJECTPROJECTBUDGETINGS,
@@ -5106,7 +5159,7 @@ export const fetchProjectBudgetings = (tokens) => {
 export const fetchProjectBudgeting = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/projectbudgets/${id}`);
     dispatch({
       type: FETCH_PROJECTPROJECTBUDGETING,
       payload: response.data.data.data,
@@ -5117,7 +5170,7 @@ export const fetchProjectBudgeting = (id, token) => {
 export const editProjectBudgeting = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(`/projectbudgets/${id}`, formValues);
     dispatch({
       type: EDIT_PROJECTPROJECTBUDGETING,
       payload: response.data.data.data,
@@ -5128,7 +5181,7 @@ export const editProjectBudgeting = (id, formValues, token) => {
 export const deleteProjectBudgeting = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/projectbudgets/${id}`);
     dispatch({ type: DELETE_PROJECTPROJECTBUDGETING, payload: id });
   };
 };
@@ -5138,7 +5191,7 @@ export const deleteProjectBudgeting = (id, token) => {
 export const createProjectPlanningTask = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post("/projectplanningtasks", formValues);
 
     dispatch({
       type: CREATE_PROJECTPLANNINGTASK,
@@ -5150,7 +5203,7 @@ export const createProjectPlanningTask = (formValues, token) => {
 export const fetchProjectPlanningTasks = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/projectplanningtasks");
 
     dispatch({
       type: FETCH_PROJECTPLANNINGTASKS,
@@ -5162,7 +5215,7 @@ export const fetchProjectPlanningTasks = (tokens) => {
 export const fetchProjectPlanningTask = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/projectplanningtasks/${id}`);
     dispatch({
       type: FETCH_PROJECTPLANNINGTASK,
       payload: response.data.data.data,
@@ -5173,7 +5226,10 @@ export const fetchProjectPlanningTask = (id, token) => {
 export const editProjectPlanningTask = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(
+      `/projectplanningtasks/${id}`,
+      formValues
+    );
     dispatch({
       type: EDIT_PROJECTPLANNINGTASK,
       payload: response.data.data.data,
@@ -5184,7 +5240,7 @@ export const editProjectPlanningTask = (id, formValues, token) => {
 export const deleteProjectPlanningTask = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/projectplanningtasks/${id}`);
     dispatch({ type: DELETE_PROJECTPLANNINGTASK, payload: id });
   };
 };
@@ -5194,7 +5250,7 @@ export const deleteProjectPlanningTask = (id, token) => {
 export const createProjectPlanningActivity = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post("/projectplanningactivities", formValues);
 
     dispatch({
       type: CREATE_PROJECTPLANNINGACTIVITY,
@@ -5206,7 +5262,7 @@ export const createProjectPlanningActivity = (formValues, token) => {
 export const fetchProjectPlanningActivities = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/projectplanningactivities");
 
     dispatch({
       type: FETCH_PROJECTPLANNINGACTIVITIES,
@@ -5218,7 +5274,7 @@ export const fetchProjectPlanningActivities = (tokens) => {
 export const fetchProjectPlanningActivity = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/projectplanningactivities/${id}`);
     dispatch({
       type: FETCH_PROJECTPLANNINGACTIVITY,
       payload: response.data.data.data,
@@ -5229,7 +5285,10 @@ export const fetchProjectPlanningActivity = (id, token) => {
 export const editProjectPlanningActivity = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(
+      `/projectplanningactivities/${id}`,
+      formValues
+    );
     dispatch({
       type: EDIT_PROJECTPLANNINGACTIVITY,
       payload: response.data.data.data,
@@ -5240,7 +5299,7 @@ export const editProjectPlanningActivity = (id, formValues, token) => {
 export const deleteProjectPlanningActivity = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/projectplanningactivities/${id}`);
     dispatch({ type: DELETE_PROJECTPLANNINGACTIVITY, payload: id });
   };
 };
@@ -5250,7 +5309,7 @@ export const deleteProjectPlanningActivity = (id, token) => {
 export const createProjectPlanningScheduling = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post("/projectplanningschedulings", formValues);
 
     dispatch({
       type: CREATE_PROJECTPLANNINGSCHEDULING,
@@ -5262,7 +5321,7 @@ export const createProjectPlanningScheduling = (formValues, token) => {
 export const fetchProjectPlanningSchedulings = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/projectplanningschedulings");
 
     dispatch({
       type: FETCH_PROJECTPLANNINGSCHEDULINGS,
@@ -5274,7 +5333,7 @@ export const fetchProjectPlanningSchedulings = (tokens) => {
 export const fetchProjectPlanningScheduling = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/projectplanningschedulings/${id}`);
     dispatch({
       type: FETCH_PROJECTPLANNINGSCHEDULING,
       payload: response.data.data.data,
@@ -5285,7 +5344,10 @@ export const fetchProjectPlanningScheduling = (id, token) => {
 export const editProjectPlanningScheduling = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(
+      `/projectplanningschedulings/${id}`,
+      formValues
+    );
     dispatch({
       type: EDIT_PROJECTPLANNINGSCHEDULING,
       payload: response.data.data.data,
@@ -5296,7 +5358,7 @@ export const editProjectPlanningScheduling = (id, formValues, token) => {
 export const deleteProjectPlanningScheduling = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/projectplanningschedulings/${id}`);
     dispatch({ type: DELETE_PROJECTPLANNINGSCHEDULING, payload: id });
   };
 };
@@ -5362,7 +5424,7 @@ export const deleteProjectExecutionActivity = (id, token) => {
 export const createProjectPlanningStep = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post("/projectplanningsteps", formValues);
 
     dispatch({
       type: CREATE_PROJECTPLANNINGSTEP,
@@ -5374,7 +5436,7 @@ export const createProjectPlanningStep = (formValues, token) => {
 export const fetchProjectPlanningSteps = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/projectplanningsteps");
 
     dispatch({
       type: FETCH_PROJECTPLANNINGSTEPS,
@@ -5386,7 +5448,7 @@ export const fetchProjectPlanningSteps = (tokens) => {
 export const fetchProjectPlanningStep = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/projectplanningsteps/${id}`);
     dispatch({
       type: FETCH_PROJECTPLANNINGSTEP,
       payload: response.data.data.data,
@@ -5397,7 +5459,10 @@ export const fetchProjectPlanningStep = (id, token) => {
 export const editProjectPlanningStep = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(
+      `/projectplanningsteps/${id}`,
+      formValues
+    );
     dispatch({
       type: EDIT_PROJECTPLANNINGSTEP,
       payload: response.data.data.data,
@@ -5408,7 +5473,7 @@ export const editProjectPlanningStep = (id, formValues, token) => {
 export const deleteProjectPlanningStep = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/projectplanningsteps/${id}`);
     dispatch({ type: DELETE_PROJECTPLANNINGSTEP, payload: id });
   };
 };
@@ -5418,7 +5483,7 @@ export const deleteProjectPlanningStep = (id, token) => {
 export const createProjectPlanningSequencing = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post("/projectplanningsequencings", formValues);
 
     dispatch({
       type: CREATE_PROJECTPLANNINGSEQUENCING,
@@ -5430,7 +5495,7 @@ export const createProjectPlanningSequencing = (formValues, token) => {
 export const fetchProjectPlanningSequencings = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/projectplanningsequencings");
 
     dispatch({
       type: FETCH_PROJECTPLANNINGSEQUENCINGS,
@@ -5442,7 +5507,7 @@ export const fetchProjectPlanningSequencings = (tokens) => {
 export const fetchProjectPlanningSequencing = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/projectplanningsequencings/${id}`);
     dispatch({
       type: FETCH_PROJECTPLANNINGSEQUENCING,
       payload: response.data.data.data,
@@ -5453,7 +5518,10 @@ export const fetchProjectPlanningSequencing = (id, token) => {
 export const editProjectPlanningSequencing = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(
+      `/projectplanningsequencings/${id}`,
+      formValues
+    );
     dispatch({
       type: EDIT_PROJECTPLANNINGSEQUENCING,
       payload: response.data.data.data,
@@ -5464,7 +5532,7 @@ export const editProjectPlanningSequencing = (id, formValues, token) => {
 export const deleteProjectPlanningSequencing = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/projectplanningsequencings/${id}`);
     dispatch({ type: DELETE_PROJECTPLANNINGSEQUENCING, payload: id });
   };
 };
@@ -5474,7 +5542,7 @@ export const deleteProjectPlanningSequencing = (id, token) => {
 export const createProjectMonitoringTask = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post("/projectmonitoringtasks", formValues);
 
     dispatch({
       type: CREATE_PROJECTMONITORINGTASK,
@@ -5486,7 +5554,7 @@ export const createProjectMonitoringTask = (formValues, token) => {
 export const fetchProjectMonitoringTasks = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/projectmonitoringtasks");
 
     dispatch({
       type: FETCH_PROJECTMONITORINGTASKS,
@@ -5498,7 +5566,7 @@ export const fetchProjectMonitoringTasks = (tokens) => {
 export const fetchProjectMonitoringTask = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/projectmonitoringtasks/${id}`);
     dispatch({
       type: FETCH_PROJECTMONITORINGTASK,
       payload: response.data.data.data,
@@ -5509,7 +5577,10 @@ export const fetchProjectMonitoringTask = (id, token) => {
 export const editProjectMonitoringTask = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(
+      `/projectmonitoringtasks/${id}`,
+      formValues
+    );
     dispatch({
       type: EDIT_PROJECTMONITORINGTASK,
       payload: response.data.data.data,
@@ -5520,7 +5591,7 @@ export const editProjectMonitoringTask = (id, formValues, token) => {
 export const deleteProjectMonitoringTask = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/projectmonitoringtasks/${id}`);
     dispatch({ type: DELETE_PROJECTMONITORINGTASK, payload: id });
   };
 };
@@ -5530,7 +5601,7 @@ export const deleteProjectMonitoringTask = (id, token) => {
 export const createProjectClosure = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post("/projectclosures", formValues);
 
     dispatch({
       type: CREATE_PROJECTCLOSURE,
@@ -5542,7 +5613,7 @@ export const createProjectClosure = (formValues, token) => {
 export const fetchProjectClosures = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/projectclosures");
 
     dispatch({
       type: FETCH_PROJECTCLOSURES,
@@ -5554,7 +5625,7 @@ export const fetchProjectClosures = (tokens) => {
 export const fetchProjectClosure = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/projectclosures/${id}`);
     dispatch({
       type: FETCH_PROJECTCLOSURE,
       payload: response.data.data.data,
@@ -5565,7 +5636,7 @@ export const fetchProjectClosure = (id, token) => {
 export const editProjectClosure = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(`/projectclosures/${id}`, formValues);
     dispatch({
       type: EDIT_PROJECTCLOSURE,
       payload: response.data.data.data,
@@ -5576,7 +5647,7 @@ export const editProjectClosure = (id, formValues, token) => {
 export const deleteProjectClosure = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/projectclosures/${id}`);
     dispatch({ type: DELETE_PROJECTCLOSURE, payload: id });
   };
 };
@@ -5586,7 +5657,10 @@ export const deleteProjectClosure = (id, token) => {
 export const createProjectMonitoringActivity = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post(
+      "/projectmonitoringactivities",
+      formValues
+    );
 
     dispatch({
       type: CREATE_PROJECTMONITORINGACTIVITY,
@@ -5598,7 +5672,7 @@ export const createProjectMonitoringActivity = (formValues, token) => {
 export const fetchProjectMonitoringActivities = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/projectmonitoringactivities");
 
     dispatch({
       type: FETCH_PROJECTMONITORINGACTIVITIES,
@@ -5610,7 +5684,7 @@ export const fetchProjectMonitoringActivities = (tokens) => {
 export const fetchProjectMonitoringActivity = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/projectmonitoringactivities/${id}`);
     dispatch({
       type: FETCH_PROJECTMONITORINGACTIVITY,
       payload: response.data.data.data,
@@ -5621,7 +5695,10 @@ export const fetchProjectMonitoringActivity = (id, token) => {
 export const editProjectMonitoringActivity = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(
+      `/projectmonitoringactivities/${id}`,
+      formValues
+    );
     dispatch({
       type: EDIT_PROJECTMONITORINGACTIVITY,
       payload: response.data.data.data,
@@ -5632,7 +5709,7 @@ export const editProjectMonitoringActivity = (id, formValues, token) => {
 export const deleteProjectMonitoringActivity = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/projectmonitoringactivities/${id}`);
     dispatch({ type: DELETE_PROJECTMONITORINGACTIVITY, payload: id });
   };
 };
@@ -5642,7 +5719,7 @@ export const deleteProjectMonitoringActivity = (id, token) => {
 export const createContact = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post("/crmcontacts", formValues);
 
     dispatch({
       type: CREATE_CONTACT,
@@ -5654,7 +5731,7 @@ export const createContact = (formValues, token) => {
 export const fetchContacts = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/crmcontacts");
 
     dispatch({
       type: FETCH_CONTACTS,
@@ -5666,7 +5743,7 @@ export const fetchContacts = (tokens) => {
 export const fetchContact = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/crmcontacts/${id}`);
     dispatch({
       type: FETCH_CONTACT,
       payload: response.data.data.data,
@@ -5677,7 +5754,7 @@ export const fetchContact = (id, token) => {
 export const editContact = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(`/crmcontacts/${id}`, formValues);
     dispatch({
       type: EDIT_CONTACT,
       payload: response.data.data.data,
@@ -5688,7 +5765,7 @@ export const editContact = (id, formValues, token) => {
 export const deleteContact = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/crmcontacts/${id}`);
     dispatch({ type: DELETE_CONTACT, payload: id });
   };
 };
@@ -5698,7 +5775,7 @@ export const deleteContact = (id, token) => {
 export const createCustomer = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post("/crmcustomers", formValues);
 
     dispatch({
       type: CREATE_CUSTOMER,
@@ -5710,7 +5787,7 @@ export const createCustomer = (formValues, token) => {
 export const fetchCustomers = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/crmcustomers");
 
     dispatch({
       type: FETCH_CUSTOMERS,
@@ -5722,7 +5799,7 @@ export const fetchCustomers = (tokens) => {
 export const fetchCustomer = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/crmcustomers/${id}`);
     dispatch({
       type: FETCH_CUSTOMER,
       payload: response.data.data.data,
@@ -5733,7 +5810,7 @@ export const fetchCustomer = (id, token) => {
 export const editCustomer = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(`/crmcustomers/${id}`, formValues);
     dispatch({
       type: EDIT_CUSTOMER,
       payload: response.data.data.data,
@@ -5744,7 +5821,7 @@ export const editCustomer = (id, formValues, token) => {
 export const deleteCustomer = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/crmcustomers/${id}`);
     dispatch({ type: DELETE_CUSTOMER, payload: id });
   };
 };
@@ -5754,7 +5831,7 @@ export const deleteCustomer = (id, token) => {
 export const createPartner = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post("/crmpartners", formValues);
 
     dispatch({
       type: CREATE_PARTNER,
@@ -5766,7 +5843,7 @@ export const createPartner = (formValues, token) => {
 export const fetchPartners = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/crmpartners");
 
     dispatch({
       type: FETCH_PARTNERS,
@@ -5778,7 +5855,7 @@ export const fetchPartners = (tokens) => {
 export const fetchPartner = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/crmpartners/${id}`);
     dispatch({
       type: FETCH_PARTNER,
       payload: response.data.data.data,
@@ -5789,7 +5866,7 @@ export const fetchPartner = (id, token) => {
 export const editPartner = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(`/crmpartners/${id}`, formValues);
     dispatch({
       type: EDIT_PARTNER,
       payload: response.data.data.data,
@@ -5800,7 +5877,7 @@ export const editPartner = (id, formValues, token) => {
 export const deletePartner = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/crmpartners/${id}`);
     dispatch({ type: DELETE_PARTNER, payload: id });
   };
 };
@@ -5810,7 +5887,7 @@ export const deletePartner = (id, token) => {
 export const createSupplier = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post("/crmsuppliers", formValues);
 
     dispatch({
       type: CREATE_SUPPLIER,
@@ -5822,7 +5899,7 @@ export const createSupplier = (formValues, token) => {
 export const fetchSuppliers = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/crmsuppliers");
 
     dispatch({
       type: FETCH_SUPPLIERS,
@@ -5834,7 +5911,7 @@ export const fetchSuppliers = (tokens) => {
 export const fetchSupplier = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/crmsuppliers/${id}`);
     dispatch({
       type: FETCH_SUPPLIER,
       payload: response.data.data.data,
@@ -5845,7 +5922,7 @@ export const fetchSupplier = (id, token) => {
 export const editSupplier = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(`/crmsuppliers/${id}`, formValues);
     dispatch({
       type: EDIT_SUPPLIER,
       payload: response.data.data.data,
@@ -5856,7 +5933,7 @@ export const editSupplier = (id, formValues, token) => {
 export const deleteSupplier = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/crmsuppliers/${id}`);
     dispatch({ type: DELETE_SUPPLIER, payload: id });
   };
 };
@@ -5866,7 +5943,7 @@ export const deleteSupplier = (id, token) => {
 export const createSalesProduct = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post("/salesproducts", formValues);
 
     dispatch({
       type: CREATE_SALESPRODUCT,
@@ -5878,7 +5955,7 @@ export const createSalesProduct = (formValues, token) => {
 export const fetchSalesProducts = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/salesproducts");
 
     dispatch({
       type: FETCH_SALESPRODUCTS,
@@ -5890,7 +5967,7 @@ export const fetchSalesProducts = (tokens) => {
 export const fetchSalesProduct = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/salesproducts/${id}`);
     dispatch({
       type: FETCH_SALESPRODUCT,
       payload: response.data.data.data,
@@ -5901,7 +5978,7 @@ export const fetchSalesProduct = (id, token) => {
 export const editSalesProduct = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(`/salesproducts/${id}`, formValues);
     dispatch({
       type: EDIT_SALESPRODUCT,
       payload: response.data.data.data,
@@ -5912,7 +5989,7 @@ export const editSalesProduct = (id, formValues, token) => {
 export const deleteSalesProduct = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/salesproducts/${id}`);
     dispatch({ type: DELETE_SALESPRODUCT, payload: id });
   };
 };
@@ -5922,7 +5999,7 @@ export const deleteSalesProduct = (id, token) => {
 export const createSalesTeam = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post("/salesteams", formValues);
 
     dispatch({
       type: CREATE_SALESTEAM,
@@ -5934,7 +6011,7 @@ export const createSalesTeam = (formValues, token) => {
 export const fetchSalesTeams = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/salesteams");
 
     dispatch({
       type: FETCH_SALESTEAMS,
@@ -5946,7 +6023,7 @@ export const fetchSalesTeams = (tokens) => {
 export const fetchSalesTeam = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/salesteams/${id}`);
     dispatch({
       type: FETCH_SALESTEAM,
       payload: response.data.data.data,
@@ -5957,7 +6034,7 @@ export const fetchSalesTeam = (id, token) => {
 export const editSalesTeam = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(`/salesteams/${id}`, formValues);
     dispatch({
       type: EDIT_SALESTEAM,
       payload: response.data.data.data,
@@ -5968,7 +6045,7 @@ export const editSalesTeam = (id, formValues, token) => {
 export const deleteSalesTeam = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/salesteams/${id}`);
     dispatch({ type: DELETE_SALESTEAM, payload: id });
   };
 };
@@ -5978,7 +6055,7 @@ export const deleteSalesTeam = (id, token) => {
 export const createSalesTeamMember = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post("/salesteammembers", formValues);
 
     dispatch({
       type: CREATE_SALESTEAMMEMBER,
@@ -5990,7 +6067,7 @@ export const createSalesTeamMember = (formValues, token) => {
 export const fetchSalesTeamMembers = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/salesteammembers");
 
     dispatch({
       type: FETCH_SALESTEAMMEMBERS,
@@ -6002,7 +6079,7 @@ export const fetchSalesTeamMembers = (tokens) => {
 export const fetchSalesTeamMember = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/salesteammembers/${id}`);
     dispatch({
       type: FETCH_SALESTEAMMEMBER,
       payload: response.data.data.data,
@@ -6013,7 +6090,7 @@ export const fetchSalesTeamMember = (id, token) => {
 export const editSalesTeamMember = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(`/salesteammembers/${id}`, formValues);
     dispatch({
       type: EDIT_SALESTEAMMEMBER,
       payload: response.data.data.data,
@@ -6024,7 +6101,7 @@ export const editSalesTeamMember = (id, formValues, token) => {
 export const deleteSalesTeamMember = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/salesteammembers/${id}`);
     dispatch({ type: DELETE_SALESTEAMMEMBER, payload: id });
   };
 };
@@ -6034,7 +6111,7 @@ export const deleteSalesTeamMember = (id, token) => {
 export const createSalesTask = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post("/salestasks", formValues);
 
     dispatch({
       type: CREATE_SALESTASK,
@@ -6046,7 +6123,7 @@ export const createSalesTask = (formValues, token) => {
 export const fetchSalesTasks = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/salestasks");
 
     dispatch({
       type: FETCH_SALESTASKS,
@@ -6058,7 +6135,7 @@ export const fetchSalesTasks = (tokens) => {
 export const fetchSalesTask = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/salestasks/${id}`);
     dispatch({
       type: FETCH_SALESTASK,
       payload: response.data.data.data,
@@ -6069,7 +6146,7 @@ export const fetchSalesTask = (id, token) => {
 export const editSalesTask = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(`/salestasks/${id}`, formValues);
     dispatch({
       type: EDIT_SALESTASK,
       payload: response.data.data.data,
@@ -6080,7 +6157,7 @@ export const editSalesTask = (id, formValues, token) => {
 export const deleteSalesTask = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/salestasks/${id}`);
     dispatch({ type: DELETE_SALESTASK, payload: id });
   };
 };
@@ -6090,7 +6167,7 @@ export const deleteSalesTask = (id, token) => {
 export const createSalesSale = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post("/sales", formValues);
 
     dispatch({
       type: CREATE_SALESSALE,
@@ -6102,7 +6179,7 @@ export const createSalesSale = (formValues, token) => {
 export const fetchSalesSales = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/sales");
 
     dispatch({
       type: FETCH_SALESSALES,
@@ -6114,7 +6191,7 @@ export const fetchSalesSales = (tokens) => {
 export const fetchSalesSale = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/sales/${id}`);
     dispatch({
       type: FETCH_SALESSALE,
       payload: response.data.data.data,
@@ -6125,7 +6202,7 @@ export const fetchSalesSale = (id, token) => {
 export const editSalesSale = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(`/sales/${id}`, formValues);
     dispatch({
       type: EDIT_SALESSALE,
       payload: response.data.data.data,
@@ -6136,7 +6213,7 @@ export const editSalesSale = (id, formValues, token) => {
 export const deleteSalesSale = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/sales/${id}`);
     dispatch({ type: DELETE_SALESSALE, payload: id });
   };
 };
@@ -6146,7 +6223,7 @@ export const deleteSalesSale = (id, token) => {
 export const createSalesInvoice = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post("/salesinvoices", formValues);
 
     dispatch({
       type: CREATE_SALESINVOICE,
@@ -6158,7 +6235,7 @@ export const createSalesInvoice = (formValues, token) => {
 export const fetchSalesInvoices = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/salesinvoices");
 
     dispatch({
       type: FETCH_SALESINVOICES,
@@ -6170,7 +6247,7 @@ export const fetchSalesInvoices = (tokens) => {
 export const fetchSalesInvoice = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/salesinvoices/${id}`);
     dispatch({
       type: FETCH_SALESINVOICE,
       payload: response.data.data.data,
@@ -6181,7 +6258,7 @@ export const fetchSalesInvoice = (id, token) => {
 export const editSalesInvoice = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(`/salesinvoices/${id}`, formValues);
     dispatch({
       type: EDIT_SALESINVOICE,
       payload: response.data.data.data,
@@ -6192,7 +6269,7 @@ export const editSalesInvoice = (id, formValues, token) => {
 export const deleteSalesInvoice = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/salesinvoices/${id}`);
     dispatch({ type: DELETE_SALESINVOICE, payload: id });
   };
 };
@@ -6202,7 +6279,7 @@ export const deleteSalesInvoice = (id, token) => {
 export const createSalesAccount = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post("/salesaccounts", formValues);
 
     dispatch({
       type: CREATE_SALESACCOUNT,
@@ -6214,7 +6291,7 @@ export const createSalesAccount = (formValues, token) => {
 export const fetchSalesAccounts = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/salesaccounts");
 
     dispatch({
       type: FETCH_SALESACCOUNTS,
@@ -6226,7 +6303,7 @@ export const fetchSalesAccounts = (tokens) => {
 export const fetchSalesAccount = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/salesaccounts/${id}`);
     dispatch({
       type: FETCH_SALESACCOUNT,
       payload: response.data.data.data,
@@ -6237,7 +6314,7 @@ export const fetchSalesAccount = (id, token) => {
 export const editSalesAccount = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(`/salesaccounts/${id}`, formValues);
     dispatch({
       type: EDIT_SALESACCOUNT,
       payload: response.data.data.data,
@@ -6248,7 +6325,7 @@ export const editSalesAccount = (id, formValues, token) => {
 export const deleteSalesAccount = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/salesaccounts/${id}`);
     dispatch({ type: DELETE_SALESACCOUNT, payload: id });
   };
 };
@@ -6258,7 +6335,7 @@ export const deleteSalesAccount = (id, token) => {
 export const createHrUnit = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post("/hrunits", formValues);
 
     dispatch({
       type: CREATE_HRUNIT,
@@ -6270,7 +6347,7 @@ export const createHrUnit = (formValues, token) => {
 export const fetchHrUnits = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/hrunits");
 
     dispatch({
       type: FETCH_HRUNITS,
@@ -6282,7 +6359,7 @@ export const fetchHrUnits = (tokens) => {
 export const fetchHrUnit = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/hrunits/${id}`);
     dispatch({
       type: FETCH_HRUNIT,
       payload: response.data.data.data,
@@ -6293,7 +6370,7 @@ export const fetchHrUnit = (id, token) => {
 export const editHrUnit = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(`/hrunits/${id}`, formValues);
     dispatch({
       type: EDIT_HRUNIT,
       payload: response.data.data.data,
@@ -6304,7 +6381,7 @@ export const editHrUnit = (id, formValues, token) => {
 export const deleteHrUnit = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/hrunits/${id}`);
     dispatch({ type: DELETE_HRUNIT, payload: id });
   };
 };
@@ -6314,7 +6391,7 @@ export const deleteHrUnit = (id, token) => {
 export const createHrDepartment = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post("/hrdepartments", formValues);
 
     dispatch({
       type: CREATE_HRDEPARTMENT,
@@ -6326,7 +6403,7 @@ export const createHrDepartment = (formValues, token) => {
 export const fetchHrDepartments = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/hrdepartments");
 
     dispatch({
       type: FETCH_HRDEPARTMENTS,
@@ -6338,7 +6415,7 @@ export const fetchHrDepartments = (tokens) => {
 export const fetchHrDepartment = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/hrdepartments/${id}`);
     dispatch({
       type: FETCH_HRDEPARTMENT,
       payload: response.data.data.data,
@@ -6349,7 +6426,7 @@ export const fetchHrDepartment = (id, token) => {
 export const editHrDepartment = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(`/hrdepartments/${id}`, formValues);
     dispatch({
       type: EDIT_HRDEPARTMENT,
       payload: response.data.data.data,
@@ -6360,7 +6437,7 @@ export const editHrDepartment = (id, formValues, token) => {
 export const deleteHrDepartment = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/hrdepartments/${id}`);
     dispatch({ type: DELETE_HRDEPARTMENT, payload: id });
   };
 };
@@ -6370,7 +6447,7 @@ export const deleteHrDepartment = (id, token) => {
 export const createHrGroup = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post("/hrgroups", formValues);
 
     dispatch({
       type: CREATE_HRGROUP,
@@ -6382,7 +6459,7 @@ export const createHrGroup = (formValues, token) => {
 export const fetchHrGroups = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/hrgroups");
 
     dispatch({
       type: FETCH_HRGROUPS,
@@ -6394,7 +6471,7 @@ export const fetchHrGroups = (tokens) => {
 export const fetchHrGroup = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/hrgroups/${id}`);
     dispatch({
       type: FETCH_HRGROUP,
       payload: response.data.data.data,
@@ -6405,7 +6482,7 @@ export const fetchHrGroup = (id, token) => {
 export const editHrGroup = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(`/hrgroups/${id}`, formValues);
     dispatch({
       type: EDIT_HRGROUP,
       payload: response.data.data.data,
@@ -6416,7 +6493,7 @@ export const editHrGroup = (id, formValues, token) => {
 export const deleteHrGroup = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/hrgroups/${id}`);
     dispatch({ type: DELETE_HRGROUP, payload: id });
   };
 };
@@ -6426,7 +6503,7 @@ export const deleteHrGroup = (id, token) => {
 export const createHrDivision = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post("/hrdivisions", formValues);
 
     dispatch({
       type: CREATE_HRDIVISION,
@@ -6438,7 +6515,7 @@ export const createHrDivision = (formValues, token) => {
 export const fetchHrDivisions = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/hrdivisions");
 
     dispatch({
       type: FETCH_HRDIVISIONS,
@@ -6450,7 +6527,7 @@ export const fetchHrDivisions = (tokens) => {
 export const fetchHrDivision = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/hrdivisions/${id}`);
     dispatch({
       type: FETCH_HRDIVISION,
       payload: response.data.data.data,
@@ -6461,7 +6538,7 @@ export const fetchHrDivision = (id, token) => {
 export const editHrDivision = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(`/hrdivisions/${id}`, formValues);
     dispatch({
       type: EDIT_HRDIVISION,
       payload: response.data.data.data,
@@ -6472,7 +6549,7 @@ export const editHrDivision = (id, formValues, token) => {
 export const deleteHrDivision = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/hrdivisions/${id}`);
     dispatch({ type: DELETE_HRDIVISION, payload: id });
   };
 };
@@ -6482,7 +6559,7 @@ export const deleteHrDivision = (id, token) => {
 export const createHrDesignation = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post("/hrdesignations", formValues);
 
     dispatch({
       type: CREATE_HRDESIGNATION,
@@ -6494,7 +6571,7 @@ export const createHrDesignation = (formValues, token) => {
 export const fetchHrDesignations = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/hrdesignations");
 
     dispatch({
       type: FETCH_HRDESIGNATIONS,
@@ -6506,7 +6583,7 @@ export const fetchHrDesignations = (tokens) => {
 export const fetchHrDesignation = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/hrdesignations/${id}`);
     dispatch({
       type: FETCH_HRDESIGNATION,
       payload: response.data.data.data,
@@ -6517,7 +6594,7 @@ export const fetchHrDesignation = (id, token) => {
 export const editHrDesignation = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(`/hrdesignations/${id}`, formValues);
     dispatch({
       type: EDIT_HRDESIGNATION,
       payload: response.data.data.data,
@@ -6528,7 +6605,7 @@ export const editHrDesignation = (id, formValues, token) => {
 export const deleteHrDesignation = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/hrdesignations/${id}`);
     dispatch({ type: DELETE_HRDESIGNATION, payload: id });
   };
 };
@@ -6538,7 +6615,7 @@ export const deleteHrDesignation = (id, token) => {
 export const createHrKpiSession = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post("/hrkpisessions", formValues);
 
     dispatch({
       type: CREATE_HRKPISESSION,
@@ -6550,7 +6627,7 @@ export const createHrKpiSession = (formValues, token) => {
 export const fetchHrKpiSessions = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/hrkpisessions");
 
     dispatch({
       type: FETCH_HRKPISESSIONS,
@@ -6562,7 +6639,7 @@ export const fetchHrKpiSessions = (tokens) => {
 export const fetchHrKpiSession = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/hrkpisessions/${id}`);
     dispatch({
       type: FETCH_HRKPISESSION,
       payload: response.data.data.data,
@@ -6573,7 +6650,7 @@ export const fetchHrKpiSession = (id, token) => {
 export const editHrKpiSession = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(`/hrkpisessions/${id}`, formValues);
     dispatch({
       type: EDIT_HRKPISESSION,
       payload: response.data.data.data,
@@ -6584,7 +6661,7 @@ export const editHrKpiSession = (id, formValues, token) => {
 export const deleteHrKpiSession = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/hrkpisessions/${id}`);
     dispatch({ type: DELETE_HRKPISESSION, payload: id });
   };
 };
@@ -6594,7 +6671,7 @@ export const deleteHrKpiSession = (id, token) => {
 export const createHrAppraisalSeason = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post("/hrappraisalseasons", formValues);
 
     dispatch({
       type: CREATE_HRAPPRAISALSEASON,
@@ -6606,7 +6683,7 @@ export const createHrAppraisalSeason = (formValues, token) => {
 export const fetchHrAppraisalSeasons = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/hrappraisalseasons");
 
     dispatch({
       type: FETCH_HRAPPRAISALSEASONS,
@@ -6618,7 +6695,7 @@ export const fetchHrAppraisalSeasons = (tokens) => {
 export const fetchHrAppraisalSeason = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/hrappraisalseasons/${id}`);
     dispatch({
       type: FETCH_HRAPPRAISALSEASON,
       payload: response.data.data.data,
@@ -6629,7 +6706,7 @@ export const fetchHrAppraisalSeason = (id, token) => {
 export const editHrAppraisalSeason = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(`/hrappraisalseasons/${id}`, formValues);
     dispatch({
       type: EDIT_HRAPPRAISALSEASON,
       payload: response.data.data.data,
@@ -6640,7 +6717,7 @@ export const editHrAppraisalSeason = (id, formValues, token) => {
 export const deleteHrAppraisalSeason = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/hrappraisalseasons/${id}`);
     dispatch({ type: DELETE_HRAPPRAISALSEASON, payload: id });
   };
 };
@@ -6650,7 +6727,7 @@ export const deleteHrAppraisalSeason = (id, token) => {
 export const createHrRole = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post("/hrroles", formValues);
 
     dispatch({
       type: CREATE_HRROLE,
@@ -6662,7 +6739,7 @@ export const createHrRole = (formValues, token) => {
 export const fetchHrRoles = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/hrroles");
 
     dispatch({
       type: FETCH_HRROLES,
@@ -6674,7 +6751,7 @@ export const fetchHrRoles = (tokens) => {
 export const fetchHrRole = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/hrroles/${id}`);
     dispatch({
       type: FETCH_HRROLE,
       payload: response.data.data.data,
@@ -6685,7 +6762,7 @@ export const fetchHrRole = (id, token) => {
 export const editHrRole = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(`/hrroles/${id}`, formValues);
     dispatch({
       type: EDIT_HRROLE,
       payload: response.data.data.data,
@@ -6696,7 +6773,7 @@ export const editHrRole = (id, formValues, token) => {
 export const deleteHrRole = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/hrroles/${id}`);
     dispatch({ type: DELETE_HRROLE, payload: id });
   };
 };
@@ -6706,7 +6783,7 @@ export const deleteHrRole = (id, token) => {
 export const createHrJobDescription = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post("/hrjobdescriptions", formValues);
 
     dispatch({
       type: CREATE_HRJOBDESCRIPTION,
@@ -6718,7 +6795,7 @@ export const createHrJobDescription = (formValues, token) => {
 export const fetchHrJobDescriptions = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/hrjobdescriptions");
 
     dispatch({
       type: FETCH_HRJOBDESCRIPTIONS,
@@ -6730,7 +6807,7 @@ export const fetchHrJobDescriptions = (tokens) => {
 export const fetchHrJobDescription = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/hrjobdescriptions/${id}`);
     dispatch({
       type: FETCH_HRJOBDESCRIPTION,
       payload: response.data.data.data,
@@ -6741,7 +6818,7 @@ export const fetchHrJobDescription = (id, token) => {
 export const editHrJobDescription = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(`/hrjobdescriptions/${id}`, formValues);
     dispatch({
       type: EDIT_HRJOBDESCRIPTION,
       payload: response.data.data.data,
@@ -6752,7 +6829,7 @@ export const editHrJobDescription = (id, formValues, token) => {
 export const deleteHrJobDescription = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/hrjobdescriptions/${id}`);
     dispatch({ type: DELETE_HRJOBDESCRIPTION, payload: id });
   };
 };
@@ -6762,7 +6839,7 @@ export const deleteHrJobDescription = (id, token) => {
 export const createHrPlanningSkillset = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post("/hrskillsets", formValues);
 
     dispatch({
       type: CREATE_HRPLANNINGSKILLSET,
@@ -6774,7 +6851,7 @@ export const createHrPlanningSkillset = (formValues, token) => {
 export const fetchHrPlanningSkillsets = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/hrskillsets");
 
     dispatch({
       type: FETCH_HRPLANNINGSKILLSETS,
@@ -6786,7 +6863,7 @@ export const fetchHrPlanningSkillsets = (tokens) => {
 export const fetchHrPlanningSkillset = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/hrskillsets/${id}`);
     dispatch({
       type: FETCH_HRPLANNINGSKILLSET,
       payload: response.data.data.data,
@@ -6797,7 +6874,7 @@ export const fetchHrPlanningSkillset = (id, token) => {
 export const editHrPlanningSkillset = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(`/hrskillsets/${id}`, formValues);
     dispatch({
       type: EDIT_HRPLANNINGSKILLSET,
       payload: response.data.data.data,
@@ -6808,7 +6885,7 @@ export const editHrPlanningSkillset = (id, formValues, token) => {
 export const deleteHrPlanningSkillset = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/hrskillsets/${id}`);
     dispatch({ type: DELETE_HRPLANNINGSKILLSET, payload: id });
   };
 };
@@ -6818,7 +6895,7 @@ export const deleteHrPlanningSkillset = (id, token) => {
 export const createHrRecruitmentInitiation = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post("/hrrecruitmentinitiations", formValues);
 
     dispatch({
       type: CREATE_HRRECRUITMENTINITIATION,
@@ -6830,7 +6907,7 @@ export const createHrRecruitmentInitiation = (formValues, token) => {
 export const fetchHrRecruitmentInitiations = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/hrrecruitmentinitiations");
 
     dispatch({
       type: FETCH_HRRECRUITMENTINITIATIONS,
@@ -6842,7 +6919,7 @@ export const fetchHrRecruitmentInitiations = (tokens) => {
 export const fetchHrRecruitmentInitiation = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/hrrecruitmentinitiations/${id}`);
     dispatch({
       type: FETCH_HRRECRUITMENTINITIATION,
       payload: response.data.data.data,
@@ -6853,7 +6930,10 @@ export const fetchHrRecruitmentInitiation = (id, token) => {
 export const editHrRecruitmentInitiation = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(
+      `/hrrecruitmentinitiations/${id}`,
+      formValues
+    );
     dispatch({
       type: EDIT_HRRECRUITMENTINITIATION,
       payload: response.data.data.data,
@@ -6864,7 +6944,7 @@ export const editHrRecruitmentInitiation = (id, formValues, token) => {
 export const deleteHrRecruitmentInitiation = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/hrrecruitmentinitiations/${id}`);
     dispatch({ type: DELETE_HRRECRUITMENTINITIATION, payload: id });
   };
 };
@@ -6874,7 +6954,7 @@ export const deleteHrRecruitmentInitiation = (id, token) => {
 export const createHrRecruitmentInterview = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post("/hrrecruitmentinterviews", formValues);
 
     dispatch({
       type: CREATE_HRRECRUITMENTINTERVIEW,
@@ -6886,7 +6966,7 @@ export const createHrRecruitmentInterview = (formValues, token) => {
 export const fetchHrRecruitmentInterviews = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/hrrecruitmentinterviews");
 
     dispatch({
       type: FETCH_HRRECRUITMENTINTERVIEWS,
@@ -6898,7 +6978,7 @@ export const fetchHrRecruitmentInterviews = (tokens) => {
 export const fetchHrRecruitmentInterview = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/hrrecruitmentinterviews/${id}`);
     dispatch({
       type: FETCH_HRRECRUITMENTINTERVIEW,
       payload: response.data.data.data,
@@ -6909,7 +6989,10 @@ export const fetchHrRecruitmentInterview = (id, token) => {
 export const editHrRecruitmentInterview = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(
+      `/hrrecruitmentinterviews/${id}`,
+      formValues
+    );
     dispatch({
       type: EDIT_HRRECRUITMENTINTERVIEW,
       payload: response.data.data.data,
@@ -6920,7 +7003,7 @@ export const editHrRecruitmentInterview = (id, formValues, token) => {
 export const deleteHrRecruitmentInterview = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/hrrecruitmentinterviews/${id}`);
     dispatch({ type: DELETE_HRRECRUITMENTINTERVIEW, payload: id });
   };
 };
@@ -6930,7 +7013,7 @@ export const deleteHrRecruitmentInterview = (id, token) => {
 export const createHrRecruitmentSelection = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post("/hrrecruitmentselections", formValues);
 
     dispatch({
       type: CREATE_HRRECRUITMENTSELECTION,
@@ -6942,7 +7025,7 @@ export const createHrRecruitmentSelection = (formValues, token) => {
 export const fetchHrRecruitmentSelections = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/hrrecruitmentselections");
 
     dispatch({
       type: FETCH_HRRECRUITMENTSELECTIONS,
@@ -6954,7 +7037,7 @@ export const fetchHrRecruitmentSelections = (tokens) => {
 export const fetchHrRecruitmentSelection = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/hrrecruitmentselections/${id}`);
     dispatch({
       type: FETCH_HRRECRUITMENTSELECTION,
       payload: response.data.data.data,
@@ -6965,7 +7048,10 @@ export const fetchHrRecruitmentSelection = (id, token) => {
 export const editHrRecruitmentSelection = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(
+      `/hrrecruitmentselections/${id}`,
+      formValues
+    );
     dispatch({
       type: EDIT_HRRECRUITMENTSELECTION,
       payload: response.data.data.data,
@@ -6976,7 +7062,7 @@ export const editHrRecruitmentSelection = (id, formValues, token) => {
 export const deleteHrRecruitmentSelection = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/hrrecruitmentselections/${id}`);
     dispatch({ type: DELETE_HRRECRUITMENTSELECTION, payload: id });
   };
 };
@@ -6986,7 +7072,7 @@ export const deleteHrRecruitmentSelection = (id, token) => {
 export const createHrRecruitmentOnboard = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post("/hrrecruitmentonboarding", formValues);
 
     dispatch({
       type: CREATE_HRRECRUITMENTONBOARD,
@@ -6998,7 +7084,7 @@ export const createHrRecruitmentOnboard = (formValues, token) => {
 export const fetchHrRecruitmentOnboards = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/hrrecruitmentonboarding");
 
     dispatch({
       type: FETCH_HRRECRUITMENTONBOARDS,
@@ -7010,7 +7096,7 @@ export const fetchHrRecruitmentOnboards = (tokens) => {
 export const fetchHrRecruitmentOnboard = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/hrrecruitmentonboarding/${id}`);
     dispatch({
       type: FETCH_HRRECRUITMENTONBOARD,
       payload: response.data.data.data,
@@ -7021,7 +7107,10 @@ export const fetchHrRecruitmentOnboard = (id, token) => {
 export const editHrRecruitmentOnboard = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(
+      `/hrrecruitmentonboarding/${id}`,
+      formValues
+    );
     dispatch({
       type: EDIT_HRRECRUITMENTONBOARD,
       payload: response.data.data.data,
@@ -7032,7 +7121,7 @@ export const editHrRecruitmentOnboard = (id, formValues, token) => {
 export const deleteHrRecruitmentOnboard = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/hrrecruitmentonboarding/${id}`);
     dispatch({ type: DELETE_HRRECRUITMENTONBOARD, payload: id });
   };
 };
@@ -7042,7 +7131,7 @@ export const deleteHrRecruitmentOnboard = (id, token) => {
 export const createHrRecruitmentPlacement = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post("/hrrecruitmentplacements", formValues);
 
     dispatch({
       type: CREATE_HRRECRUITMENTPLACEMENT,
@@ -7054,7 +7143,7 @@ export const createHrRecruitmentPlacement = (formValues, token) => {
 export const fetchHrRecruitmentPlacements = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/hrrecruitmentplacements");
 
     dispatch({
       type: FETCH_HRRECRUITMENTPLACEMENTS,
@@ -7066,7 +7155,7 @@ export const fetchHrRecruitmentPlacements = (tokens) => {
 export const fetchHrRecruitmentPlacement = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/hrrecruitmentplacements/${id}`);
     dispatch({
       type: FETCH_HRRECRUITMENTPLACEMENT,
       payload: response.data.data.data,
@@ -7077,7 +7166,10 @@ export const fetchHrRecruitmentPlacement = (id, token) => {
 export const editHrRecruitmentPlacement = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(
+      `/hrrecruitmentplacements/${id}`,
+      formValues
+    );
     dispatch({
       type: EDIT_HRRECRUITMENTPLACEMENT,
       payload: response.data.data.data,
@@ -7088,7 +7180,7 @@ export const editHrRecruitmentPlacement = (id, formValues, token) => {
 export const deleteHrRecruitmentPlacement = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/hrrecruitmentplacements/${id}`);
     dispatch({ type: DELETE_HRRECRUITMENTPLACEMENT, payload: id });
   };
 };
@@ -7098,7 +7190,7 @@ export const deleteHrRecruitmentPlacement = (id, token) => {
 export const createHrCompensationSalary = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post("/hrcompensationsalaries", formValues);
 
     dispatch({
       type: CREATE_HRCOMPENSATIONSALARY,
@@ -7110,7 +7202,7 @@ export const createHrCompensationSalary = (formValues, token) => {
 export const fetchHrCompensationSalaries = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/hrcompensationsalaries");
 
     dispatch({
       type: FETCH_HRCOMPENSATIONSALARYS,
@@ -7122,7 +7214,7 @@ export const fetchHrCompensationSalaries = (tokens) => {
 export const fetchHrCompensationSalary = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/hrcompensationsalaries/${id}`);
     dispatch({
       type: FETCH_HRCOMPENSATIONSALARY,
       payload: response.data.data.data,
@@ -7133,7 +7225,10 @@ export const fetchHrCompensationSalary = (id, token) => {
 export const editHrCompensationSalary = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(
+      `/hrcompensationsalaries/${id}`,
+      formValues
+    );
     dispatch({
       type: EDIT_HRCOMPENSATIONSALARY,
       payload: response.data.data.data,
@@ -7144,7 +7239,7 @@ export const editHrCompensationSalary = (id, formValues, token) => {
 export const deleteHrCompensationSalary = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/hrcompensationsalaries/${id}`);
     dispatch({ type: DELETE_HRCOMPENSATIONSALARY, payload: id });
   };
 };
@@ -7154,7 +7249,7 @@ export const deleteHrCompensationSalary = (id, token) => {
 export const createHrCompensationBonus = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post("/hrcompensationbonuses", formValues);
 
     dispatch({
       type: CREATE_HRCOMPENSATIONBONUS,
@@ -7166,7 +7261,7 @@ export const createHrCompensationBonus = (formValues, token) => {
 export const fetchHrCompensationBonuses = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/hrcompensationbonuses");
 
     dispatch({
       type: FETCH_HRCOMPENSATIONBONUSES,
@@ -7178,7 +7273,7 @@ export const fetchHrCompensationBonuses = (tokens) => {
 export const fetchHrCompensationBonus = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/hrcompensationbonuses/${id}`);
     dispatch({
       type: FETCH_HRCOMPENSATIONBONUS,
       payload: response.data.data.data,
@@ -7189,7 +7284,10 @@ export const fetchHrCompensationBonus = (id, token) => {
 export const editHrCompensationBonus = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(
+      `/hrcompensationbonuses/${id}`,
+      formValues
+    );
     dispatch({
       type: EDIT_HRCOMPENSATIONBONUS,
       payload: response.data.data.data,
@@ -7200,7 +7298,7 @@ export const editHrCompensationBonus = (id, formValues, token) => {
 export const deleteHrCompensationBonus = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/hrcompensationbonuses/${id}`);
     dispatch({ type: DELETE_HRCOMPENSATIONBONUS, payload: id });
   };
 };
@@ -7210,7 +7308,10 @@ export const deleteHrCompensationBonus = (id, token) => {
 export const createHrCompensationLeaveAllowance = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post(
+      "/hrcompensationleaveallowances",
+      formValues
+    );
 
     dispatch({
       type: CREATE_HRCOMPENSATIONLEAVEALLOWANCE,
@@ -7222,7 +7323,7 @@ export const createHrCompensationLeaveAllowance = (formValues, token) => {
 export const fetchHrCompensationLeaveAllowances = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/hrcompensationleaveallowances");
 
     dispatch({
       type: FETCH_HRCOMPENSATIONLEAVEALLOWANCES,
@@ -7234,7 +7335,7 @@ export const fetchHrCompensationLeaveAllowances = (tokens) => {
 export const fetchHrCompensationLeaveAllowance = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/hrcompensationleaveallowances/${id}`);
     dispatch({
       type: FETCH_HRCOMPENSATIONLEAVEALLOWANCE,
       payload: response.data.data.data,
@@ -7245,7 +7346,10 @@ export const fetchHrCompensationLeaveAllowance = (id, token) => {
 export const editHrCompensationLeaveAllowance = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(
+      `/hrcompensationleaveallowances/${id}`,
+      formValues
+    );
     dispatch({
       type: EDIT_HRCOMPENSATIONLEAVEALLOWANCE,
       payload: response.data.data.data,
@@ -7256,7 +7360,7 @@ export const editHrCompensationLeaveAllowance = (id, formValues, token) => {
 export const deleteHrCompensationLeaveAllowance = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/hrcompensationleaveallowances/${id}`);
     dispatch({ type: DELETE_HRCOMPENSATIONLEAVEALLOWANCE, payload: id });
   };
 };
@@ -7266,7 +7370,7 @@ export const deleteHrCompensationLeaveAllowance = (id, token) => {
 export const createHrCompensationOvertime = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post("/hrcompensationovertimes", formValues);
 
     dispatch({
       type: CREATE_HRCOMPENSATIONOVERTIME,
@@ -7278,7 +7382,7 @@ export const createHrCompensationOvertime = (formValues, token) => {
 export const fetchHrCompensationOvertimes = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/hrcompensationovertimes");
 
     dispatch({
       type: FETCH_HRCOMPENSATIONOVERTIMES,
@@ -7290,7 +7394,7 @@ export const fetchHrCompensationOvertimes = (tokens) => {
 export const fetchHrCompensationOvertime = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/hrcompensationovertimes/${id}`);
     dispatch({
       type: FETCH_HRCOMPENSATIONOVERTIME,
       payload: response.data.data.data,
@@ -7301,7 +7405,10 @@ export const fetchHrCompensationOvertime = (id, token) => {
 export const editHrCompensationOvertime = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(
+      `/hrcompensationovertimes/${id}`,
+      formValues
+    );
     dispatch({
       type: EDIT_HRCOMPENSATIONOVERTIME,
       payload: response.data.data.data,
@@ -7312,7 +7419,7 @@ export const editHrCompensationOvertime = (id, formValues, token) => {
 export const deleteHrCompensationOvertime = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/hrcompensationovertimes/${id}`);
     dispatch({ type: DELETE_HRCOMPENSATIONOVERTIME, payload: id });
   };
 };
@@ -7322,7 +7429,10 @@ export const deleteHrCompensationOvertime = (id, token) => {
 export const createHrCompensationSalaryAdvance = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post(
+      "/hrcompensationsalaryadvances",
+      formValues
+    );
 
     dispatch({
       type: CREATE_HRCOMPENSATIONSALARYADVANCE,
@@ -7334,7 +7444,7 @@ export const createHrCompensationSalaryAdvance = (formValues, token) => {
 export const fetchHrCompensationSalaryAdvances = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/hrcompensationsalaryadvances");
 
     dispatch({
       type: FETCH_HRCOMPENSATIONSALARYADVANCES,
@@ -7346,7 +7456,7 @@ export const fetchHrCompensationSalaryAdvances = (tokens) => {
 export const fetchHrCompensationSalaryAdvance = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/hrcompensationsalaryadvances/${id}`);
     dispatch({
       type: FETCH_HRCOMPENSATIONSALARYADVANCE,
       payload: response.data.data.data,
@@ -7357,7 +7467,10 @@ export const fetchHrCompensationSalaryAdvance = (id, token) => {
 export const editHrCompensationSalaryAdvance = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(
+      `/hrcompensationsalaryadvances/${id}`,
+      formValues
+    );
     dispatch({
       type: EDIT_HRCOMPENSATIONSALARYADVANCE,
       payload: response.data.data.data,
@@ -7368,17 +7481,17 @@ export const editHrCompensationSalaryAdvance = (id, formValues, token) => {
 export const deleteHrCompensationSalaryAdvance = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/hrcompensationsalaryadvances/${id}`);
     dispatch({ type: DELETE_HRCOMPENSATIONSALARYADVANCE, payload: id });
   };
 };
 
-///////////////////////////////  HR COMPENSATION Staff ;loans ////////////////////
+///////////////////////////////  HR COMPENSATION Staff loans ////////////////////
 
 export const createHrCompensationStaffLoan = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post("/hrcompensationstaffloans", formValues);
 
     dispatch({
       type: CREATE_HRCOMPENSATIONSTAFFLOAN,
@@ -7390,7 +7503,7 @@ export const createHrCompensationStaffLoan = (formValues, token) => {
 export const fetchHrCompensationStaffLoans = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/hrcompensationstaffloans");
 
     dispatch({
       type: FETCH_HRCOMPENSATIONSTAFFLOANS,
@@ -7402,7 +7515,7 @@ export const fetchHrCompensationStaffLoans = (tokens) => {
 export const fetchHrCompensationStaffLoan = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/hrcompensationstaffloans/${id}`);
     dispatch({
       type: FETCH_HRCOMPENSATIONSTAFFLOAN,
       payload: response.data.data.data,
@@ -7413,7 +7526,10 @@ export const fetchHrCompensationStaffLoan = (id, token) => {
 export const editHrCompensationStaffLoan = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(
+      `/hrcompensationstaffloans/${id}`,
+      formValues
+    );
     dispatch({
       type: EDIT_HRCOMPENSATIONSTAFFLOAN,
       payload: response.data.data.data,
@@ -7424,7 +7540,7 @@ export const editHrCompensationStaffLoan = (id, formValues, token) => {
 export const deleteHrCompensationStaffLoan = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/hrcompensationstaffloans/${id}`);
     dispatch({ type: DELETE_HRCOMPENSATIONSTAFFLOAN, payload: id });
   };
 };
@@ -7434,7 +7550,10 @@ export const deleteHrCompensationStaffLoan = (id, token) => {
 export const createHrCompensationCertRefund = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post(
+      "/hrcompensationcertificaterefunds",
+      formValues
+    );
 
     dispatch({
       type: CREATE_HRCOMPENSATIONCERTIFICATEREFUND,
@@ -7446,7 +7565,7 @@ export const createHrCompensationCertRefund = (formValues, token) => {
 export const fetchHrCompensationCertRefunds = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/hrcompensationcertificaterefunds");
 
     dispatch({
       type: FETCH_HRCOMPENSATIONCERTIFICATEREFUNDS,
@@ -7458,7 +7577,7 @@ export const fetchHrCompensationCertRefunds = (tokens) => {
 export const fetchHrCompensationCertRefund = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/hrcompensationcertificaterefunds/${id}`);
     dispatch({
       type: FETCH_HRCOMPENSATIONCERTIFICATEREFUND,
       payload: response.data.data.data,
@@ -7469,7 +7588,10 @@ export const fetchHrCompensationCertRefund = (id, token) => {
 export const editHrCompensationCertRefund = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(
+      `/hrcompensationcertificaterefunds/${id}`,
+      formValues
+    );
     dispatch({
       type: EDIT_HRCOMPENSATIONCERTIFICATEREFUND,
       payload: response.data.data.data,
@@ -7480,7 +7602,7 @@ export const editHrCompensationCertRefund = (id, formValues, token) => {
 export const deleteHrCompensationCertRefund = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/hrcompensationcertificaterefunds/${id}`);
     dispatch({ type: DELETE_HRCOMPENSATIONCERTIFICATEREFUND, payload: id });
   };
 };
@@ -7490,7 +7612,7 @@ export const deleteHrCompensationCertRefund = (id, token) => {
 export const createHrLeavesLeave = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post("/hrleavesleaves", formValues);
 
     dispatch({
       type: CREATE_HRLEAVELEAVE,
@@ -7502,7 +7624,7 @@ export const createHrLeavesLeave = (formValues, token) => {
 export const fetchHrLeavesLeaves = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/hrleavesleaves");
 
     dispatch({
       type: FETCH_HRLEAVELEAVES,
@@ -7514,7 +7636,7 @@ export const fetchHrLeavesLeaves = (tokens) => {
 export const fetchHrLeavesLeave = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/hrleavesleaves/${id}`);
     dispatch({
       type: FETCH_HRLEAVELEAVE,
       payload: response.data.data.data,
@@ -7525,7 +7647,7 @@ export const fetchHrLeavesLeave = (id, token) => {
 export const editHrLeavesLeave = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(`/hrleavesleaves/${id}`, formValues);
     dispatch({
       type: EDIT_HRLEAVELEAVE,
       payload: response.data.data.data,
@@ -7536,7 +7658,7 @@ export const editHrLeavesLeave = (id, formValues, token) => {
 export const deleteHrLeavesLeave = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/hrleavesleaves/${id}`);
     dispatch({ type: DELETE_HRLEAVELEAVE, payload: id });
   };
 };
@@ -7546,7 +7668,7 @@ export const deleteHrLeavesLeave = (id, token) => {
 export const createHrExitExit = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post("/hrexitexits", formValues);
 
     dispatch({
       type: CREATE_HREXITEXIT,
@@ -7558,7 +7680,7 @@ export const createHrExitExit = (formValues, token) => {
 export const fetchHrExitExits = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/hrexitexits");
 
     dispatch({
       type: FETCH_HREXITEXITS,
@@ -7570,7 +7692,7 @@ export const fetchHrExitExits = (tokens) => {
 export const fetchHrExitExit = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/hrexitexits/${id}`);
     dispatch({
       type: FETCH_HREXITEXIT,
       payload: response.data.data.data,
@@ -7581,7 +7703,7 @@ export const fetchHrExitExit = (id, token) => {
 export const editHrExitExit = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(`/hrexitexits/${id}`, formValues);
     dispatch({
       type: EDIT_HREXITEXIT,
       payload: response.data.data.data,
@@ -7592,7 +7714,7 @@ export const editHrExitExit = (id, formValues, token) => {
 export const deleteHrExitExit = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/hrexitexits/${id}`);
     dispatch({ type: DELETE_HREXITEXIT, payload: id });
   };
 };
@@ -7602,7 +7724,7 @@ export const deleteHrExitExit = (id, token) => {
 export const createHrExitClearance = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post("/hrexitclearances", formValues);
 
     dispatch({
       type: CREATE_HREXITCLEARANCE,
@@ -7614,7 +7736,7 @@ export const createHrExitClearance = (formValues, token) => {
 export const fetchHrExitClearances = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/hrexitclearances");
 
     dispatch({
       type: FETCH_HREXITCLEARANCES,
@@ -7626,7 +7748,7 @@ export const fetchHrExitClearances = (tokens) => {
 export const fetchHrExitClearance = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/hrexitclearances/${id}`);
     dispatch({
       type: FETCH_HREXITCLEARANCE,
       payload: response.data.data.data,
@@ -7637,7 +7759,7 @@ export const fetchHrExitClearance = (id, token) => {
 export const editHrExitClearance = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(`/hrexitclearances/${id}`, formValues);
     dispatch({
       type: EDIT_HREXITCLEARANCE,
       payload: response.data.data.data,
@@ -7648,7 +7770,7 @@ export const editHrExitClearance = (id, formValues, token) => {
 export const deleteHrExitClearance = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/hrexitclearances/${id}`);
     dispatch({ type: DELETE_HREXITCLEARANCE, payload: id });
   };
 };
@@ -7658,7 +7780,7 @@ export const deleteHrExitClearance = (id, token) => {
 export const createHrPerformanceAppraisal = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post("/hrperformanceappraisals", formValues);
 
     dispatch({
       type: CREATE_HRPERFORMANCEAPPRAISAL,
@@ -7670,7 +7792,7 @@ export const createHrPerformanceAppraisal = (formValues, token) => {
 export const fetchHrPerformanceAppraisals = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/hrperformanceappraisals");
 
     dispatch({
       type: FETCH_HRPERFORMANCEAPPRAISALS,
@@ -7682,7 +7804,7 @@ export const fetchHrPerformanceAppraisals = (tokens) => {
 export const fetchHrPerformanceAppraisal = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/hrperformanceappraisals/${id}`);
     dispatch({
       type: FETCH_HRPERFORMANCEAPPRAISAL,
       payload: response.data.data.data,
@@ -7693,7 +7815,10 @@ export const fetchHrPerformanceAppraisal = (id, token) => {
 export const editHrPerformanceAppraisal = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(
+      `/hrperformanceappraisals/${id}`,
+      formValues
+    );
     dispatch({
       type: EDIT_HRPERFORMANCEAPPRAISAL,
       payload: response.data.data.data,
@@ -7704,7 +7829,7 @@ export const editHrPerformanceAppraisal = (id, formValues, token) => {
 export const deleteHrPerformanceAppraisal = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/hrperformanceappraisals/${id}`);
     dispatch({ type: DELETE_HRPERFORMANCEAPPRAISAL, payload: id });
   };
 };
@@ -7714,7 +7839,7 @@ export const deleteHrPerformanceAppraisal = (id, token) => {
 export const createHrPerformancePerformance = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post("/hrperformanceperformances", formValues);
 
     dispatch({
       type: CREATE_HRPERFORMANCEPERFORMANCE,
@@ -7726,7 +7851,7 @@ export const createHrPerformancePerformance = (formValues, token) => {
 export const fetchHrPerformancePerformances = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/hrperformanceperformances");
 
     dispatch({
       type: FETCH_HRPERFORMANCEPERFORMANCES,
@@ -7738,7 +7863,7 @@ export const fetchHrPerformancePerformances = (tokens) => {
 export const fetchHrPerformancePerformance = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/hrperformanceperformances/${id}`);
     dispatch({
       type: FETCH_HRPERFORMANCEPERFORMANCE,
       payload: response.data.data.data,
@@ -7749,7 +7874,10 @@ export const fetchHrPerformancePerformance = (id, token) => {
 export const editHrPerformancePerformance = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(
+      `/hrperformanceperformances/${id}`,
+      formValues
+    );
     dispatch({
       type: EDIT_HRPERFORMANCEPERFORMANCE,
       payload: response.data.data.data,
@@ -7760,7 +7888,7 @@ export const editHrPerformancePerformance = (id, formValues, token) => {
 export const deleteHrPerformancePerformance = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/hrperformanceperformances/${id}`);
     dispatch({ type: DELETE_HRPERFORMANCEPERFORMANCE, payload: id });
   };
 };
@@ -7770,7 +7898,7 @@ export const deleteHrPerformancePerformance = (id, token) => {
 export const createHrSelfServiceLeave = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post("/hrselfserviceleaves", formValues);
 
     dispatch({
       type: CREATE_HRSELFSERVICELEAVE,
@@ -7782,7 +7910,7 @@ export const createHrSelfServiceLeave = (formValues, token) => {
 export const fetchHrSelfServiceLeaves = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/hrselfserviceleaves");
 
     dispatch({
       type: FETCH_HRSELFSERVICELEAVES,
@@ -7794,7 +7922,7 @@ export const fetchHrSelfServiceLeaves = (tokens) => {
 export const fetchHrSelfServiceLeave = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/hrselfserviceleaves/${id}`);
     dispatch({
       type: FETCH_HRSELFSERVICELEAVE,
       payload: response.data.data.data,
@@ -7805,7 +7933,7 @@ export const fetchHrSelfServiceLeave = (id, token) => {
 export const editHrSelfServiceLeave = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(`/hrselfserviceleaves/${id}`, formValues);
     dispatch({
       type: EDIT_HRSELFSERVICELEAVE,
       payload: response.data.data.data,
@@ -7816,7 +7944,7 @@ export const editHrSelfServiceLeave = (id, formValues, token) => {
 export const deleteHrSelfServiceLeave = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/hrselfserviceleaves/${id}`);
     dispatch({ type: DELETE_HRSELFSERVICELEAVE, payload: id });
   };
 };
@@ -7826,7 +7954,7 @@ export const deleteHrSelfServiceLeave = (id, token) => {
 export const createHrSelfServiceStaffLoan = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post("/hrselfservicestaffloans", formValues);
 
     dispatch({
       type: CREATE_HRSELFSERVICESTAFFLOAN,
@@ -7838,7 +7966,7 @@ export const createHrSelfServiceStaffLoan = (formValues, token) => {
 export const fetchHrSelfServiceStaffLoans = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/hrselfservicestaffloans");
 
     dispatch({
       type: FETCH_HRSELFSERVICESTAFFLOANS,
@@ -7850,7 +7978,7 @@ export const fetchHrSelfServiceStaffLoans = (tokens) => {
 export const fetchHrSelfServiceStaffLoan = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/hrselfservicestaffloans/${id}`);
     dispatch({
       type: FETCH_HRSELFSERVICESTAFFLOAN,
       payload: response.data.data.data,
@@ -7861,7 +7989,10 @@ export const fetchHrSelfServiceStaffLoan = (id, token) => {
 export const editHrSelfServiceStaffLoan = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(
+      `/hrselfservicestaffloans/${id}`,
+      formValues
+    );
     dispatch({
       type: EDIT_HRSELFSERVICESTAFFLOAN,
       payload: response.data.data.data,
@@ -7872,7 +8003,7 @@ export const editHrSelfServiceStaffLoan = (id, formValues, token) => {
 export const deleteHrSelfServiceStaffLoan = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/hrselfservicestaffloans/${id}`);
     dispatch({ type: DELETE_HRSELFSERVICESTAFFLOAN, payload: id });
   };
 };
@@ -7882,7 +8013,10 @@ export const deleteHrSelfServiceStaffLoan = (id, token) => {
 export const createHrSelfServiceCertificateRefund = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post(
+      "/hrselfservicecertificaterefunds",
+      formValues
+    );
 
     dispatch({
       type: CREATE_HRSELFSERVICECERTREFUND,
@@ -7894,7 +8028,7 @@ export const createHrSelfServiceCertificateRefund = (formValues, token) => {
 export const fetchHrSelfServiceCertificateRefunds = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/hrselfservicecertificaterefunds");
 
     dispatch({
       type: FETCH_HRSELFSERVICECERTREFUNDS,
@@ -7906,7 +8040,7 @@ export const fetchHrSelfServiceCertificateRefunds = (tokens) => {
 export const fetchHrSelfServiceCertificateRefund = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/hrselfservicecertificaterefunds/${id}`);
     dispatch({
       type: FETCH_HRSELFSERVICECERTREFUND,
       payload: response.data.data.data,
@@ -7917,7 +8051,10 @@ export const fetchHrSelfServiceCertificateRefund = (id, token) => {
 export const editHrSelfServiceCertificateRefund = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(
+      `/hrselfservicecertificaterefunds/${id}`,
+      formValues
+    );
     dispatch({
       type: EDIT_HRSELFSERVICECERTREFUND,
       payload: response.data.data.data,
@@ -7928,7 +8065,7 @@ export const editHrSelfServiceCertificateRefund = (id, formValues, token) => {
 export const deleteHrSelfServiceCertificateRefund = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/hrselfservicecertificaterefunds/${id}`);
     dispatch({ type: DELETE_HRSELFSERVICECERTREFUND, payload: id });
   };
 };
@@ -7938,7 +8075,7 @@ export const deleteHrSelfServiceCertificateRefund = (id, token) => {
 export const createHrSelfServiceExit = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post("/hrselfserviceexits", formValues);
 
     dispatch({
       type: CREATE_HRSELFSERVICEEXIT,
@@ -7950,7 +8087,7 @@ export const createHrSelfServiceExit = (formValues, token) => {
 export const fetchHrSelfServiceExits = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/hrselfserviceexits");
 
     dispatch({
       type: FETCH_HRSELFSERVICEEXITS,
@@ -7962,7 +8099,7 @@ export const fetchHrSelfServiceExits = (tokens) => {
 export const fetchHrSelfServiceExit = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/hrselfserviceexits/${id}`);
     dispatch({
       type: FETCH_HRSELFSERVICEEXIT,
       payload: response.data.data.data,
@@ -7973,7 +8110,7 @@ export const fetchHrSelfServiceExit = (id, token) => {
 export const editHrSelfServiceExit = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(`/hrselfserviceexits/${id}`, formValues);
     dispatch({
       type: EDIT_HRSELFSERVICEEXIT,
       payload: response.data.data.data,
@@ -7984,7 +8121,7 @@ export const editHrSelfServiceExit = (id, formValues, token) => {
 export const deleteHrSelfServiceExit = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/hrselfserviceexits/${id}`);
     dispatch({ type: DELETE_HRSELFSERVICEEXIT, payload: id });
   };
 };
@@ -7994,7 +8131,7 @@ export const deleteHrSelfServiceExit = (id, token) => {
 export const createHrSelfServiceOvertime = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post("/hrselfserviceovertimes", formValues);
 
     dispatch({
       type: CREATE_HRSELFSERVICEOVERTIME,
@@ -8006,7 +8143,7 @@ export const createHrSelfServiceOvertime = (formValues, token) => {
 export const fetchHrSelfServiceOvertimes = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/hrselfserviceovertimes");
 
     dispatch({
       type: FETCH_HRSELFSERVICEOVERTIMES,
@@ -8018,7 +8155,7 @@ export const fetchHrSelfServiceOvertimes = (tokens) => {
 export const fetchHrSelfServiceOvertime = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/hrselfserviceovertimes/${id}`);
     dispatch({
       type: FETCH_HRSELFSERVICEOVERTIME,
       payload: response.data.data.data,
@@ -8029,7 +8166,10 @@ export const fetchHrSelfServiceOvertime = (id, token) => {
 export const editHrSelfServiceOvertime = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(
+      `/hrselfserviceovertimes/${id}`,
+      formValues
+    );
     dispatch({
       type: EDIT_HRSELFSERVICEOVERTIME,
       payload: response.data.data.data,
@@ -8040,7 +8180,7 @@ export const editHrSelfServiceOvertime = (id, formValues, token) => {
 export const deleteHrSelfServiceOvertime = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/hrselfserviceovertimes/${id}`);
     dispatch({ type: DELETE_HRSELFSERVICEOVERTIME, payload: id });
   };
 };
@@ -8050,7 +8190,10 @@ export const deleteHrSelfServiceOvertime = (id, token) => {
 export const createHrSelfServiceSalaryAdvance = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post(
+      "/hrselfservicesalaryadvances",
+      formValues
+    );
 
     dispatch({
       type: CREATE_HRSELFSERVICESALARYADVANCE,
@@ -8062,7 +8205,7 @@ export const createHrSelfServiceSalaryAdvance = (formValues, token) => {
 export const fetchHrSelfServiceSalaryAdvances = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/hrselfservicesalaryadvances");
 
     dispatch({
       type: FETCH_HRSELFSERVICESALARYADVANCES,
@@ -8074,7 +8217,7 @@ export const fetchHrSelfServiceSalaryAdvances = (tokens) => {
 export const fetchHrSelfServiceSalaryAdvance = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/hrselfservicesalaryadvances/${id}`);
     dispatch({
       type: FETCH_HRSELFSERVICESALARYADVANCE,
       payload: response.data.data.data,
@@ -8085,7 +8228,10 @@ export const fetchHrSelfServiceSalaryAdvance = (id, token) => {
 export const editHrSelfServiceSalaryAdvance = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(
+      `/hrselfservicesalaryadvances/${id}`,
+      formValues
+    );
     dispatch({
       type: EDIT_HRSELFSERVICESALARYADVANCE,
       payload: response.data.data.data,
@@ -8096,7 +8242,7 @@ export const editHrSelfServiceSalaryAdvance = (id, formValues, token) => {
 export const deleteHrSelfServiceSalaryAdvance = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/hrselfservicesalaryadvances/${id}`);
     dispatch({ type: DELETE_HRSELFSERVICESALARYADVANCE, payload: id });
   };
 };
@@ -8106,7 +8252,7 @@ export const deleteHrSelfServiceSalaryAdvance = (id, token) => {
 export const createHrSelfServiceAppraisal = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post("/hrselfserviceappraisals", formValues);
 
     dispatch({
       type: CREATE_HRSELFSERVICEAPPRAISAL,
@@ -8118,7 +8264,7 @@ export const createHrSelfServiceAppraisal = (formValues, token) => {
 export const fetchHrSelfServiceAppraisals = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/hrselfserviceappraisals");
 
     dispatch({
       type: FETCH_HRSELFSERVICEAPPRAISALS,
@@ -8130,7 +8276,7 @@ export const fetchHrSelfServiceAppraisals = (tokens) => {
 export const fetchHrSelfServiceAppraisal = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/hrselfserviceappraisals/${id}`);
     dispatch({
       type: FETCH_HRSELFSERVICEAPPRAISAL,
       payload: response.data.data.data,
@@ -8141,7 +8287,10 @@ export const fetchHrSelfServiceAppraisal = (id, token) => {
 export const editHrSelfServiceAppraisal = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(
+      `/hrselfserviceappraisals/${id}`,
+      formValues
+    );
     dispatch({
       type: EDIT_HRSELFSERVICEAPPRAISAL,
       payload: response.data.data.data,
@@ -8152,7 +8301,7 @@ export const editHrSelfServiceAppraisal = (id, formValues, token) => {
 export const deleteHrSelfServiceAppraisal = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/hrselfserviceappraisals/${id}`);
     dispatch({ type: DELETE_HRSELFSERVICEAPPRAISAL, payload: id });
   };
 };
@@ -8162,7 +8311,7 @@ export const deleteHrSelfServiceAppraisal = (id, token) => {
 export const createHrSelfServicePayslip = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post("/hrselfservicepayslips", formValues);
 
     dispatch({
       type: CREATE_HRSELFSERVICEPAYSLIP,
@@ -8174,7 +8323,7 @@ export const createHrSelfServicePayslip = (formValues, token) => {
 export const fetchHrSelfServicePayslips = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/hrselfservicepayslips");
 
     dispatch({
       type: FETCH_HRSELFSERVICEPAYSLIPS,
@@ -8186,7 +8335,7 @@ export const fetchHrSelfServicePayslips = (tokens) => {
 export const fetchHrSelfServicePayslip = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/hrselfservicepayslips/${id}`);
     dispatch({
       type: FETCH_HRSELFSERVICEPAYSLIP,
       payload: response.data.data.data,
@@ -8197,7 +8346,10 @@ export const fetchHrSelfServicePayslip = (id, token) => {
 export const editHrSelfServicePayslip = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(
+      `/hrselfservicepayslips/${id}`,
+      formValues
+    );
     dispatch({
       type: EDIT_HRSELFSERVICEPAYSLIP,
       payload: response.data.data.data,
@@ -8208,7 +8360,7 @@ export const editHrSelfServicePayslip = (id, formValues, token) => {
 export const deleteHrSelfServicePayslip = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/hrselfservicepayslips/${id}`);
     dispatch({ type: DELETE_HRSELFSERVICEPAYSLIP, payload: id });
   };
 };
@@ -8218,7 +8370,7 @@ export const deleteHrSelfServicePayslip = (id, token) => {
 export const createHrUtilityEmolumentPeriod = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post("/hremolumentperiods", formValues);
 
     dispatch({
       type: CREATE_HRUTILITYEMOLUMENTPERIOD,
@@ -8230,7 +8382,7 @@ export const createHrUtilityEmolumentPeriod = (formValues, token) => {
 export const fetchHrUtilityEmolumentPeriods = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/hremolumentperiods");
 
     dispatch({
       type: FETCH_HRUTILITYEMOLUMENTPERIODS,
@@ -8242,7 +8394,7 @@ export const fetchHrUtilityEmolumentPeriods = (tokens) => {
 export const fetchHrUtilityEmolumentPeriod = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/hremolumentperiods/${id}`);
     dispatch({
       type: FETCH_HRUTILITYEMOLUMENTPERIOD,
       payload: response.data.data.data,
@@ -8253,7 +8405,7 @@ export const fetchHrUtilityEmolumentPeriod = (id, token) => {
 export const editHrUtilityEmolumentPeriod = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(`/hremolumentperiods/${id}`, formValues);
     dispatch({
       type: EDIT_HRUTILITYEMOLUMENTPERIOD,
       payload: response.data.data.data,
@@ -8264,7 +8416,7 @@ export const editHrUtilityEmolumentPeriod = (id, formValues, token) => {
 export const deleteHrUtilityEmolumentPeriod = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/hremolumentperiods/${id}`);
     dispatch({ type: DELETE_HRUTILITYEMOLUMENTPERIOD, payload: id });
   };
 };
@@ -8274,7 +8426,7 @@ export const deleteHrUtilityEmolumentPeriod = (id, token) => {
 export const createHrUtilityBonusRate = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post("/hrbonusrates", formValues);
 
     dispatch({
       type: CREATE_HRUTILITYBONUSRATE,
@@ -8286,7 +8438,7 @@ export const createHrUtilityBonusRate = (formValues, token) => {
 export const fetchHrUtilityBonusRates = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/hrbonusrates");
 
     dispatch({
       type: FETCH_HRUTILITYBONUSRATES,
@@ -8298,7 +8450,7 @@ export const fetchHrUtilityBonusRates = (tokens) => {
 export const fetchHrUtilityBonusRate = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/hrbonusrates/${id}`);
     dispatch({
       type: FETCH_HRUTILITYBONUSRATE,
       payload: response.data.data.data,
@@ -8309,7 +8461,7 @@ export const fetchHrUtilityBonusRate = (id, token) => {
 export const editHrUtilityBonusRate = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(`/hrbonusrates/${id}`, formValues);
     dispatch({
       type: EDIT_HRUTILITYBONUSRATE,
       payload: response.data.data.data,
@@ -8320,7 +8472,7 @@ export const editHrUtilityBonusRate = (id, formValues, token) => {
 export const deleteHrUtilityBonusRate = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/hrbonusrates/${id}`);
     dispatch({ type: DELETE_HRUTILITYBONUSRATE, payload: id });
   };
 };
@@ -8330,7 +8482,7 @@ export const deleteHrUtilityBonusRate = (id, token) => {
 export const createHrUtilityOvertimeRate = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post("/hrovertimerates", formValues);
 
     dispatch({
       type: CREATE_HRUTILITYOVERTIMERATE,
@@ -8342,7 +8494,7 @@ export const createHrUtilityOvertimeRate = (formValues, token) => {
 export const fetchHrUtilityOvertimeRates = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/hrovertimerates");
 
     dispatch({
       type: FETCH_HRUTILITYOVERTIMERATES,
@@ -8354,7 +8506,7 @@ export const fetchHrUtilityOvertimeRates = (tokens) => {
 export const fetchHrUtilityOvertimeRate = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/hrovertimerates/${id}`);
     dispatch({
       type: FETCH_HRUTILITYOVERTIMERATE,
       payload: response.data.data.data,
@@ -8365,7 +8517,7 @@ export const fetchHrUtilityOvertimeRate = (id, token) => {
 export const editHrUtilityOvertimeRate = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(`/hrovertimerates/${id}`, formValues);
     dispatch({
       type: EDIT_HRUTILITYOVERTIMERATE,
       payload: response.data.data.data,
@@ -8376,7 +8528,7 @@ export const editHrUtilityOvertimeRate = (id, formValues, token) => {
 export const deleteHrUtilityOvertimeRate = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/hrovertimerates/${id}`);
     dispatch({ type: DELETE_HRUTILITYOVERTIMERATE, payload: id });
   };
 };
@@ -8386,7 +8538,7 @@ export const deleteHrUtilityOvertimeRate = (id, token) => {
 export const createHrUtilityOrganizationLevel = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post("/hrorganizationlevels", formValues);
 
     dispatch({
       type: CREATE_HRUTILITYORGANIZATIONLEVEL,
@@ -8398,7 +8550,7 @@ export const createHrUtilityOrganizationLevel = (formValues, token) => {
 export const fetchHrUtilityOrganizationLevels = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/hrorganizationlevels");
 
     dispatch({
       type: FETCH_HRUTILITYORGANIZATIONLEVELS,
@@ -8410,7 +8562,7 @@ export const fetchHrUtilityOrganizationLevels = (tokens) => {
 export const fetchHrUtilityOrganizationLevel = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/hrorganizationlevels/${id}`);
     dispatch({
       type: FETCH_HRUTILITYORGANIZATIONLEVEL,
       payload: response.data.data.data,
@@ -8421,7 +8573,10 @@ export const fetchHrUtilityOrganizationLevel = (id, token) => {
 export const editHrUtilityOrganizationLevel = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(
+      `/hrorganizationlevels/${id}`,
+      formValues
+    );
     dispatch({
       type: EDIT_HRUTILITYORGANIZATIONLEVEL,
       payload: response.data.data.data,
@@ -8432,7 +8587,7 @@ export const editHrUtilityOrganizationLevel = (id, formValues, token) => {
 export const deleteHrUtilityOrganizationLevel = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/hrorganizationlevels/${id}`);
     dispatch({ type: DELETE_HRUTILITYORGANIZATIONLEVEL, payload: id });
   };
 };
@@ -8442,7 +8597,7 @@ export const deleteHrUtilityOrganizationLevel = (id, token) => {
 export const createHrUtilitySalaryGrade = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post("/hrsalarygrades", formValues);
 
     dispatch({
       type: CREATE_HRUTILITYSALARYGRADE,
@@ -8454,7 +8609,7 @@ export const createHrUtilitySalaryGrade = (formValues, token) => {
 export const fetchHrUtilitySalaryGrades = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/hrsalarygrades");
 
     dispatch({
       type: FETCH_HRUTILITYSALARYGRADES,
@@ -8466,7 +8621,7 @@ export const fetchHrUtilitySalaryGrades = (tokens) => {
 export const fetchHrUtilitySalaryGrade = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/hrsalarygrades/${id}`);
     dispatch({
       type: FETCH_HRUTILITYSALARYGRADE,
       payload: response.data.data.data,
@@ -8477,7 +8632,7 @@ export const fetchHrUtilitySalaryGrade = (id, token) => {
 export const editHrUtilitySalaryGrade = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(`/hrsalarygrades/${id}`, formValues);
     dispatch({
       type: EDIT_HRUTILITYSALARYGRADE,
       payload: response.data.data.data,
@@ -8488,7 +8643,7 @@ export const editHrUtilitySalaryGrade = (id, formValues, token) => {
 export const deleteHrUtilitySalaryGrade = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/hrsalarygrades/${id}`);
     dispatch({ type: DELETE_HRUTILITYSALARYGRADE, payload: id });
   };
 };
@@ -8498,7 +8653,7 @@ export const deleteHrUtilitySalaryGrade = (id, token) => {
 export const createHrUtilitySalaryGradeDeductable = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post("/hrsalarygradedeductables", formValues);
 
     dispatch({
       type: CREATE_HRUTILITYSALARYGRADEDEDUCTABLE,
@@ -8510,7 +8665,7 @@ export const createHrUtilitySalaryGradeDeductable = (formValues, token) => {
 export const fetchHrUtilitySalaryGradeDeductables = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/hrsalarygradedeductables");
 
     dispatch({
       type: FETCH_HRUTILITYSALARYGRADEDEDUCTABLES,
@@ -8522,7 +8677,7 @@ export const fetchHrUtilitySalaryGradeDeductables = (tokens) => {
 export const fetchHrUtilitySalaryGradeDeductable = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/hrsalarygradedeductables/${id}`);
     dispatch({
       type: FETCH_HRUTILITYSALARYGRADEDEDUCTABLE,
       payload: response.data.data.data,
@@ -8533,7 +8688,10 @@ export const fetchHrUtilitySalaryGradeDeductable = (id, token) => {
 export const editHrUtilitySalaryGradeDeductable = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(
+      `/hrsalarygradedeductables/${id}`,
+      formValues
+    );
     dispatch({
       type: EDIT_HRUTILITYSALARYGRADEDEDUCTABLE,
       payload: response.data.data.data,
@@ -8544,7 +8702,7 @@ export const editHrUtilitySalaryGradeDeductable = (id, formValues, token) => {
 export const deleteHrUtilitySalaryGradeDeductable = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/hrsalarygradedeductables/${id}`);
     dispatch({ type: DELETE_HRUTILITYSALARYGRADEDEDUCTABLE, payload: id });
   };
 };
@@ -8554,7 +8712,7 @@ export const deleteHrUtilitySalaryGradeDeductable = (id, token) => {
 export const createHrUtilityExtraDeductable = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.post("/officeoperations", formValues);
+    const response = await data.post("/hrextradeductables", formValues);
 
     dispatch({
       type: CREATE_HRUTILITYEXTRADEDUCTABLE,
@@ -8566,7 +8724,7 @@ export const createHrUtilityExtraDeductable = (formValues, token) => {
 export const fetchHrUtilityExtraDeductables = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
-    const response = await data.get("/officeoperations");
+    const response = await data.get("/hrextradeductables");
 
     dispatch({
       type: FETCH_HRUTILITYEXTRADEDUCTABLES,
@@ -8578,7 +8736,7 @@ export const fetchHrUtilityExtraDeductables = (tokens) => {
 export const fetchHrUtilityExtraDeductable = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.get(`/officeoperations/${id}`);
+    const response = await data.get(`/hrextradeductables/${id}`);
     dispatch({
       type: FETCH_HRUTILITYEXTRADEDUCTABLE,
       payload: response.data.data.data,
@@ -8589,7 +8747,7 @@ export const fetchHrUtilityExtraDeductable = (id, token) => {
 export const editHrUtilityExtraDeductable = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    const response = await data.patch(`/officeoperations/${id}`, formValues);
+    const response = await data.patch(`/hrextradeductables/${id}`, formValues);
     dispatch({
       type: EDIT_HRUTILITYEXTRADEDUCTABLE,
       payload: response.data.data.data,
@@ -8600,7 +8758,130 @@ export const editHrUtilityExtraDeductable = (id, formValues, token) => {
 export const deleteHrUtilityExtraDeductable = (id, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   return async (dispatch) => {
-    await data.delete(`/officeoperations/${id}`);
+    await data.delete(`/hrextradeductables/${id}`);
     dispatch({ type: DELETE_HRUTILITYEXTRADEDUCTABLE, payload: id });
+  };
+};
+
+///////////////////////////////  ASSETS SET ACTION CREATORS ////////////////////
+
+export const createAssetSet = (formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.post("/assetsets", formValues);
+
+    dispatch({
+      type: CREATE_ASSETSET,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchAssetSets = (tokens) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
+  return async (dispatch) => {
+    const response = await data.get("/assetsets");
+
+    dispatch({
+      type: FETCH_ASSETSETS,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchAssetSet = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.get(`/assetsets/${id}`);
+    dispatch({
+      type: FETCH_ASSETSET,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const editAssetSet = (id, formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+
+  return async (dispatch) => {
+    const response = await data.patch(`/assetsets/${id}`, formValues);
+   
+    dispatch({
+      type: EDIT_ASSETSET,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const deleteAssetSet = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    await data.delete(`/assetsets/${id}`);
+    dispatch({ type: DELETE_ASSETSET, payload: id });
+  };
+};
+
+export const adjustQuantityInAssetSet = (id, formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+ 
+  return async () => {
+    const response = await data.patch(`/assetsets/${id}`, formValues);
+    
+  };
+};
+
+///////////////////////////////  ASSETS SET BATCH ACTION CREATORS ////////////////////
+
+export const createAssetSetBatch = (formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.post("/assetsetbatches", formValues);
+
+    dispatch({
+      type: CREATE_ASSETSETBATCH,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchAssetSetBatches = (tokens) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
+  return async (dispatch) => {
+    const response = await data.get("/assetsetbatches");
+
+    dispatch({
+      type: FETCH_ASSETSETBATCHES,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchAssetSetBatch = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.get(`/assetsetbatches/${id}`);
+    dispatch({
+      type: FETCH_ASSETSETBATCH,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const editAssetSetBatch = (id, formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.patch(`/assetsetbatches/${id}`, formValues);
+    dispatch({
+      type: EDIT_ASSETSETBATCH,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const deleteAssetSetBatch = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    await data.delete(`/assetsetbatches/${id}`);
+    dispatch({ type: DELETE_ASSETSETBATCH, payload: id });
   };
 };

@@ -210,13 +210,13 @@ class AssetsUnapprovedProcurementsList extends React.Component {
         ),
       },
     ];
-    this.props.unapprovedProcurements.map((unapprovedProcurement) => {
+    this.props.unApprovedAssetProcurements.map((unApprovedAssetProcurement) => {
       let row = {
         numbering: ++counter,
-        id: unapprovedProcurement.id,
-        code: unapprovedProcurement.code,
-        name: unapprovedProcurement.name,
-        description: unapprovedProcurement.description,
+        id: unApprovedAssetProcurement.id,
+        code: unApprovedAssetProcurement.code,
+        name: unApprovedAssetProcurement.name,
+        description: unApprovedAssetProcurement.description,
       };
       rows.push(row);
     });
@@ -245,7 +245,11 @@ class AssetsUnapprovedProcurementsList extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return { unapprovedProcurements: Object.values(state.unapprovedProcurement) };
+  return {
+    unApprovedAssetProcurements: Object.values(
+      state.unApprovedAssetProcurement
+    ),
+  };
 };
 
 export default connect(mapStateToProps, { fetchUnapprovedProcurements })(

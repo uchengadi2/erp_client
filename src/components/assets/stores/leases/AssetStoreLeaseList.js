@@ -162,8 +162,12 @@ class AssetStoreLeaseList extends React.Component {
     let counter = 0;
     const columns = [
       { field: "numbering", headerName: "S/n", width: 60 },
-      { field: "code", headerName: "Transaction Code", width: 150 },
-      { field: "name", headerName: "Transaction Name", width: 200 },
+      { field: "serviceOutlet", headerName: "Service Outlet", width: 150 },
+      { field: "beneficiary", headerName: "Lease Beneficiary", width: 200 },
+      { field: "beneficiaryType", headerName: "Beneficiary Type", width: 200 },
+      { field: "storeType", headerName: "Store Type", width: 200 },
+      { field: "store", headerName: "Store", width: 200 },
+      { field: "cost", headerName: "Lease Cost", width: 200 },
 
       {
         field: "editaction",
@@ -210,8 +214,15 @@ class AssetStoreLeaseList extends React.Component {
       let row = {
         numbering: ++counter,
         id: assetStoreLease.id,
-        code: assetStoreLease.code,
-        name: assetStoreLease.name,
+        serviceOutlet: assetStoreLease.serviceOutlet,
+        beneficiary: assetStoreLease.beneficiary,
+        storeType: assetStoreLease.storeType,
+        store: assetStoreLease.store,
+        purpose: assetStoreLease.purpose,
+        beneficiaryType: assetStoreLease.beneficiaryType,
+        leaseCommencementDate: assetStoreLease.leaseCommencementDate,
+        leaseEndDate: assetStoreLease.leaseEndDate,
+        cost: assetStoreLease.cost,
         description: assetStoreLease.description,
       };
       rows.push(row);

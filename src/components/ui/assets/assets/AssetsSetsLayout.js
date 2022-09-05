@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import Grid from "@material-ui/core/Grid";
 import Snackbar from "@material-ui/core/Snackbar";
 
@@ -10,19 +10,19 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import history from "../../../../history";
-import ServiceOutletsAndTransactionTypesFilter from "../../headerFilters/ServiceOutletsAndTransactionTypesFilter";
 
-import OperationsTransformationPhaseEventCreateForm from "../../../operations/utilities/transformationPhaseEvents/OperationsTransformationPhaseEventCreateForm";
-import OperationsTransformationPhaseEventsList from "../../../operations/utilities/transformationPhaseEvents/OperationsTransformationPhaseEventsList";
+import AssetSetCreateForm from "../../../assets/assets/assetSets/AssetSetCreateForm";
+import AssetSetsList from "../../../assets/assets/assetSets/AssetSetsList";
+import AssetTypesFilter from "../../headerFilters/AssetTypesFilter";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     marginTop: "-80px",
-    width: 1000,
+    width: 1100,
   },
   headerContainer: {
     height: 20,
-    marginTop: 0,
+    marginTop: 10,
     height: 40,
   },
   secondContainer: {
@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
   addButton: {
     borderRadius: 10,
     height: 30,
-    width: 250,
+    width: 120,
     marginLeft: 10,
     marginTop: 50,
     marginBottom: 20,
@@ -58,14 +58,12 @@ const useStyles = makeStyles((theme) => ({
     padding: 5,
     margin: -10,
   },
-  selectField: {
-    marginTop: 30,
-  },
 }));
 
-function OperationsUtilityTransformationPhaseEventsLayout(props) {
+function AssetsSetsLayout(props) {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
+  const [assetType, setAssetType] = useState();
   const [alert, setAlert] = useState({
     open: false,
     message: "",
@@ -80,6 +78,10 @@ function OperationsUtilityTransformationPhaseEventsLayout(props) {
   const handleDialogOpenStatus = () => {
     // history.push("/categories/new");
     setOpen(false);
+  };
+
+  const getCurrentAssetTypeHandle = (value) => {
+    setAssetType(value);
   };
 
   const handleSuccessfulCreateSnackbar = (message) => {
@@ -114,7 +116,11 @@ function OperationsUtilityTransformationPhaseEventsLayout(props) {
     >
       <Grid item container direction="column" sm={width}>
         <Grid item className={classes.selectField}>
-          <ServiceOutletsAndTransactionTypesFilter />
+          <AssetTypesFilter
+            token={props.token}
+            userId={props.userId}
+            getCurrentAssetTypeHandle={getCurrentAssetTypeHandle}
+          />
         </Grid>
         <Grid
           item
@@ -129,21 +135,20 @@ function OperationsUtilityTransformationPhaseEventsLayout(props) {
                 className={classes.addButton}
                 onClick={() => [
                   setOpen(true),
-                  history.push(
-                    "/operations/utilities/processingphaseevents/new"
-                  ),
+                  history.push("/assets/assets/sets/new"),
                 ]}
               >
-                Create Processing Phase event
+                Create Set
               </Button>
             </Grid>
             <Grid item></Grid>
           </Toolbar>
         </Grid>
         <Grid item className={classes.contentContainer}>
-          <OperationsTransformationPhaseEventsList
+          <AssetSetsList
             token={props.token}
             userId={props.userId}
+            assetType={assetType}
           />
           {/* {renderDataList()} */}
           {/* <DataGridText /> */}
@@ -153,13 +158,10 @@ function OperationsUtilityTransformationPhaseEventsLayout(props) {
         //style={{ zIndex: 1302 }}
         fullScreen={matchesXS}
         open={open}
-        onClose={() => [
-          setOpen(false),
-          history.push("/operations/utilities/processingphaseevents"),
-        ]}
+        onClose={() => [setOpen(false), history.push("/assets/assets/sets")]}
       >
         <DialogContent>
-          <OperationsTransformationPhaseEventCreateForm
+          <AssetSetCreateForm
             token={props.token}
             userId={props.userId}
             handleDialogOpenStatus={handleDialogOpenStatus}
@@ -200,4 +202,4 @@ function OperationsUtilityTransformationPhaseEventsLayout(props) {
   );
 }
 
-export default OperationsUtilityTransformationPhaseEventsLayout;
+export default AssetsSetsLayout;

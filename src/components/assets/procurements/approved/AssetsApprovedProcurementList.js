@@ -9,7 +9,7 @@ import CancelRoundedIcon from "@material-ui/icons/CancelRounded";
 import AssignmentIcon from "@material-ui/icons/Assignment";
 import Typography from "@material-ui/core/Typography";
 import history from "../../../../history";
-import { fetchApprovedProcurements } from "../../../../actions";
+import { fetchUnapprovedProcurements } from "../../../../actions";
 import DataGridContainer from "../../../DataGridContainer";
 import AssetApprovedProcurementDelete from "./AssetApprovedProcurementDelete";
 import AssetApprovedProcurementEditForm from "./AssetApprovedProcurementEditForm";
@@ -32,7 +32,7 @@ class AssetsApprovedProcurementList extends React.Component {
     };
   }
   componentDidMount() {
-    this.props.fetchApprovedProcurements(this.props.token);
+    this.props.fetchUnapprovedProcurements(this.props.token);
   }
 
   handleDialogOpenStatus = () => {
@@ -209,13 +209,13 @@ class AssetsApprovedProcurementList extends React.Component {
         ),
       },
     ];
-    this.props.approvedProcurements.map((approvedProcurement) => {
+    this.props.unApprovedAssetProcurements.map((unApprovedAssetProcurement) => {
       let row = {
         numbering: ++counter,
-        id: approvedProcurement.id,
-        code: approvedProcurement.code,
-        name: approvedProcurement.name,
-        description: approvedProcurement.description,
+        id: unApprovedAssetProcurement.id,
+        code: unApprovedAssetProcurement.code,
+        name: unApprovedAssetProcurement.name,
+        description: unApprovedAssetProcurement.description,
       };
       rows.push(row);
     });
@@ -244,9 +244,9 @@ class AssetsApprovedProcurementList extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return { approvedProcurements: Object.values(state.approvedProcurement) };
+  return { unApprovedAssetProcurements: Object.values(state.unApprovedAssetProcurement) };
 };
 
-export default connect(mapStateToProps, { fetchApprovedProcurements })(
+export default connect(mapStateToProps, { fetchUnapprovedProcurements })(
   AssetsApprovedProcurementList
 );

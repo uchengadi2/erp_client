@@ -162,8 +162,9 @@ class AssetStoreDispositionTypeList extends React.Component {
     let counter = 0;
     const columns = [
       { field: "numbering", headerName: "S/n", width: 60 },
-      { field: "code", headerName: "Transaction Code", width: 150 },
-      { field: "name", headerName: "Transaction Name", width: 200 },
+
+      { field: "name", headerName: "Disposition Type", width: 250 },
+      { field: "assetType", headerName: "Asset Type", width: 250 },
 
       {
         field: "editaction",
@@ -214,7 +215,7 @@ class AssetStoreDispositionTypeList extends React.Component {
       let row = {
         numbering: ++counter,
         id: storeDispositionType.id,
-        code: storeDispositionType.code,
+        assetType: storeDispositionType.assetType,
         name: storeDispositionType.name,
         description: storeDispositionType.description,
       };

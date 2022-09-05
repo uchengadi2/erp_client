@@ -3,9 +3,9 @@ import { connect } from "react-redux";
 import { Alert, AlertTitle } from "@material-ui/lab";
 import Button from "@material-ui/core/Button";
 import history from "../../../../history";
-import { fetchAssetType, deleteAssetType } from "../../../../actions";
+import { fetchAssetSet, deleteAssetSet } from "../../../../actions";
 
-class AssetUtilityAssetTypeDelete extends React.Component {
+class AssetSetDelete extends React.Component {
   componentDidMount() {
     // console.log("the item id is:", this.props.id);
     // console.log("the token is:", this.props.token);
@@ -13,13 +13,13 @@ class AssetUtilityAssetTypeDelete extends React.Component {
 
   render() {
     const handleDelete = () => {
-      this.props.deleteAssetType(this.props.id, this.props.token);
+      this.props.deleteAssetSet(this.props.id, this.props.token);
       this.props.handleDialogOpenStatus();
     };
 
     const handleNoDelete = () => {
       this.props.handleDialogOpenStatus();
-      history.push("/assets/utilities/assettypes");
+      history.push("/assets/assets/sets");
     };
 
     return (
@@ -48,8 +48,8 @@ class AssetUtilityAssetTypeDelete extends React.Component {
             </Button>,
           ]}
         >
-          <AlertTitle>Delete Asset Type?</AlertTitle>
-          Are you sure you want to delete this asset type?
+          <AlertTitle>Delete Asset Set?</AlertTitle>
+          Are you sure you want to delete this asset set?
         </Alert>
       </>
     );
@@ -57,9 +57,7 @@ class AssetUtilityAssetTypeDelete extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  return { assetType: state.assetType[ownProps.params.id] };
+  return { assetSet: state.assetSet[ownProps.params.id] };
 };
 
-export default connect(null, { fetchAssetType, deleteAssetType })(
-  AssetUtilityAssetTypeDelete
-);
+export default connect(null, { fetchAssetSet, deleteAssetSet })(AssetSetDelete);

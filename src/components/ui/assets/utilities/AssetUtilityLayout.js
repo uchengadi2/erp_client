@@ -59,7 +59,7 @@ function LinkTab(props) {
       //label={route.name}
       onClick={(event) => {
         event.preventDefault();
-        history.push(`/orders`);
+        history.push(`/assets/utilities`);
       }}
       {...props}
     />
@@ -116,14 +116,14 @@ function AssetUtilityLayout({ token, userId }) {
             history.push(`/assets/utilities/assettypes`);
           }}
         />
-        <Tab
+        {/* <Tab
           label="Asset Depreciation Types"
           {...a11yProps(0)}
           onClick={(event) => {
             event.preventDefault();
             history.push(`/assets/utilities/depreciationtypes`);
           }}
-        />
+        /> */}
         <Tab
           label="Store Types"
           {...a11yProps(0)}
@@ -182,25 +182,25 @@ function AssetUtilityLayout({ token, userId }) {
       <TabPanel value={value} index={1}>
         <AssetAssetTypesLayout token={token} userId={userId} />
       </TabPanel>
-      <TabPanel value={value} index={2}>
+      {/* <TabPanel value={value} index={2}>
         <AssetDepreciationTypesLayout token={token} userId={userId} />
-      </TabPanel>
-      <TabPanel value={value} index={3}>
+      </TabPanel> */}
+      <TabPanel value={value} index={2}>
         <AssetStoreTypesLayout token={token} userId={userId} />
       </TabPanel>
-      <TabPanel value={value} index={4}>
+      <TabPanel value={value} index={3}>
         <AssetMaintenanceTypesLayout token={token} userId={userId} />
       </TabPanel>
-      <TabPanel value={value} index={5}>
+      <TabPanel value={value} index={4}>
         <AssetMeasurementUnitTypes token={token} userId={userId} />
       </TabPanel>
-      <TabPanel value={value} index={6}>
+      <TabPanel value={value} index={5}>
         <AssetMovementTypesLayout token={token} userId={userId} />
       </TabPanel>
-      <TabPanel value={value} index={7}>
+      <TabPanel value={value} index={6}>
         <AssetDispositionTypesLayout token={token} userId={userId} />
       </TabPanel>
-      <TabPanel value={value} index={8}>
+      <TabPanel value={value} index={7}>
         <AssetStoreMaintenanceTypesLayout token={token} userId={userId} />
       </TabPanel>
     </Box>

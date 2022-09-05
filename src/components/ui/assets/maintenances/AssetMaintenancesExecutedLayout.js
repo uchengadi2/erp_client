@@ -130,7 +130,7 @@ function AssetMaintenancesExecutedLayout(props) {
                 onClick={() => [
                   setOpen(true),
                   history.push(
-                    "/assets/maintenances/approved/approvedmaintenances/new"
+                    "/assets/maintenances/approved/allmaintenances/new"
                   ),
                 ]}
               >
@@ -155,7 +155,7 @@ function AssetMaintenancesExecutedLayout(props) {
         open={open}
         onClose={() => [
           setOpen(false),
-          history.push("/assets/maintenances/executed/executedmaintenances"),
+          history.push("/assets/maintenances/executed/allmaintenances"),
         ]}
       >
         <DialogContent>

@@ -53,7 +53,7 @@ function LinkTab(props) {
       //label={route.name}
       onClick={(event) => {
         event.preventDefault();
-        history.push(`/orders`);
+        history.push(`/assets/procurements`);
       }}
       {...props}
     />
@@ -99,7 +99,7 @@ function AssetsProcurementLayout({ token, userId }) {
           {...a11yProps(0)}
           onClick={(event) => {
             event.preventDefault();
-            history.push(`/assets/procurements/executedprocurements`);
+            history.push(`/assets/procurements/assetprocurements`);
           }}
         />
         <Tab

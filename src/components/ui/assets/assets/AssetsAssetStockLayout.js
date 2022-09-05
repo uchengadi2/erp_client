@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import Grid from "@material-ui/core/Grid";
 import Snackbar from "@material-ui/core/Snackbar";
 
@@ -13,6 +13,7 @@ import history from "../../../../history";
 
 import AssetsStockCreateForm from "../../../assets/assets/stock/AssetsStockCreateForm";
 import AssetsStocksList from "../../../assets/assets/stock/AssetsStocksList";
+import AssetTypesFilter from "../../headerFilters/AssetTypesFilter";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -62,6 +63,7 @@ const useStyles = makeStyles((theme) => ({
 function AssetsAssetStockLayout(props) {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
+  const [assetType, setAssetType] = useState();
   const [alert, setAlert] = useState({
     open: false,
     message: "",
@@ -76,6 +78,10 @@ function AssetsAssetStockLayout(props) {
   const handleDialogOpenStatus = () => {
     // history.push("/categories/new");
     setOpen(false);
+  };
+
+  const getCurrentAssetTypeHandle = (value) => {
+    setAssetType(value);
   };
 
   const handleSuccessfulCreateSnackbar = (message) => {
@@ -99,6 +105,30 @@ function AssetsAssetStockLayout(props) {
 
   const width = 12;
 
+  const renderCreateAssetForm = () => {
+    if (assetType !== undefined) {
+      if (assetType === "charcoal") {
+        console.log("charcoal form will be rendered");
+      }
+      if (assetType === "commodity") {
+        console.log("commodity form will be rendered");
+      }
+      if (assetType === "plantation") {
+        console.log("plantation form will be rendered");
+      }
+      if (assetType === "livestock") {
+        console.log("livestock form will be rendered");
+      }
+      if (assetType === "otherstocks") {
+        console.log("general stock form will be rendered");
+      }
+      if (assetType === "fishex") {
+        console.log("fishes form will be rendered");
+      }
+    }
+    console.log("general stock form will be rendered");
+  };
+
   return (
     <Grid
       container
@@ -110,7 +140,11 @@ function AssetsAssetStockLayout(props) {
     >
       <Grid item container direction="column" sm={width}>
         <Grid item className={classes.selectField}>
-          {/* <GeneralLedgerCodeFilter /> */}
+          <AssetTypesFilter
+            token={props.token}
+            userId={props.userId}
+            getCurrentAssetTypeHandle={getCurrentAssetTypeHandle}
+          />
         </Grid>
         <Grid
           item
@@ -135,7 +169,11 @@ function AssetsAssetStockLayout(props) {
           </Toolbar>
         </Grid>
         <Grid item className={classes.contentContainer}>
-          <AssetsStocksList token={props.token} userId={props.userId} />
+          <AssetsStocksList
+            token={props.token}
+            userId={props.userId}
+            assetType={assetType}
+          />
           {/* {renderDataList()} */}
           {/* <DataGridText /> */}
         </Grid>
@@ -147,13 +185,14 @@ function AssetsAssetStockLayout(props) {
         onClose={() => [setOpen(false), history.push("/assets/assets/stocks")]}
       >
         <DialogContent>
-          <AssetsStockCreateForm
+          {/* <AssetsStockCreateForm
             token={props.token}
             userId={props.userId}
             handleDialogOpenStatus={handleDialogOpenStatus}
             handleSuccessfulCreateSnackbar={handleSuccessfulCreateSnackbar}
             handleFailedSnackbar={handleFailedSnackbar}
-          />
+          /> */}
+          {renderCreateAssetForm()}
         </DialogContent>
       </Dialog>
       <Grid

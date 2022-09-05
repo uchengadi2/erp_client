@@ -157,13 +157,15 @@ class AssetUtilityAssetTypeList extends React.Component {
     );
   };
 
-  renderTransTypesList = () => {
+  renderDataList = () => {
     let rows = [];
     let counter = 0;
     const columns = [
       { field: "numbering", headerName: "S/n", width: 60 },
-      { field: "code", headerName: "Transaction Code", width: 150 },
-      { field: "name", headerName: "Transaction Name", width: 200 },
+
+      { field: "name", headerName: "Asset Type", width: 250 },
+      { field: "code", headerName: "Asset Type Code", width: 250 },
+      { field: "assetSubclass", headerName: "Asset Subclass", width: 250 },
 
       {
         field: "editaction",
@@ -208,12 +210,14 @@ class AssetUtilityAssetTypeList extends React.Component {
         ),
       },
     ];
+    console.log("asset types", this.props.assetTypes);
     this.props.assetTypes.map((assetType) => {
       let row = {
         numbering: ++counter,
         id: assetType.id,
-        code: assetType.code,
+        assetSubclass: assetType.assetSubclass,
         name: assetType.name,
+        code: assetType.code,
         description: assetType.description,
       };
       rows.push(row);
@@ -226,7 +230,7 @@ class AssetUtilityAssetTypeList extends React.Component {
       <>
         {this.renderDeleteDialogForm()}
         {this.renderEditDialogForm()}
-        {this.renderTransTypesList()}
+        {this.renderDataList()}
         <Snackbar
           open={this.state.alert.open}
           message={this.state.alert.message}

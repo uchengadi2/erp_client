@@ -15,7 +15,8 @@ import MenuItem from "@material-ui/core/MenuItem";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import Select from "@material-ui/core/Select";
 import api from "./../../../../apis/local";
-import { EDIT_ASSETSTORESPACEALLOCATION } from "../../../../actions/types";
+import { EDIT_ASSETSETBATCH } from "../../../../actions/types";
+import { editAssetSet } from "../../../../actions/index";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -27,8 +28,8 @@ const useStyles = makeStyles((theme) => ({
   submitButton: {
     borderRadius: 10,
     height: 40,
-    width: 250,
-    marginLeft: 150,
+    width: 200,
+    marginLeft: 180,
     marginTop: 20,
     marginBottom: 20,
     color: "white",
@@ -39,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const renderAllocationCostField = ({
+const renderLabelField = ({
   input,
   label,
   meta: { touched, error, invalid },
@@ -50,7 +51,7 @@ const renderAllocationCostField = ({
   return (
     <TextField
       //error={touched && invalid}
-      helperText="Allocation Cost"
+      helperText="Batch Label"
       variant="outlined"
       label={label}
       id={input.name}
@@ -61,11 +62,84 @@ const renderAllocationCostField = ({
       {...custom}
       // {...input}
       onChange={input.onChange}
-      inputProps={{
-        style: {
-          height: 5,
-        },
-      }}
+    />
+  );
+};
+
+const renderAssetBatchRefNumberField = ({
+  input,
+  label,
+  meta: { touched, error, invalid },
+  type,
+  id,
+  ...custom
+}) => {
+  return (
+    <TextField
+      //error={touched && invalid}
+      helperText="Batch Ref Number"
+      variant="outlined"
+      label={label}
+      id={input.name}
+      defaultValue={input.value}
+      fullWidth
+      //required
+      type={type}
+      {...custom}
+      // {...input}
+      onChange={input.onChange}
+    />
+  );
+};
+
+const renderQuantityField = ({
+  input,
+  label,
+  meta: { touched, error, invalid },
+  type,
+  id,
+  ...custom
+}) => {
+  return (
+    <TextField
+      //error={touched && invalid}
+      helperText="Quantity in Batch"
+      variant="outlined"
+      label={label}
+      id={input.name}
+      defaultValue={input.value}
+      fullWidth
+      //required
+      type={type}
+      {...custom}
+      // {...input}
+      onChange={input.onChange}
+    />
+  );
+};
+
+const renderAcquisitionDateField = ({
+  input,
+  label,
+  meta: { touched, error, invalid },
+  type,
+  id,
+  ...custom
+}) => {
+  return (
+    <TextField
+      //error={touched && invalid}
+      helperText="Acquisition Date"
+      variant="outlined"
+      label={label}
+      id={input.name}
+      defaultValue={input.value}
+      fullWidth
+      //required
+      type={type}
+      {...custom}
+      // {...input}
+      onChange={input.onChange}
     />
   );
 };
@@ -83,7 +157,7 @@ const renderDescriptionField = ({
       error={touched && invalid}
       //placeholder="category description"
       variant="outlined"
-      helperText="Describe Space Allocation"
+      helperText="Describe Batch"
       label={label}
       id={input.name}
       name={input.name}
@@ -100,158 +174,30 @@ const renderDescriptionField = ({
   );
 };
 
-const renderDateAllocationField = ({
-  input,
-  label,
-  meta: { touched, error, invalid },
-  type,
-  id,
-  ...custom
-}) => {
-  return (
-    <TextField
-      //error={touched && invalid}
-      helperText="Allocation Date"
-      variant="outlined"
-      label={label}
-      id={input.name}
-      defaultValue={input.value}
-      fullWidth
-      //required
-      type={type}
-      {...custom}
-      // {...input}
-      onChange={input.onChange}
-      inputProps={{
-        style: {
-          height: 5,
-        },
-      }}
-    />
-  );
-};
-
-const renderSpaceAllocationField = ({
-  input,
-  label,
-  meta: { touched, error, invalid },
-  type,
-  id,
-  ...custom
-}) => {
-  return (
-    <TextField
-      //error={touched && invalid}
-      helperText="Space Allocated"
-      variant="outlined"
-      placeholder="in sq ft"
-      label={label}
-      id={input.name}
-      defaultValue={input.value}
-      fullWidth
-      disabled
-      //required
-      type={type}
-      {...custom}
-      // {...input}
-      onChange={input.onChange}
-      inputProps={{
-        style: {
-          height: 5,
-        },
-      }}
-    />
-  );
-};
-
-const renderAllocationCommencementDateField = ({
-  input,
-  label,
-  meta: { touched, error, invalid },
-  type,
-  id,
-  ...custom
-}) => {
-  return (
-    <TextField
-      //error={touched && invalid}
-      helperText="Allocation Commencement Date"
-      variant="outlined"
-      label={label}
-      id={input.name}
-      defaultValue={input.value}
-      fullWidth
-      //required
-      type={type}
-      {...custom}
-      // {...input}
-      onChange={input.onChange}
-      inputProps={{
-        style: {
-          height: 5,
-        },
-      }}
-    />
-  );
-};
-
-const renderAllocationEndDateField = ({
-  input,
-  label,
-  meta: { touched, error, invalid },
-  type,
-  id,
-  ...custom
-}) => {
-  return (
-    <TextField
-      //error={touched && invalid}
-      helperText="Allocation End Date"
-      variant="outlined"
-      label={label}
-      id={input.name}
-      defaultValue={input.value}
-      fullWidth
-      //required
-      type={type}
-      {...custom}
-      // {...input}
-      onChange={input.onChange}
-      inputProps={{
-        style: {
-          height: 5,
-        },
-      }}
-    />
-  );
-};
-
-function AssetStoreAllocationStoreSpaceEditForm(props) {
+function AssetSetBatchEditForm(props) {
   const classes = useStyles();
-  const [serviceOutlet, setServiceOutlet] = useState(
-    props.params.serviceOutlet
-  );
-  const [storeType, setStoreType] = useState(props.params.storeType);
-  const [store, setStore] = useState(props.params.store);
-  const [beneficiaryServiceOutlet, setBeneficiaryServiceOutlet] = useState(
-    props.params.beneficiaryServiceOutlet
-  );
-  const [storeUnallocatedSpace, setStoreUnallocatedSpace] = useState();
-  const [serviceOutletList, setServiceOutletList] = useState([]);
-  const [storeTypeList, setStoreTypeList] = useState([]);
-  const [storeList, setStoreList] = useState([]);
+  const [assetType, setAssetType] = useState(props.params.assetType);
+  const [assetSet, setAssetSet] = useState(props.params.assetSet);
+  const [measurementUnit, setMeasurementUnit] = useState();
+  const [assetTypeList, setAssetTypeList] = useState([]);
+  const [assetSetList, setAssetSetList] = useState([]);
+  const [measurementUnitList, setMeasurementUnitList] = useState([]);
+  const [assetSetRef, setAssetSetRef] = useState(null);
+  const [assetSetRemainingQuanity, setAssetSetRemainingQuantity] =
+    useState(null);
+  const [assetSetMeasurementUnit, setAsetSetMeasurementUnit] = useState(null);
+  const [totalAssetQuantity, setTotalAssetQuantity] = useState();
   const [loading, setLoading] = useState(false);
 
   const params = props.params;
 
   const dispatch = useDispatch();
 
-  //get the service outlet
   useEffect(() => {
     const fetchData = async () => {
       let allData = [];
       api.defaults.headers.common["Authorization"] = `Bearer ${props.token}`;
-      const response = await api.get("/serviceoutlets");
+      const response = await api.get("/assettypes");
       const workingData = response.data.data.data;
       workingData.map((item) => {
         allData.push({
@@ -259,7 +205,7 @@ function AssetStoreAllocationStoreSpaceEditForm(props) {
           name: `${item.name}`,
         });
       });
-      setServiceOutletList(allData);
+      setAssetTypeList(allData);
     };
 
     //call the function
@@ -267,14 +213,34 @@ function AssetStoreAllocationStoreSpaceEditForm(props) {
     fetchData().catch(console.error);
   }, []);
 
-  //get the store type
+  useEffect(() => {
+    const fetchData = async () => {
+      let allData = [];
+      api.defaults.headers.common["Authorization"] = `Bearer ${props.token}`;
+      const response = await api.get("/assetsets", {
+        params: { assetType: assetType },
+      });
+      const workingData = response.data.data.data;
+      workingData.map((item) => {
+        allData.push({
+          id: item._id,
+          name: `${item.label}`,
+        });
+      });
+      setAssetSetList(allData);
+    };
+
+    //call the function
+
+    fetchData().catch(console.error);
+  }, [assetType]);
 
   useEffect(() => {
     const fetchData = async () => {
       let allData = [];
       api.defaults.headers.common["Authorization"] = `Bearer ${props.token}`;
-      const response = await api.get("/storetypes", {
-        //params: { assetType: assetType },
+      const response = await api.get("/assetmeasurementunits", {
+        params: { assetType: assetType },
       });
       const workingData = response.data.data.data;
       workingData.map((item) => {
@@ -283,83 +249,80 @@ function AssetStoreAllocationStoreSpaceEditForm(props) {
           name: `${item.name}`,
         });
       });
-      setStoreTypeList(allData);
+      setMeasurementUnitList(allData);
     };
 
     //call the function
 
     fetchData().catch(console.error);
-  }, []);
+  }, [assetType]);
 
-  //list the stores in the service outlet of a particular store type
-
-  useEffect(() => {
-    const fetchData = async () => {
-      let allData = [];
-      api.defaults.headers.common["Authorization"] = `Bearer ${props.token}`;
-      const response = await api.get("/stores", {
-        params: { storeType: storeType, serviceOutlet: serviceOutlet },
-      });
-      const workingData = response.data.data.data;
-      workingData.map((item) => {
-        allData.push({
-          id: item._id,
-          name: `${item.name}`,
-        });
-      });
-      setStoreList(allData);
-    };
-
-    //call the function
-
-    fetchData().catch(console.error);
-  }, [serviceOutlet, storeType]);
-
-  //retrieve the selected store details
+  //fetch an asset set
 
   useEffect(() => {
     const fetchData = async () => {
       let allData = [];
       api.defaults.headers.common["Authorization"] = `Bearer ${props.token}`;
-      const response = await api.get(`/stores/${store}`);
+      //   const response = await api.get("/assetsets", {
+      //     params: { assetType: assetType },
+      //   });
+
+      const response = await api.patch(`/assetsets/${assetSet}`);
 
       const item = response.data.data.data;
       allData.push({
         id: item._id,
-        unallocatedSpace: item.unallocatedSpace,
+        label: `${item.label}`,
+        assetType: item.assetType,
+        quantity: item.quantity,
+        remainingQuantity: item.remainingQuantity,
+        assetMeasurementUnit: item.assetMeasurementUnit,
+        setRefNumber: item.setRefNumber,
+        acquisitionDate: item.acquisitionDate,
       });
 
-      setStoreUnallocatedSpace(allData[0].unallocatedSpace);
+      //setAssetSetList(allData);
+      setAssetSetRef(allData[0].setRefNumber);
+      setAsetSetMeasurementUnit(allData[0].assetMeasurementUnit);
+      setAssetSetRemainingQuantity(allData[0].remainingQuantity);
+      setTotalAssetQuantity(allData[0].quantity);
+      setMeasurementUnit(allData[0].assetMeasurementUnit);
     };
 
     //call the function
 
     fetchData().catch(console.error);
-  }, [store]);
+  }, [assetSet]);
 
-  const handleServiceOutletChange = (event) => {
-    setServiceOutlet(event.target.value);
+  const handleAssetTypeChange = (event) => {
+    setAssetType(event.target.value);
     //     props.handleCountryChange(event.target.value);
   };
 
-  const handleStoreTypeChange = (event) => {
-    setStoreType(event.target.value);
+  const handleAssetSetChange = (event) => {
+    setAssetSet(event.target.value);
     //     props.handleCountryChange(event.target.value);
   };
 
-  const handleStoreChange = (event) => {
-    setStore(event.target.value);
+  const handleAsetMeasurementUnitChange = (event) => {
+    setMeasurementUnit(event.target.value);
     //     props.handleCountryChange(event.target.value);
   };
 
-  const handleBeneficiaryServiceOutletChange = (event) => {
-    setBeneficiaryServiceOutlet(event.target.value);
-    //     props.handleCountryChange(event.target.value);
-  };
+  let remainingQuantity = 0;
 
-  //get the service outlet  list
-  const renderServiceOutletList = () => {
-    return serviceOutletList.map((item) => {
+  if (
+    assetSetRemainingQuanity === undefined ||
+    assetSetRemainingQuanity === null
+  ) {
+    remainingQuantity = totalAssetQuantity;
+  } else {
+    remainingQuantity = assetSetRemainingQuanity;
+  }
+
+  //get the Asset Type list
+  const renderAssetTypeList = () => {
+    return assetTypeList.map((item) => {
       return (
         <MenuItem key={item.id} value={item.id}>
           {item.name}
@@ -368,9 +331,9 @@ function AssetStoreAllocationStoreSpaceEditForm(props) {
     });
   };
 
-  //get the store type
-  const renderStoreTypeList = () => {
-    return storeTypeList.map((item) => {
+  //get the Measurement Unit  list
+  const renderAssetMeasurementUnitList = () => {
+    return measurementUnitList.map((item) => {
       return (
         <MenuItem key={item.id} value={item.id}>
           {item.name}
@@ -379,9 +342,9 @@ function AssetStoreAllocationStoreSpaceEditForm(props) {
     });
   };
 
-  //get the store list
-  const renderStoreList = () => {
-    return storeList.map((item) => {
+  //get the asset set  list
+  const renderAssetSetList = () => {
+    return assetSetList.map((item) => {
       return (
         <MenuItem key={item.id} value={item.id}>
           {item.name}
@@ -390,7 +353,7 @@ function AssetStoreAllocationStoreSpaceEditForm(props) {
     });
   };
 
-  const renderStoreTypeField = ({
+  const renderAssetTypeField = ({
     input,
     label,
     meta: { touched, error, invalid },
@@ -404,28 +367,28 @@ function AssetStoreAllocationStoreSpaceEditForm(props) {
           {/* <InputLabel id="vendor_city">City</InputLabel> */}
 
           <Select
-            labelId="storeType"
-            id="storeType"
+            labelId="assetType"
+            id="assetType"
             //defaultValue={schemeType}
-            value={storeType}
+            value={assetType}
             // onChange={props.handleCountryChange}
-            onChange={handleStoreTypeChange}
-            label="Store Type"
-            style={{ width: 163, marginTop: 10, marginLeft: 10, height: 40 }}
+            onChange={handleAssetTypeChange}
+            label="Asset Type"
+            style={{ width: 165, marginTop: 10, height: 55 }}
             //{...input}
           >
             {/* <MenuItem value="tangible">Tangible Asset</MenuItem>
             <MenuItem value="inTangible">Intangible Asset</MenuItem> */}
 
-            {renderStoreTypeList()}
+            {renderAssetTypeList()}
           </Select>
-          <FormHelperText style={{ marginLeft: 20 }}>Store Type</FormHelperText>
+          <FormHelperText style={{ marginLeft: 20 }}>Asset Type</FormHelperText>
         </FormControl>
       </Box>
     );
   };
 
-  const renderServiceOutletField = ({
+  const renderAssetMeasurementUnitField = ({
     input,
     label,
     meta: { touched, error, invalid },
@@ -439,30 +402,31 @@ function AssetStoreAllocationStoreSpaceEditForm(props) {
           {/* <InputLabel id="vendor_city">City</InputLabel> */}
 
           <Select
-            labelId="serviceOutlet"
-            id="serviceOutlet"
+            labelId="assetMeasurementUnit"
+            id="assetMeasurementUnit"
             //defaultValue={schemeType}
-            value={serviceOutlet}
+            value={measurementUnit}
             // onChange={props.handleCountryChange}
-            onChange={handleServiceOutletChange}
-            label="Service Outlet"
-            style={{ width: 170, marginTop: 10, marginLeft: 0, height: 40 }}
+            onChange={handleAsetMeasurementUnitChange}
+            label="Unit of Measurement"
+            style={{ width: 150, marginTop: 0, marginLeft: 10, height: 55 }}
             //{...input}
+            readOnly={true}
           >
             {/* <MenuItem value="tangible">Tangible Asset</MenuItem>
             <MenuItem value="inTangible">Intangible Asset</MenuItem> */}
 
-            {renderServiceOutletList()}
+            {renderAssetMeasurementUnitList()}
           </Select>
           <FormHelperText style={{ marginLeft: 20 }}>
-            Service Outlet
+            Batch Measurement Unit
           </FormHelperText>
         </FormControl>
       </Box>
     );
   };
 
-  const renderStoreField = ({
+  const renderAssetSetField = ({
     input,
     label,
     meta: { touched, error, invalid },
@@ -476,62 +440,28 @@ function AssetStoreAllocationStoreSpaceEditForm(props) {
           {/* <InputLabel id="vendor_city">City</InputLabel> */}
 
           <Select
-            labelId="store"
-            id="store"
+            labelId="assetSet"
+            id="assetSet"
             //defaultValue={schemeType}
-            value={store}
+            value={assetSet}
             // onChange={props.handleCountryChange}
-            onChange={handleStoreChange}
-            label="Store"
-            style={{ width: 195, marginTop: 10, marginLeft: 10, height: 40 }}
+            onChange={handleAssetSetChange}
+            label="Asset Set"
+            style={{ width: 165, marginTop: 10, marginLeft: 10, height: 55 }}
             //{...input}
           >
             {/* <MenuItem value="tangible">Tangible Asset</MenuItem>
             <MenuItem value="inTangible">Intangible Asset</MenuItem> */}
 
-            {renderStoreList()}
+            {renderAssetSetList()}
           </Select>
-          <FormHelperText style={{ marginLeft: 20 }}>Store</FormHelperText>
+          <FormHelperText style={{ marginLeft: 20 }}>Asset Set</FormHelperText>
         </FormControl>
       </Box>
     );
   };
 
-  const renderBeneficiaryServiceOutletField = ({
-    input,
-    label,
-    meta: { touched, error, invalid },
-    type,
-    id,
-    ...custom
-  }) => {
-    return (
-      <Box>
-        <FormControl variant="outlined">
-          {/* <InputLabel id="vendor_city">City</InputLabel> */}
-
-          <Select
-            labelId="beneficiaryServiceOutlet"
-            id="beneficiaryServiceOutlet"
-            //defaultValue={schemeType}
-            value={beneficiaryServiceOutlet}
-            // onChange={props.handleCountryChange}
-            onChange={handleBeneficiaryServiceOutletChange}
-            label="Beneficiary Service Outlet"
-            style={{ width: 170, marginTop: 10, marginLeft: 0, height: 40 }}
-            //{...input}
-          >
-            {renderServiceOutletList()}
-          </Select>
-          <FormHelperText style={{ marginLeft: 20 }}>
-            Beneficiary Service Outlet
-          </FormHelperText>
-        </FormControl>
-      </Box>
-    );
-  };
-
-  const renderSpaceForAllocationField = ({
+  const renderSetRemainingQuantityField = ({
     input,
     label,
     meta: { touched, error, invalid },
@@ -542,7 +472,7 @@ function AssetStoreAllocationStoreSpaceEditForm(props) {
     return (
       <TextField
         //error={touched && invalid}
-        helperText="Space For Allocation (sq ft)"
+        helperText="Set Remaining Quantity"
         variant="outlined"
         label={label}
         id={input.name}
@@ -554,22 +484,77 @@ function AssetStoreAllocationStoreSpaceEditForm(props) {
         {...custom}
         // {...input}
         onChange={input.onChange}
-        inputProps={{
-          style: {
-            height: 5,
-          },
-        }}
       />
     );
   };
 
-  let totalUnallocatedSpace = 0;
-  if (storeUnallocatedSpace) {
-    console.log("unallocated space is:", storeUnallocatedSpace.toFixed(2));
-    totalUnallocatedSpace = storeUnallocatedSpace.toFixed(2);
-  }
+  const renderAssetSetMeasurementUnitField = ({
+    input,
+    label,
+    meta: { touched, error, invalid },
+    type,
+    id,
+    ...custom
+  }) => {
+    return (
+      <Box>
+        <FormControl variant="outlined">
+          {/* <InputLabel id="vendor_city">City</InputLabel> */}
+
+          <Select
+            labelId="setMeasurementUnit"
+            id="setMeasurementUnit"
+            //defaultValue={schemeType}
+            value={assetSetMeasurementUnit}
+            // onChange={props.handleCountryChange}
+            onChange={handleAsetMeasurementUnitChange}
+            label="Unit of Measurement"
+            style={{ width: 150, marginTop: 0, marginLeft: 10, height: 55 }}
+            //{...input}
+            readOnly={true}
+          >
+            {/* <MenuItem value="tangible">Tangible Asset</MenuItem>
+            <MenuItem value="inTangible">Intangible Asset</MenuItem> */}
+
+            {renderAssetMeasurementUnitList()}
+          </Select>
+          <FormHelperText style={{ marginLeft: 20 }}>
+            Set Measurement Unit
+          </FormHelperText>
+        </FormControl>
+      </Box>
+    );
+  };
+
+  const renderAssetSetRefNumberField = ({
+    input,
+    label,
+    meta: { touched, error, invalid },
+    type,
+    id,
+    ...custom
+  }) => {
+    return (
+      <TextField
+        //error={touched && invalid}
+        helperText="Set Reference Number"
+        variant="outlined"
+        label={label}
+        id={input.name}
+        defaultValue={input.value}
+        fullWidth
+        //required
+        type={type}
+        disabled
+        {...custom}
+        // {...input}
+        onChange={input.onChange}
+      />
+    );
+  };
+
   const buttonContent = () => {
-    return <React.Fragment> Update Allocated Store Space</React.Fragment>;
+    return <React.Fragment> Update Asset Batch</React.Fragment>;
   };
 
   const onSubmit = (formValues) => {
@@ -578,34 +563,44 @@ function AssetStoreAllocationStoreSpaceEditForm(props) {
     const Str = require("@supercharge/strings");
     // formValues["code"] = Str(formValues.code).limit(4).get();
     formValues["createdBy"] = props.userId;
-    formValues["serviceOutlet"] = serviceOutlet;
-    formValues["storeType"] = storeType;
-    formValues["store"] = store;
-    formValues["beneficiaryServiceOutlet"] = beneficiaryServiceOutlet;
+    formValues["assetType"] = assetType;
+    formValues["assetSet"] = assetSet;
+    formValues["assetMeasurementUnit"] = measurementUnit;
 
-    if (+totalUnallocatedSpace < +formValues["spaceAllocated"]) {
-      formValues["spaceAllocated"] = totalUnallocatedSpace;
+    if (remainingQuantity < formValues["quantity"]) {
+      formValues["quantity"] = remainingQuantity;
     }
+
+    formValues["remainingQuantityInBatch"] = formValues["quantity"];
 
     if (formValues) {
       const editForm = async () => {
         api.defaults.headers.common["Authorization"] = `Bearer ${props.token}`;
-
         const response = await api.patch(
-          `/storespaceallocations/${props.params.id}`,
+          `/assetsetbatches/${props.params.id}`,
           formValues
         );
 
         if (response.data.status === "success") {
           dispatch({
-            type: EDIT_ASSETSTORESPACEALLOCATION,
+            type: EDIT_ASSETSETBATCH,
             payload: response.data.data.data,
           });
 
-          //reduce that space allocatable of the store
+          //recalculate asset quantity in the set document
+          // const remainingSetQuantity =
+          //   remainingQuantity - formValues["quantity"];
+          // const dataValue = {
+          //   id: assetSet,
+          //   remainingQuantity: remainingSetQuantity,
+          // };
+          // const setResponse = await api.patch(
+          //   `/assetsets/${assetSet}`,
+          //   dataValue
+          // );
 
           props.handleSuccessfulEditSnackbar(
-            `This Store Space  is allocated successfully!!!`
+            `${response.data.data.data.label} Batch is updated successfully!!!`
           );
           props.handleEditDialogOpenStatus();
           setLoading(false);
@@ -624,27 +619,15 @@ function AssetStoreAllocationStoreSpaceEditForm(props) {
     }
   };
 
-  const allocationCommencementDate = new Date(params.allocationCommencementDate)
-    .toISOString()
-    .slice(0, 10);
-
-  const allocationEndDate = new Date(params.allocationEndDate)
-    .toISOString()
-    .slice(0, 10);
-
-  const allocationDate = new Date(params.dateAllocated)
-    .toISOString()
-    .slice(0, 10);
-
   return (
-    <form id="assetStoreAllocationStoreSpaceEditForm">
+    <form id="assetSetBatchEditForm">
       <Box
         // component="form"
         // id="categoryForm"
         // onSubmit={onSubmit}
         sx={{
           width: 550,
-          height: 540,
+          height: 520,
         }}
         noValidate
         autoComplete="off"
@@ -659,124 +642,115 @@ function AssetStoreAllocationStoreSpaceEditForm(props) {
             style={{ color: "blue", fontSize: "1.5em" }}
             component="legend"
           >
-            <Typography variant="subtitle1"> Store Space Allocation</Typography>
+            <Typography variant="subtitle1"> Asset Batch</Typography>
           </FormLabel>
         </Grid>
         <Grid container direction="row">
           <Grid item>
             <Field
               label=""
-              id="serviceOutlet"
-              name="serviceOutlet"
+              id="assetType"
+              name="assetType"
+              // defaultValue={params.assetType}
               type="text"
-              component={renderServiceOutletField}
+              component={renderAssetTypeField}
             />
           </Grid>
 
           <Grid item>
             <Field
               label=""
-              id="storeType"
-              name="storeType"
+              id="assetSet"
+              name="assetSet"
+              //defaultValue={params.assetSet}
               type="text"
-              component={renderStoreTypeField}
+              component={renderAssetSetField}
+              style={{ marginTop: 10 }}
+            />
+          </Grid>
+          <Grid item>
+            <Field
+              label=""
+              id="label"
+              name="label"
+              defaultValue={params.label}
+              type="text"
+              component={renderLabelField}
               style={{ marginTop: 10, marginLeft: 10 }}
             />
           </Grid>
-          <Grid item>
-            <Field
-              label=""
-              id="store"
-              name="store"
-              type="text"
-              component={renderStoreField}
-              style={{ width: 180, marginLeft: 10 }}
-            />
-          </Grid>
         </Grid>
-        <Grid container direction="row">
+
+        <Grid container direction="row" style={{ marginTop: 10 }}>
           <Grid item>
             <Field
               label=""
-              id="beneficiaryServiceOutlet"
-              name="beneficiaryServiceOutlet"
+              id="setRefNumber"
+              name="setRefNumber"
+              defaultValue={assetSetRef}
               type="text"
-              component={renderBeneficiaryServiceOutletField}
-              style={{ marginLeft: 10 }}
+              component={renderAssetSetRefNumberField}
+              style={{ width: 195 }}
             />
           </Grid>
 
           <Grid item>
             <Field
               label=""
-              id="spaceForAllocation"
-              name="spaceForAllocation"
-              defaultValue={totalUnallocatedSpace}
-              type="text"
-              component={renderSpaceForAllocationField}
-              style={{ width: 180, marginLeft: 10, marginTop: 10 }}
-            />
-          </Grid>
-
-          <Grid item>
-            <Field
-              label=""
-              id="spaceAllocated"
-              name="spaceAllocated"
-              defaultValue={params.spaceAllocated}
+              id="remainingQuantity"
+              name="remainingQuantity"
+              defaultValue={remainingQuantity}
               type="number"
-              component={renderSpaceAllocationField}
-              style={{ width: 180, marginLeft: 10, marginTop: 10 }}
+              component={renderSetRemainingQuantityField}
+              style={{ marginLeft: 10, width: 180 }}
             />
           </Grid>
-        </Grid>
-        <Grid container direction="row">
           <Grid item>
             <Field
               label=""
-              id="dateAllocated"
-              name="dateAllocated"
-              defaultValue={allocationDate}
-              type="date"
-              component={renderDateAllocationField}
-              style={{ width: 270, marginLeft: 0, marginTop: 10 }}
+              id="setMeasurementUnit"
+              name="setMeasurementUnit"
+              type="text"
+              component={renderAssetSetMeasurementUnitField}
+              style={{ marginLeft: 15, width: 150 }}
+            />
+          </Grid>
+        </Grid>
+
+        <Grid container direction="row" style={{ marginTop: 10 }}>
+          <Grid item>
+            <Field
+              label=""
+              id="batchRefNumber"
+              name="batchRefNumber"
+              defaultValue={params.batchRefNumber}
+              type="text"
+              component={renderAssetBatchRefNumberField}
+              style={{ width: 190 }}
             />
           </Grid>
 
           <Grid item>
             <Field
               label=""
-              id="allocationCost"
-              name="allocationCost"
-              defaultValue={params.allocationCost}
+              id="quantity"
+              name="quantity"
+              defaultValue={params.quantity}
               type="number"
-              component={renderAllocationCostField}
-              style={{ width: 270, marginLeft: 10, marginTop: 10 }}
+              component={renderQuantityField}
+              style={{ marginLeft: 10, width: 190 }}
             />
           </Grid>
-        </Grid>
-        <Grid container direction="row">
           <Grid item>
             <Field
               label=""
-              id="allocationCommencementDate"
-              name="allocationCommencementDate"
-              defaultValue={allocationCommencementDate}
-              type="date"
-              component={renderAllocationCommencementDateField}
-              style={{ width: 270, marginLeft: 0, marginTop: 10 }}
-            />
-          </Grid>
-
-          <Grid item>
-            <Field
-              label=""
-              id="allocationEndDate"
-              name="allocationEndDate"
-              defaultValue={allocationEndDate}
-              type="date"
-              component={renderAllocationEndDateField}
-              style={{ width: 270, marginLeft: 10, marginTop: 10 }}
+              id="assetMeasurementUnit"
+              name="assetMeasurementUnit"
+              defaultValue={params.assetMeasurementUnit}
+              //defaultValue={measurementUnit}
+              type="text"
+              component={renderAssetMeasurementUnitField}
+              style={{ marginLeft: 20 }}
             />
           </Grid>
         </Grid>
@@ -788,7 +762,7 @@ function AssetStoreAllocationStoreSpaceEditForm(props) {
           defaultValue={params.description}
           type="text"
           component={renderDescriptionField}
-          style={{ marginTop: 10 }}
+          style={{ marginTop: 10, width: 550 }}
         />
 
         <Button
@@ -808,5 +782,5 @@ function AssetStoreAllocationStoreSpaceEditForm(props) {
 }
 
 export default reduxForm({
-  form: "assetStoreAllocationStoreSpaceEditForm",
-})(AssetStoreAllocationStoreSpaceEditForm);
+  form: "assetSetBatchEditForm",
+})(AssetSetBatchEditForm);

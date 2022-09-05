@@ -15,7 +15,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import Select from "@material-ui/core/Select";
 import api from "./../../../../apis/local";
-import { CREATE_MEASUREMENTUNIT } from "../../../../actions/types";
+import { CREATE_ASSETSET } from "../../../../actions/types";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const renderNameField = ({
+const renderLabelField = ({
   input,
   label,
   meta: { touched, error, invalid },
@@ -50,7 +50,7 @@ const renderNameField = ({
   return (
     <TextField
       //error={touched && invalid}
-      helperText="Enter Measurement Unit"
+      helperText="Enter Asset Set Label"
       variant="outlined"
       label={label}
       id={input.name}
@@ -65,7 +65,7 @@ const renderNameField = ({
   );
 };
 
-const renderSymbolField = ({
+const renderAssetSetRefNumberField = ({
   input,
   label,
   meta: { touched, error, invalid },
@@ -76,7 +76,59 @@ const renderSymbolField = ({
   return (
     <TextField
       //error={touched && invalid}
-      helperText="Enter Measurement Unit Symbol"
+      helperText="Enter Ref Number"
+      variant="outlined"
+      label={label}
+      id={input.name}
+      defaultValue={input.value}
+      fullWidth
+      //required
+      type={type}
+      {...custom}
+      // {...input}
+      onChange={input.onChange}
+    />
+  );
+};
+
+const renderQuantityField = ({
+  input,
+  label,
+  meta: { touched, error, invalid },
+  type,
+  id,
+  ...custom
+}) => {
+  return (
+    <TextField
+      //error={touched && invalid}
+      helperText="Enter Asset Quantity in this Set"
+      variant="outlined"
+      label={label}
+      id={input.name}
+      defaultValue={input.value}
+      fullWidth
+      //required
+      type={type}
+      {...custom}
+      // {...input}
+      onChange={input.onChange}
+    />
+  );
+};
+
+const renderAcquisitionDateField = ({
+  input,
+  label,
+  meta: { touched, error, invalid },
+  type,
+  id,
+  ...custom
+}) => {
+  return (
+    <TextField
+      //error={touched && invalid}
+      helperText="Enter Acquisition Date"
       variant="outlined"
       label={label}
       id={input.name}
@@ -104,7 +156,7 @@ const renderDescriptionField = ({
       error={touched && invalid}
       //placeholder="category description"
       variant="outlined"
-      helperText="Describe Measurement Unit"
+      helperText="Describe Asset Set"
       label={label}
       id={input.name}
       name={input.name}
@@ -121,10 +173,12 @@ const renderDescriptionField = ({
   );
 };
 
-function AssetUtilityMeasurementUnitCreateForm(props) {
+function AssetSetCreateForm(props) {
   const classes = useStyles();
   const [assetType, setAssetType] = useState();
+  const [measurementUnit, setMeasurementUnit] = useState();
   const [assetTypeList, setAssetTypeList] = useState([]);
+  const [measurementUnitList, setMeasurementUnitList] = useState([]);
   const [loading, setLoading] = useState(false);
 
   const dispatch = useDispatch();
@@ -149,8 +203,35 @@ function AssetUtilityMeasurementUnitCreateForm(props) {
     fetchData().catch(console.error);
   }, []);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      let allData = [];
+      api.defaults.headers.common["Authorization"] = `Bearer ${props.token}`;
+      const response = await api.get("/assetmeasurementunits", {
+        params: { assetType: assetType },
+      });
+      const workingData = response.data.data.data;
+      workingData.map((item) => {
+        allData.push({
+          id: item._id,
+          name: `${item.name}`,
+        });
+      });
+      setMeasurementUnitList(allData);
+    };
+
+    //call the function
+
+    fetchData().catch(console.error);
+  }, [assetType]);
+
   const handleAssetTypeChange = (event) => {
     setAssetType(event.target.value);
+    //     props.handleCountryChange(event.target.value);
+  };
+
+  const handleAsetMeasurementUnitChange = (event) => {
+    setMeasurementUnit(event.target.value);
     //     props.handleCountryChange(event.target.value);
   };
 
@@ -165,7 +246,19 @@ function AssetUtilityMeasurementUnitCreateForm(props) {
     });
   };
 
-  const renderAssetSubclassField = ({
+  //get the Measurement Unit  list
+  const renderAssetMeasurementUnitList = () => {
+    return measurementUnitList.map((item) => {
+      return (
+        <MenuItem key={item.id} value={item.id}>
+          {item.name}
+        </MenuItem>
+      );
+    });
+  };
+
+  console.log("the aset type is:", assetType);
+  const renderAssetTypeField = ({
     input,
     label,
     meta: { touched, error, invalid },
@@ -186,7 +279,7 @@ function AssetUtilityMeasurementUnitCreateForm(props) {
             // onChange={props.handleCountryChange}
             onChange={handleAssetTypeChange}
             label="Asset Type"
-            style={{ width: 400, marginTop: 10, height: 50 }}
+            style={{ width: 195, marginTop: 10, height: 55 }}
             {...input}
           >
             {/* <MenuItem value="tangible">Tangible Asset</MenuItem>
@@ -202,8 +295,45 @@ function AssetUtilityMeasurementUnitCreateForm(props) {
     );
   };
 
+  const renderAssetMeasurementUnitField = ({
+    input,
+    label,
+    meta: { touched, error, invalid },
+    type,
+    id,
+    ...custom
+  }) => {
+    return (
+      <Box>
+        <FormControl variant="outlined">
+          {/* <InputLabel id="vendor_city">City</InputLabel> */}
+
+          <Select
+            labelId="assetMeasurementUnit"
+            id="assetMeasurementUnit"
+            //defaultValue={schemeType}
+            value={measurementUnit}
+            // onChange={props.handleCountryChange}
+            onChange={handleAsetMeasurementUnitChange}
+            label="Unit of Measurement"
+            style={{ width: 195, marginTop: 0, height: 55 }}
+            {...input}
+          >
+            {/* <MenuItem value="tangible">Tangible Asset</MenuItem>
+            <MenuItem value="inTangible">Intangible Asset</MenuItem> */}
+
+            {renderAssetMeasurementUnitList()}
+          </Select>
+          <FormHelperText style={{ marginLeft: 20 }}>
+            Select Unit of Measurement
+          </FormHelperText>
+        </FormControl>
+      </Box>
+    );
+  };
+
   const buttonContent = () => {
-    return <React.Fragment> Add Measurement Unit</React.Fragment>;
+    return <React.Fragment> Create Asset Set</React.Fragment>;
   };
 
   const onSubmit = (formValues) => {
@@ -212,22 +342,21 @@ function AssetUtilityMeasurementUnitCreateForm(props) {
     const Str = require("@supercharge/strings");
     // formValues["code"] = Str(formValues.code).limit(4).get();
     formValues["createdBy"] = props.userId;
-
-    console.log("this formvalues is:", formValues);
+    formValues["remainingQuantity"] = formValues["quantity"];
 
     if (formValues) {
       const createForm = async () => {
         api.defaults.headers.common["Authorization"] = `Bearer ${props.token}`;
-        const response = await api.post(`/assetmeasurementunits`, formValues);
+        const response = await api.post(`/assetsets`, formValues);
 
         if (response.data.status === "success") {
           dispatch({
-            type: CREATE_MEASUREMENTUNIT,
+            type: CREATE_ASSETSET,
             payload: response.data.data.data,
           });
 
           props.handleSuccessfulCreateSnackbar(
-            `${response.data.data.data.name} Asset Measurement Unit is added successfully!!!`
+            `${response.data.data.data.label} Asset Set is added successfully!!!`
           );
           props.handleDialogOpenStatus();
           setLoading(false);
@@ -246,8 +375,10 @@ function AssetUtilityMeasurementUnitCreateForm(props) {
     }
   };
 
+  console.log("the aset type2 is:", assetType);
+
   return (
-    <form id="assetUtilityMeasurementUnitCreateForm">
+    <form id="assetSetCreateForm">
       <Box
         // component="form"
         // id="categoryForm"
@@ -269,32 +400,76 @@ function AssetUtilityMeasurementUnitCreateForm(props) {
             style={{ color: "blue", fontSize: "1.5em" }}
             component="legend"
           >
-            <Typography variant="subtitle1"> Asset Measurement Unit</Typography>
+            <Typography variant="subtitle1"> Asset Set</Typography>
           </FormLabel>
         </Grid>
-        <Field
-          label=""
-          id="assetType"
-          name="assetType"
-          type="text"
-          component={renderAssetSubclassField}
-        />
-        <Field
-          label=""
-          id="name"
-          name="name"
-          type="text"
-          component={renderNameField}
-          style={{ marginTop: 10 }}
-        />
-        <Field
-          label=""
-          id="symbol"
-          name="symbol"
-          type="text"
-          component={renderSymbolField}
-          style={{ marginTop: 10 }}
-        />
+        <Grid container direction="row">
+          <Grid item>
+            <Field
+              label=""
+              id="assetType"
+              name="assetType"
+              type="text"
+              component={renderAssetTypeField}
+            />
+          </Grid>
+
+          <Grid item>
+            <Field
+              label=""
+              id="label"
+              name="label"
+              type="text"
+              component={renderLabelField}
+              style={{ marginTop: 10, marginLeft: 10 }}
+            />
+          </Grid>
+        </Grid>
+        <Grid container direction="row">
+          <Grid item>
+            <Field
+              label=""
+              id="setRefNumber"
+              name="setRefNumber"
+              type="text"
+              component={renderAssetSetRefNumberField}
+              style={{ width: 195 }}
+            />
+          </Grid>
+
+          <Grid item>
+            <Field
+              label=""
+              id="quantity"
+              name="quantity"
+              type="number"
+              component={renderQuantityField}
+              style={{ marginLeft: 10 }}
+            />
+          </Grid>
+        </Grid>
+        <Grid container direction="row">
+          <Grid item>
+            <Field
+              label=""
+              id="assetMeasurementUnit"
+              name="assetMeasurementUnit"
+              type="text"
+              component={renderAssetMeasurementUnitField}
+            />
+          </Grid>
+
+          <Grid item>
+            <Field
+              label=""
+              id="acquisitionDate"
+              name="acquisitionDate"
+              type="date"
+              component={renderAcquisitionDateField}
+              style={{ width: 195, marginLeft: 10 }}
+            />
+          </Grid>
+        </Grid>
 
         <Field
           label=""
@@ -322,5 +497,5 @@ function AssetUtilityMeasurementUnitCreateForm(props) {
 }
 
 export default reduxForm({
-  form: "assetUtilityMeasurementUnitCreateForm",
-})(AssetUtilityMeasurementUnitCreateForm);
+  form: "assetSetCreateForm",
+})(AssetSetCreateForm);

@@ -162,8 +162,17 @@ class AssetStoreMaintenancesList extends React.Component {
     let counter = 0;
     const columns = [
       { field: "numbering", headerName: "S/n", width: 60 },
-      { field: "code", headerName: "Transaction Code", width: 150 },
-      { field: "name", headerName: "Transaction Name", width: 200 },
+      { field: "serviceOutlet", headerName: "Service Outlet", width: 200 },
+
+      { field: "label", headerName: "Maintenace Label", width: 200 },
+      {
+        field: "storeMaintenanceType",
+        headerName: "Maintenance Type",
+        width: 150,
+      },
+      { field: "storeType", headerName: "Store Type", width: 150 },
+      { field: "store", headerName: "store", width: 150 },
+      { field: "cost", headerName: "Maintenance Cost", width: 150 },
 
       {
         field: "editaction",
@@ -210,9 +219,17 @@ class AssetStoreMaintenancesList extends React.Component {
       let row = {
         numbering: ++counter,
         id: assetStoreMaintenance.id,
-        code: assetStoreMaintenance.code,
-        name: assetStoreMaintenance.name,
+        serviceOutlet: assetStoreMaintenance.serviceOutlet,
+        label: assetStoreMaintenance.label,
+        storeType: assetStoreMaintenance.storeType,
+        storeMaintenanceType: assetStoreMaintenance.storeMaintenanceType,
+        store: assetStoreMaintenance.store,
+        cost: assetStoreMaintenance.cost,
+        purpose: assetStoreMaintenance.purpose,
         description: assetStoreMaintenance.description,
+        maintenanceCommencementDate:
+          assetStoreMaintenance.maintenanceCommencementDate,
+        maintenanceEndDate: assetStoreMaintenance.maintenanceEndDate,
       };
       rows.push(row);
     });

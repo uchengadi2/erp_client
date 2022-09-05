@@ -161,8 +161,7 @@ class AssetUtilityStoreTypeList extends React.Component {
     let counter = 0;
     const columns = [
       { field: "numbering", headerName: "S/n", width: 60 },
-      { field: "code", headerName: "Transaction Code", width: 150 },
-      { field: "name", headerName: "Transaction Name", width: 200 },
+      { field: "name", headerName: "Store Type", width: 200 },
 
       {
         field: "editaction",
@@ -211,7 +210,6 @@ class AssetUtilityStoreTypeList extends React.Component {
       let row = {
         numbering: ++counter,
         id: storeType.id,
-        code: storeType.code,
         name: storeType.name,
         description: storeType.description,
       };
