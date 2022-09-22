@@ -149,6 +149,7 @@ import hrUtilityExtraDeductableReducer from "./hrUtilityExtraDeductableReducer";
 import assetProcurementReducer from "./assetProcurementReducer";
 import assetSetReducer from "./assetSetReducer";
 import assetSetBatchReducer from "./assetSetBatchReducer";
+import stockRequisitionReducer from "./stockRequisitionReducer";
 
 export default combineReducers({
   auth: authReducer,
@@ -304,4 +305,5 @@ export default combineReducers({
   assetProcurement: assetProcurementReducer,
   assetSet: assetSetReducer,
   assetSetBatch: assetSetBatchReducer,
+  stockRequisition: stockRequisitionReducer,
 });

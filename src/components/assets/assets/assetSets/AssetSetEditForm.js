@@ -61,6 +61,11 @@ const renderLabelField = ({
       {...custom}
       // {...input}
       onChange={input.onChange}
+      inputProps={{
+        style: {
+          height: 1,
+        },
+      }}
     />
   );
 };
@@ -87,6 +92,11 @@ const renderAssetSetRefNumberField = ({
       {...custom}
       // {...input}
       onChange={input.onChange}
+      inputProps={{
+        style: {
+          height: 1,
+        },
+      }}
     />
   );
 };
@@ -113,6 +123,11 @@ const renderQuantityField = ({
       {...custom}
       // {...input}
       onChange={input.onChange}
+      inputProps={{
+        style: {
+          height: 1,
+        },
+      }}
     />
   );
 };
@@ -139,6 +154,11 @@ const renderAcquisitionDateField = ({
       {...custom}
       // {...input}
       onChange={input.onChange}
+      inputProps={{
+        style: {
+          height: 1,
+        },
+      }}
     />
   );
 };
@@ -165,7 +185,7 @@ const renderDescriptionField = ({
       type={type}
       style={{ marginTop: 20 }}
       multiline={true}
-      minRows={4}
+      minRows={3}
       {...custom}
       // {...input}
       onChange={input.onChange}
@@ -181,6 +201,16 @@ function AssetSetEditForm(props) {
   );
   const [assetTypeList, setAssetTypeList] = useState([]);
   const [measurementUnitList, setMeasurementUnitList] = useState([]);
+  const [assetProcurementList, setAssetProcurementList] = useState([]);
+  const [assetProcurement, setAssetProcurement] = useState(
+    props.params.assetProcurement
+  );
+  const [currentQuantity, setCurrentQuality] = useState(props.params.quantity);
+  const [remainingQuantityForAllocation, setRemainingQuantityForAllocation] =
+    useState();
+  const [remainingQuantity, setRemainingQuantity] = useState(
+    props.params.remainingQuantity
+  );
   const [loading, setLoading] = useState(false);
 
   const params = props.params;
@@ -233,6 +263,61 @@ function AssetSetEditForm(props) {
     fetchData().catch(console.error);
   }, [assetType]);
 
+  //fetch asset procurements
+  useEffect(() => {
+    const fetchData = async () => {
+      let allData = [];
+      api.defaults.headers.common["Authorization"] = `Bearer ${props.token}`;
+      const response = await api.get("/assetprocurements", {
+        params: { assetType: assetType },
+      });
+      const workingData = response.data.data.data;
+      workingData.map((item) => {
+        allData.push({
+          id: item._id,
+          name: `${item.procurementRefNumber}-${item.procurementItem}`,
+        });
+      });
+      setAssetProcurementList(allData);
+    };
+
+    //call the function
+
+    fetchData().catch(console.error);
+  }, [assetType]);
+
+  //fetching a particular procurement detail
+
+  useEffect(() => {
+    const fetchData = async () => {
+      let allData = [];
+      api.defaults.headers.common["Authorization"] = `Bearer ${props.token}`;
+      //   const response = await api.get("/assetsets", {
+      //     params: { assetType: assetType },
+      //   });
+
+      const response = await api.get(`/assetprocurements/${assetProcurement}`);
+
+      const item = response.data.data.data;
+      allData.push({
+        id: item._id,
+        assetType: item.assetType,
+        quantity: item.quantity,
+        assetMeasurementUnit: item.assetMeasurementUnit,
+        remainingQuantityForAllocation: item.remainingQuantityForAllocation,
+      });
+
+      setRemainingQuantityForAllocation(
+        allData[0].remainingQuantityForAllocation
+      );
+      setMeasurementUnit(allData[0].assetMeasurementUnit);
+    };
+
+    //call the function
+
+    fetchData().catch(console.error);
+  }, [assetProcurement]);
+
   const handleAssetTypeChange = (event) => {
     setAssetType(event.target.value);
     //     props.handleCountryChange(event.target.value);
@@ -240,6 +325,11 @@ function AssetSetEditForm(props) {
 
   const handleAsetMeasurementUnitChange = (event) => {
     setMeasurementUnit(event.target.value);
+    //     props.handleCountryChange(event.target.value);
+  };
+
+  const handleAssetProcurementChange = (event) => {
+    setAssetProcurement(event.target.value);
     //     props.handleCountryChange(event.target.value);
   };
 
@@ -257,6 +347,17 @@ function AssetSetEditForm(props) {
   //get the Measurement Unit  list
   const renderAssetMeasurementUnitList = () => {
     return measurementUnitList.map((item) => {
+      return (
+        <MenuItem key={item.id} value={item.id}>
+          {item.name}
+        </MenuItem>
+      );
+    });
+  };
+
+  //get the Asset Procurement  list
+  const renderAssetProcurementUnitList = () => {
+    return assetProcurementList.map((item) => {
       return (
         <MenuItem key={item.id} value={item.id}>
           {item.name}
@@ -286,7 +387,7 @@ function AssetSetEditForm(props) {
             // onChange={props.handleCountryChange}
             onChange={handleAssetTypeChange}
             label="Asset Type"
-            style={{ width: 195, marginTop: 10, height: 55 }}
+            style={{ width: 195, marginTop: 10, height: 38 }}
             //{...input}
           >
             {/* <MenuItem value="tangible">Tangible Asset</MenuItem>
@@ -321,8 +422,9 @@ function AssetSetEditForm(props) {
             // onChange={props.handleCountryChange}
             onChange={handleAsetMeasurementUnitChange}
             label="Unit of Measurement"
-            style={{ width: 195, marginTop: 0, height: 55 }}
+            style={{ width: 195, marginTop: 10, height: 38 }}
             //{...input}
+            disabled
           >
             {/* <MenuItem value="tangible">Tangible Asset</MenuItem>
             <MenuItem value="inTangible">Intangible Asset</MenuItem> */}
@@ -334,6 +436,75 @@ function AssetSetEditForm(props) {
           </FormHelperText>
         </FormControl>
       </Box>
+    );
+  };
+
+  const renderProcurementField = ({
+    input,
+    label,
+    meta: { touched, error, invalid },
+    type,
+    id,
+    ...custom
+  }) => {
+    return (
+      <Box>
+        <FormControl variant="outlined">
+          {/* <InputLabel id="vendor_city">City</InputLabel> */}
+
+          <Select
+            labelId="assetProcurement"
+            id="assetProcurement"
+            //defaultValue={schemeType}
+            value={assetProcurement}
+            // onChange={props.handleCountryChange}
+            onChange={handleAssetProcurementChange}
+            label="Asset Type"
+            style={{ width: 185, marginTop: 10, height: 38 }}
+            //{...input}
+          >
+            {/* <MenuItem value="tangible">Tangible Asset</MenuItem>
+            <MenuItem value="inTangible">Intangible Asset</MenuItem> */}
+
+            {renderAssetProcurementUnitList()}
+          </Select>
+          <FormHelperText style={{ marginLeft: 20 }}>
+            Select Procurement
+          </FormHelperText>
+        </FormControl>
+      </Box>
+    );
+  };
+
+  const renderRemainingProcuredAllocatableQuantityField = ({
+    input,
+    label,
+    meta: { touched, error, invalid },
+    type,
+    id,
+    ...custom
+  }) => {
+    return (
+      <TextField
+        //error={touched && invalid}
+        helperText="Procurement Allocatable Quantity"
+        variant="outlined"
+        label={label}
+        id={input.name}
+        defaultValue={input.value}
+        fullWidth
+        //required
+        type={type}
+        {...custom}
+        disabled
+        // {...input}
+        onChange={input.onChange}
+        inputProps={{
+          style: {
+            height: 1,
+          },
+        }}
+      />
     );
   };
 
@@ -349,6 +520,19 @@ function AssetSetEditForm(props) {
     formValues["UpdatedBy"] = props.userId;
     formValues["assetType"] = assetType;
     formValues["assetMeasurementUnit"] = measurementUnit;
+    formValues["assetProcurement"] = assetProcurement;
+
+    if (formValues["quantity"]) {
+      if (
+        parseFloat(remainingQuantityForAllocation) <
+        parseFloat(formValues["quantity"])
+      ) {
+        formValues["quantity"] = remainingQuantityForAllocation;
+      }
+      const diff =
+        parseFloat(currentQuantity) - parseFloat(formValues["quantity"]);
+      formValues["remainingQuantity"] = remainingQuantity - diff;
+    }
 
     if (formValues) {
       const editForm = async () => {
@@ -364,6 +548,22 @@ function AssetSetEditForm(props) {
             type: EDIT_ASSETSET,
             payload: response.data.data.data,
           });
+
+          //recalculate asset quantity in the procurement document
+          if (formValues["quantity"]) {
+            const diff =
+              parseFloat(currentQuantity) - parseFloat(formValues["quantity"]);
+            const remainingProcurementQuantity =
+              remainingQuantityForAllocation + diff;
+            const dataValue = {
+              remainingQuantityForAllocation: remainingProcurementQuantity,
+            };
+
+            const setResponse = await api.patch(
+              `/assetprocurements/${assetProcurement}`,
+              dataValue
+            );
+          }
 
           props.handleSuccessfulEditSnackbar(
             `${response.data.data.data.label} Asset Set is added successfully!!!`
@@ -393,7 +593,7 @@ function AssetSetEditForm(props) {
         // onSubmit={onSubmit}
         sx={{
           width: 400,
-          height: 500,
+          height: 520,
         }}
         noValidate
         autoComplete="off"
@@ -439,12 +639,36 @@ function AssetSetEditForm(props) {
           <Grid item>
             <Field
               label=""
+              id="procurement"
+              name="procurement"
+              defaultValue={assetProcurement}
+              type="text"
+              component={renderProcurementField}
+            />
+          </Grid>
+
+          <Grid item>
+            <Field
+              label=""
+              id="remainingQuantityForAllocation"
+              name="remainingQuantityForAllocation"
+              defaultValue={remainingQuantityForAllocation}
+              type="number"
+              component={renderRemainingProcuredAllocatableQuantityField}
+              style={{ marginTop: 10, marginLeft: 10 }}
+            />
+          </Grid>
+        </Grid>
+        <Grid container direction="row">
+          <Grid item>
+            <Field
+              label=""
               id="setRefNumber"
               name="setRefNumber"
               defaultValue={params.setRefNumber}
               type="text"
               component={renderAssetSetRefNumberField}
-              style={{ width: 195 }}
+              style={{ width: 195, marginTop: 10 }}
             />
           </Grid>
 
@@ -456,7 +680,7 @@ function AssetSetEditForm(props) {
               defaultValue={params.quantity}
               type="number"
               component={renderQuantityField}
-              style={{ marginLeft: 10 }}
+              style={{ marginLeft: 10, marginTop: 10 }}
             />
           </Grid>
         </Grid>
@@ -480,7 +704,7 @@ function AssetSetEditForm(props) {
               defaultValue={dateOfPurchase}
               type="date"
               component={renderAcquisitionDateField}
-              style={{ width: 195, marginLeft: 10 }}
+              style={{ width: 195, marginLeft: 10, marginTop: 10 }}
             />
           </Grid>
         </Grid>

@@ -18,7 +18,7 @@ import AssetMaintenancesExecutedCreateForm from "../../../assets/maintenances/ex
 const useStyles = makeStyles((theme) => ({
   root: {
     marginTop: "-80px",
-    width: 1000,
+    width: 1100,
   },
   headerContainer: {
     height: 20,
@@ -129,12 +129,10 @@ function AssetMaintenancesExecutedLayout(props) {
                 className={classes.addButton}
                 onClick={() => [
                   setOpen(true),
-                  history.push(
-                    "/assets/maintenances/approved/allmaintenances/new"
-                  ),
+                  history.push("/assets/maintenances/allmaintenances/new"),
                 ]}
               >
-                Initiate Maintenance Request
+                Add Asset Maintenance
               </Button>
             </Grid>
             <Grid item></Grid>
@@ -155,7 +153,7 @@ function AssetMaintenancesExecutedLayout(props) {
         open={open}
         onClose={() => [
           setOpen(false),
-          history.push("/assets/maintenances/executed/allmaintenances"),
+          history.push("/assets/maintenances/allmaintenances"),
         ]}
       >
         <DialogContent>

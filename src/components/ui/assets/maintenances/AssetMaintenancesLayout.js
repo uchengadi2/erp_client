@@ -101,14 +101,14 @@ function AssetMaintenancesLayout({ token }) {
             history.push(`/assets/maintenances/allmaintenances`);
           }}
         />
-        <Tab
+        {/* <Tab
           label="Unapproved Assets Maintenances"
           {...a11yProps(0)}
           onClick={(event) => {
             event.preventDefault();
             history.push(`/assets/maintenances/unapprovedmaintenances`);
           }}
-        />
+        /> */}
         {/* <Tab
           label="Approved Assets Maintenances"
           {...a11yProps(0)}

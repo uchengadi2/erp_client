@@ -15,7 +15,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import Select from "@material-ui/core/Select";
 import api from "./../../../../apis/local";
-import { EDIT_ASSETREQUISITION } from "../../../../actions/types";
+import { CREATE_ASSETMOVEMENT } from "../../../../actions/types";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -27,10 +27,10 @@ const useStyles = makeStyles((theme) => ({
   submitButton: {
     borderRadius: 10,
     height: 40,
-    width: 220,
-    marginLeft: 180,
-    marginTop: 10,
-    marginBottom: 0,
+    width: 180,
+    marginLeft: 190,
+    marginTop: 20,
+    marginBottom: 20,
     color: "white",
     backgroundColor: theme.palette.common.blue,
     "&:hover": {
@@ -50,7 +50,7 @@ const renderLabelField = ({
   return (
     <TextField
       //error={touched && invalid}
-      helperText="Requisition Label"
+      helperText="Transfer Label"
       variant="outlined"
       label={label}
       id={input.name}
@@ -70,7 +70,7 @@ const renderLabelField = ({
   );
 };
 
-const renderRequisitionRefNumberField = ({
+const renderMovementRefNumberField = ({
   input,
   label,
   meta: { touched, error, invalid },
@@ -81,7 +81,7 @@ const renderRequisitionRefNumberField = ({
   return (
     <TextField
       //error={touched && invalid}
-      helperText="Requisition Ref Number"
+      helperText="Transfer Ref Number"
       variant="outlined"
       label={label}
       id={input.name}
@@ -101,7 +101,7 @@ const renderRequisitionRefNumberField = ({
   );
 };
 
-const renderRequisitionCostField = ({
+const renderMovementCostField = ({
   input,
   label,
   meta: { touched, error, invalid },
@@ -112,7 +112,7 @@ const renderRequisitionCostField = ({
   return (
     <TextField
       //error={touched && invalid}
-      helperText="Requisition Cost"
+      helperText="Transfer Cost"
       variant="outlined"
       label={label}
       id={input.name}
@@ -143,7 +143,7 @@ const renderQuantityField = ({
   return (
     <TextField
       //error={touched && invalid}
-      helperText="Stock Quantity Requested"
+      helperText="Stock Quantity Transfered"
       variant="outlined"
       label={label}
       id={input.name}
@@ -163,7 +163,7 @@ const renderQuantityField = ({
   );
 };
 
-const renderRequisitionDateField = ({
+const renderExpectedDateOfReturnDateField = ({
   input,
   label,
   meta: { touched, error, invalid },
@@ -174,7 +174,7 @@ const renderRequisitionDateField = ({
   return (
     <TextField
       //error={touched && invalid}
-      helperText="Requisition Date"
+      helperText="Expected Return Date"
       variant="outlined"
       label={label}
       id={input.name}
@@ -194,7 +194,69 @@ const renderRequisitionDateField = ({
   );
 };
 
-const renderRequisitionPurposeField = ({
+const renderMovementDateField = ({
+  input,
+  label,
+  meta: { touched, error, invalid },
+  type,
+  id,
+  ...custom
+}) => {
+  return (
+    <TextField
+      //error={touched && invalid}
+      helperText="Transfer Date"
+      variant="outlined"
+      label={label}
+      id={input.name}
+      defaultValue={input.value}
+      fullWidth
+      //required
+      type={type}
+      {...custom}
+      // {...input}
+      onChange={input.onChange}
+      inputProps={{
+        style: {
+          height: 1,
+        },
+      }}
+    />
+  );
+};
+
+const renderMovementDestinationField = ({
+  input,
+  label,
+  meta: { touched, error, invalid },
+  type,
+  id,
+  ...custom
+}) => {
+  return (
+    <TextField
+      //error={touched && invalid}
+      helperText="Transfer Destination"
+      variant="outlined"
+      label={label}
+      id={input.name}
+      defaultValue={input.value}
+      fullWidth
+      //required
+      type={type}
+      {...custom}
+      // {...input}
+      onChange={input.onChange}
+      inputProps={{
+        style: {
+          height: 1,
+        },
+      }}
+    />
+  );
+};
+
+const renderMovementPurposeField = ({
   input,
   label,
   meta: { touched, error, invalid },
@@ -207,7 +269,7 @@ const renderRequisitionPurposeField = ({
       error={touched && invalid}
       //placeholder="category description"
       variant="outlined"
-      helperText="Requisition Purpose"
+      helperText="Transfer Purpose"
       label={label}
       id={input.name}
       name={input.name}
@@ -240,7 +302,7 @@ const renderDescriptionField = ({
       error={touched && invalid}
       //placeholder="category description"
       variant="outlined"
-      helperText="Describe Requisition"
+      helperText="Describe Transfer"
       label={label}
       id={input.name}
       name={input.name}
@@ -257,29 +319,25 @@ const renderDescriptionField = ({
   );
 };
 
-function AssetRequisitionAllRequisitionEditForm(props) {
-  const { params } = props;
+function AssetMovementsAllTransferCreateForm(props) {
   const classes = useStyles();
-  const [assetType, setAssetType] = useState(params.assetType);
-  const [serviceOutlet, setServiceOutlet] = useState(params.serviceOutlet);
-  const [assetStock, setAssetStock] = useState(params.assetStock);
-  const [currency, setCurrency] = useState(params.currency);
-  const [maintenanceType, setMaintenanceType] = useState();
+  const [assetType, setAssetType] = useState(null);
+  const [serviceOutlet, setServiceOutlet] = useState();
+  const [movementType, setMovementType] = useState();
+  const [assetStock, setAssetStock] = useState();
+  const [currency, setCurrency] = useState();
   const [measurementUnit, setMeasurementUnit] = useState();
   const [assetTypeList, setAssetTypeList] = useState([]);
   const [serviceOutletList, setServiceOutletList] = useState([]);
-  const [maintenanceTypeList, setMaintenanceTypeList] = useState([]);
+  const [movementTypeList, setMovementTypeList] = useState([]);
   const [measurementUnitList, setMeasurementUnitList] = useState([]);
   const [storeList, setStoreList] = useState([]);
   const [currencyList, setCurrencyList] = useState([]);
   const [assetStockList, setAssetStockList] = useState([]);
-  const [store, setStore] = useState(params.store);
-  const [currentStockQuantity, setCurrentStockQuantity] = useState(
-    params.quantity
-  );
-  const [assetMeasurementUnit, setAssetMeasurementUnit] = useState(
-    params.assetMeasurementUnit
-  );
+  const [destinationStoreList, seyDestinationStoreList] = useState([]);
+  const [store, setStore] = useState(null);
+  const [destinationStore, setDestinationStore] = useState();
+  const [assetMeasurementUnit, setAssetMeasurementUnit] = useState();
   const [stockTotalQuantity, setStockTotalQuantity] = useState();
   const [loading, setLoading] = useState(false);
 
@@ -334,9 +392,7 @@ function AssetRequisitionAllRequisitionEditForm(props) {
     const fetchData = async () => {
       let allData = [];
       api.defaults.headers.common["Authorization"] = `Bearer ${props.token}`;
-      const response = await api.get("/maintenancetypes", {
-        params: { assetType: assetType },
-      });
+      const response = await api.get("/movementtypes");
       const workingData = response.data.data.data;
       workingData.map((item) => {
         allData.push({
@@ -344,13 +400,13 @@ function AssetRequisitionAllRequisitionEditForm(props) {
           name: `${item.name}`,
         });
       });
-      setMaintenanceTypeList(allData);
+      setMovementTypeList(allData);
     };
 
     //call the function
 
     fetchData().catch(console.error);
-  }, [assetType]);
+  }, []);
 
   //fetch all stores
 
@@ -375,6 +431,28 @@ function AssetRequisitionAllRequisitionEditForm(props) {
 
     fetchData().catch(console.error);
   }, [serviceOutlet]);
+
+  //fetch all destination stores
+
+  useEffect(() => {
+    const fetchData = async () => {
+      let allData = [];
+      api.defaults.headers.common["Authorization"] = `Bearer ${props.token}`;
+      const response = await api.get("/stores");
+      const workingData = response.data.data.data;
+      workingData.map((item) => {
+        allData.push({
+          id: item._id,
+          name: `${item.name}`,
+        });
+      });
+      seyDestinationStoreList(allData);
+    };
+
+    //call the function
+
+    fetchData().catch(console.error);
+  }, []);
 
   //fetch asset measurement units
   useEffect(() => {
@@ -487,6 +565,11 @@ function AssetRequisitionAllRequisitionEditForm(props) {
     //     props.handleCountryChange(event.target.value);
   };
 
+  const handleDestinationStoreChange = (event) => {
+    setDestinationStore(event.target.value);
+    //     props.handleCountryChange(event.target.value);
+  };
+
   const handleAsetMeasurementUnitChange = (event) => {
     setAssetMeasurementUnit(event.target.value);
     //     props.handleCountryChange(event.target.value);
@@ -496,8 +579,8 @@ function AssetRequisitionAllRequisitionEditForm(props) {
     //     props.handleCountryChange(event.target.value);
   };
 
-  const handleMaintenanceTypeChange = (event) => {
-    setMaintenanceType(event.target.value);
+  const handleMovementTypeChange = (event) => {
+    setMovementType(event.target.value);
     //     props.handleCountryChange(event.target.value);
   };
 
@@ -553,9 +636,9 @@ function AssetRequisitionAllRequisitionEditForm(props) {
     });
   };
 
-  //get the maintenance type
-  const renderMaintenanceTypeList = () => {
-    return maintenanceTypeList.map((item) => {
+  //get the disposition type
+  const renderMovementTypeList = () => {
+    return movementTypeList.map((item) => {
       return (
         <MenuItem key={item.id} value={item.id}>
           {item.name}
@@ -578,6 +661,17 @@ function AssetRequisitionAllRequisitionEditForm(props) {
   //get the store  list
   const renderStoreList = () => {
     return storeList.map((item) => {
+      return (
+        <MenuItem key={item.id} value={item.id}>
+          {item.name}
+        </MenuItem>
+      );
+    });
+  };
+
+  //get the destination store  list
+  const renderDestinationStoreList = () => {
+    return destinationStoreList.map((item) => {
       return (
         <MenuItem key={item.id} value={item.id}>
           {item.name}
@@ -653,7 +747,7 @@ function AssetRequisitionAllRequisitionEditForm(props) {
             // onChange={props.handleCountryChange}
             onChange={handleAsetMeasurementUnitChange}
             label="Unit of Measurement"
-            style={{ width: 185, marginTop: 5, marginLeft: 10, height: 38 }}
+            style={{ width: 150, marginTop: 0, marginLeft: 10, height: 38 }}
             //{...input}
             readOnly={true}
           >
@@ -759,7 +853,7 @@ function AssetRequisitionAllRequisitionEditForm(props) {
             // onChange={props.handleCountryChange}
             onChange={handleStoreChange}
             label="Store"
-            style={{ width: 180, marginTop: 10, marginLeft: 10, height: 38 }}
+            style={{ width: 175, marginTop: 5, marginLeft: 0, height: 38 }}
             //{...input}
           >
             {/* <MenuItem value="tangible">Tangible Asset</MenuItem>
@@ -767,13 +861,15 @@ function AssetRequisitionAllRequisitionEditForm(props) {
 
             {renderStoreList()}
           </Select>
-          <FormHelperText style={{ marginLeft: 20 }}>Store</FormHelperText>
+          <FormHelperText style={{ marginLeft: 20 }}>
+            Source Store
+          </FormHelperText>
         </FormControl>
       </Box>
     );
   };
 
-  const renderMaintenanceTypeField = ({
+  const renderDestinationStoreField = ({
     input,
     label,
     meta: { touched, error, invalid },
@@ -787,23 +883,60 @@ function AssetRequisitionAllRequisitionEditForm(props) {
           {/* <InputLabel id="vendor_city">City</InputLabel> */}
 
           <Select
-            labelId="maintenanceType"
-            id="maintenanceType"
+            labelId="destinationStore"
+            id="destinationStore"
             //defaultValue={schemeType}
-            value={maintenanceType}
+            value={destinationStore}
             // onChange={props.handleCountryChange}
-            onChange={handleMaintenanceTypeChange}
-            label="Maintenance Type"
+            onChange={handleDestinationStoreChange}
+            label="Destination Store"
+            style={{ width: 190, marginTop: 0, marginLeft: 10, height: 38 }}
+            //{...input}
+          >
+            {/* <MenuItem value="tangible">Tangible Asset</MenuItem>
+            <MenuItem value="inTangible">Intangible Asset</MenuItem> */}
+
+            {renderDestinationStoreList()}
+          </Select>
+          <FormHelperText style={{ marginLeft: 20 }}>
+            Destination Store
+          </FormHelperText>
+        </FormControl>
+      </Box>
+    );
+  };
+
+  const renderMovementTypeField = ({
+    input,
+    label,
+    meta: { touched, error, invalid },
+    type,
+    id,
+    ...custom
+  }) => {
+    return (
+      <Box>
+        <FormControl variant="outlined">
+          {/* <InputLabel id="vendor_city">City</InputLabel> */}
+
+          <Select
+            labelId="movementType"
+            id="movementType"
+            //defaultValue={schemeType}
+            value={movementType}
+            // onChange={props.handleCountryChange}
+            onChange={handleMovementTypeChange}
+            label="Movement Type"
             style={{ width: 180, marginTop: 10, marginLeft: 10, height: 38 }}
             //{...input}
           >
             {/* <MenuItem value="tangible">Tangible Asset</MenuItem>
             <MenuItem value="inTangible">Intangible Asset</MenuItem> */}
 
-            {renderMaintenanceTypeList()}
+            {renderMovementTypeList()}
           </Select>
           <FormHelperText style={{ marginLeft: 20 }}>
-            Maintenance Type
+            Movement Type
           </FormHelperText>
         </FormControl>
       </Box>
@@ -831,7 +964,7 @@ function AssetRequisitionAllRequisitionEditForm(props) {
             // onChange={props.handleCountryChange}
             onChange={handleAssetStockChange}
             label="Asset Stock"
-            style={{ width: 175, marginTop: 5, marginLeft: 0, height: 38 }}
+            style={{ width: 175, marginTop: 5, marginLeft: 10, height: 38 }}
             //{...input}
           >
             {/* <MenuItem value="tangible">Tangible Asset</MenuItem>
@@ -866,7 +999,7 @@ function AssetRequisitionAllRequisitionEditForm(props) {
             // onChange={props.handleCountryChange}
             onChange={handleCurrencyChange}
             label="Currency"
-            style={{ width: 150, marginTop: 0, marginLeft: 10, height: 38 }}
+            style={{ width: 160, marginTop: 0, marginLeft: 10, height: 38 }}
             //{...input}
           >
             {/* <MenuItem value="tangible">Tangible Asset</MenuItem>
@@ -880,7 +1013,7 @@ function AssetRequisitionAllRequisitionEditForm(props) {
     );
   };
 
-  const renderInitialStockQuantityField = ({
+  const renderAssetSetRefNumberField = ({
     input,
     label,
     meta: { touched, error, invalid },
@@ -891,7 +1024,7 @@ function AssetRequisitionAllRequisitionEditForm(props) {
     return (
       <TextField
         //error={touched && invalid}
-        helperText="Quantity of Stock in Store"
+        helperText="Set Reference Number"
         variant="outlined"
         label={label}
         id={input.name}
@@ -913,7 +1046,7 @@ function AssetRequisitionAllRequisitionEditForm(props) {
   };
 
   const buttonContent = () => {
-    return <React.Fragment> Update Stock Request</React.Fragment>;
+    return <React.Fragment> Transfer Stock</React.Fragment>;
   };
 
   const onSubmit = (formValues) => {
@@ -925,53 +1058,47 @@ function AssetRequisitionAllRequisitionEditForm(props) {
     formValues["assetType"] = assetType;
     formValues["store"] = store;
     formValues["serviceOutlet"] = serviceOutlet;
-    // formValues["maintenanceType"] = maintenanceType;
+    formValues["movementType"] = movementType;
     formValues["currency"] = currency;
     formValues["assetStock"] = assetStock;
     formValues["assetMeasurementUnit"] = assetMeasurementUnit;
 
-    if (formValues["quantity"]) {
-      if (stockTotalQuantity < formValues["quantity"]) {
-        formValues["quantity"] = stockTotalQuantity;
-      }
+    if (stockTotalQuantity < formValues["quantity"]) {
+      formValues["quantity"] = stockTotalQuantity;
     }
 
-    // if (!formValues["requisitionRefNumber"]) {
-    //   formValues["requisitionRefNumber"] =
-    //     "RQ" + "-" + Math.floor(Math.random() * 1000000) + "-" + "ST";
-    // }
+    if (!formValues["transferRefNumber"]) {
+      formValues["transferRefNumber"] =
+        "MV" + "-" + Math.floor(Math.random() * 1000000000) + "-" + "ST";
+    }
 
     if (formValues) {
-      const editForm = async () => {
+      const createForm = async () => {
         api.defaults.headers.common["Authorization"] = `Bearer ${props.token}`;
-        const response = await api.patch(
-          `/assetrequisitions/${params.id}`,
-          formValues
-        );
+        const response = await api.post(`/assetmovements`, formValues);
 
         if (response.data.status === "success") {
           dispatch({
-            type: EDIT_ASSETREQUISITION,
+            type: CREATE_ASSETMOVEMENT,
             payload: response.data.data.data,
           });
 
           //recalculate stock quantity in the store
-          if (formValues["quantity"]) {
-            const diff =
-              parseFloat(currentStockQuantity) -
-              parseFloat(formValues["quantity"]);
-            const newStockTotalQuantity = stockTotalQuantity + diff;
-            const dataValue = {
-              quantity: newStockTotalQuantity,
-            };
+          const remainingStockQuantityInStore =
+            stockTotalQuantity - formValues["quantity"];
+          const dataValue = {
+            quantity: remainingStockQuantityInStore,
+          };
 
-            const setResponse = await api.patch(`/assetstocks/${assetStock}`, dataValue);
-          }
-
-          props.handleSuccessfulEditSnackbar(
-            `${response.data.data.data.requisitionRefNumber} Stock Requisition is updated successfully!!!`
+          const setResponse = await api.patch(
+            `/assetstocks/${assetStock}`,
+            dataValue
           );
-          props.handleEditDialogOpenStatus();
+
+          props.handleSuccessfulCreateSnackbar(
+            `${response.data.data.data.transferRefNumber} Stock Transfer is added successfully!!!`
+          );
+          props.handleDialogOpenStatus();
           setLoading(false);
         } else {
           props.handleFailedSnackbar(
@@ -979,7 +1106,7 @@ function AssetRequisitionAllRequisitionEditForm(props) {
           );
         }
       };
-      editForm().catch((err) => {
+      createForm().catch((err) => {
         props.handleFailedSnackbar();
         console.log("err:", err.message);
       });
@@ -988,19 +1115,15 @@ function AssetRequisitionAllRequisitionEditForm(props) {
     }
   };
 
-  const dateOfRequisition = new Date(params.requisitionDate)
-    .toISOString()
-    .slice(0, 10);
-
   return (
-    <form id="assetRequisitionAllRequisitionEditForm">
+    <form id="assetMovementsAllTransferCreateForm">
       <Box
         // component="form"
         // id="categoryForm"
         // onSubmit={onSubmit}
         sx={{
           width: 550,
-          height: 540,
+          height: 545,
         }}
         noValidate
         autoComplete="off"
@@ -1015,7 +1138,7 @@ function AssetRequisitionAllRequisitionEditForm(props) {
             style={{ color: "blue", fontSize: "1.5em" }}
             component="legend"
           >
-            <Typography variant="subtitle1"> Stock Requisition</Typography>
+            <Typography variant="subtitle1"> Stock Transfer</Typography>
           </FormLabel>
         </Grid>
         <Grid container direction="row">
@@ -1042,11 +1165,11 @@ function AssetRequisitionAllRequisitionEditForm(props) {
           <Grid item>
             <Field
               label=""
-              id="store"
-              name="store"
+              id="movementType"
+              name="movementType"
               type="text"
-              component={renderStoreField}
-              style={{ marginTop: 10 }}
+              component={renderMovementTypeField}
+              style={{ marginTop: 10, marginLeft: 10 }}
             />
           </Grid>
         </Grid>
@@ -1055,8 +1178,18 @@ function AssetRequisitionAllRequisitionEditForm(props) {
           <Grid item>
             <Field
               label=""
-              id="asset"
-              name="asset"
+              id="store"
+              name="store"
+              type="text"
+              component={renderStoreField}
+            />
+          </Grid>
+
+          <Grid item>
+            <Field
+              label=""
+              id="assetStock"
+              name="assetStock"
               type="text"
               component={renderAssetStockField}
               // style={{ marginLeft: 10, width: 180 }}
@@ -1065,12 +1198,35 @@ function AssetRequisitionAllRequisitionEditForm(props) {
           <Grid item>
             <Field
               label=""
-              id="initialStockQuantity"
-              name="initialStockQuantity"
-              defaultValue={stockTotalQuantity}
+              id="label"
+              name="label"
+              type="text"
+              component={renderLabelField}
+              style={{ marginLeft: 10, marginTop: 5, width: 180 }}
+            />
+          </Grid>
+        </Grid>
+
+        <Grid container direction="row" style={{ marginTop: 10 }}>
+          <Grid item>
+            <Field
+              label=""
+              id="transferRefNumber"
+              name="transferRefNumber"
+              type="text"
+              component={renderMovementRefNumberField}
+              style={{ width: 190 }}
+            />
+          </Grid>
+
+          <Grid item>
+            <Field
+              label=""
+              id="quantity"
+              name="quantity"
               type="number"
-              component={renderInitialStockQuantityField}
-              style={{ marginTop: 5, marginLeft: 10, width: 170 }}
+              component={renderQuantityField}
+              style={{ marginLeft: 10, width: 190 }}
             />
           </Grid>
           <Grid item>
@@ -1081,44 +1237,7 @@ function AssetRequisitionAllRequisitionEditForm(props) {
               //defaultValue={measurementUnit}
               type="text"
               component={renderAssetMeasurementUnitField}
-              style={{ marginLeft: 10 }}
-            />
-          </Grid>
-        </Grid>
-
-        <Grid container direction="row" style={{ marginTop: 10 }}>
-          <Grid item>
-            <Field
-              label=""
-              id="label"
-              name="label"
-              defaultValue={params.label}
-              type="text"
-              component={renderLabelField}
-              style={{ marginLeft: 0, marginTop: 5, width: 185 }}
-            />
-          </Grid>
-          <Grid item>
-            <Field
-              label=""
-              id="requisitionRefNumber"
-              name="requisitionRefNumber"
-              defaultValue={params.requisitionRefNumber}
-              type="text"
-              component={renderRequisitionRefNumberField}
-              style={{ width: 180, marginLeft: 10, marginTop: 5 }}
-            />
-          </Grid>
-
-          <Grid item>
-            <Field
-              label=""
-              id="quantity"
-              name="quantity"
-              defaultValue={params.quantity}
-              type="number"
-              component={renderQuantityField}
-              style={{ marginLeft: 10, width: 165, marginTop: 5 }}
+              style={{ marginLeft: 20 }}
             />
           </Grid>
         </Grid>
@@ -1126,24 +1245,44 @@ function AssetRequisitionAllRequisitionEditForm(props) {
           <Grid item>
             <Field
               label=""
-              id="requisitionDate"
-              name="requisitionDate"
-              defaultValue={dateOfRequisition}
+              id="transferDate"
+              name="transferDate"
               type="date"
-              component={renderRequisitionDateField}
-              style={{ width: 190 }}
+              component={renderMovementDateField}
+              style={{ width: 170 }}
+            />
+          </Grid>
+          <Grid item>
+            <Field
+              label=""
+              id="expectedDateOfAssetReturn"
+              name="expectedDateOfAssetReturn"
+              type="date"
+              component={renderExpectedDateOfReturnDateField}
+              style={{ width: 170, marginLeft: 10 }}
             />
           </Grid>
 
           <Grid item>
             <Field
               label=""
-              id="totalRequisitionCost"
-              name="totalRequisitionCost"
-              defaultValue={params.totalRequisitionCost}
+              id="destinationStore"
+              name="destinationStore"
+              type="text"
+              component={renderDestinationStoreField}
+              //   style={{ marginLeft: 10 }}
+            />
+          </Grid>
+        </Grid>
+        <Grid container direction="row" style={{ marginTop: 10 }}>
+          <Grid item>
+            <Field
+              label=""
+              id="totalTransferCost"
+              name="totalTransferCost"
               type="number"
-              component={renderRequisitionCostField}
-              style={{ marginLeft: 10, width: 190 }}
+              component={renderMovementCostField}
+              style={{ marginLeft: 0, width: 170 }}
             />
           </Grid>
           <Grid item>
@@ -1154,25 +1293,26 @@ function AssetRequisitionAllRequisitionEditForm(props) {
               //defaultValue={measurementUnit}
               type="text"
               component={renderCurrencyField}
-              style={{ marginLeft: 20 }}
+              style={{ marginTop: 0 }}
+            />
+          </Grid>
+
+          <Grid item>
+            <Field
+              label=""
+              id="purpose"
+              name="purpose"
+              type="text"
+              component={renderMovementPurposeField}
+              style={{ marginTop: 0, width: 200, marginLeft: 10 }}
             />
           </Grid>
         </Grid>
-        <Field
-          label=""
-          id="purpose"
-          name="purpose"
-          defaultValue={params.purpose}
-          type="text"
-          component={renderRequisitionPurposeField}
-          style={{ marginTop: 10, width: 550 }}
-        />
 
         <Field
           label=""
           id="description"
           name="description"
-          defaultValue={params.description}
           type="text"
           component={renderDescriptionField}
           style={{ marginTop: 10, width: 550 }}
@@ -1195,5 +1335,5 @@ function AssetRequisitionAllRequisitionEditForm(props) {
 }
 
 export default reduxForm({
-  form: "assetRequisitionAllRequisitionEditForm",
-})(AssetRequisitionAllRequisitionEditForm);
+  form: "assetMovementsAllTransferCreateForm",
+})(AssetMovementsAllTransferCreateForm);

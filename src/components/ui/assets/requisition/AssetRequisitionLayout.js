@@ -104,7 +104,7 @@ function AssetRequisitionLayout({ token }) {
             history.push(`/assets/requisitions/allrequisitions`);
           }}
         />
-        <Tab
+        {/* <Tab
           label="Pending Requisitions"
           {...a11yProps(0)}
           onClick={(event) => {
@@ -137,7 +137,7 @@ function AssetRequisitionLayout({ token }) {
             event.preventDefault();
             history.push(`/assets/requisitions/assetreturns`);
           }}
-        />
+        /> */}
       </Tabs>
 
       <TabPanel value={value} index={0}>

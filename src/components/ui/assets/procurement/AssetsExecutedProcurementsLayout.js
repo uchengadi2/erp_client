@@ -11,13 +11,14 @@ import DialogContent from "@material-ui/core/DialogContent";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import history from "../../../../history";
 import ServiceOutletFilters from "../../headerFilters/ServiceOutletFilters";
-import AssetsExecutedProcurementList from "../../../assets/procurements/executed/AssetsExecutedProcurementList";
+
 import AssetExecutedProcurementCreateForm from "../../../assets/procurements/executed/AssetExecutedProcurementCreateForm";
+import AssetExecutedProcurementList from "../../../assets/procurements/executed/AssetExecutedProcurementList";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     marginTop: "-80px",
-    width: 1000,
+    width: 1150,
   },
   headerContainer: {
     height: 20,
@@ -38,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
   addButton: {
     borderRadius: 10,
     height: 30,
-    width: 220,
+    width: 180,
     marginLeft: 10,
     marginTop: 50,
     marginBottom: 20,
@@ -112,9 +113,9 @@ function AssetsExecutedProcurementsLayout(props) {
       spacing={2}
     >
       <Grid item container direction="column" sm={width}>
-        <Grid item className={classes.selectField}>
+        {/* <Grid item className={classes.selectField}>
           <ServiceOutletFilters />
-        </Grid>
+        </Grid> */}
         <Grid
           item
           container
@@ -131,14 +132,14 @@ function AssetsExecutedProcurementsLayout(props) {
                   history.push("/assets/procurements/assetprocurements/new"),
                 ]}
               >
-                Initiate Procurement Request
+                Add Procurement
               </Button>
             </Grid>
             <Grid item></Grid>
           </Toolbar>
         </Grid>
         <Grid item className={classes.contentContainer}>
-          <AssetsExecutedProcurementList
+          <AssetExecutedProcurementList
             token={props.token}
             userId={props.userId}
           />

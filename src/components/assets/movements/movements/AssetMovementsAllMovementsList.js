@@ -162,8 +162,15 @@ class AssetMovementsAllMovementsList extends React.Component {
     let counter = 0;
     const columns = [
       { field: "numbering", headerName: "S/n", width: 60 },
-      { field: "code", headerName: "Transaction Code", width: 150 },
-      { field: "name", headerName: "Transaction Name", width: 200 },
+      { field: "serviceOutlet", headerName: "Service Outlet", width: 150 },
+      { field: "label", headerName: "Movement Label", width: 200 },
+      {
+        field: "movementRefNumber",
+        headerName: "Reference Number",
+        width: 160,
+      },
+      { field: "assetType", headerName: "Asset Type", width: 160 },
+      { field: "assetStock", headerName: "Stock", width: 200 },
 
       {
         field: "editaction",
@@ -214,9 +221,27 @@ class AssetMovementsAllMovementsList extends React.Component {
       let row = {
         numbering: ++counter,
         id: assetMovement.id,
-        code: assetMovement.code,
-        name: assetMovement.name,
+        serviceOutlet: assetMovement.serviceOutlet,
+        label: assetMovement.label,
+        movementRefNumber: assetMovement.movementRefNumber,
+        purpose: assetMovement.purpose,
+        movementType: assetMovement.movementType,
+        assetType: assetMovement.assetType,
+        assetStock: assetMovement.assetStock,
+        store: assetMovement.store,
+        movementDate: assetMovement.movementDate,
+        totalMovementCost: assetMovement.totalMovementCost,
+        currency: assetMovement.currency,
+        quantity: assetMovement.quantity,
+        assetMeasurementUnit: assetMovement.assetMeasurementUnit,
+        createdBy: assetMovement.createdBy,
+        dateCreated: assetMovement.dateCreated,
         description: assetMovement.description,
+        destination: assetMovement.destination,
+        assetReturnDate: assetMovement.assetReturnDate,
+        destination: assetMovement.destination,
+        expectedDateOfAssetReturn: assetMovement.expectedDateOfAssetReturn,
+        actualDateOfAssetReturn: assetMovement.actualDateOfAssetReturn,
       };
       rows.push(row);
     });

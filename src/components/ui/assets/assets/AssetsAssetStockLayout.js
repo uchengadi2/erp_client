@@ -139,13 +139,13 @@ function AssetsAssetStockLayout(props) {
       spacing={2}
     >
       <Grid item container direction="column" sm={width}>
-        <Grid item className={classes.selectField}>
+        {/* <Grid item className={classes.selectField}>
           <AssetTypesFilter
             token={props.token}
             userId={props.userId}
             getCurrentAssetTypeHandle={getCurrentAssetTypeHandle}
           />
-        </Grid>
+        </Grid> */}
         <Grid
           item
           container
@@ -181,18 +181,20 @@ function AssetsAssetStockLayout(props) {
       <Dialog
         //style={{ zIndex: 1302 }}
         fullScreen={matchesXS}
+        fullWidth={true}
+        maxWidth={"lg"}
         open={open}
         onClose={() => [setOpen(false), history.push("/assets/assets/stocks")]}
       >
         <DialogContent>
-          {/* <AssetsStockCreateForm
+          <AssetsStockCreateForm
             token={props.token}
             userId={props.userId}
             handleDialogOpenStatus={handleDialogOpenStatus}
             handleSuccessfulCreateSnackbar={handleSuccessfulCreateSnackbar}
             handleFailedSnackbar={handleFailedSnackbar}
-          /> */}
-          {renderCreateAssetForm()}
+          />
+          {/* {renderCreateAssetForm()} */}
         </DialogContent>
       </Dialog>
       <Grid

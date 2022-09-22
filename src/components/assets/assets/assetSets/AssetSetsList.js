@@ -172,12 +172,12 @@ class AssetSetsList extends React.Component {
         headerName: "Unallocated Quantity",
         width: 160,
       },
-      {
-        field: "assetMeasurementUnit",
-        headerName: "Asset Measurement Unit",
-        width: 160,
-      },
-      { field: "acquisitionDate", headerName: "Acquisition Date", width: 160 },
+      // {
+      //   field: "assetMeasurementUnit",
+      //   headerName: "Asset Measurement Unit",
+      //   width: 160,
+      // },
+      // { field: "acquisitionDate", headerName: "Acquisition Date", width: 160 },
 
       {
         field: "editaction",
@@ -233,6 +233,7 @@ class AssetSetsList extends React.Component {
         acquisitionDate: assetSet.acquisitionDate,
         assetMeasurementUnit: assetSet.assetMeasurementUnit,
         remainingQuantity: assetSet.remainingQuantity,
+        assetProcurement: assetSet.assetProcurement,
       };
       rows.push(row);
     });

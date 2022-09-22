@@ -78,7 +78,7 @@ class AssetMaintenancesExecutedList extends React.Component {
           open={this.state.editOpen}
           onClose={() => [
             this.setState({ editOpen: false }),
-            history.push("/assets/maintenances/executed/executedmaintenances"),
+            history.push("/assets/maintenances/allmaintenances"),
           ]}
         >
           <DialogContent>
@@ -105,7 +105,7 @@ class AssetMaintenancesExecutedList extends React.Component {
           open={this.state.deleteOpen}
           onClose={() => [
             this.setState({ deleteOpen: false }),
-            history.push(`/assets/maintenances/executed/executedmaintenances`),
+            history.push(`/assets/maintenances/allmaintenances`),
           ]}
         >
           <DialogContent>
@@ -130,7 +130,7 @@ class AssetMaintenancesExecutedList extends React.Component {
           open={this.state.cancelOpen}
           onClose={() => [
             this.setState({ cancelOpen: false }),
-            history.push(`/assets/maintenances/executed/executedmaintenances`),
+            history.push(`/assets/maintenances/allmaintenances`),
           ]}
         >
           <DialogContent>
@@ -150,7 +150,7 @@ class AssetMaintenancesExecutedList extends React.Component {
           open={this.state.assignOpen}
           onClose={() => [
             this.setState({ assignOpen: false }),
-            history.push(`/assets/maintenances/executed/executedmaintenances`),
+            history.push(`/assets/maintenances/allmaintenances`),
           ]}
         ></Dialog>
       </>
@@ -162,8 +162,11 @@ class AssetMaintenancesExecutedList extends React.Component {
     let counter = 0;
     const columns = [
       { field: "numbering", headerName: "S/n", width: 60 },
-      { field: "code", headerName: "Transaction Code", width: 150 },
-      { field: "name", headerName: "Transaction Name", width: 200 },
+      { field: "serviceOutlet", headerName: "Service Outlet", width: 150 },
+      { field: "label", headerName: "Maintenance Label", width: 200 },
+      { field: "maintenanceType", headerName: "Maintenance Type", width: 160 },
+      { field: "assetType", headerName: "Asset Type", width: 160 },
+      { field: "assetStock", headerName: "Stock", width: 200 },
 
       {
         field: "editaction",
@@ -181,7 +184,7 @@ class AssetMaintenancesExecutedList extends React.Component {
                   params: params.row,
                 }),
                 history.push(
-                  `/assets/maintenances/executed/executedmaintenances/edit/${params.id}`
+                  `/assets/maintenances/allmaintenances/edit/${params.id}`
                 ),
               ]}
             />
@@ -202,7 +205,7 @@ class AssetMaintenancesExecutedList extends React.Component {
               onClick={() => [
                 this.setState({ deleteOpen: true, id: params.id }),
                 history.push(
-                  `/assets/maintenances/executed/executedmaintenances/delete/${params.id}`
+                  `/assets/maintenances/allmaintenances/delete/${params.id}`
                 ),
               ]}
             />
@@ -214,8 +217,21 @@ class AssetMaintenancesExecutedList extends React.Component {
       let row = {
         numbering: ++counter,
         id: executedMaintenance.id,
-        code: executedMaintenance.code,
-        name: executedMaintenance.name,
+        serviceOutlet: executedMaintenance.serviceOutlet,
+        label: executedMaintenance.label,
+        maintenanceRefNumber: executedMaintenance.maintenanceRefNumber,
+        purpose: executedMaintenance.purpose,
+        maintenanceType: executedMaintenance.maintenanceType,
+        assetType: executedMaintenance.assetType,
+        assetStock: executedMaintenance.assetStock,
+        store: executedMaintenance.store,
+        maintenanceDate: executedMaintenance.maintenanceDate,
+        totalMaintenanceCost: executedMaintenance.totalMaintenanceCost,
+        currency: executedMaintenance.currency,
+        quantity: executedMaintenance.quantity,
+        assetMeasurementUnit: executedMaintenance.assetMeasurementUnit,
+        createdBy: executedMaintenance.createdBy,
+        dateCreated: executedMaintenance.dateCreated,
         description: executedMaintenance.description,
       };
       rows.push(row);

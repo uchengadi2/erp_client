@@ -103,7 +103,7 @@ function AssetDispositionLayout({ token }) {
             history.push(`/assets/dispositions/alldispositions`);
           }}
         />
-        <Tab
+        {/* <Tab
           label="Pending Dispositions"
           {...a11yProps(0)}
           onClick={(event) => {
@@ -128,7 +128,7 @@ function AssetDispositionLayout({ token }) {
             event.preventDefault();
             history.push(`/assets/dispositions/assetreturns`);
           }}
-        />
+        /> */}
       </Tabs>
 
       <TabPanel value={value} index={0}>

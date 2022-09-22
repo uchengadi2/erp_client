@@ -187,6 +187,7 @@ import {
   FETCH_UNAPPROVEDSTOCKTRANSFER,
   DELETE_UNAPPROVEDSTOCKTRANSFER,
   EDIT_UNAPPROVEDSTOCKTRANSFER,
+  CREATE_ASSETREQUISITION,
   FETCH_ASSETREQUISITIONS,
   FETCH_ASSETREQUISITION,
   DELETE_ASSETREQUISITION,
@@ -207,6 +208,7 @@ import {
   FETCH_RETURNASSETPOSTREQUISITION,
   EDIT_RETURNASSETPOSTREQUISITION,
   DELETE_RETURNASSETPOSTREQUISITION,
+  CREATE_ASSETRETIREMENT,
   FETCH_ASSETRETIREMENTS,
   FETCH_ASSETRETIREMENT,
   EDIT_ASSETRETIREMENT,
@@ -223,6 +225,7 @@ import {
   FETCH_RETURNPOSTASSETRETIREMENT,
   EDIT_RETURNPOSTASSETRETIREMENT,
   DELETE_RETURNPOSTASSETRETIREMENT,
+  CREATE_ASSETDISPOSITION,
   FETCH_ASSETDISPOSITIONS,
   FETCH_ASSETDISPOSITION,
   EDIT_ASSETDISPOSITION,
@@ -729,6 +732,11 @@ import {
   FETCH_ASSETSETBATCH,
   EDIT_ASSETSETBATCH,
   DELETE_ASSETSETBATCH,
+  CREATE_STOCKREQUISITION,
+  FETCH_STOCKREQUISITIONS,
+  FETCH_STOCKREQUISITION,
+  EDIT_STOCKREQUISITION,
+  DELETE_STOCKREQUISITION,
 } from "./types";
 
 //authentication and authorization  operations
@@ -2437,49 +2445,61 @@ export const deleteInventoryStock = (id, token) => {
   };
 };
 
-////////////////////////UNAPPROVED STOCK REQUISITION ///////////////////////////
+// //////////////////////// STOCK REQUISITION ///////////////////////////
 
-export const fetchUnapprovedStockRequisitions = (tokens) => {
-  data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
-  return async (dispatch) => {
-    const response = await data.get("/assetstocks");
+// export const createStockRequisition = (formValues, token) => {
+//   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+//   return async (dispatch) => {
+//     const response = await data.post("/assetrequisitions", formValues);
 
-    dispatch({
-      type: FETCH_UNAPPROVEDSTOCKREQUISITIONS,
-      payload: response.data.data.data,
-    });
-  };
-};
+//     dispatch({
+//       type: CREATE_STOCKREQUISITION,
+//       payload: response.data.data.data,
+//     });
+//   };
+// };
 
-export const fetchUnapprovedStockRequisition = (id, token) => {
-  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-  return async (dispatch) => {
-    const response = await data.get(`/assetstocks/${id}`);
-    dispatch({
-      type: FETCH_UNAPPROVEDSTOCKREQUISITION,
-      payload: response.data.data.data,
-    });
-  };
-};
+// export const fetchStockRequisitions = (tokens) => {
+//   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
+//   return async (dispatch) => {
+//     const response = await data.get("/assetrequisitions");
 
-export const editUnapprovedStockRequisition = (id, formValues, token) => {
-  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-  return async (dispatch) => {
-    const response = await data.patch(`/assetstocks/${id}`, formValues);
-    dispatch({
-      type: EDIT_UNAPPROVEDSTOCKREQUISITION,
-      payload: response.data.data.data,
-    });
-  };
-};
+//     dispatch({
+//       type: FETCH_STOCKREQUISITIONS,
+//       payload: response.data.data.data,
+//     });
+//   };
+// };
 
-export const deleteUnapprovedStockRequisition = (id, token) => {
-  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-  return async (dispatch) => {
-    await data.delete(`/assetstocks/${id}`);
-    dispatch({ type: DELETE_UNAPPROVEDSTOCKREQUISITION, payload: id });
-  };
-};
+// export const fetchStockRequisition = (id, token) => {
+//   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+//   return async (dispatch) => {
+//     const response = await data.get(`/assetrequisitions/${id}`);
+//     dispatch({
+//       type: FETCH_STOCKREQUISITION,
+//       payload: response.data.data.data,
+//     });
+//   };
+// };
+
+// export const editStockRequisition = (id, formValues, token) => {
+//   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+//   return async (dispatch) => {
+//     const response = await data.patch(`/assetrequisitions/${id}`, formValues);
+//     dispatch({
+//       type: EDIT_STOCKREQUISITION,
+//       payload: response.data.data.data,
+//     });
+//   };
+// };
+
+// export const deleteStockRequisition = (id, token) => {
+//   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+//   return async (dispatch) => {
+//     await data.delete(`/assetrequisitions/${id}`);
+//     dispatch({ type: DELETE_STOCKREQUISITION, payload: id });
+//   };
+// };
 
 ////////////////////////UNAPPROVED STOCK RETIREMENT ///////////////////////////
 
@@ -2614,6 +2634,18 @@ export const deleteUnapprovedStockTransfer = (id, token) => {
 };
 
 /////////////////////////////////////////ASSET REQUISITIONS ACTION CREATORS ///////////////////
+
+export const createAssetRequisition = (formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.post("/assetrequisitions", formValues);
+
+    dispatch({
+      type: CREATE_ASSETREQUISITION,
+      payload: response.data.data.data,
+    });
+  };
+};
 
 export const fetchAssetRequisitions = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
@@ -2835,6 +2867,18 @@ export const deleteReturnAssetPostRequisition = (id, token) => {
 
 ///////////////////////////////////////// ASSET RETIREMENT ACTION CREATORS ///////////////////
 
+export const createAssetRetirement = (formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.post("/assetretirements", formValues);
+
+    dispatch({
+      type: CREATE_ASSETRETIREMENT,
+      payload: response.data.data.data,
+    });
+  };
+};
+
 export const fetchAssetRetirements = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
   return async (dispatch) => {
@@ -3010,6 +3054,18 @@ export const deleteReturnAssetPostRetirement = (id, token) => {
 };
 
 ///////////////////////////////////////// ASSET  DISPOSITION ACTION CREATORS ///////////////////
+
+export const createAssetDisposition = (formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.post("/assetdispositions", formValues);
+
+    dispatch({
+      type: CREATE_ASSETDISPOSITION,
+      payload: response.data.data.data,
+    });
+  };
+};
 
 export const fetchAssetDispostions = (tokens) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
@@ -8805,7 +8861,7 @@ export const editAssetSet = (id, formValues, token) => {
 
   return async (dispatch) => {
     const response = await data.patch(`/assetsets/${id}`, formValues);
-   
+
     dispatch({
       type: EDIT_ASSETSET,
       payload: response.data.data.data,
@@ -8823,10 +8879,9 @@ export const deleteAssetSet = (id, token) => {
 
 export const adjustQuantityInAssetSet = (id, formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
- 
+
   return async () => {
     const response = await data.patch(`/assetsets/${id}`, formValues);
-    
   };
 };
 

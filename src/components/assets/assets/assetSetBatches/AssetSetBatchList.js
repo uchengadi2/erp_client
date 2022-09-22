@@ -164,10 +164,10 @@ class AssetSetBatchList extends React.Component {
       { field: "numbering", headerName: "S/n", width: 60 },
 
       { field: "label", headerName: "Batch Label", width: 200 },
-      { field: "batchRefNumber", headerName: "Batch Ref Number", width: 200 },
-      { field: "assetType", headerName: "Asset Type", width: 200 },
-      { field: "assetSet", headerName: "Asset Set", width: 200 },
-      { field: "quantity", headerName: "Quantity", width: 200 },
+      { field: "batchRefNumber", headerName: "Batch Ref Number", width: 130 },
+      { field: "assetType", headerName: "Asset Type", width: 130 },
+      { field: "assetSet", headerName: "Asset Set", width: 130 },
+      { field: "quantity", headerName: "Quantity", width: 120 },
 
       {
         field: "editaction",

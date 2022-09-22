@@ -9,7 +9,7 @@ import CancelRoundedIcon from "@material-ui/icons/CancelRounded";
 import AssignmentIcon from "@material-ui/icons/Assignment";
 import Typography from "@material-ui/core/Typography";
 import history from "../../../../history";
-import { fetchUnapprovedStockRequisitions } from "../../../../actions";
+import { fetchAssetRequisitions } from "../../../../actions";
 import DataGridContainer from "../../../DataGridContainer";
 
 import AssetInventoryUnapprovedRequisitionDelete from "./AssetInventoryUnapprovedRequisitionDelete";
@@ -254,6 +254,6 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { fetchUnapprovedStockRequisitions })(
+export default connect(mapStateToProps, { fetchAssetRequisitions })(
   AssetInventoryUnapprovedRequisitionList
 );

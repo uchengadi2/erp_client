@@ -115,13 +115,13 @@ function AssetsSetsLayout(props) {
       spacing={2}
     >
       <Grid item container direction="column" sm={width}>
-        <Grid item className={classes.selectField}>
+        {/* <Grid item className={classes.selectField}>
           <AssetTypesFilter
             token={props.token}
             userId={props.userId}
             getCurrentAssetTypeHandle={getCurrentAssetTypeHandle}
           />
-        </Grid>
+        </Grid> */}
         <Grid
           item
           container

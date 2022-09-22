@@ -104,16 +104,16 @@ function AssetMovementsLayout({ token }) {
             history.push(`/assets/movements/allmovements`);
           }}
         />
-        <Tab
-          label="Transfers & Leases"
+        {/* <Tab
+          label="Transfers"
           {...a11yProps(0)}
           onClick={(event) => {
             event.preventDefault();
             history.push(`/assets/movements/alltransfers`);
           }}
-        />
+        /> */}
 
-        <Tab
+        {/* <Tab
           label="Pending Transfers & Leases"
           {...a11yProps(0)}
           onClick={(event) => {
@@ -137,7 +137,7 @@ function AssetMovementsLayout({ token }) {
             event.preventDefault();
             history.push(`/assets/movements/assetreturns`);
           }}
-        />
+        /> */}
       </Tabs>
 
       <TabPanel value={value} index={0}>

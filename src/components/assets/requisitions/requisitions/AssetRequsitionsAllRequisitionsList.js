@@ -162,8 +162,15 @@ class AssetRequsitionsAllRequisitionsList extends React.Component {
     let counter = 0;
     const columns = [
       { field: "numbering", headerName: "S/n", width: 60 },
-      { field: "code", headerName: "Transaction Code", width: 150 },
-      { field: "name", headerName: "Transaction Name", width: 200 },
+      { field: "serviceOutlet", headerName: "Service Outlet", width: 150 },
+      { field: "label", headerName: "Requisition Label", width: 200 },
+      {
+        field: "requisitionRefNumber",
+        headerName: "Reference Number",
+        width: 160,
+      },
+      { field: "assetType", headerName: "Asset Type", width: 160 },
+      { field: "assetStock", headerName: "Stock", width: 200 },
 
       {
         field: "editaction",
@@ -214,8 +221,20 @@ class AssetRequsitionsAllRequisitionsList extends React.Component {
       let row = {
         numbering: ++counter,
         id: assetRequisition.id,
-        code: assetRequisition.code,
-        name: assetRequisition.name,
+        serviceOutlet: assetRequisition.serviceOutlet,
+        label: assetRequisition.label,
+        requisitionRefNumber: assetRequisition.requisitionRefNumber,
+        purpose: assetRequisition.purpose,
+        assetType: assetRequisition.assetType,
+        assetStock: assetRequisition.assetStock,
+        store: assetRequisition.store,
+        requisitionDate: assetRequisition.requisitionDate,
+        totalRequisitionCost: assetRequisition.totalRequisitionCost,
+        currency: assetRequisition.currency,
+        quantity: assetRequisition.quantity,
+        assetMeasurementUnit: assetRequisition.assetMeasurementUnit,
+        createdBy: assetRequisition.createdBy,
+        dateCreated: assetRequisition.dateCreated,
         description: assetRequisition.description,
       };
       rows.push(row);

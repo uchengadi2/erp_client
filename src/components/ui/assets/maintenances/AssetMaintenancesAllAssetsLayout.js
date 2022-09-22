@@ -16,7 +16,7 @@ import AssetsMaintenancesAllAssetsList from "../../../assets/maintenances/allAss
 const useStyles = makeStyles((theme) => ({
   root: {
     marginTop: "-50px",
-    width: 1050,
+    width: 1150,
   },
   headerContainer: {
     height: 20,
@@ -290,7 +290,7 @@ function AssetMaintenancesAllAssetsLayout(props) {
                   history.push("/assets/maintenances/allassets/new"),
                 ]}
               >
-                Initiate Asset Maintenance
+                Add Asset Maintenance
               </Button>
             </Grid>
             <Grid item></Grid>

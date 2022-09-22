@@ -162,8 +162,15 @@ class AssetRetirementsAllRetirementsList extends React.Component {
     let counter = 0;
     const columns = [
       { field: "numbering", headerName: "S/n", width: 60 },
-      { field: "code", headerName: "Transaction Code", width: 150 },
-      { field: "name", headerName: "Transaction Name", width: 200 },
+      { field: "serviceOutlet", headerName: "Service Outlet", width: 150 },
+      { field: "label", headerName: "Retirement Label", width: 200 },
+      {
+        field: "retirementRefNumber",
+        headerName: "Reference Number",
+        width: 160,
+      },
+      { field: "assetType", headerName: "Asset Type", width: 160 },
+      { field: "assetStock", headerName: "Stock", width: 200 },
 
       {
         field: "editaction",
@@ -214,8 +221,20 @@ class AssetRetirementsAllRetirementsList extends React.Component {
       let row = {
         numbering: ++counter,
         id: assetRetirement.id,
-        code: assetRetirement.code,
-        name: assetRetirement.name,
+        serviceOutlet: assetRetirement.serviceOutlet,
+        label: assetRetirement.label,
+        retirementRefNumber: assetRetirement.retirementRefNumber,
+        purpose: assetRetirement.purpose,
+        assetType: assetRetirement.assetType,
+        assetStock: assetRetirement.assetStock,
+        store: assetRetirement.store,
+        retirementDate: assetRetirement.retirementDate,
+        totalRetirementCost: assetRetirement.totalRetirementCost,
+        currency: assetRetirement.currency,
+        quantity: assetRetirement.quantity,
+        assetMeasurementUnit: assetRetirement.assetMeasurementUnit,
+        createdBy: assetRetirement.createdBy,
+        dateCreated: assetRetirement.dateCreated,
         description: assetRetirement.description,
       };
       rows.push(row);

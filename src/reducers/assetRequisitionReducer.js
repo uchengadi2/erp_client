@@ -1,5 +1,6 @@
 import _ from "lodash";
 import {
+  CREATE_ASSETREQUISITION,
   FETCH_ASSETREQUISITIONS,
   FETCH_ASSETREQUISITION,
   DELETE_ASSETREQUISITION,
@@ -17,8 +18,8 @@ export default (state = {}, action) => {
 
     case FETCH_ASSETREQUISITION:
       return { ...state, [action.payload.id]: action.payload };
-    // case CREATE_APPROVEDMAINTENANCE:
-    //   return { ...state, [action.payload.id]: action.payload };
+    case CREATE_ASSETREQUISITION:
+      return { ...state, [action.payload.id]: action.payload };
     case EDIT_ASSETREQUISITION:
       return { ...state, [action.payload.id]: action.payload };
     case DELETE_ASSETREQUISITION:

@@ -162,8 +162,11 @@ class AssetDispositionsAllDispositionsList extends React.Component {
     let counter = 0;
     const columns = [
       { field: "numbering", headerName: "S/n", width: 60 },
-      { field: "code", headerName: "Transaction Code", width: 150 },
-      { field: "name", headerName: "Transaction Name", width: 200 },
+      { field: "serviceOutlet", headerName: "Service Outlet", width: 150 },
+      { field: "label", headerName: "Disposition Label", width: 200 },
+      { field: "dispositionType", headerName: "Disposition Type", width: 160 },
+      { field: "assetType", headerName: "Asset Type", width: 160 },
+      { field: "assetStock", headerName: "Stock", width: 200 },
 
       {
         field: "editaction",
@@ -214,8 +217,21 @@ class AssetDispositionsAllDispositionsList extends React.Component {
       let row = {
         numbering: ++counter,
         id: assetDispostion.id,
-        code: assetDispostion.code,
-        name: assetDispostion.name,
+        serviceOutlet: assetDispostion.serviceOutlet,
+        label: assetDispostion.label,
+        dispositionRefNumber: assetDispostion.dispositionRefNumber,
+        purpose: assetDispostion.purpose,
+        dispositionType: assetDispostion.dispositionType,
+        assetType: assetDispostion.assetType,
+        assetStock: assetDispostion.assetStock,
+        store: assetDispostion.store,
+        dispositionDate: assetDispostion.dispositionDate,
+        totalDispositionCost: assetDispostion.totalDispositionCost,
+        currency: assetDispostion.currency,
+        quantity: assetDispostion.quantity,
+        assetMeasurementUnit: assetDispostion.assetMeasurementUnit,
+        createdBy: assetDispostion.createdBy,
+        dateCreated: assetDispostion.dateCreated,
         description: assetDispostion.description,
       };
       rows.push(row);

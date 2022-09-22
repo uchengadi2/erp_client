@@ -218,24 +218,25 @@ const Header = (props) => {
 
   const assetsOptions = [
     {
-      name: "Assets",
-      link: "/assets/assets",
+      name: "Procurement",
+      link: "/assets/procurements",
       activeIndex: 1,
       selectedIndex: 10,
     },
+
     {
-      name: "Procurement",
-      link: "/assets/procurements",
+      name: "Assets",
+      link: "/assets/assets",
       activeIndex: 1,
       selectedIndex: 11,
     },
 
-    {
-      name: "Inventory",
-      link: "/assets/inventories",
-      activeIndex: 1,
-      selectedIndex: 12,
-    },
+    // {
+    //   name: "Inventory",
+    //   link: "/assets/inventories",
+    //   activeIndex: 1,
+    //   selectedIndex: 12,
+    // },
     {
       name: "Maintenances",
       link: "/assets/maintenances",

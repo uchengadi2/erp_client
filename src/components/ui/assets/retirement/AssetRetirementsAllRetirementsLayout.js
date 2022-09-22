@@ -10,14 +10,15 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import history from "../../../../history";
-import ServiceOutletsAndTransactionTypesFilter from "../../headerFilters/ServiceOutletsAndTransactionTypesFilter";
-
+//import ServiceOutletsAndTransactionTypesFilter from "../../headerFilters/ServiceOutletsAndTransactionTypesFilter";
+import ServiceOutletFilters from "../../headerFilters/ServiceOutletFilters";
 import AssetRetirementsAllRetirementsList from "../../../assets/retirements/retirements/AssetRetirementsAllRetirementsList";
+import AssetRetirementsAllRetirementCreateForm from "../../../assets/retirements/retirements/AssetRetirementsAllRetirementCreateForm";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     marginTop: "-80px",
-    width: 1000,
+    width: 1150,
   },
   headerContainer: {
     height: 20,
@@ -33,12 +34,12 @@ const useStyles = makeStyles((theme) => ({
   contentContainer: {
     // backgroundColor: "#ccab",
     height: "auto",
-    marginTop: 10,
+    marginTop: 50,
   },
   addButton: {
     borderRadius: 10,
     height: 30,
-    width: 220,
+    width: 150,
     marginLeft: 10,
     marginTop: 50,
     marginBottom: 20,
@@ -113,7 +114,7 @@ function AssetRetirementsAllRetirementsLayout(props) {
     >
       <Grid item container direction="column" sm={width}>
         <Grid item className={classes.selectField}>
-          <ServiceOutletsAndTransactionTypesFilter />
+          <ServiceOutletFilters />
         </Grid>
         <Grid
           item
@@ -121,23 +122,21 @@ function AssetRetirementsAllRetirementsLayout(props) {
           direction="row"
           className={classes.headerContainer}
         >
-          {/* <Toolbar disableGutters className={classes.toolbar}>
+          <Toolbar disableGutters className={classes.toolbar}>
             <Grid item>
               <Button
                 variant="contained"
                 className={classes.addButton}
                 onClick={() => [
                   setOpen(true),
-                  history.push(
-                    "/assets/maintenances/unapproved/unapprovedmaintenances/new"
-                  ),
+                  history.push("/assets/retirements/allretirements/new"),
                 ]}
               >
-                Initiate Maintenance Request
+                Retire Stock
               </Button>
             </Grid>
             <Grid item></Grid>
-          </Toolbar> */}
+          </Toolbar>
         </Grid>
         <Grid item className={classes.contentContainer}>
           <AssetRetirementsAllRetirementsList
@@ -157,15 +156,15 @@ function AssetRetirementsAllRetirementsLayout(props) {
           history.push("/assets/retirements/allretirements"),
         ]}
       >
-        {/* <DialogContent>
-          <AssetMaintenancesUnapprovedCreateForm
+        <DialogContent>
+          <AssetRetirementsAllRetirementCreateForm
             token={props.token}
             userId={props.userId}
             handleDialogOpenStatus={handleDialogOpenStatus}
             handleSuccessfulCreateSnackbar={handleSuccessfulCreateSnackbar}
             handleFailedSnackbar={handleFailedSnackbar}
           />
-        </DialogContent> */}
+        </DialogContent>
       </Dialog>
       <Grid
         item

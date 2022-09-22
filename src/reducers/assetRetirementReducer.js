@@ -1,5 +1,6 @@
 import _ from "lodash";
 import {
+  CREATE_ASSETRETIREMENT,
   FETCH_ASSETRETIREMENTS,
   FETCH_ASSETRETIREMENT,
   DELETE_ASSETRETIREMENT,
@@ -17,8 +18,8 @@ export default (state = {}, action) => {
 
     case FETCH_ASSETRETIREMENT:
       return { ...state, [action.payload.id]: action.payload };
-    // case CREATE_APPROVEDMAINTENANCE:
-    //   return { ...state, [action.payload.id]: action.payload };
+    case CREATE_ASSETRETIREMENT:
+      return { ...state, [action.payload.id]: action.payload };
     case EDIT_ASSETRETIREMENT:
       return { ...state, [action.payload.id]: action.payload };
     case DELETE_ASSETRETIREMENT:

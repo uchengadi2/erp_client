@@ -75,6 +75,8 @@ class AssetsStocksList extends React.Component {
       <>
         <Dialog
           //style={{ zIndex: 1302 }}
+          fullWidth={true}
+          maxWidth={"lg"}
           open={this.state.editOpen}
           onClose={() => [
             this.setState({ editOpen: false }),
@@ -157,13 +159,18 @@ class AssetsStocksList extends React.Component {
     );
   };
 
-  renderDepreciationTypesList = () => {
+  renderDataList = () => {
     let rows = [];
     let counter = 0;
     const columns = [
       { field: "numbering", headerName: "S/n", width: 60 },
-      { field: "code", headerName: "Transaction Code", width: 150 },
-      { field: "name", headerName: "Transaction Name", width: 200 },
+      { field: "serviceOutlet", headerName: "Service Outlet", width: 150 },
+      { field: "name", headerName: "Asset Name", width: 200 },
+      { field: "assetType", headerName: "Asset Type", width: 150 },
+      // { field: "assetSet", headerName: "Asset Set", width: 150 },
+      { field: "assetBatch", headerName: "Asset Batch", width: 150 },
+      // { field: "quantity", headerName: "Quantity", width: 150 },
+      { field: "sku", headerName: "Sku", width: 150 },
 
       {
         field: "editaction",
@@ -206,13 +213,38 @@ class AssetsStocksList extends React.Component {
         ),
       },
     ];
+
     this.props.stocks.map((stock) => {
       let row = {
         numbering: ++counter,
         id: stock.id,
-        code: stock.code,
+        serviceOutlet: stock.serviceOutlet,
         name: stock.name,
+        assetSubclass: stock.assetSubclass,
+        assetType: stock.assetType,
+        assetSet: stock.assetSet,
+        assetBatch: stock.assetBatch,
+        storeType: stock.storeType,
+        store: stock.store,
+        glHead: stock.glHead,
+        subGlHead: stock.subGlHead,
+        ledger: stock.ledger,
+        assetRefNumber: stock.assetRefNumber,
+        quantity: stock.quantity,
+        datePlacedInStore: stock.datePlacedInStore,
+        assetMeasurementUnit: stock.assetMeasurementUnit,
+        totalWeight: stock.totalWeight,
+        sku: stock.sku,
         description: stock.description,
+        heightDimension: stock.heightDimension,
+        lengthDimension: stock.lengthDimension,
+        widthDimension: stock.widthDimension,
+        totalAcquisitionCost: stock.totalAcquisitionCost,
+        currency: stock.currency,
+        plant: stock.plant,
+        commodity: stock.commodity,
+        livestock: stock.livestock,
+        charcoal: stock.charcoal,
       };
       rows.push(row);
     });
@@ -224,7 +256,7 @@ class AssetsStocksList extends React.Component {
       <>
         {this.renderDeleteDialogForm()}
         {this.renderEditDialogForm()}
-        {this.renderDepreciationTypesList()}
+        {this.renderDataList()}
         <Snackbar
           open={this.state.alert.open}
           message={this.state.alert.message}

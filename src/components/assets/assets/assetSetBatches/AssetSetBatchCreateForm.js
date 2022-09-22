@@ -265,7 +265,7 @@ function AssetSetBatchCreateForm(props) {
       //     params: { assetType: assetType },
       //   });
 
-      const response = await api.patch(`/assetsets/${assetSet}`);
+      const response = await api.get(`/assetsets/${assetSet}`);
 
       const item = response.data.data.data;
       allData.push({
@@ -595,9 +595,7 @@ function AssetSetBatchCreateForm(props) {
             dataValue
           );
 
-          console.log("set response:", setResponse);
-
-          props.handleSuccessfulCreateSnackbar(
+         props.handleSuccessfulCreateSnackbar(
             `${response.data.data.data.label} Batch is created successfully!!!`
           );
           props.handleDialogOpenStatus();

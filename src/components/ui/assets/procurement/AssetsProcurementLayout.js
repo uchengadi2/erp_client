@@ -8,7 +8,6 @@ import Box from "@material-ui/core/Box";
 import { Link } from "react-router-dom";
 import history from "./../../../../history";
 
-import AssetsApprovedProcurementsLayout from "./AssetsApprovedProcurementsLayout";
 import AssetsExecutedProcurementsLayout from "./AssetsExecutedProcurementsLayout";
 import AssetsUnapprovedProcurementLayout from "./AssetsUnapprovedProcurementLayout";
 
@@ -102,14 +101,14 @@ function AssetsProcurementLayout({ token, userId }) {
             history.push(`/assets/procurements/assetprocurements`);
           }}
         />
-        <Tab
+        {/* <Tab
           label="Unapproved Procurement Request"
           {...a11yProps(0)}
           onClick={(event) => {
             event.preventDefault();
             history.push(`/assets/procurements/unapprovedprocurements`);
           }}
-        />
+        /> */}
         {/* <Tab
           label="Approved Procurement Request"
           {...a11yProps(0)}

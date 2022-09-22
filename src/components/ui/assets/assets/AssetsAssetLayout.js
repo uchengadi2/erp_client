@@ -102,14 +102,14 @@ function AssetsAssetLayout({ token, userId }) {
             history.push(`/assets/assets/stocks`);
           }}
         />
-        <Tab
+        {/* <Tab
           label="Other Assets"
           {...a11yProps(0)}
           onClick={(event) => {
             event.preventDefault();
             history.push(`/assets/assets/otherassets`);
           }}
-        />
+        /> */}
         <Tab
           label="=========================================="
           {...a11yProps(0)}
@@ -140,13 +140,13 @@ function AssetsAssetLayout({ token, userId }) {
       <TabPanel value={value} index={0}>
         <AssetsAssetStockLayout token={token} userId={userId} />
       </TabPanel>
-      <TabPanel value={value} index={1}>
+      {/* <TabPanel value={value} index={1}>
         <AssetsAssetsOtherAssetsLayout token={token} userId={userId} />
-      </TabPanel>
-      <TabPanel value={value} index={3}>
+      </TabPanel> */}
+      <TabPanel value={value} index={2}>
         <AssetsSetsLayout token={token} userId={userId} />
       </TabPanel>
-      <TabPanel value={value} index={4}>
+      <TabPanel value={value} index={3}>
         <AssetSetBatchesLayout token={token} userId={userId} />
       </TabPanel>
     </div>

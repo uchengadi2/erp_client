@@ -10,15 +10,15 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import history from "../../../../history";
-import ServiceOutletsAndTransactionTypesFilter from "../../headerFilters/ServiceOutletsAndTransactionTypesFilter";
-
+//import ServiceOutletsAndTransactionTypesFilter from "../../headerFilters/ServiceOutletsAndTransactionTypesFilter";
+import ServiceOutletFilters from "../../headerFilters/ServiceOutletFilters";
 import AssetMovementsAllMovementCreateForm from "../../../assets/movements/movements/AssetMovementsAllMovementCreateForm";
 import AssetMovementsAllMovementsList from "../../../assets/movements/movements/AssetMovementsAllMovementsList";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     marginTop: "-80px",
-    width: 1000,
+    width: 1150,
   },
   headerContainer: {
     height: 20,
@@ -34,12 +34,12 @@ const useStyles = makeStyles((theme) => ({
   contentContainer: {
     // backgroundColor: "#ccab",
     height: "auto",
-    marginTop: 10,
+    marginTop: 50,
   },
   addButton: {
     borderRadius: 10,
     height: 30,
-    width: 220,
+    width: 150,
     marginLeft: 10,
     marginTop: 50,
     marginBottom: 20,
@@ -114,7 +114,7 @@ function AssetMovementsAllMovementsLayout(props) {
     >
       <Grid item container direction="column" sm={width}>
         <Grid item className={classes.selectField}>
-          <ServiceOutletsAndTransactionTypesFilter />
+          <ServiceOutletFilters />
         </Grid>
         <Grid
           item
@@ -122,23 +122,21 @@ function AssetMovementsAllMovementsLayout(props) {
           direction="row"
           className={classes.headerContainer}
         >
-          {/* <Toolbar disableGutters className={classes.toolbar}>
+          <Toolbar disableGutters className={classes.toolbar}>
             <Grid item>
               <Button
                 variant="contained"
                 className={classes.addButton}
                 onClick={() => [
                   setOpen(true),
-                  history.push(
-                    "/assets/maintenances/unapproved/unapprovedmaintenances/new"
-                  ),
+                  history.push("/assets/movements/allmovements/new"),
                 ]}
               >
-                Initiate Maintenance Request
+                Move Stock
               </Button>
             </Grid>
             <Grid item></Grid>
-          </Toolbar> */}
+          </Toolbar>
         </Grid>
         <Grid item className={classes.contentContainer}>
           <AssetMovementsAllMovementsList

@@ -15,7 +15,7 @@ import DataGridContainer from "../../../DataGridContainer";
 import AssetExecutedProcurementDelete from "./AssetExecutedProcurementDelete";
 import AssetExecutedProcurementEditForm from "./AssetExecutedProcurementEditForm";
 
-class AssetsExecutedProcurementList extends React.Component {
+class AssetExecutedProcurementList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -157,13 +157,32 @@ class AssetsExecutedProcurementList extends React.Component {
     );
   };
 
-  renderDepreciationTypesList = () => {
+  renderDataList = () => {
     let rows = [];
     let counter = 0;
     const columns = [
       { field: "numbering", headerName: "S/n", width: 60 },
-      { field: "code", headerName: "Transaction Code", width: 150 },
-      { field: "name", headerName: "Transaction Name", width: 200 },
+
+      { field: "assetType", headerName: "Asset Type", width: 150 },
+      { field: "procurementItem", headerName: "Procurement Item", width: 150 },
+      {
+        field: "procurementRefNumber",
+        headerName: "Procurement Ref No",
+        width: 160,
+      },
+      { field: "quantity", headerName: "Quantity", width: 120 },
+      {
+        field: "remainingQuantityForAllocation",
+        headerName: "Allocatable Quantity",
+        width: 150,
+      },
+
+      {
+        field: "assetMeasurementUnit",
+        headerName: "Asset Measurement Unit",
+        width: 160,
+      },
+      //   { field: "procurementDate", headerName: "Procurement Date", width: 160 },
 
       {
         field: "editaction",
@@ -210,13 +229,24 @@ class AssetsExecutedProcurementList extends React.Component {
         ),
       },
     ];
+
     this.props.assetProcurements.map((assetProcurement) => {
       let row = {
         numbering: ++counter,
         id: assetProcurement.id,
-        code: assetProcurement.code,
-        name: assetProcurement.name,
+        assetType: assetProcurement.assetType,
+        procurementItem: assetProcurement.procurementItem,
         description: assetProcurement.description,
+        quantity: assetProcurement.quantity,
+        procurementDate: assetProcurement.procurementDate,
+        assetMeasurementUnit: assetProcurement.assetMeasurementUnit,
+        totalCostOfProcurement: assetProcurement.totalCostOfProcurement,
+        currency: assetProcurement.currency,
+        supplier: assetProcurement.supplier,
+        procuredBy: assetProcurement.procuredBy,
+        procurementRefNumber: assetProcurement.procurementRefNumber,
+        remainingQuantityForAllocation:
+          assetProcurement.remainingQuantityForAllocation,
       };
       rows.push(row);
     });
@@ -228,7 +258,7 @@ class AssetsExecutedProcurementList extends React.Component {
       <>
         {this.renderDeleteDialogForm()}
         {this.renderEditDialogForm()}
-        {this.renderDepreciationTypesList()}
+        {this.renderDataList()}
         <Snackbar
           open={this.state.alert.open}
           message={this.state.alert.message}
@@ -249,5 +279,5 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, { fetchAssetProcurements })(
-  AssetsExecutedProcurementList
+  AssetExecutedProcurementList
 );

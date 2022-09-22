@@ -103,7 +103,7 @@ function AssetRetirementLayout({ token }) {
             history.push(`/assets/retirements/allretirements`);
           }}
         />
-        <Tab
+        {/* <Tab
           label="Pending Retirements"
           {...a11yProps(0)}
           onClick={(event) => {
@@ -128,7 +128,7 @@ function AssetRetirementLayout({ token }) {
             event.preventDefault();
             history.push(`/assets/retirements/assetreturns`);
           }}
-        />
+        /> */}
       </Tabs>
 
       <TabPanel value={value} index={0}>

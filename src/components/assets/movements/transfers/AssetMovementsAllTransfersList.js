@@ -162,8 +162,15 @@ class AssetMovementsAllTransfersList extends React.Component {
     let counter = 0;
     const columns = [
       { field: "numbering", headerName: "S/n", width: 60 },
-      { field: "code", headerName: "Transaction Code", width: 150 },
-      { field: "name", headerName: "Transaction Name", width: 200 },
+      { field: "serviceOutlet", headerName: "Service Outlet", width: 150 },
+      { field: "label", headerName: "Transfer Label", width: 200 },
+      {
+        field: "transferRefNumber",
+        headerName: "Reference Number",
+        width: 160,
+      },
+      { field: "assetType", headerName: "Asset Type", width: 160 },
+      { field: "assetStock", headerName: "Stock", width: 200 },
 
       {
         field: "editaction",
@@ -214,9 +221,23 @@ class AssetMovementsAllTransfersList extends React.Component {
       let row = {
         numbering: ++counter,
         id: assetTransferMovement.id,
-        code: assetTransferMovement.code,
-        name: assetTransferMovement.name,
+        serviceOutlet: assetTransferMovement.serviceOutlet,
+        label: assetTransferMovement.label,
+        transferRefNumber: assetTransferMovement.transferRefNumber,
+        purpose: assetTransferMovement.purpose,
+        assetType: assetTransferMovement.assetType,
+        assetStock: assetTransferMovement.assetStock,
+        sourceStore: assetTransferMovement.sourceStore,
+        transferDate: assetTransferMovement.transferDate,
+        totalTransferCost: assetTransferMovement.totalTransferCost,
+        currency: assetTransferMovement.currency,
+        quantity: assetTransferMovement.quantity,
+        assetMeasurementUnit: assetTransferMovement.assetMeasurementUnit,
+        createdBy: assetTransferMovement.createdBy,
+        dateCreated: assetTransferMovement.dateCreated,
         description: assetTransferMovement.description,
+        destinationStore: assetTransferMovement.destinationStore,
+        assetReturnDate: assetTransferMovement.assetReturnDate,
       };
       rows.push(row);
     });
