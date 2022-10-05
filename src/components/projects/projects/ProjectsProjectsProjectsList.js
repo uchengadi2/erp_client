@@ -162,8 +162,10 @@ class ProjectsProjectsProjectsList extends React.Component {
     let counter = 0;
     const columns = [
       { field: "numbering", headerName: "S/n", width: 60 },
-      { field: "code", headerName: "Transaction Code", width: 150 },
-      { field: "name", headerName: "Transaction Name", width: 200 },
+      { field: "serviceOutlet", headerName: "Service Outlet", width: 200 },
+      { field: "refNumber", headerName: "Reference Number", width: 250 },
+      { field: "name", headerName: "Project Name", width: 250 },
+      { field: "status", headerName: "Status", width: 200 },
 
       {
         field: "editaction",
@@ -210,9 +212,18 @@ class ProjectsProjectsProjectsList extends React.Component {
       let row = {
         numbering: ++counter,
         id: projectProject.id,
-        code: projectProject.code,
+        refNumber: projectProject.refNumber,
         name: projectProject.name,
         description: projectProject.description,
+        sponsor: projectProject.sponsor,
+        startDate: projectProject.startDate,
+        endDate: projectProject.endDate,
+        totalBudget: projectProject.totalBudget,
+        remainingBudgetedAmount: projectProject.remainingBudgetedAmount,
+        currency: projectProject.currency,
+        projectManager: projectProject.projectManager,
+        status: projectProject.status,
+        serviceOutlet: projectProject.serviceOutlet,
       };
       rows.push(row);
     });

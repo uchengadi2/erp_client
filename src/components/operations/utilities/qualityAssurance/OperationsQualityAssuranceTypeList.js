@@ -162,8 +162,9 @@ class OperationsQualityAssuranceTypeList extends React.Component {
     let counter = 0;
     const columns = [
       { field: "numbering", headerName: "S/n", width: 60 },
-      { field: "code", headerName: "Transaction Code", width: 150 },
-      { field: "name", headerName: "Transaction Name", width: 200 },
+      { field: "refNumber", headerName: "Reference Number", width: 250 },
+      { field: "name", headerName: "Quality Assurance Type", width: 250 },
+      { field: "processingType", headerName: "Processing Type", width: 250 },
 
       {
         field: "editaction",
@@ -215,8 +216,9 @@ class OperationsQualityAssuranceTypeList extends React.Component {
         let row = {
           numbering: ++counter,
           id: operationQualityAssuranceType.id,
-          code: operationQualityAssuranceType.code,
+          refNumber: operationQualityAssuranceType.refNumber,
           name: operationQualityAssuranceType.name,
+          processingType: operationQualityAssuranceType.processingType,
           description: operationQualityAssuranceType.description,
         };
         rows.push(row);

@@ -81,7 +81,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function OperationsUtilityLayout({ token }) {
+function OperationsUtilityLayout({ token, userId }) {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
@@ -107,22 +107,22 @@ function OperationsUtilityLayout({ token }) {
             history.push(`/operations/utilities/processingtypes`);
           }}
         />
-        <Tab
+        {/* <Tab
           label="Processing Phases"
           {...a11yProps(0)}
           onClick={(event) => {
             event.preventDefault();
             history.push(`/operations/utilities/processingphases`);
           }}
-        />
-        <Tab
+        /> */}
+        {/* <Tab
           label="Processing Phase Events"
           {...a11yProps(0)}
           onClick={(event) => {
             event.preventDefault();
             history.push(`/operations/utilities/processingphaseevents`);
           }}
-        />
+        /> */}
         <Tab
           label="Finishing Types"
           {...a11yProps(0)}
@@ -139,22 +139,22 @@ function OperationsUtilityLayout({ token }) {
             history.push(`/operations/utilities/qualityassurancetypes`);
           }}
         />
-        <Tab
+        {/* <Tab
           label="Quality Assurance Phases"
           {...a11yProps(0)}
           onClick={(event) => {
             event.preventDefault();
             history.push(`/operations/utilities/qualityassurancephases`);
           }}
-        />
-        <Tab
+        /> */}
+        {/* <Tab
           label="Quality Assurance Phase Events"
           {...a11yProps(0)}
           onClick={(event) => {
             event.preventDefault();
             history.push(`/operations/utilities/qualityassurancephaseevents`);
           }}
-        />
+        /> */}
         <Tab
           label="Maintenance Types"
           {...a11yProps(0)}
@@ -166,28 +166,37 @@ function OperationsUtilityLayout({ token }) {
       </Tabs>
 
       <TabPanel value={value} index={0}>
-        <OperationsUtilityTransformationTypesLayout token={token} />
+        <OperationsUtilityTransformationTypesLayout
+          token={token}
+          userId={userId}
+        />
       </TabPanel>
-      <TabPanel value={value} index={1}>
-        <OperationsUtilityTransformationPhasesLayout token={token} />
+      {/* <TabPanel value={value} index={1}>
+        <OperationsUtilityTransformationPhasesLayout token={token} userId={userId}/>
       </TabPanel>
       <TabPanel value={value} index={2}>
-        <OperationsUtilityTransformationPhaseEventsLayout token={token} />
+        <OperationsUtilityTransformationPhaseEventsLayout token={token} userId={userId}/>
+      </TabPanel> */}
+      <TabPanel value={value} index={1}>
+        <OperationsUtilityFinisihingTypesLayout token={token} userId={userId} />
       </TabPanel>
-      <TabPanel value={value} index={3}>
-        <OperationsUtilityFinisihingTypesLayout token={token} />
+      <TabPanel value={value} index={2}>
+        <OperationsUtilityQualityAssuranceTypesLayoutt
+          token={token}
+          userId={userId}
+        />
       </TabPanel>
-      <TabPanel value={value} index={4}>
-        <OperationsUtilityQualityAssuranceTypesLayoutt token={token} />
-      </TabPanel>
-      <TabPanel value={value} index={5}>
-        <OperationsUtilityQualityAssurancePhasesLayout token={token} />
+      {/* <TabPanel value={value} index={5}>
+        <OperationsUtilityQualityAssurancePhasesLayout token={token} userId={userId}/>
       </TabPanel>
       <TabPanel value={value} index={6}>
-        <OperationsUtilityQualityAssurancePhaseEventsLayout token={token} />
-      </TabPanel>
-      <TabPanel value={value} index={7}>
-        <OperationsUtilityMaintenanceTypesLayout token={token} />
+        <OperationsUtilityQualityAssurancePhaseEventsLayout token={token} userId={userId}/>
+      </TabPanel> */}
+      <TabPanel value={value} index={3}>
+        <OperationsUtilityMaintenanceTypesLayout
+          token={token}
+          userId={userId}
+        />
       </TabPanel>
     </div>
   );

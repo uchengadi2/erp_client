@@ -162,8 +162,11 @@ class OperationsProductionMaintenanceList extends React.Component {
     let counter = 0;
     const columns = [
       { field: "numbering", headerName: "S/n", width: 60 },
-      { field: "code", headerName: "Transaction Code", width: 150 },
-      { field: "name", headerName: "Transaction Name", width: 200 },
+      { field: "serviceOutlet", headerName: "Service Outlet", width: 150 },
+      { field: "refNumber", headerName: "Reference Number", width: 150 },
+      { field: "label", headerName: "Label", width: 150 },
+      { field: "status", headerName: "Status", width: 150 },
+      { field: "operation", headerName: "Operation", width: 200 },
 
       {
         field: "editaction",
@@ -215,9 +218,19 @@ class OperationsProductionMaintenanceList extends React.Component {
         let row = {
           numbering: ++counter,
           id: operationProductionMaintenance.id,
-          code: operationProductionMaintenance.code,
-          name: operationProductionMaintenance.name,
+          refNumber: operationProductionMaintenance.refNumber,
+          label: operationProductionMaintenance.label,
+          serviceOutlet: operationProductionMaintenance.serviceOutlet,
+          status: operationProductionMaintenance.status,
+          maintenanceType: operationProductionMaintenance.maintenanceType,
           description: operationProductionMaintenance.description,
+          comment: operationProductionMaintenance.comment,
+          operation: operationProductionMaintenance.operation,
+          maintenanceDate: operationProductionMaintenance.maintenanceDate,
+          output: operationProductionMaintenance.output,
+          maintenanceCost: operationProductionMaintenance.maintenanceCost,
+          currency: operationProductionMaintenance.currency,
+          dateLastModified:operationProductionMaintenance.dateLastModified,
         };
         rows.push(row);
       }

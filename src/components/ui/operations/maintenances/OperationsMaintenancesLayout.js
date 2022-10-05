@@ -93,16 +93,16 @@ function OperationsMaintenancesLayout({ token, userId }) {
         aria-label="Vertical tabs example"
         className={classes.tabs}
       >
-        <Tab
+        {/* <Tab
           label="Processing Maintenances"
           {...a11yProps(0)}
           onClick={(event) => {
             event.preventDefault();
             history.push(`/operations/maintenances/maintenances`);
           }}
-        />
+        /> */}
         <Tab
-          label="Production Maintenances"
+          label="Maintenances"
           {...a11yProps(0)}
           onClick={(event) => {
             event.preventDefault();
@@ -111,13 +111,13 @@ function OperationsMaintenancesLayout({ token, userId }) {
         />
       </Tabs>
 
-      <TabPanel value={value} index={0}>
+      {/* <TabPanel value={value} index={0}>
         <OperationsMaintenancesMaintenancesLayout
           token={token}
           userId={userId}
         />
-      </TabPanel>
-      <TabPanel value={value} index={1}>
+      </TabPanel> */}
+      <TabPanel value={value} index={0}>
         <OperationProductionsMaintenancesLayout token={token} userId={userId} />
       </TabPanel>
     </div>

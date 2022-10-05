@@ -18,7 +18,7 @@ import OperationsFinishingTypesList from "../../../operations/utilities/finishin
 const useStyles = makeStyles((theme) => ({
   root: {
     marginTop: "-80px",
-    width: 1000,
+    width: 1100,
   },
   headerContainer: {
     height: 20,
@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
   addButton: {
     borderRadius: 10,
     height: 30,
-    width: 220,
+    width: 170,
     marginLeft: 10,
     marginTop: 50,
     marginBottom: 20,
@@ -113,9 +113,9 @@ function OperationsUtilityFinisihingTypesLayout(props) {
       spacing={2}
     >
       <Grid item container direction="column" sm={width}>
-        <Grid item className={classes.selectField}>
+        {/* <Grid item className={classes.selectField}>
           <ServiceOutletsAndTransactionTypesFilter />
-        </Grid>
+        </Grid> */}
         <Grid
           item
           container

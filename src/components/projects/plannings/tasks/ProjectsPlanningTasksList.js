@@ -162,8 +162,11 @@ class ProjectsPlanningTasksList extends React.Component {
     let counter = 0;
     const columns = [
       { field: "numbering", headerName: "S/n", width: 60 },
-      { field: "code", headerName: "Transaction Code", width: 150 },
-      { field: "name", headerName: "Transaction Name", width: 200 },
+      { field: "refNumber", headerName: "Reference Number", width: 150 },
+      { field: "serviceOutlet", headerName: "Service Outlet", width: 150 },
+      { field: "project", headerName: "Project", width: 150 },
+      { field: "task", headerName: "Task", width: 150 },
+      { field: "status", headerName: "Status", width: 150 },
 
       {
         field: "editaction",
@@ -210,9 +213,17 @@ class ProjectsPlanningTasksList extends React.Component {
       let row = {
         numbering: ++counter,
         id: projectPlanningTask.id,
-        code: projectPlanningTask.code,
-        name: projectPlanningTask.name,
+        refNumber: projectPlanningTask.refNumber,
+        task: projectPlanningTask.task,
+        serviceOutlet: projectPlanningTask.serviceOutlet,
+        project: projectPlanningTask.project,
         description: projectPlanningTask.description,
+        startDate: projectPlanningTask.startDate,
+        endDate: projectPlanningTask.endDate,
+        status: projectPlanningTask.status,
+        expectedOutcome: projectPlanningTask.expectedOutcome,
+        actualOutcome: projectPlanningTask.actualOutcome,
+        dateLastModified: projectPlanningTask.dateLastModified,
       };
       rows.push(row);
     });

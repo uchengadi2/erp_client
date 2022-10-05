@@ -162,8 +162,11 @@ class ProjectsProjectsResourcesList extends React.Component {
     let counter = 0;
     const columns = [
       { field: "numbering", headerName: "S/n", width: 60 },
-      { field: "code", headerName: "Transaction Code", width: 150 },
-      { field: "name", headerName: "Transaction Name", width: 200 },
+      { field: "serviceOutlet", headerName: "Service Outlet", width: 150 },
+      { field: "refNumber", headerName: "Reference Number", width: 150 },
+      { field: "stock", headerName: "Stock", width: 150 },
+      { field: "stockQuantity", headerName: "Stock Quantity", width: 150 },
+      { field: "label", headerName: "Resource Label", width: 200 },
 
       {
         field: "editaction",
@@ -212,9 +215,17 @@ class ProjectsProjectsResourcesList extends React.Component {
       let row = {
         numbering: ++counter,
         id: projectProjectResource.id,
-        code: projectProjectResource.code,
-        name: projectProjectResource.name,
+        refNumber: projectProjectResource.refNumber,
+        label: projectProjectResource.label,
         description: projectProjectResource.description,
+        assetType: projectProjectResource.assetType,
+        assetSet: projectProjectResource.assetSet,
+        assetSetBatch: projectProjectResource.assetSetBatch,
+        stock: projectProjectResource.stock,
+        stockQuantity: projectProjectResource.stockQuantity,
+        serviceOutlet: projectProjectResource.serviceOutlet,
+        storeType: projectProjectResource.storeType,
+        store: projectProjectResource.store,
       };
       rows.push(row);
     });

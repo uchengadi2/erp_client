@@ -112,7 +112,7 @@ function ProjectsPlanningsLayout({ token }) {
             history.push(`/projects/plannings/activities`);
           }}
         />
-        <Tab
+        {/* <Tab
           label="Steps"
           {...a11yProps(0)}
           onClick={(event) => {
@@ -135,7 +135,7 @@ function ProjectsPlanningsLayout({ token }) {
             event.preventDefault();
             history.push(`/projects/plannings/schedulings`);
           }}
-        />
+        /> */}
       </Tabs>
 
       <TabPanel value={value} index={0}>
@@ -144,7 +144,7 @@ function ProjectsPlanningsLayout({ token }) {
       <TabPanel value={value} index={1}>
         <ProjectsPlanningsActivitiesLayout token={token} />
       </TabPanel>
-      <TabPanel value={value} index={2}>
+      {/* <TabPanel value={value} index={2}>
         <ProjectsPlanningsStepsLayout token={token} />
       </TabPanel>
       <TabPanel value={value} index={3}>
@@ -152,7 +152,7 @@ function ProjectsPlanningsLayout({ token }) {
       </TabPanel>
       <TabPanel value={value} index={4}>
         <ProjectsPlanningsSchedulingsLayout token={token} />
-      </TabPanel>
+      </TabPanel> */}
     </div>
   );
 }

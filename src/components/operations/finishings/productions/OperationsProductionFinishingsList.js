@@ -162,8 +162,11 @@ class OperationsProductionFinishingsList extends React.Component {
     let counter = 0;
     const columns = [
       { field: "numbering", headerName: "S/n", width: 60 },
-      { field: "code", headerName: "Transaction Code", width: 150 },
-      { field: "name", headerName: "Transaction Name", width: 200 },
+      { field: "serviceOutlet", headerName: "Service Outlet", width: 150 },
+      { field: "refNumber", headerName: "Reference Number", width: 150 },
+      { field: "label", headerName: "Label", width: 150 },
+      { field: "status", headerName: "Status", width: 150 },
+      { field: "operation", headerName: "Operation", width: 200 },
 
       {
         field: "editaction",
@@ -215,9 +218,19 @@ class OperationsProductionFinishingsList extends React.Component {
         let row = {
           numbering: ++counter,
           id: operationProductionFinishing.id,
-          code: operationProductionFinishing.code,
-          name: operationProductionFinishing.name,
+          refNumber: operationProductionFinishing.refNumber,
+          label: operationProductionFinishing.label,
+          serviceOutlet: operationProductionFinishing.serviceOutlet,
+          status: operationProductionFinishing.status,
+          finishingType: operationProductionFinishing.finishingType,
           description: operationProductionFinishing.description,
+          comment: operationProductionFinishing.comment,
+          operation: operationProductionFinishing.operation,
+          finishingDate: operationProductionFinishing.finishingDate,
+          output: operationProductionFinishing.output,
+          finishingCost: operationProductionFinishing.finishingCost,
+          currency: operationProductionFinishing.currency,
+          dateLastModified: operationProductionFinishing.dateLastModified,
         };
         rows.push(row);
       }

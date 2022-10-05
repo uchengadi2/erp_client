@@ -110,14 +110,14 @@ function ProjectsProjectsLayout({ token }) {
             history.push(`/projects/projects/resources`);
           }}
         />
-        <Tab
+        {/* <Tab
           label="Budgeting"
           {...a11yProps(0)}
           onClick={(event) => {
             event.preventDefault();
             history.push(`/projects/projects/budgetings`);
           }}
-        />
+        /> */}
       </Tabs>
 
       <TabPanel value={value} index={0}>
@@ -126,9 +126,9 @@ function ProjectsProjectsLayout({ token }) {
       <TabPanel value={value} index={1}>
         <ProjectsProjectsResourcesLayout token={token} />
       </TabPanel>
-      <TabPanel value={value} index={2}>
+      {/* <TabPanel value={value} index={2}>
         <ProjectsProjectsBudgetingsLayout token={token} />
-      </TabPanel>
+      </TabPanel> */}
     </div>
   );
 }

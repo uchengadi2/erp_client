@@ -170,8 +170,11 @@ class OperationsProductionQualityAssuranceList extends React.Component {
     let counter = 0;
     const columns = [
       { field: "numbering", headerName: "S/n", width: 60 },
-      { field: "code", headerName: "Transaction Code", width: 150 },
-      { field: "name", headerName: "Transaction Name", width: 200 },
+      { field: "serviceOutlet", headerName: "Service Outlet", width: 150 },
+      { field: "refNumber", headerName: "Reference Number", width: 150 },
+      { field: "label", headerName: "Label", width: 150 },
+      { field: "status", headerName: "Status", width: 150 },
+      { field: "operation", headerName: "Operation", width: 200 },
 
       {
         field: "editaction",
@@ -223,9 +226,23 @@ class OperationsProductionQualityAssuranceList extends React.Component {
         let row = {
           numbering: ++counter,
           id: operationProductionQualityAssurance.id,
-          code: operationProductionQualityAssurance.code,
-          name: operationProductionQualityAssurance.name,
+          refNumber: operationProductionQualityAssurance.refNumber,
+          label: operationProductionQualityAssurance.label,
+          serviceOutlet: operationProductionQualityAssurance.serviceOutlet,
+          status: operationProductionQualityAssurance.status,
+          qualityAssuranceType:
+            operationProductionQualityAssurance.qualityAssuranceType,
           description: operationProductionQualityAssurance.description,
+          comment: operationProductionQualityAssurance.comment,
+          operation: operationProductionQualityAssurance.operation,
+          qualityAssuranceDate:
+            operationProductionQualityAssurance.qualityAssuranceDate,
+          output: operationProductionQualityAssurance.output,
+          qualityAssuranceCost:
+            operationProductionQualityAssurance.qualityAssuranceCost,
+          currency: operationProductionQualityAssurance.currency,
+          dateLastModified:
+            operationProductionQualityAssurance.dateLastModified,
         };
         rows.push(row);
       }

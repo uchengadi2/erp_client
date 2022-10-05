@@ -11,6 +11,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import history from "../../../../history";
 import ServiceOutletsAndTransactionTypesFilter from "../../headerFilters/ServiceOutletsAndTransactionTypesFilter";
+import ServiceOutletFilters from "../../headerFilters/ServiceOutletFilters";
 
 import OperationsOperationsOperationsCreateForm from "../../../operations/operations/OperationsOperationsOperationsCreateForm";
 import OperationsOperationsOperationsList from "../../../operations/operations/OperationsOperationsOperationsList";
@@ -18,7 +19,7 @@ import OperationsOperationsOperationsList from "../../../operations/operations/O
 const useStyles = makeStyles((theme) => ({
   root: {
     marginTop: "-80px",
-    width: 1000,
+    width: 1150,
   },
   headerContainer: {
     height: 20,
@@ -114,7 +115,7 @@ function OperationsOperationsOperationsLayout(props) {
     >
       <Grid item container direction="column" sm={width}>
         <Grid item className={classes.selectField}>
-          <ServiceOutletsAndTransactionTypesFilter />
+          <ServiceOutletFilters />
         </Grid>
         <Grid
           item

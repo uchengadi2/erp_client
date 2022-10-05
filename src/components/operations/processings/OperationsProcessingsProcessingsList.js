@@ -162,8 +162,11 @@ class OperationsProcessingsProcessingsList extends React.Component {
     let counter = 0;
     const columns = [
       { field: "numbering", headerName: "S/n", width: 60 },
-      { field: "code", headerName: "Transaction Code", width: 150 },
-      { field: "name", headerName: "Transaction Name", width: 200 },
+      { field: "serviceOutlet", headerName: "Service Outlet", width: 150 },
+      { field: "refNumber", headerName: "Reference Number", width: 150 },
+      { field: "label", headerName: "Label", width: 150 },
+      { field: "status", headerName: "Status", width: 150 },
+      { field: "operation", headerName: "Operation", width: 200 },
 
       {
         field: "editaction",
@@ -214,9 +217,25 @@ class OperationsProcessingsProcessingsList extends React.Component {
       let row = {
         numbering: ++counter,
         id: operationProcessing.id,
-        code: operationProcessing.code,
-        name: operationProcessing.name,
+        refNumber: operationProcessing.refNumber,
+        label: operationProcessing.label,
+        serviceOutlet: operationProcessing.serviceOutlet,
+        project: operationProcessing.project,
+        status: operationProcessing.status,
+        task: operationProcessing.task,
+        activity: operationProcessing.activity,
+        processingType: operationProcessing.processingType,
         description: operationProcessing.description,
+        comment: operationProcessing.comment,
+        dateLastModified: operationProcessing.dateLastModified,
+        processor: operationProcessing.processor,
+        processorType: operationProcessing.processorType,
+        supervisor: operationProcessing.supervisor,
+        operation: operationProcessing.operation,
+        processingDate: operationProcessing.processingDate,
+        output: operationProcessing.output,
+        processingCost: operationProcessing.processingCost,
+        currency: operationProcessing.currency,
       };
       rows.push(row);
     });

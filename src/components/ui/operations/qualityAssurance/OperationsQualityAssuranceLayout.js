@@ -93,16 +93,16 @@ function OperationsQualityAssuranceLayout({ token, userId }) {
         aria-label="Vertical tabs example"
         className={classes.tabs}
       >
-        <Tab
+        {/* <Tab
           label="Processings Quality Assurances"
           {...a11yProps(0)}
           onClick={(event) => {
             event.preventDefault();
             history.push(`/operations/qualityassurances/qualityassurances`);
           }}
-        />
+        /> */}
         <Tab
-          label="Production Quality Assurances"
+          label="Quality Assurances"
           {...a11yProps(0)}
           onClick={(event) => {
             event.preventDefault();
@@ -113,13 +113,13 @@ function OperationsQualityAssuranceLayout({ token, userId }) {
         />
       </Tabs>
 
-      <TabPanel value={value} index={0}>
+      {/* <TabPanel value={value} index={0}>
         <OperationsQualityAssuranceProcessingLayout
           token={token}
           userId={userId}
         />
-      </TabPanel>
-      <TabPanel value={value} index={1}>
+      </TabPanel> */}
+      <TabPanel value={value} index={0}>
         <OperationsProductionQualityAssuranceLayout
           token={token}
           userId={userId}

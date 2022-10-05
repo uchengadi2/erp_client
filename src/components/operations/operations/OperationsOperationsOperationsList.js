@@ -162,8 +162,11 @@ class OperationsOperationsOperationsList extends React.Component {
     let counter = 0;
     const columns = [
       { field: "numbering", headerName: "S/n", width: 60 },
-      { field: "code", headerName: "Transaction Code", width: 150 },
-      { field: "name", headerName: "Transaction Name", width: 200 },
+      { field: "serviceOutlet", headerName: "Service Outlet", width: 150 },
+      { field: "refNumber", headerName: "Reference Number", width: 150 },
+      { field: "label", headerName: "Label", width: 150 },
+      { field: "status", headerName: "Status", width: 150 },
+      { field: "project", headerName: "Project", width: 200 },
 
       {
         field: "editaction",
@@ -214,8 +217,15 @@ class OperationsOperationsOperationsList extends React.Component {
       let row = {
         numbering: ++counter,
         id: operationOperation.id,
-        code: operationOperation.code,
-        name: operationOperation.name,
+        refNumber: operationOperation.refNumber,
+        label: operationOperation.label,
+        serviceOutlet: operationOperation.serviceOutlet,
+        project: operationOperation.project,
+        status: operationOperation.status,
+        glHead: operationOperation.glHead,
+        subGlHead: operationOperation.subGlHead,
+        ledger: operationOperation.ledger,
+        commencementDate:operationOperation.commencementDate,
         description: operationOperation.description,
       };
       rows.push(row);

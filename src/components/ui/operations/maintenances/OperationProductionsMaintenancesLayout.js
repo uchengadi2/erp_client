@@ -18,7 +18,7 @@ import OperationsProductionMaintenanceList from "../../../operations/maintenance
 const useStyles = makeStyles((theme) => ({
   root: {
     marginTop: "-80px",
-    width: 1000,
+    width: 1100,
   },
   headerContainer: {
     height: 20,

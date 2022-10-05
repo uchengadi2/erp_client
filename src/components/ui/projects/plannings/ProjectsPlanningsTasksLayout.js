@@ -17,7 +17,7 @@ import ProjectsPlanningTasksList from "../../../projects/plannings/tasks/Project
 const useStyles = makeStyles((theme) => ({
   root: {
     marginTop: "-80px",
-    width: 1000,
+    width: 1150,
   },
   headerContainer: {
     height: 20,

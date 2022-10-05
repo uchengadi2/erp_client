@@ -18,7 +18,7 @@ import OperationsProcessingsProcessingsList from "../../../operations/processing
 const useStyles = makeStyles((theme) => ({
   root: {
     marginTop: "-80px",
-    width: 1000,
+    width: 1150,
   },
   headerContainer: {
     height: 20,
@@ -132,7 +132,7 @@ function OperationsProcessingProcessingsLayout(props) {
                   history.push("/operations/processings/processings/new"),
                 ]}
               >
-                Start a Process
+                Add Processing
               </Button>
             </Grid>
             <Grid item></Grid>

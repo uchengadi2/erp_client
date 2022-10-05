@@ -162,30 +162,32 @@ class ProjectsClosureProjectsList extends React.Component {
     let counter = 0;
     const columns = [
       { field: "numbering", headerName: "S/n", width: 60 },
-      { field: "code", headerName: "Transaction Code", width: 150 },
-      { field: "name", headerName: "Transaction Name", width: 200 },
+      { field: "refNumber", headerName: "ReferenceNumber", width: 150 },
+      { field: "label", headerName: "Label", width: 200 },
+      { field: "serviceOutlet", headerName: "Service Outlet", width: 200 },
+      { field: "project", headerName: "Project", width: 200 },
 
-      {
-        field: "editaction",
-        headerName: "",
-        width: 30,
-        description: "Update row",
-        renderCell: (params) => (
-          <strong>
-            {/* {params.value.getFullYear()} */}
-            <EditRoundedIcon
-              onClick={() => [
-                this.setState({
-                  editOpen: true,
-                  id: params.id,
-                  params: params.row,
-                }),
-                history.push(`/projects/closures/projects/edit/${params.id}`),
-              ]}
-            />
-          </strong>
-        ),
-      },
+      // {
+      //   field: "editaction",
+      //   headerName: "",
+      //   width: 30,
+      //   description: "Update row",
+      //   renderCell: (params) => (
+      //     <strong>
+      //       {/* {params.value.getFullYear()} */}
+      //       <EditRoundedIcon
+      //         onClick={() => [
+      //           this.setState({
+      //             editOpen: true,
+      //             id: params.id,
+      //             params: params.row,
+      //           }),
+      //           history.push(`/projects/closures/projects/edit/${params.id}`),
+      //         ]}
+      //       />
+      //     </strong>
+      //   ),
+      // },
 
       {
         field: "deleteaction",
@@ -210,8 +212,12 @@ class ProjectsClosureProjectsList extends React.Component {
       let row = {
         numbering: ++counter,
         id: projectClosure.id,
-        code: projectClosure.code,
-        name: projectClosure.name,
+        refNumber: projectClosure.refNumber,
+        label: projectClosure.label,
+        serviceOutlet: projectClosure.serviceOutlet,
+        project: projectClosure.project,
+        dateClosed: projectClosure.dateClosed,
+        closedBy: projectClosure.closedBy,
         description: projectClosure.description,
       };
       rows.push(row);

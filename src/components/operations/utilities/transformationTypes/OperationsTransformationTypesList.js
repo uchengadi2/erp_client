@@ -161,9 +161,13 @@ class OperationsTransformationTypesList extends React.Component {
     let rows = [];
     let counter = 0;
     const columns = [
-      { field: "numbering", headerName: "S/n", width: 60 },
-      { field: "code", headerName: "Transaction Code", width: 150 },
-      { field: "name", headerName: "Transaction Name", width: 200 },
+      { field: "numbering", headerName: "S/n", width: 100 },
+      {
+        field: "refNumber",
+        headerName: "Processing Reference Number",
+        width: 250,
+      },
+      { field: "name", headerName: "Processing Type", width: 250 },
 
       {
         field: "editaction",
@@ -215,7 +219,7 @@ class OperationsTransformationTypesList extends React.Component {
         let row = {
           numbering: ++counter,
           id: operationsTransformationType.id,
-          code: operationsTransformationType.code,
+          refNumber: operationsTransformationType.refNumber,
           name: operationsTransformationType.name,
           description: operationsTransformationType.description,
         };

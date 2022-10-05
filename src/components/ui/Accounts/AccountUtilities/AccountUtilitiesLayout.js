@@ -167,7 +167,7 @@ function AccountUtilitiesLayout({ token, userId }) {
           //     history.push(`/accounts/utilities/subgls`);
           //   }}
         />
-        <Tab
+        {/* <Tab
           label="====== FUNDING ======"
           {...a11yProps(0)}
           disabled
@@ -175,8 +175,8 @@ function AccountUtilitiesLayout({ token, userId }) {
           //     event.preventDefault();
           //     history.push(`/accounts/utilities/subgls`);
           //   }}
-        />
-        <Tab
+        /> */}
+        {/* <Tab
           label="Equity Account Funding"
           {...a11yProps(8)}
           onClick={(event) => {
@@ -199,7 +199,7 @@ function AccountUtilitiesLayout({ token, userId }) {
             event.preventDefault();
             history.push(`/accounts/utilities/staffaccounts`);
           }}
-        />
+        /> */}
       </Tabs>
 
       <TabPanel value={value} index={0}>

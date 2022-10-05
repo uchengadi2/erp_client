@@ -52,7 +52,7 @@ function LinkTab(props) {
       //label={route.name}
       onClick={(event) => {
         event.preventDefault();
-        history.push(`/crm`);
+        history.push(`/operations/finishings`);
       }}
       {...props}
     />
@@ -93,16 +93,16 @@ function OperationsFinishingLayout({ token, userId }) {
         aria-label="Vertical tabs example"
         className={classes.tabs}
       >
-        <Tab
+        {/* <Tab
           label="Processings Finishings"
           {...a11yProps(0)}
           onClick={(event) => {
             event.preventDefault();
             history.push(`/operations/finishings/finishings`);
           }}
-        />
+        /> */}
         <Tab
-          label="Production Finishings"
+          label="Finishings"
           {...a11yProps(0)}
           onClick={(event) => {
             event.preventDefault();
@@ -111,10 +111,10 @@ function OperationsFinishingLayout({ token, userId }) {
         />
       </Tabs>
 
-      <TabPanel value={value} index={0}>
+      {/* <TabPanel value={value} index={0}>
         <OperationsFinishingProcessLayout token={token} userId={userId} />
-      </TabPanel>
-      <TabPanel value={value} index={1}>
+      </TabPanel> */}
+      <TabPanel value={value} index={0}>
         <OperationsProductionFinishingLayout token={token} userId={userId} />
       </TabPanel>
     </div>

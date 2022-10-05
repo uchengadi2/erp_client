@@ -18,7 +18,7 @@ import OperationsQualityAssuranceTypeList from "../../../operations/utilities/qu
 const useStyles = makeStyles((theme) => ({
   root: {
     marginTop: "-80px",
-    width: 1000,
+    width: 1100,
   },
   headerContainer: {
     height: 20,
@@ -113,9 +113,9 @@ function OperationsUtilityQualityAssuranceTypesLayout(props) {
       spacing={2}
     >
       <Grid item container direction="column" sm={width}>
-        <Grid item className={classes.selectField}>
+        {/* <Grid item className={classes.selectField}>
           <ServiceOutletsAndTransactionTypesFilter />
-        </Grid>
+        </Grid> */}
         <Grid
           item
           container

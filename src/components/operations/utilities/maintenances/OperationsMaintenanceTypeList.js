@@ -162,8 +162,9 @@ class OperationsMaintenanceTypeList extends React.Component {
     let counter = 0;
     const columns = [
       { field: "numbering", headerName: "S/n", width: 60 },
-      { field: "code", headerName: "Transaction Code", width: 150 },
-      { field: "name", headerName: "Transaction Name", width: 200 },
+      { field: "refNumber", headerName: "Reference Number", width: 250 },
+      { field: "name", headerName: "Maintenance Type", width: 250 },
+      { field: "processingType", headerName: "Processing Type", width: 250 },
 
       {
         field: "editaction",
@@ -214,8 +215,9 @@ class OperationsMaintenanceTypeList extends React.Component {
       let row = {
         numbering: ++counter,
         id: operationMaintenanceType.id,
-        code: operationMaintenanceType.code,
+        refNumber: operationMaintenanceType.refNumber,
         name: operationMaintenanceType.name,
+        processingType: operationMaintenanceType.processingType,
         description: operationMaintenanceType.description,
       };
       rows.push(row);
