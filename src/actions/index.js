@@ -825,12 +825,10 @@ export const deleteCategory = (id, token) => {
 ///////////////user resource crud operation //////////////////////////////////////
 export const createUser = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-  console.log("formvalues at index:", formValues);
-  console.log("token at index:", token);
+
   return async (dispatch) => {
     const response = await data.post("/users");
 
-    console.log("staff user response:", response);
     dispatch({ type: CREATE_USER, payload: response.data.data.data });
     //history.push("/users");
   };
@@ -5882,7 +5880,7 @@ export const deleteCustomer = (id, token) => {
   };
 };
 
-//////////////////////////////////  CRM PARTNERS ////////////////////
+//////////////////////////////////  CRM sPARTNERS ////////////////////
 
 export const createPartner = (formValues, token) => {
   data.defaults.headers.common["Authorization"] = `Bearer ${token}`;

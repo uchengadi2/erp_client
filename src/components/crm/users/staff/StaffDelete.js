@@ -3,9 +3,9 @@ import { connect } from "react-redux";
 import { Alert, AlertTitle } from "@material-ui/lab";
 import Button from "@material-ui/core/Button";
 import history from "../../../../history";
-import { fetchPartner, deletePartner } from "../../../../actions";
+import { fetchUser, deleteUser } from "../../../../actions";
 
-class CrmPartnersPartnersDelete extends React.Component {
+class StaffDelete extends React.Component {
   componentDidMount() {
     // console.log("the item id is:", this.props.id);
     // console.log("the token is:", this.props.token);
@@ -13,14 +13,14 @@ class CrmPartnersPartnersDelete extends React.Component {
 
   render() {
     const handleDelete = () => {
-      this.props.deletePartner(this.props.id, this.props.token);
+      this.props.deleteUser(this.props.id, this.props.token);
       this.props.handleDialogOpenStatus();
-      history.push("/crm/suppliers/partners");
+      history.push("/crm/users/staffers");
     };
 
     const handleNoDelete = () => {
       this.props.handleDialogOpenStatus();
-      history.push("/crm/suppliers/partners");
+      history.push("/crm/users/staffers");
     };
 
     return (
@@ -49,8 +49,8 @@ class CrmPartnersPartnersDelete extends React.Component {
             </Button>,
           ]}
         >
-          <AlertTitle>Delete Partner?</AlertTitle>
-          Are you sure you want to delete this partner?
+          <AlertTitle>Delete User?</AlertTitle>
+          Are you sure you want to delete this user?
         </Alert>
       </>
     );
@@ -58,10 +58,10 @@ class CrmPartnersPartnersDelete extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  return { crmPartner: state.crmPartner[ownProps.params.id] };
+  return { crmUser: state.crmUser[ownProps.params.id] };
 };
 
 export default connect(null, {
-  fetchPartner,
-  deletePartner,
-})(CrmPartnersPartnersDelete);
+  fetchUser,
+  deleteUser,
+})(StaffDelete);

@@ -96,14 +96,14 @@ function CrmUsersLayout({ token, userId }) {
         className={classes.tabs}
       >
         <Tab
-          label="Staff Users"
+          label="Users"
           {...a11yProps(0)}
           onClick={(event) => {
             event.preventDefault();
             history.push(`/crm/users/staff`);
           }}
         />
-        <Tab
+        {/* <Tab
           label="Customer Users"
           {...a11yProps(0)}
           onClick={(event) => {
@@ -126,13 +126,13 @@ function CrmUsersLayout({ token, userId }) {
             event.preventDefault();
             history.push(`/crm/users/suppliers`);
           }}
-        />
+        /> */}
       </Tabs>
 
       <TabPanel value={value} index={0}>
         <CrmStaffUsersLayout token={token} userId={userId} />
       </TabPanel>
-      <TabPanel value={value} index={1}>
+      {/* <TabPanel value={value} index={1}>
         <CrmCustomerUsersLayout token={token} userId={userId} />
       </TabPanel>
       <TabPanel value={value} index={2}>
@@ -140,7 +140,7 @@ function CrmUsersLayout({ token, userId }) {
       </TabPanel>
       <TabPanel value={value} index={3}>
         <CrmSupplierUsersLayout token={token} userId={userId} />
-      </TabPanel>
+      </TabPanel> */}
     </div>
   );
 }

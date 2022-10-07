@@ -15,8 +15,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import Select from "@material-ui/core/Select";
 import api from "./../../../apis/local";
-import { CREATE_OPERATIONPROCESSING } from "../../../actions/types";
-import ProjectsClosureProjectsList from "../../projects/closure/projects/ProjectsClosureProjectsList";
+import { CREATE_CONTACT } from "../../../actions/types";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -40,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const renderLabelField = ({
+const renderActivityField = ({
   input,
   label,
   meta: { touched, error, invalid },
@@ -51,7 +50,7 @@ const renderLabelField = ({
   return (
     <TextField
       //error={touched && invalid}
-      helperText="Enter a Label"
+      helperText="Enter the Activity"
       variant="outlined"
       label={label}
       id={input.name}
@@ -104,7 +103,7 @@ const renderReferenceNumberField = ({
   );
 };
 
-const renderProcessingCostField = ({
+const renderStartDateField = ({
   input,
   label,
   meta: { touched, error, invalid },
@@ -115,7 +114,7 @@ const renderProcessingCostField = ({
   return (
     <TextField
       //error={touched && invalid}
-      helperText="Processing Cost"
+      helperText="Enter Start Date"
       variant="outlined"
       label={label}
       id={input.name}
@@ -136,7 +135,7 @@ const renderProcessingCostField = ({
   );
 };
 
-const renderProcessingDateField = ({
+const renderEndDateField = ({
   input,
   label,
   meta: { touched, error, invalid },
@@ -147,7 +146,7 @@ const renderProcessingDateField = ({
   return (
     <TextField
       //error={touched && invalid}
-      helperText="Processing Date"
+      helperText="Enter End Date"
       variant="outlined"
       label={label}
       id={input.name}
@@ -181,7 +180,7 @@ const renderDescriptionField = ({
       error={touched && invalid}
       //placeholder="category description"
       variant="outlined"
-      helperText="Describe Processing"
+      helperText="Describe Activity"
       label={label}
       id={input.name}
       name={input.name}
@@ -198,7 +197,7 @@ const renderDescriptionField = ({
   );
 };
 
-const renderCommentField = ({
+const renderExpextedOutcomeField = ({
   input,
   label,
   meta: { touched, error, invalid },
@@ -211,7 +210,7 @@ const renderCommentField = ({
       error={touched && invalid}
       //placeholder="category description"
       variant="outlined"
-      helperText="Comment"
+      helperText="Expected Outcome"
       label={label}
       id={input.name}
       name={input.name}
@@ -224,100 +223,6 @@ const renderCommentField = ({
       {...custom}
       // {...input}
       onChange={input.onChange}
-    />
-  );
-};
-
-const renderOutputField = ({
-  input,
-  label,
-  meta: { touched, error, invalid },
-  type,
-  id,
-  ...custom
-}) => {
-  return (
-    <TextField
-      error={touched && invalid}
-      //placeholder="category description"
-      variant="outlined"
-      helperText="Output"
-      label={label}
-      id={input.name}
-      name={input.name}
-      defaultValue={input.value}
-      fullWidth
-      type={type}
-      style={{ marginTop: 20 }}
-      multiline={true}
-      minRows={7}
-      {...custom}
-      // {...input}
-      onChange={input.onChange}
-    />
-  );
-};
-
-const renderProcessorField = ({
-  input,
-  label,
-  meta: { touched, error, invalid },
-  type,
-  id,
-  ...custom
-}) => {
-  return (
-    <TextField
-      //error={touched && invalid}
-      helperText="Enter Processor"
-      variant="outlined"
-      label={label}
-      id={input.name}
-      defaultValue={input.value}
-      fullWidth
-      //required
-      type={type}
-      {...custom}
-      // {...input}
-      onChange={input.onChange}
-      InputProps={{
-        inputProps: {},
-        style: {
-          height: 38,
-        },
-      }}
-    />
-  );
-};
-
-const renderSupervisorField = ({
-  input,
-  label,
-  meta: { touched, error, invalid },
-  type,
-  id,
-  ...custom
-}) => {
-  return (
-    <TextField
-      //error={touched && invalid}
-      helperText="Enter Supervisor"
-      variant="outlined"
-      label={label}
-      id={input.name}
-      defaultValue={input.value}
-      fullWidth
-      //required
-      type={type}
-      {...custom}
-      // {...input}
-      onChange={input.onChange}
-      InputProps={{
-        inputProps: {},
-        style: {
-          height: 38,
-        },
-      }}
     />
   );
 };
@@ -325,26 +230,12 @@ const renderSupervisorField = ({
 function OperationsProcessingsProcessingsCreateForm(props) {
   const classes = useStyles();
   const [project, setProject] = useState();
-  const [user, setUser] = useState();
-  const [status, setStatus] = useState("in-progress");
-  const [processorType, setProcessorType] = useState();
-  const [processingType, setProcessingType] = useState();
-  const [currency, setCurrency] = useState();
-  const [serviceOutlet, setServiceOutlet] = useState();
   const [task, setTask] = useState();
-  const [activity, setActivity] = useState();
-  const [operation, setOperation] = useState();
+  const [status, setStatus] = useState("pending");
+  const [serviceOutlet, setServiceOutlet] = useState();
   const [projectList, setProjectList] = useState([]);
-  const [userList, setUserList] = useState([]);
-  const [serviceOutletList, setServiceOutList] = useState([]);
-  const [glHeadList, setGlHeadList] = useState([]);
-  const [subGlHeadList, setSubGlHeadList] = useState([]);
-  const [currencyList, setCurrencyList] = useState([]);
   const [taskList, setTaskList] = useState([]);
-  const [activityList, setActivityList] = useState([]);
-  const [operationList, setOperationList] = useState([]);
-  const [processorTypeList, setProcessorTypeList] = useState([]);
-  const [processingTypeList, setProcessingTypeList] = useState([]);
+  const [serviceOutletList, setServiceOutList] = useState([]);
   const [loading, setLoading] = useState(false);
 
   const dispatch = useDispatch();
@@ -393,27 +284,7 @@ function OperationsProcessingsProcessingsCreateForm(props) {
     fetchData().catch(console.error);
   }, []);
 
-  //fetch project users
-
-  useEffect(() => {
-    const fetchData = async () => {
-      let allData = [];
-      api.defaults.headers.common["Authorization"] = `Bearer ${props.token}`;
-      const response = await api.get("/operationprocessingtypes");
-      const workingData = response.data.data.data;
-      workingData.map((item) => {
-        allData.push({
-          id: item._id,
-          name: `${item.name}`,
-        });
-      });
-      setProcessingTypeList(allData);
-    };
-
-    //call the function
-
-    fetchData().catch(console.error);
-  }, []);
+  //fetch project tasks
 
   useEffect(() => {
     const fetchData = async () => {
@@ -437,87 +308,8 @@ function OperationsProcessingsProcessingsCreateForm(props) {
     fetchData().catch(console.error);
   }, [project]);
 
-  //fetch the subglheads
-
-  useEffect(() => {
-    const fetchData = async () => {
-      let allData = [];
-      api.defaults.headers.common["Authorization"] = `Bearer ${props.token}`;
-      const response = await api.get("/projectplanningactivities", {
-        params: { task: task },
-      });
-      const workingData = response.data.data.data;
-      workingData.map((item) => {
-        allData.push({
-          id: item._id,
-          name: `${item.refNumber}-${item.activity}`,
-        });
-      });
-      setActivityList(allData);
-    };
-
-    //call the function
-
-    fetchData().catch(console.error);
-  }, [task]);
-
-  //fetch the asset store subglheads
-
-  useEffect(() => {
-    const fetchData = async () => {
-      let allData = [];
-      api.defaults.headers.common["Authorization"] = `Bearer ${props.token}`;
-      const response = await api.get("/operationoperations", {
-        params: { project: project },
-      });
-      const workingData = response.data.data.data;
-      workingData.map((item) => {
-        allData.push({
-          id: item._id,
-          name: `${item.label}`,
-        });
-      });
-      setOperationList(allData);
-    };
-
-    //call the function
-
-    fetchData().catch(console.error);
-  }, [project]);
-
-  //retrieve currencies
-  useEffect(() => {
-    const fetchData = async () => {
-      let allData = [];
-      api.defaults.headers.common["Authorization"] = `Bearer ${props.token}`;
-      const response = await api.get("/currencies");
-      const workingData = response.data.data.data;
-      workingData.map((item) => {
-        allData.push({
-          id: item._id,
-          name: `${item.name}`,
-        });
-      });
-      setCurrencyList(allData);
-    };
-
-    //call the function
-
-    fetchData().catch(console.error);
-  }, []);
-
   const handleProjectChange = (event) => {
     setProject(event.target.value);
-    //     props.handleCountryChange(event.target.value);
-  };
-
-  const handleOperationChange = (event) => {
-    setOperation(event.target.value);
-    //     props.handleCountryChange(event.target.value);
-  };
-
-  const handleServiceOutletChange = (event) => {
-    setServiceOutlet(event.target.value);
     //     props.handleCountryChange(event.target.value);
   };
 
@@ -526,28 +318,13 @@ function OperationsProcessingsProcessingsCreateForm(props) {
     //     props.handleCountryChange(event.target.value);
   };
 
-  const handleActivityChange = (event) => {
-    setActivity(event.target.value);
-    //     props.handleCountryChange(event.target.value);
-  };
-
-  const handleProcessingTypeChange = (event) => {
-    setProcessingType(event.target.value);
-    //     props.handleCountryChange(event.target.value);
-  };
-
-  const handleProcessorTypeChange = (event) => {
-    setProcessorType(event.target.value);
-    //     props.handleCountryChange(event.target.value);
-  };
-
   const handleStatusChange = (event) => {
     setStatus(event.target.value);
     //     props.handleCountryChange(event.target.value);
   };
 
-  const handleCurrencyChange = (event) => {
-    setCurrency(event.target.value);
+  const handleServiceOutletChange = (event) => {
+    setServiceOutlet(event.target.value);
     //     props.handleCountryChange(event.target.value);
   };
 
@@ -562,29 +339,7 @@ function OperationsProcessingsProcessingsCreateForm(props) {
     });
   };
 
-  //get the Service Outlet list
-  const renderServiceOutletList = () => {
-    return serviceOutletList.map((item) => {
-      return (
-        <MenuItem key={item.id} value={item.id}>
-          {item.name}
-        </MenuItem>
-      );
-    });
-  };
-
-  //get the operation list
-  const renderOperationList = () => {
-    return operationList.map((item) => {
-      return (
-        <MenuItem key={item.id} value={item.id}>
-          {item.name}
-        </MenuItem>
-      );
-    });
-  };
-
-  //get the task list
+  //get the Task  list
   const renderTaskList = () => {
     return taskList.map((item) => {
       return (
@@ -595,31 +350,9 @@ function OperationsProcessingsProcessingsCreateForm(props) {
     });
   };
 
-  //get the activity list
-  const renderActivityList = () => {
-    return activityList.map((item) => {
-      return (
-        <MenuItem key={item.id} value={item.id}>
-          {item.name}
-        </MenuItem>
-      );
-    });
-  };
-
-  //get the processing type list
-  const renderProcessingTypeList = () => {
-    return processingTypeList.map((item) => {
-      return (
-        <MenuItem key={item.id} value={item.id}>
-          {item.name}
-        </MenuItem>
-      );
-    });
-  };
-
-  //get the currency list
-  const renderCurrencyList = () => {
-    return currencyList.map((item) => {
+  //get the Service Outlet list
+  const renderServiceOutletList = () => {
+    return serviceOutletList.map((item) => {
       return (
         <MenuItem key={item.id} value={item.id}>
           {item.name}
@@ -661,6 +394,39 @@ function OperationsProcessingsProcessingsCreateForm(props) {
     );
   };
 
+  const renderTaskField = ({
+    input,
+    label,
+    meta: { touched, error, invalid },
+    type,
+    id,
+    ...custom
+  }) => {
+    return (
+      <Box>
+        <FormControl variant="outlined">
+          {/* <InputLabel id="vendor_city">City</InputLabel> */}
+
+          <Select
+            labelId="task"
+            id="task"
+            //defaultValue={schemeType}
+            value={task}
+            // onChange={props.handleCountryChange}
+            onChange={handleTaskChange}
+            label="Task"
+            style={{ width: 400, marginTop: 10, height: 38 }}
+          >
+            {renderTaskList()}
+          </Select>
+          <FormHelperText style={{ marginLeft: 20 }}>
+            Select Task
+          </FormHelperText>
+        </FormControl>
+      </Box>
+    );
+  };
+
   const renderServiceOutletField = ({
     input,
     label,
@@ -694,171 +460,6 @@ function OperationsProcessingsProcessingsCreateForm(props) {
     );
   };
 
-  const renderOperationField = ({
-    input,
-    label,
-    meta: { touched, error, invalid },
-    type,
-    id,
-    ...custom
-  }) => {
-    return (
-      <Box>
-        <FormControl variant="outlined">
-          {/* <InputLabel id="vendor_city">City</InputLabel> */}
-
-          <Select
-            labelId="operation"
-            id="operation"
-            //defaultValue={schemeType}
-            value={operation}
-            // onChange={props.handleCountryChange}
-            onChange={handleOperationChange}
-            label="Operation"
-            style={{ width: 400, marginTop: 5, marginLeft: 0, height: 38 }}
-            //{...input}
-          >
-            {renderOperationList()}
-          </Select>
-          <FormHelperText style={{ marginLeft: 20 }}>Operation</FormHelperText>
-        </FormControl>
-      </Box>
-    );
-  };
-
-  const renderTaskField = ({
-    input,
-    label,
-    meta: { touched, error, invalid },
-    type,
-    id,
-    ...custom
-  }) => {
-    return (
-      <Box>
-        <FormControl variant="outlined">
-          {/* <InputLabel id="vendor_city">City</InputLabel> */}
-
-          <Select
-            labelId="task"
-            id="task"
-            //defaultValue={schemeType}
-            value={task}
-            // onChange={props.handleCountryChange}
-            onChange={handleTaskChange}
-            label="Task"
-            style={{ width: 400, marginTop: 5, marginLeft: 0, height: 38 }}
-            //{...input}
-          >
-            {/* <MenuItem value="tangible">Tangible Asset</MenuItem>
-            <MenuItem value="inTangible">Intangible Asset</MenuItem> */}
-
-            {renderTaskList()}
-          </Select>
-          <FormHelperText style={{ marginLeft: 20 }}>Task</FormHelperText>
-        </FormControl>
-      </Box>
-    );
-  };
-
-  const renderActivityField = ({
-    input,
-    label,
-    meta: { touched, error, invalid },
-    type,
-    id,
-    ...custom
-  }) => {
-    return (
-      <Box>
-        <FormControl variant="outlined">
-          {/* <InputLabel id="vendor_city">City</InputLabel> */}
-
-          <Select
-            labelId="activity"
-            id="activity"
-            //defaultValue={schemeType}
-            value={activity}
-            // onChange={props.handleCountryChange}
-            onChange={handleActivityChange}
-            label="Activity"
-            style={{ width: 400, marginTop: 5, marginLeft: 0, height: 38 }}
-            //{...input}
-          >
-            {renderActivityList()}
-          </Select>
-          <FormHelperText style={{ marginLeft: 20 }}>Activity</FormHelperText>
-        </FormControl>
-      </Box>
-    );
-  };
-
-  const renderProcessingTypeField = ({
-    input,
-    label,
-    meta: { touched, error, invalid },
-    type,
-    id,
-    ...custom
-  }) => {
-    return (
-      <Box>
-        <FormControl variant="outlined">
-          {/* <InputLabel id="vendor_city">City</InputLabel> */}
-
-          <Select
-            labelId="processingType"
-            id="processingType"
-            //defaultValue={schemeType}
-            value={processingType}
-            // onChange={props.handleCountryChange}
-            onChange={handleProcessingTypeChange}
-            label="Processing Type"
-            style={{ width: 180, marginTop: 5, marginLeft: 0, height: 38 }}
-            //{...input}
-          >
-            {renderProcessingTypeList()}
-          </Select>
-          <FormHelperText style={{ marginLeft: 20 }}>
-            Processing Type
-          </FormHelperText>
-        </FormControl>
-      </Box>
-    );
-  };
-
-  const renderCurrencyField = ({
-    input,
-    label,
-    meta: { touched, error, invalid },
-    type,
-    id,
-    ...custom
-  }) => {
-    return (
-      <Box>
-        <FormControl variant="outlined">
-          {/* <InputLabel id="vendor_city">City</InputLabel> */}
-
-          <Select
-            labelId="currency"
-            id="currency"
-            //defaultValue={schemeType}
-            value={currency}
-            // onChange={props.handleCountryChange}
-            onChange={handleCurrencyChange}
-            label="Currency"
-            style={{ width: 180, marginTop: 5, marginLeft: 0, height: 38 }}
-            //{...input}
-          >
-            {renderCurrencyList()}
-          </Select>
-          <FormHelperText style={{ marginLeft: 20 }}>Currency</FormHelperText>
-        </FormControl>
-      </Box>
-    );
-  };
-
   const renderStatusField = ({
     input,
     label,
@@ -879,50 +480,19 @@ function OperationsProcessingsProcessingsCreateForm(props) {
             value={status}
             // onChange={props.handleCountryChange}
             onChange={handleStatusChange}
-            label="Processing Status"
-            style={{ width: 200, marginTop: 5, marginLeft: 10, height: 38 }}
+            label="Task Status"
+            style={{ width: 210, marginTop: 10, marginLeft: 0, height: 38 }}
+            readOnly
           >
+            <MenuItem value="pending">Pending</MenuItem>
             <MenuItem value="in-progress">In Progress</MenuItem>
             <MenuItem value="completed">Completed</MenuItem>
             <MenuItem value="suspended">Suspended</MenuItem>
             <MenuItem value="waived">Waived</MenuItem>
+            <MenuItem value="dropped">Dropped</MenuItem>
           </Select>
           <FormHelperText style={{ marginLeft: 20 }}>
-            Processing Status
-          </FormHelperText>
-        </FormControl>
-      </Box>
-    );
-  };
-
-  const renderProcessorTypeField = ({
-    input,
-    label,
-    meta: { touched, error, invalid },
-    type,
-    id,
-    ...custom
-  }) => {
-    return (
-      <Box>
-        <FormControl variant="outlined">
-          {/* <InputLabel id="vendor_city">City</InputLabel> */}
-
-          <Select
-            labelId="processorType"
-            id="processorType"
-            //defaultValue={schemeType}
-            value={processorType}
-            // onChange={props.handleCountryChange}
-            onChange={handleProcessorTypeChange}
-            label="Processor Type"
-            style={{ width: 190, marginTop: 5, marginLeft: 0, height: 38 }}
-          >
-            <MenuItem value="human">Human</MenuItem>
-            <MenuItem value="machine">Machine</MenuItem>
-          </Select>
-          <FormHelperText style={{ marginLeft: 20 }}>
-            Processor Type
+            Task Status
           </FormHelperText>
         </FormControl>
       </Box>
@@ -930,7 +500,7 @@ function OperationsProcessingsProcessingsCreateForm(props) {
   };
 
   const buttonContent = () => {
-    return <React.Fragment> Add processing</React.Fragment>;
+    return <React.Fragment> Add Activity</React.Fragment>;
   };
 
   const onSubmit = (formValues) => {
@@ -939,43 +509,29 @@ function OperationsProcessingsProcessingsCreateForm(props) {
     const Str = require("@supercharge/strings");
     // formValues["code"] = Str(formValues.code).limit(4).get();
     formValues["createdBy"] = props.userId;
+    formValues["status"] = status;
     formValues["serviceOutlet"] = serviceOutlet;
     formValues["project"] = project;
-    formValues["status"] = status;
-    formValues["operation"] = operation;
     formValues["task"] = task;
-    formValues["activity"] = activity;
-    formValues["processingType"] = processingType;
-    formValues["processorType"] = processorType;
-    formValues["currency"] = currency;
 
     if (!formValues["refNumber"]) {
       formValues["refNumber"] =
-        "OP" + "-" + Math.floor(Math.random() * 1000000) + "-" + "PRC";
+        "CIS" + "-" + Math.floor(Math.random() * 1000000) + "-" + "CTA";
     }
 
     if (formValues) {
       const createForm = async () => {
         api.defaults.headers.common["Authorization"] = `Bearer ${props.token}`;
-        const response = await api.post(`/operationprocessings`, formValues);
+        const response = await api.post(`/crmcontacts`, formValues);
 
         if (response.data.status === "success") {
           dispatch({
-            type: CREATE_OPERATIONPROCESSING,
+            type: CREATE_CONTACT,
             payload: response.data.data.data,
           });
 
-          //reset the status of the project to closed
-          const dataValue = {
-            status: "in-progress",
-          };
-          const newResponse = await api.patch(
-            `/operationoperations/${operation}`,
-            dataValue
-          );
-
           props.handleSuccessfulCreateSnackbar(
-            `${response.data.data.data.refNumber}-${response.data.data.data.label} Processing is added successfully!!!`
+            `${response.data.data.data.name} Contact is added successfully!!!`
           );
           props.handleDialogOpenStatus();
           setLoading(false);
@@ -1017,7 +573,7 @@ function OperationsProcessingsProcessingsCreateForm(props) {
             style={{ color: "blue", fontSize: "1.5em" }}
             component="legend"
           >
-            <Typography variant="subtitle1"> Processing</Typography>
+            <Typography variant="subtitle1"> Add Contact</Typography>
           </FormLabel>
         </Grid>
         <Field
@@ -1038,39 +594,24 @@ function OperationsProcessingsProcessingsCreateForm(props) {
         />
         <Field
           label=""
-          id="operation"
-          name="operation"
-          type="text"
-          component={renderOperationField}
-          style={{ marginTop: 10 }}
-        />
-        <Field
-          label=""
           id="task"
           name="task"
           type="text"
           component={renderTaskField}
           style={{ marginTop: 10 }}
         />
-        <Field
-          label=""
-          id="activity"
-          name="activity"
-          type="text"
-          component={renderActivityField}
-          style={{ marginTop: 10 }}
-        />
-        <Field
-          label=""
-          id="label"
-          name="label"
-          type="text"
-          component={renderLabelField}
-          style={{ marginTop: 10 }}
-        />
-
         <Grid container="row">
-          <Grid item style={{ width: "45%" }}>
+          <Grid item style={{ width: "52%" }}>
+            <Field
+              label=""
+              id="status"
+              name="status"
+              type="text"
+              component={renderStatusField}
+              style={{ marginTop: 10 }}
+            />
+          </Grid>
+          <Grid item style={{ width: "45%", marginLeft: 10 }}>
             <Field
               label=""
               id="refNumber"
@@ -1080,109 +621,45 @@ function OperationsProcessingsProcessingsCreateForm(props) {
               style={{ marginTop: 10 }}
             />
           </Grid>
-          <Grid item style={{ width: "52%", marginLeft: 10 }}>
-            <Field
-              label=""
-              id="processingDate"
-              name="processingDate"
-              type="date"
-              component={renderProcessingDateField}
-              style={{ marginTop: 10 }}
-            />
-          </Grid>
-        </Grid>
-
-        <Grid container="row">
-          <Grid item style={{ width: "45%" }}>
-            <Field
-              label=""
-              id="processingType"
-              name="processingType"
-              type="text"
-              component={renderProcessingTypeField}
-              // style={{ marginTop: 10 }}
-            />
-          </Grid>
-          <Grid item style={{ width: "52%", marginLeft: 10 }}>
-            <Field
-              label=""
-              id="processor"
-              name="processor"
-              type="text"
-              component={renderProcessorField}
-              style={{ marginTop: 5 }}
-            />
-          </Grid>
-        </Grid>
-
-        <Grid container="row">
-          <Grid item style={{ width: "45%" }}>
-            <Field
-              label=""
-              id="processorType"
-              name="processorType"
-              type="text"
-              component={renderProcessorTypeField}
-              style={{ marginTop: 10 }}
-            />
-          </Grid>
-          <Grid item style={{ width: "52%", marginLeft: 10 }}>
-            <Field
-              label=""
-              id="status"
-              name="status"
-              type="date"
-              component={renderStatusField}
-              style={{ marginTop: 10 }}
-            />
-          </Grid>
-        </Grid>
-        <Grid container="row">
-          <Grid item style={{ width: "45%" }}>
-            <Field
-              label=""
-              id="currency"
-              name="currency"
-              type="text"
-              component={renderCurrencyField}
-              style={{ marginTop: 5 }}
-            />
-          </Grid>
-          <Grid item style={{ width: "52%", marginLeft: 10 }}>
-            <Field
-              label=""
-              id="processingCost"
-              name="processingCost"
-              type="number"
-              component={renderProcessingCostField}
-              style={{ marginTop: 5 }}
-            />
-          </Grid>
         </Grid>
 
         <Field
           label=""
-          id="supervisor"
-          name="supervisor"
+          id="activity"
+          name="activity"
           type="text"
-          component={renderSupervisorField}
+          component={renderActivityField}
           style={{ marginTop: 10 }}
         />
 
+        <Grid container="row">
+          <Grid item style={{ width: "45%" }}>
+            <Field
+              label=""
+              id="startDate"
+              name="startDate"
+              type="date"
+              component={renderStartDateField}
+              style={{ marginTop: 10 }}
+            />
+          </Grid>
+          <Grid item style={{ width: "52%", marginLeft: 10 }}>
+            <Field
+              label=""
+              id="endDate"
+              name="endDate"
+              type="date"
+              component={renderEndDateField}
+              style={{ marginTop: 10 }}
+            />
+          </Grid>
+        </Grid>
         <Field
           label=""
-          id="output"
-          name="output"
+          id="expectedOutcome"
+          name="expectedOutcome"
           type="text"
-          component={renderOutputField}
-          style={{ marginTop: 10 }}
-        />
-        <Field
-          label=""
-          id="comment"
-          name="comment"
-          type="text"
-          component={renderCommentField}
+          component={renderExpextedOutcomeField}
           style={{ marginTop: 10 }}
         />
 

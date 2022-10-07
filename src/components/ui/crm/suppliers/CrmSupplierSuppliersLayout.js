@@ -16,7 +16,7 @@ import CrmSuppliersSuppliersList from "../../../crm/suppliers/supplier/CrmSuppli
 const useStyles = makeStyles((theme) => ({
   root: {
     marginTop: "-80px",
-    width: 1000,
+    width: 1150,
   },
   headerContainer: {
     height: 20,
@@ -111,9 +111,9 @@ function CrmSupplierSuppliersLayout(props) {
       spacing={2}
     >
       <Grid item container direction="column" sm={width}>
-        <Grid item className={classes.selectField}>
+        {/* <Grid item className={classes.selectField}>
           <CrmSupplierTypeFilter />
-        </Grid>
+        </Grid> */}
         <Grid
           item
           container

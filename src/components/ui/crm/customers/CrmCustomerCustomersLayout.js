@@ -17,7 +17,7 @@ import CrmCustomersCustomersList from "../../../crm/customers/customers/CrmCusto
 const useStyles = makeStyles((theme) => ({
   root: {
     marginTop: "-80px",
-    width: 1000,
+    width: 1150,
   },
   headerContainer: {
     height: 20,
@@ -112,9 +112,9 @@ function CrmCustomerCustomersLayout(props) {
       spacing={2}
     >
       <Grid item container direction="column" sm={width}>
-        <Grid item className={classes.selectField}>
+        {/* <Grid item className={classes.selectField}>
           <CrmCustomerTypeFilter />
-        </Grid>
+        </Grid> */}
         <Grid
           item
           container

@@ -161,9 +161,20 @@ class CrmContactsContactsList extends React.Component {
     let rows = [];
     let counter = 0;
     const columns = [
-      { field: "numbering", headerName: "S/n", width: 60 },
-      { field: "code", headerName: "Transaction Code", width: 150 },
-      { field: "name", headerName: "Transaction Name", width: 200 },
+      { field: "numbering", headerName: "S/n", width: 100 },
+      {
+        field: "contactRefNumber",
+        headerName: "Contact Information Number",
+        width: 180,
+      },
+      { field: "name", headerName: "Name", width: 180 },
+      { field: "titles", headerName: "Titles", width: 180 },
+      {
+        field: "placeOfEmployment",
+        headerName: "Place of Employmet",
+        width: 150,
+      },
+      { field: "gender", headerName: "Gender", width: 150 },
 
       {
         field: "editaction",
@@ -210,9 +221,32 @@ class CrmContactsContactsList extends React.Component {
       let row = {
         numbering: ++counter,
         id: crmContact.id,
-        code: crmContact.code,
+        titles: crmContact.titles,
+        contactRefNumber: crmContact.contactRefNumber,
         name: crmContact.name,
-        description: crmContact.description,
+        officeAddress: crmContact.officeAddress,
+        homeAddress: crmContact.homeAddress,
+        facebookProfile: crmContact.facebookProfile,
+        twitterProfile: crmContact.twitterProfile,
+        linkedInProfile: crmContact.linkedInProfile,
+        occupation: crmContact.occupation,
+        placeOfEmployment: crmContact.placeOfEmployment,
+        officeDesignation: crmContact.officeDesignation,
+        emailAddresses: crmContact.emailAddresses,
+        phoneNumbers: crmContact.phoneNumbers,
+        hobby: crmContact.hobby,
+        placesOfInterest: crmContact.placesOfInterest,
+        clubMemberships: crmContact.clubMemberships,
+        religion: crmContact.religion,
+        gender: crmContact.gender,
+        highestEducationLevel: crmContact.highestEducationLevel,
+        birthday: crmContact.birthday,
+        placeOfOrigin: crmContact.placeOfOrigin,
+        politicalPartyAffiliation: crmContact.politicalPartyAffiliation,
+        maritalStatus: crmContact.maritalStatus,
+        comment: crmContact.comment,
+        marriageAnniversary: crmContact.marriageAnniversary,
+        memo: crmContact.memo,
       };
       rows.push(row);
     });

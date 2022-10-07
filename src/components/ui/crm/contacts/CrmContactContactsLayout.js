@@ -17,7 +17,7 @@ import CrmContactsContactsCreateForm from "../../../crm/contacts/contacts/CrmCon
 const useStyles = makeStyles((theme) => ({
   root: {
     marginTop: "-80px",
-    width: 1000,
+    width: 1150,
   },
   headerContainer: {
     height: 20,
@@ -112,9 +112,9 @@ function CrmContactContactsLayout(props) {
       spacing={2}
     >
       <Grid item container direction="column" sm={width}>
-        <Grid item className={classes.selectField}>
+        {/* <Grid item className={classes.selectField}>
           <CrmContactTypesFilter />
-        </Grid>
+        </Grid> */}
         <Grid
           item
           container

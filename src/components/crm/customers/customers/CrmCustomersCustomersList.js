@@ -162,8 +162,9 @@ class CrmCustomersCustomersList extends React.Component {
     let counter = 0;
     const columns = [
       { field: "numbering", headerName: "S/n", width: 60 },
-      { field: "code", headerName: "Transaction Code", width: 150 },
-      { field: "name", headerName: "Transaction Name", width: 200 },
+      { field: "name", headerName: "Vendor Name", width: 200 },
+      { field: "customerNumber", headerName: "Customer Number", width: 200 },
+      { field: "type", headerName: "Customer Type", width: 200 },
 
       {
         field: "editaction",
@@ -210,9 +211,16 @@ class CrmCustomersCustomersList extends React.Component {
       let row = {
         numbering: ++counter,
         id: crmCustomer.id,
-        code: crmCustomer.code,
         name: crmCustomer.name,
         description: crmCustomer.description,
+        customerNumber: crmCustomer.customerNumber,
+        type: crmCustomer.type,
+        logo: crmCustomer.logo,
+        customerCountry: crmCustomer.customerCountry,
+        contactPerson: crmCustomer.contactPerson,
+        //bankDetails: crmCustomer.bankDetails,
+        location: crmCustomer.location,
+        products: crmCustomer.products,
       };
       rows.push(row);
     });

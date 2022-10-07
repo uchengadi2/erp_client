@@ -162,8 +162,9 @@ class CrmSuppliersSuppliersList extends React.Component {
     let counter = 0;
     const columns = [
       { field: "numbering", headerName: "S/n", width: 60 },
-      { field: "code", headerName: "Transaction Code", width: 150 },
-      { field: "name", headerName: "Transaction Name", width: 200 },
+      { field: "name", headerName: "Vendor Name", width: 200 },
+      { field: "supplierNumber", headerName: "Supplier Number", width: 200 },
+      { field: "type", headerName: "Supplier Type", width: 200 },
 
       {
         field: "editaction",
@@ -210,9 +211,16 @@ class CrmSuppliersSuppliersList extends React.Component {
       let row = {
         numbering: ++counter,
         id: crmSupplier.id,
-        code: crmSupplier.code,
         name: crmSupplier.name,
         description: crmSupplier.description,
+        supplierNumber: crmSupplier.supplierNumber,
+        type: crmSupplier.type,
+        logo: crmSupplier.logo,
+        products: crmSupplier.products,
+        supplierCountry: crmSupplier.supplierCountry,
+        contactPerson: crmSupplier.contactPerson,
+        bankDetails: crmSupplier.bankDetails,
+        location: crmSupplier.location,
       };
       rows.push(row);
     });

@@ -162,8 +162,9 @@ class CrmPartnersPartnersList extends React.Component {
     let counter = 0;
     const columns = [
       { field: "numbering", headerName: "S/n", width: 60 },
-      { field: "code", headerName: "Transaction Code", width: 150 },
-      { field: "name", headerName: "Transaction Name", width: 200 },
+      { field: "name", headerName: "Vendor Name", width: 200 },
+      { field: "partnerNumber", headerName: "Partner Number", width: 200 },
+      { field: "type", headerName: "Partner Type", width: 200 },
 
       {
         field: "editaction",
@@ -210,9 +211,16 @@ class CrmPartnersPartnersList extends React.Component {
       let row = {
         numbering: ++counter,
         id: crmPartner.id,
-        code: crmPartner.code,
         name: crmPartner.name,
         description: crmPartner.description,
+        partnerNumber: crmPartner.partnerNumber,
+        type: crmPartner.type,
+        logo: crmPartner.logo,
+        partnerCountry: crmPartner.partnerCountry,
+        contactPerson: crmPartner.contactPerson,
+        bankDetails: crmPartner.bankDetails,
+        location: crmPartner.location,
+        products: crmPartner.products,
       };
       rows.push(row);
     });

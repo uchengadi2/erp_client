@@ -19,7 +19,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import FormHelperText from "@material-ui/core/FormHelperText";
 
 import api from "./../../../../apis/local";
-import { CREATE_USER } from "../../../../actions/types";
+import { EDIT_USER } from "../../../../actions/types";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -93,9 +93,10 @@ const renderEmailField = ({
       id={input.name}
       defaultValue={input.value}
       fullWidth
-      required
+      //required
       type={type}
       {...custom}
+      disabled
       style={{ marginTop: 15 }}
       onChange={input.onChange}
       InputProps={{
@@ -574,18 +575,25 @@ const renderGuarantorPhoneNumbersField = ({
   );
 };
 
-function StaffForm(props) {
+function StaffEditForm(props) {
+  const { params } = props;
   const classes = useStyles();
-  const [role, setRole] = useState("");
-  const [serviceOutlet, setServiceOutlet] = useState();
-  const [gender, setGender] = useState();
-  const [guarantorGender, setGuarantorGender] = useState();
-  const [maritalStatus, setMaritalStatus] = useState();
+  const [role, setRole] = useState(params.role);
+  const [serviceOutlet, setServiceOutlet] = useState(params.serviceOutlet);
+  const [gender, setGender] = useState(params.gender);
+  const [guarantorGender, setGuarantorGender] = useState(
+    params.guarantorGender
+  );
+  const [maritalStatus, setMaritalStatus] = useState(params.maritalStatus);
   const [highestLevelOfEducationAttained, setHighestLevelOfEducationAttained] =
-    useState();
-  const [nextOfKinRelationship, setNextOfKinRelationship] = useState();
-  const [guarantorRelationship, setGuarantorRelationship] = useState();
-  const [userType, setUserType] = useState("staff");
+    useState(params.highestLevelOfEducationAttained);
+  const [nextOfKinRelationship, setNextOfKinRelationship] = useState(
+    params.nextOfKinRelationship
+  );
+  const [guarantorRelationship, setGuarantorRelationship] = useState(
+    params.guarantorRelationship
+  );
+  const [userType, setUserType] = useState(params.userType);
   const [serviceOutletList, setServiceOutletList] = useState([]);
   const [loading, setLoading] = useState();
 
@@ -906,14 +914,6 @@ function StaffForm(props) {
     );
   };
 
-  const validateEmail = (email) => {
-    return String(email)
-      .toLowerCase()
-      .match(
-        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-      );
-  };
-
   const buttonContent = () => {
     return <React.Fragment>Submit</React.Fragment>;
   };
@@ -940,37 +940,21 @@ function StaffForm(props) {
         "BR" + "-" + Math.floor(Math.random() * 1000000) + "-" + "AG";
     }
 
-    if (!validateEmail(formValues["email"])) {
-      props.handleFailedSnackbar(
-        "You just entered an invalid email address. Please reactify it and try again"
-      );
-
-      return;
-    }
-
-    if (formValues["password"] !== formValues["passwordConfirm"]) {
-      props.handleFailedSnackbar(
-        "Password and Password Confirm are not the same"
-      );
-
-      return;
-    }
-
     if (formValues) {
-      const createForm = async () => {
+      const editForm = async () => {
         api.defaults.headers.common["Authorization"] = `Bearer ${props.token}`;
-        const response = await api.post(`/users`, formValues);
+        const response = await api.patch(`/users/${params.id}`, formValues);
 
         if (response.data.status === "success") {
           dispatch({
-            type: CREATE_USER,
+            type: EDIT_USER,
             payload: response.data.data.data,
           });
 
-          props.handleSuccessfulCreateSnackbar(
-            `${response.data.data.data.staffNumber}-${response.data.data.data.name} User is added successfully!!!`
+          props.handleSuccessfulEditSnackbar(
+            `${response.data.data.data.staffNumber}-${response.data.data.data.name} User is updated successfully!!!`
           );
-          props.handleDialogOpenStatus();
+          props.handleEditDialogOpenStatus();
           setLoading(false);
         } else {
           props.handleFailedSnackbar(
@@ -978,7 +962,7 @@ function StaffForm(props) {
           );
         }
       };
-      createForm().catch((err) => {
+      editForm().catch((err) => {
         props.handleFailedSnackbar();
         console.log("err:", err.message);
       });
@@ -986,6 +970,10 @@ function StaffForm(props) {
       props.handleFailedSnackbar("Something went wrong, please try again!!!");
     }
   };
+
+  const dateOfBirth = params.dateOfBirth
+    ? new Date(params.dateOfBirth).toISOString().slice(0, 10)
+    : "";
 
   return (
     <div className={classes.root}>
@@ -998,13 +986,13 @@ function StaffForm(props) {
             variant="subtitle1"
             style={{ fontSize: "1.0em", marginTop: 20 }}
           >
-            Add User
+            Update User
           </Typography>
         </FormLabel>
       </Grid>
       <Box
         component="form"
-        id="userForm"
+        id="staffEditForm"
         // onSubmit={onSubmit}
         sx={{
           width: 500,
@@ -1018,29 +1006,10 @@ function StaffForm(props) {
           label=""
           id="email"
           name="email"
+          defaultValue={params.email}
           type="email"
           component={renderEmailField}
         />
-        <Grid container direction="row">
-          <Grid item style={{ width: "49%", marginTop: 10 }}>
-            <Field
-              label=""
-              id="password"
-              name="password"
-              type="password"
-              component={renderPasswordField}
-            />
-          </Grid>
-          <Grid item style={{ width: "48%", marginTop: 10, marginLeft: 10 }}>
-            <Field
-              label=""
-              id="passwordConfirm"
-              name="passwordConfirm"
-              type="password"
-              component={renderConfirmPasswordField}
-            />
-          </Grid>
-        </Grid>
 
         <Grid container direction="row">
           <Grid item style={{ width: "50%", marginTop: 10 }}>
@@ -1048,6 +1017,7 @@ function StaffForm(props) {
               label=""
               id="name"
               name="name"
+              defaultValue={params.name}
               type="text"
               component={renderNameField}
             />
@@ -1080,6 +1050,7 @@ function StaffForm(props) {
               label=""
               id="staffNumber"
               name="staffNumber"
+              defaultValue={params.staffNumber}
               type="text"
               component={renderStaffNumberField}
             />
@@ -1089,6 +1060,7 @@ function StaffForm(props) {
               label=""
               id="dateOfBirth"
               name="dateOfBirth"
+              defaultValue={dateOfBirth}
               type="date"
               component={renderDateOfBirthField}
             />
@@ -1129,6 +1101,7 @@ function StaffForm(props) {
               label=""
               id="courseOfStudy"
               name="courseOfStudy"
+              defaultValue={params.courseOfStudy}
               type="text"
               component={renderCourseOfStudyField}
             />
@@ -1138,6 +1111,7 @@ function StaffForm(props) {
           label=""
           id="phoneNumbers"
           name="phoneNumbers"
+          defaultValue={params.phoneNumbers}
           type="text"
           component={renderPhoneNumbersField}
         />
@@ -1145,6 +1119,7 @@ function StaffForm(props) {
           label=""
           id="references"
           name="references"
+          defaultValue={params.references}
           type="text"
           component={renderReferencesField}
         />
@@ -1152,6 +1127,7 @@ function StaffForm(props) {
           label=""
           id="houseAddress"
           name="houseAddress"
+          defaultValue={params.houseAddress}
           type="text"
           component={renderHomeAddressField}
         />
@@ -1166,6 +1142,7 @@ function StaffForm(props) {
               label=""
               id="nextOfKinName"
               name="nextOfKinName"
+              defaultValue={params.nextOfKinName}
               type="text"
               component={renderNextOfKinNameField}
             />
@@ -1184,6 +1161,7 @@ function StaffForm(props) {
           label=""
           id="nextOfKinPhoneNumbers"
           name="nextOfKinPhoneNumbers"
+          defaultValue={params.nextOfKinPhoneNumbers}
           type="text"
           component={renderNextOfKinPhoneNumbersField}
         />
@@ -1191,6 +1169,7 @@ function StaffForm(props) {
           label=""
           id="nextOfKinAddress"
           name="nextOfKinAddress"
+          defaultValue={params.nextOfKinAddress}
           type="text"
           component={renderNextOfKinAddressField}
         />
@@ -1203,6 +1182,7 @@ function StaffForm(props) {
           label=""
           id="guarantorName"
           name="guarantorName"
+          defaultValue={params.guarantorName}
           type="text"
           component={renderGuarantorNameField}
         />
@@ -1230,6 +1210,7 @@ function StaffForm(props) {
           label=""
           id="guarantorPhoneNumbers"
           name="guarantorPhoneNumbers"
+          defaultValue={params.guarantorPhoneNumbers}
           type="text"
           component={renderGuarantorPhoneNumbersField}
         />
@@ -1237,6 +1218,7 @@ function StaffForm(props) {
           label=""
           id="guarantorAddress"
           name="guarantorAddress"
+          defaultValue={params.guarantorAddress}
           type="text"
           component={renderGuarantorAddressField}
         />
@@ -1250,6 +1232,7 @@ function StaffForm(props) {
           label=""
           id="memo"
           name="memo"
+          defaultValue={params.memo}
           type="text"
           component={renderMemoField}
         />
@@ -1273,5 +1256,5 @@ function StaffForm(props) {
 }
 
 export default reduxForm({
-  form: "userForm",
-})(StaffForm);
+  form: "staffEditForm",
+})(StaffEditForm);

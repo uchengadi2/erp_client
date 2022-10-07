@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import Dialog from "@material-ui/core/Dialog";
+import Snackbar from "@material-ui/core/Snackbar";
 import DialogContent from "@material-ui/core/DialogContent";
 import EditRoundedIcon from "@material-ui/icons/EditRounded";
 import DeleteRoundedIcon from "@material-ui/icons/DeleteRounded";
@@ -9,6 +10,8 @@ import Typography from "@material-ui/core/Typography";
 import history from "../../../../history";
 import { fetchUsers } from "../../../../actions";
 import DataGridContainer from "../../../DataGridContainer";
+import StaffEditForm from "./StaffEditForm";
+import StaffDelete from "./StaffDelete";
 
 class StaffList extends React.Component {
   constructor(props) {
@@ -19,6 +22,11 @@ class StaffList extends React.Component {
       blacklistOpen: false,
       id: null,
       params: {},
+      alert: {
+        open: false,
+        message: "",
+        backgroundColor: "",
+      },
     };
   }
   componentDidMount() {
@@ -35,6 +43,29 @@ class StaffList extends React.Component {
     this.setState({ editOpen: false });
   };
 
+  handleSuccessfulEditSnackbar = (message) => {
+    // history.push("/categories/new");
+    this.setState({ editOpen: false });
+    this.setState({
+      alert: {
+        open: true,
+        message: message,
+        backgroundColor: "#4BB543",
+      },
+    });
+  };
+
+  handleFailedSnackbar = (message) => {
+    this.setState({
+      alert: {
+        open: true,
+        message: message,
+        backgroundColor: "#FF3232",
+      },
+    });
+    this.setState({ editOpen: false });
+  };
+
   renderEditDialogForm = () => {
     //token will be used here
     return (
@@ -48,11 +79,14 @@ class StaffList extends React.Component {
           ]}
         >
           <DialogContent>
-            {/* <CityEdit
+            <StaffEditForm
               token={this.props.token}
+              userId={this.props.userId}
               params={this.state.params}
               handleEditDialogOpenStatus={this.handleEditDialogOpenStatus}
-            /> */}
+              handleSuccessfulEditSnackbar={this.handleSuccessfulEditSnackbar}
+              handleFailedSnackbar={this.handleFailedSnackbar}
+            />
           </DialogContent>
         </Dialog>
       </>
@@ -72,11 +106,12 @@ class StaffList extends React.Component {
           ]}
         >
           <DialogContent>
-            {/* <CityDelete
+            <StaffDelete
               token={this.props.token}
+              userId={this.props.userId}
               id={this.state.id}
               handleDialogOpenStatus={this.handleDialogOpenStatus}
-            /> */}
+            />
           </DialogContent>
         </Dialog>
       </>
@@ -107,11 +142,11 @@ class StaffList extends React.Component {
     let counter = 0;
     const columns = [
       { field: "numbering", headerName: "S/n", width: 100 },
-      { field: "name", headerName: "Name", width: 300 },
-      { field: "email", headerName: "Email", width: 350 },
-      { field: "role", headerName: "Role", width: 250 },
+      { field: "name", headerName: "Name", width: 200 },
+      { field: "email", headerName: "Email", width: 200 },
+      { field: "role", headerName: "Role", width: 100 },
       { field: "userType", headerName: "User Type", width: 100 },
-      { field: "serviceOutlet", headerName: "Service Outlet", width: 100 },
+      { field: "serviceOutlet", headerName: "Service Outlet", width: 200 },
       {
         field: "editaction",
         headerName: "",
@@ -133,24 +168,7 @@ class StaffList extends React.Component {
           </strong>
         ),
       },
-      // {
-      //   field: "blacklistaction",
-      //   headerName: "",
-      //   width: 30,
-      //   description: "Blacklist city",
-      //   renderCell: (params) => (
-      //     <strong>
-      //       {/* {params.value.getFullYear()} */}
-      //       <CancelRoundedIcon
-      //         style={{ color: "black" }}
-      //         onClick={() => [
-      //           this.setState({ blacklistOpen: true, id: params.id }),
-      //           history.push(`/crm/users/staffers/blacklist/${params.id}`),
-      //         ]}
-      //       />
-      //     </strong>
-      //   ),
-      // },
+
       {
         field: "deleteaction",
         headerName: "",
@@ -176,29 +194,29 @@ class StaffList extends React.Component {
         id: user._id,
         name: user.name,
         role: user.role,
-        serviceOutlet: user.staffUserDetail.currentServiceOutlet,
-        servedServiceOutlets: user.staffUserDetail.servedServiceOutlets,
+        serviceOutlet: user.serviceOutlet,
         userType: user.userType,
         email: user.email,
-        staffNumber: user.staffUserDetail.staffNumber,
-        gender: user.staffUserDetail.gender,
-        maritalStatus: user.staffUserDetail.maritalStatus,
-        dateOfBirth: user.staffUserDetail.dateOfBirth,
-        highestLevelOfEducationAttained:
-          user.staffUserDetail.highestLevelOfEducationAttained,
-        courseOfStudy: user.staffUserDetail.courseOfStudy,
-        References: user.staffUserDetail.References,
-        yearsOfExperience: user.staffUserDetail.yearsOfExperience,
-        houseAddress: user.staffUserDetail.houseAddress,
-        // nextOfKinName: user.staffUserDetail.nextOfKin.name || "",
-        // nextOfKinAddress: user.staffUserDetail.nextOfKin.address || "",
-        // nextOfKinRelationship:
-        //   user.staffUserDetail.nextOfKin.relationship || "",
-        // guarantorName: user.staffUserDetail.guarantor.name || "",
-        // guarantorAddress: user.staffUserDetail.guarantor.address || "",
-        // guarantorGender: user.staffUserDetail.guarantor.gender || "",
-        // guarantorRelationship:
-        //   user.staffUserDetail.guarantor.relationship || "",
+        staffNumber: user.staffNumber,
+        gender: user.gender,
+        maritalStatus: user.maritalStatus,
+        dateOfBirth: user.dateOfBirth,
+        highestLevelOfEducationAttained: user.highestLevelOfEducationAttained,
+        courseOfStudy: user.courseOfStudy,
+        references: user.references,
+        houseAddress: user.houseAddress,
+        nextOfKinName: user.nextOfKinName,
+        nextOfKinAddress: user.nextOfKinAddress,
+        nextOfKinRelationship: user.nextOfKinRelationship,
+        guarantorName: user.guarantorName,
+        guarantorAddress: user.guarantorAddress,
+        guarantorGender: user.guarantorGender,
+        guarantorRelationship: user.guarantorRelationship,
+        photo: user.photo,
+        memo: user.memo,
+        phoneNumbers: user.phoneNumbers,
+        nextOfKinPhoneNumbers: user.nextOfKinPhoneNumbers,
+        guarantorPhoneNumbers: user.guarantorPhoneNumbers,
       };
       rows.push(row);
     });
@@ -212,6 +230,16 @@ class StaffList extends React.Component {
         {this.renderEditDialogForm()}
         {this.renderCitiesList()}
         {this.renderBlackListDialogForm()}
+        <Snackbar
+          open={this.state.alert.open}
+          message={this.state.alert.message}
+          ContentProps={{
+            style: { backgroundColor: this.state.alert.backgroundColor },
+          }}
+          anchorOrigin={{ vertical: "top", horizontal: "center" }}
+          onClose={() => this.setState({ alert: { ...alert, open: false } })}
+          autoHideDuration={4000}
+        />
       </>
     );
   }
