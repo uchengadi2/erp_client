@@ -1147,7 +1147,7 @@ function OperationsProcessingsProcessingsEditForm(props) {
             />
           </Grid>
         </Grid>
-        <Grid container="row">
+        {/* <Grid container="row">
           <Grid item style={{ width: "45%" }}>
             <Field
               label=""
@@ -1169,7 +1169,7 @@ function OperationsProcessingsProcessingsEditForm(props) {
               style={{ marginTop: 5 }}
             />
           </Grid>
-        </Grid>
+        </Grid> */}
 
         <Field
           label=""
