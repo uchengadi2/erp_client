@@ -175,7 +175,9 @@ function ProjectsProjectsResourceCreateForm(props) {
   const [storeType, setStoreType] = useState();
   const [store, setStore] = useState();
   const [serviceOutlet, setServiceOutlet] = useState();
+  const [project, setProject] = useState();
   const [availableStockQuantity, setAvailableStockQuantity] = useState();
+  const [projectList, setProjectList] = useState([]);
   const [assetTypeList, setAssetTypeList] = useState([]);
   const [serviceOutletList, setServiceOutList] = useState([]);
   const [assetSetList, setAssetSetList] = useState([]);
@@ -252,6 +254,29 @@ function ProjectsProjectsResourceCreateForm(props) {
 
     fetchData().catch(console.error);
   }, []);
+
+  // service outlet projects
+  useEffect(() => {
+    const fetchData = async () => {
+      let allData = [];
+      api.defaults.headers.common["Authorization"] = `Bearer ${props.token}`;
+      const response = await api.get("/projects", {
+        params: { serviceOutlet: serviceOutlet, status: "pending" },
+      });
+      const workingData = response.data.data.data;
+      workingData.map((item) => {
+        allData.push({
+          id: item._id,
+          name: `${item.name}`,
+        });
+      });
+      setProjectList(allData);
+    };
+
+    //call the function
+
+    fetchData().catch(console.error);
+  }, [serviceOutlet]);
 
   //fetch asset sets
 
@@ -361,7 +386,6 @@ function ProjectsProjectsResourceCreateForm(props) {
         quantity: `${item.quantity}`,
       });
       setAvailableStockQuantity(allData[0].quantity);
-      console.log("all data:", allData);
     };
 
     //call the function
@@ -400,6 +424,11 @@ function ProjectsProjectsResourceCreateForm(props) {
 
   const handleStockChange = (event) => {
     setStock(event.target.value);
+    //     props.handleCountryChange(event.target.value);
+  };
+
+  const handleProjectChange = (event) => {
+    setProject(event.target.value);
     //     props.handleCountryChange(event.target.value);
   };
 
@@ -461,6 +490,17 @@ function ProjectsProjectsResourceCreateForm(props) {
   //get the Service Outlet list
   const renderServiceOutletList = () => {
     return serviceOutletList.map((item) => {
+      return (
+        <MenuItem key={item.id} value={item.id}>
+          {item.name}
+        </MenuItem>
+      );
+    });
+  };
+
+  //get the Service Outlet Projects list
+  const renderProjectList = () => {
+    return projectList.map((item) => {
       return (
         <MenuItem key={item.id} value={item.id}>
           {item.name}
@@ -533,13 +573,46 @@ function ProjectsProjectsResourceCreateForm(props) {
             value={serviceOutlet}
             // onChange={props.handleCountryChange}
             onChange={handleServiceOutletChange}
-            label="Project Manager"
+            label="Service Outlet"
             style={{ width: 400, marginTop: 10, height: 38 }}
           >
             {renderServiceOutletList()}
           </Select>
           <FormHelperText style={{ marginLeft: 20 }}>
             Select Service Outlet
+          </FormHelperText>
+        </FormControl>
+      </Box>
+    );
+  };
+
+  const renderProjectField = ({
+    input,
+    label,
+    meta: { touched, error, invalid },
+    type,
+    id,
+    ...custom
+  }) => {
+    return (
+      <Box>
+        <FormControl variant="outlined">
+          {/* <InputLabel id="vendor_city">City</InputLabel> */}
+
+          <Select
+            labelId="project"
+            id="project"
+            //defaultValue={schemeType}
+            value={project}
+            // onChange={props.handleCountryChange}
+            onChange={handleProjectChange}
+            label="Project"
+            style={{ width: 400, marginTop: 10, height: 38 }}
+          >
+            {renderProjectList()}
+          </Select>
+          <FormHelperText style={{ marginLeft: 20 }}>
+            Select Project
           </FormHelperText>
         </FormControl>
       </Box>
@@ -761,6 +834,7 @@ function ProjectsProjectsResourceCreateForm(props) {
     formValues["storeType"] = storeType;
     formValues["store"] = store;
     formValues["stock"] = stock;
+    formValues["project"] = project;
 
     if (!formValues["refNumber"]) {
       formValues["refNumber"] =
@@ -854,6 +928,14 @@ function ProjectsProjectsResourceCreateForm(props) {
           name="serviceOutlet"
           type="text"
           component={renderServiceOutletField}
+          style={{ marginTop: 10 }}
+        />
+        <Field
+          label=""
+          id="project"
+          name="project"
+          type="text"
+          component={renderProjectField}
           style={{ marginTop: 10 }}
         />
         <Grid container="row">

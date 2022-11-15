@@ -27,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
   submitButton: {
     borderRadius: 10,
     height: 40,
-    width: 200,
+    width: 230,
     marginLeft: 100,
     marginTop: 20,
     marginBottom: 20,
@@ -929,7 +929,7 @@ function OperationsProcessingsProcessingsEditForm(props) {
   };
 
   const buttonContent = () => {
-    return <React.Fragment> Update processing</React.Fragment>;
+    return <React.Fragment> Update Processing</React.Fragment>;
   };
 
   const onSubmit = (formValues) => {
@@ -1023,7 +1023,7 @@ function OperationsProcessingsProcessingsEditForm(props) {
             style={{ color: "blue", fontSize: "1.5em" }}
             component="legend"
           >
-            <Typography variant="subtitle1"> Processing</Typography>
+            <Typography variant="subtitle1">Processing</Typography>
           </FormLabel>
         </Grid>
         <Field

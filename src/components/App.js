@@ -111,8 +111,7 @@ function App() {
     //setBecomePartnerOpen(true);
   };
 
-  console.log("user id id:", userId);
-  console.log("user token is:", token);
+
   if (!token) {
     return <UserLogin setToken={setToken} setUserId={setUserId} />;
   }

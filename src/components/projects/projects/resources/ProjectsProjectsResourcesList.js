@@ -226,6 +226,7 @@ class ProjectsProjectsResourcesList extends React.Component {
         serviceOutlet: projectProjectResource.serviceOutlet,
         storeType: projectProjectResource.storeType,
         store: projectProjectResource.store,
+        project: projectProjectResource.project,
       };
       rows.push(row);
     });

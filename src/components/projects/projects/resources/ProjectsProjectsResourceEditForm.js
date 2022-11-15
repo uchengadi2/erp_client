@@ -180,6 +180,8 @@ function ProjectsProjectsResourceEditForm(props) {
   const [currentStockQuantity, setCurrentStockQuantity] = useState(
     params.stockQuantity
   );
+  const [project, setProject] = useState(params.project);
+  const [projectList, setProjectList] = useState([]);
   const [assetTypeList, setAssetTypeList] = useState([]);
   const [serviceOutletList, setServiceOutList] = useState([]);
   const [assetSetList, setAssetSetList] = useState([]);
@@ -236,6 +238,29 @@ function ProjectsProjectsResourceEditForm(props) {
 
     fetchData().catch(console.error);
   }, [storeType, serviceOutlet]);
+
+  // service outlet projects
+  useEffect(() => {
+    const fetchData = async () => {
+      let allData = [];
+      api.defaults.headers.common["Authorization"] = `Bearer ${props.token}`;
+      const response = await api.get("/projects", {
+        params: { serviceOutlet: serviceOutlet, status: "pending" },
+      });
+      const workingData = response.data.data.data;
+      workingData.map((item) => {
+        allData.push({
+          id: item._id,
+          name: `${item.name}`,
+        });
+      });
+      setProjectList(allData);
+    };
+
+    //call the function
+
+    fetchData().catch(console.error);
+  }, [serviceOutlet]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -407,6 +432,11 @@ function ProjectsProjectsResourceEditForm(props) {
     //     props.handleCountryChange(event.target.value);
   };
 
+  const handleProjectChange = (event) => {
+    setProject(event.target.value);
+    //     props.handleCountryChange(event.target.value);
+  };
+
   //get the store tyoes
   const renderStoreTypeList = () => {
     return storeTypeList.map((item) => {
@@ -484,6 +514,17 @@ function ProjectsProjectsResourceEditForm(props) {
     });
   };
 
+  //get the Service Outlet Projects list
+  const renderProjectList = () => {
+    return projectList.map((item) => {
+      return (
+        <MenuItem key={item.id} value={item.id}>
+          {item.name}
+        </MenuItem>
+      );
+    });
+  };
+
   const renderAssetTypeField = ({
     input,
     label,
@@ -544,6 +585,39 @@ function ProjectsProjectsResourceEditForm(props) {
           </Select>
           <FormHelperText style={{ marginLeft: 20 }}>
             Select Service Outlet
+          </FormHelperText>
+        </FormControl>
+      </Box>
+    );
+  };
+
+  const renderProjectField = ({
+    input,
+    label,
+    meta: { touched, error, invalid },
+    type,
+    id,
+    ...custom
+  }) => {
+    return (
+      <Box>
+        <FormControl variant="outlined">
+          {/* <InputLabel id="vendor_city">City</InputLabel> */}
+
+          <Select
+            labelId="project"
+            id="project"
+            //defaultValue={schemeType}
+            value={project}
+            // onChange={props.handleCountryChange}
+            onChange={handleProjectChange}
+            label="Project"
+            style={{ width: 400, marginTop: 10, height: 38 }}
+          >
+            {renderProjectList()}
+          </Select>
+          <FormHelperText style={{ marginLeft: 20 }}>
+            Select Project
           </FormHelperText>
         </FormControl>
       </Box>
@@ -747,7 +821,9 @@ function ProjectsProjectsResourceEditForm(props) {
       />
     );
   };
-
+  console.log("the project:", params.project);
+  console.log("the selected project:", project);
+  console.log("the params:", params);
   const buttonContent = () => {
     return <React.Fragment> Update Resource</React.Fragment>;
   };
@@ -765,6 +841,7 @@ function ProjectsProjectsResourceEditForm(props) {
     formValues["storeType"] = storeType;
     formValues["store"] = store;
     formValues["stock"] = stock;
+    formValues["project"] = project;
 
     const diff =
       parseFloat(currentStockQuantity) -
@@ -871,6 +948,14 @@ function ProjectsProjectsResourceEditForm(props) {
           name="serviceOutlet"
           type="text"
           component={renderServiceOutletField}
+          style={{ marginTop: 10 }}
+        />
+        <Field
+          label=""
+          id="project"
+          name="project"
+          type="text"
+          component={renderProjectField}
           style={{ marginTop: 10 }}
         />
         <Grid container="row">
