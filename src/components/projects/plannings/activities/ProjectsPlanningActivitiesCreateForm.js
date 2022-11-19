@@ -244,9 +244,7 @@ function ProjectsPlanningActivitiesCreateForm(props) {
     const fetchData = async () => {
       let allData = [];
       api.defaults.headers.common["Authorization"] = `Bearer ${props.token}`;
-      const response = await api.get("/projects", {
-        params: { serviceOutlet: serviceOutlet },
-      });
+      const response = await api.get("/projects");
       const workingData = response.data.data.data;
       workingData.map((item) => {
         allData.push({
@@ -260,7 +258,7 @@ function ProjectsPlanningActivitiesCreateForm(props) {
     //call the function
 
     fetchData().catch(console.error);
-  }, [serviceOutlet]);
+  }, []);
 
   //service outlet
 
@@ -510,13 +508,12 @@ function ProjectsPlanningActivitiesCreateForm(props) {
     // formValues["code"] = Str(formValues.code).limit(4).get();
     formValues["createdBy"] = props.userId;
     formValues["status"] = status;
-    formValues["serviceOutlet"] = serviceOutlet;
     formValues["project"] = project;
     formValues["task"] = task;
 
     if (!formValues["refNumber"]) {
       formValues["refNumber"] =
-        "PR" + "-" + Math.floor(Math.random() * 1000000) + "-" + "ACT";
+        "PR" + "-" + Math.floor(Math.random() * 100000000) + "-" + "ACT";
     }
 
     if (formValues) {
@@ -579,14 +576,7 @@ function ProjectsPlanningActivitiesCreateForm(props) {
             <Typography variant="subtitle1"> Add Activity</Typography>
           </FormLabel>
         </Grid>
-        <Field
-          label=""
-          id="serviceOutlet"
-          name="serviceOutlet"
-          type="text"
-          component={renderServiceOutletField}
-          style={{ marginTop: 10 }}
-        />
+
         <Field
           label=""
           id="project"

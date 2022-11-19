@@ -228,9 +228,31 @@ class OperationsProductionFinishingsList extends React.Component {
           operation: operationProductionFinishing.operation,
           finishingDate: operationProductionFinishing.finishingDate,
           output: operationProductionFinishing.output,
-          finishingCost: operationProductionFinishing.finishingCost,
-          currency: operationProductionFinishing.currency,
+          extraFinishingCost: operationProductionFinishing.extraFinishingCost,
+          extraFinishingCostCurrency:
+            operationProductionFinishing.extraFinishingCostCurrency,
           dateLastModified: operationProductionFinishing.dateLastModified,
+          processingType: operationProductionFinishing.processingType,
+          process: operationProductionFinishing.process,
+          inventoryType: operationProductionFinishing.inventoryType,
+          inventory: operationProductionFinishing.inventory,
+          availableInventoryQuantity:
+            operationProductionFinishing.availableInventoryQuantity,
+          availableInventoryUnit:
+            operationProductionFinishing.availableInventoryUnit,
+          inventoryCostPerUnit:
+            operationProductionFinishing.inventoryCostPerUnit,
+          inventoryQuantityAllocated:
+            operationProductionFinishing.inventoryQuantityAllocated,
+          inventoryUnitCostCurrency:
+            operationProductionFinishing.inventoryUnitCostCurrency,
+          allocatedInventoryUnit:
+            operationProductionFinishing.allocatedInventoryUnit,
+          inventoryUnitCostCurrency:
+            operationProductionFinishing.inventoryUnitCostCurrency,
+          processorType: operationProductionFinishing.processorType,
+          processor: operationProductionFinishing.processor,
+          supervisor: operationProductionFinishing.supervisor,
         };
         rows.push(row);
       }

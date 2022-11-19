@@ -162,7 +162,6 @@ class ProjectsProjectsProjectsList extends React.Component {
     let counter = 0;
     const columns = [
       { field: "numbering", headerName: "S/n", width: 60 },
-      { field: "serviceOutlet", headerName: "Service Outlet", width: 200 },
       { field: "refNumber", headerName: "Reference Number", width: 250 },
       { field: "name", headerName: "Project Name", width: 250 },
       { field: "status", headerName: "Status", width: 200 },
@@ -223,7 +222,6 @@ class ProjectsProjectsProjectsList extends React.Component {
         currency: projectProject.currency,
         projectManager: projectProject.projectManager,
         status: projectProject.status,
-        serviceOutlet: projectProject.serviceOutlet,
       };
       rows.push(row);
     });

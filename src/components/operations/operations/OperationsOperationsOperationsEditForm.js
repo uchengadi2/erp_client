@@ -190,9 +190,7 @@ function OperationsOperationsOperationsEditForm(props) {
     const fetchData = async () => {
       let allData = [];
       api.defaults.headers.common["Authorization"] = `Bearer ${props.token}`;
-      const response = await api.get("/projects", {
-        params: { serviceOutlet: serviceOutlet },
-      });
+      const response = await api.get("/projects");
       const workingData = response.data.data.data;
       workingData.map((item) => {
         allData.push({

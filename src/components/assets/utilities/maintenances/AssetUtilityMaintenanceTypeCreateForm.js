@@ -187,8 +187,6 @@ function AssetUtilityMaintenanceTypeCreateForm(props) {
     // formValues["code"] = Str(formValues.code).limit(4).get();
     formValues["createdBy"] = props.userId;
 
-    console.log("this formvalues is:", formValues);
-
     if (formValues) {
       const createForm = async () => {
         api.defaults.headers.common["Authorization"] = `Bearer ${props.token}`;

@@ -737,6 +737,21 @@ import {
   FETCH_STOCKREQUISITION,
   EDIT_STOCKREQUISITION,
   DELETE_STOCKREQUISITION,
+  CREATE_ASSETINVENTORYTYPE,
+  FETCH_ASSETINVENTORYTYPES,
+  FETCH_ASSETINVENTORYTYPE,
+  EDIT_ASSETINVENTORYTYPE,
+  DELETE_ASSETINVENTORYTYPE,
+  CREATE_ASSETINVENTORY,
+  FETCH_ASSETINVENTORIES,
+  FETCH_ASSETINVENTORY,
+  EDIT_ASSETINVENTORY,
+  DELETE_ASSETINVENTORY,
+  CREATE_ASSETINVENTORYMEASUREMENTUNIT,
+  FETCH_ASSETINVENTORYMEASUREMENTUNITS,
+  FETCH_ASSETINVENTORYMEASUREMENTUNIT,
+  EDIT_ASSETINVENTORYMEASUREMENTUNIT,
+  DELETE_ASSETINVENTORYMEASUREMENTUNIT,
 } from "./types";
 
 //authentication and authorization  operations
@@ -8936,5 +8951,176 @@ export const deleteAssetSetBatch = (id, token) => {
   return async (dispatch) => {
     await data.delete(`/assetsetbatches/${id}`);
     dispatch({ type: DELETE_ASSETSETBATCH, payload: id });
+  };
+};
+
+/////////////////////////////////// INVENTORY TYPES ACTION CREATORS ////////////////
+
+export const createAssetInventoryType = (formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+
+  return async (dispatch) => {
+    const response = await data.post("/assetinventorytypes", formValues);
+    dispatch({
+      type: CREATE_ASSETINVENTORYTYPE,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchAssetInventoryTypes = (tokens) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
+  return async (dispatch) => {
+    const response = await data.get("/assetinventorytypes");
+
+    dispatch({
+      type: FETCH_ASSETINVENTORYTYPES,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchAssetInventoryType = (id, token) => {
+  return async (dispatch) => {
+    const response = await data.get(`/assetinventorytypes/${id}`);
+    dispatch({ type: FETCH_ASSETINVENTORYTYPE, payload: response.data });
+  };
+};
+
+export const editAssetInventoryType = (id, formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.patch(`/assetinventorytypes/${id}`, formValues);
+    dispatch({
+      type: EDIT_ASSETINVENTORYTYPE,
+      payload: response.data.data.data,
+    });
+    //history.push("/utility/countries");
+  };
+};
+
+export const deleteAssetInventoryType = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    await data.delete(`/assetinventorytypes/${id}`);
+    dispatch({ type: DELETE_ASSETINVENTORYTYPE, payload: id });
+    //history.push("/utilities/countries");
+  };
+};
+
+/////////////////////////////////// INVENTORY ACTION CREATORS ////////////////
+
+export const createAssetInventory = (formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+
+  return async (dispatch) => {
+    const response = await data.post("/assetinventories", formValues);
+    dispatch({
+      type: CREATE_ASSETINVENTORY,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchAssetInventories = (tokens) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
+  return async (dispatch) => {
+    const response = await data.get("/assetinventories");
+
+    dispatch({
+      type: FETCH_ASSETINVENTORIES,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchAssetInventory = (id, token) => {
+  return async (dispatch) => {
+    const response = await data.get(`/assetinventories/${id}`);
+    dispatch({ type: FETCH_ASSETINVENTORY, payload: response.data });
+  };
+};
+
+export const editAssetInventory = (id, formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.patch(`/assetinventories/${id}`, formValues);
+    dispatch({
+      type: EDIT_ASSETINVENTORY,
+      payload: response.data.data.data,
+    });
+    //history.push("/utility/countries");
+  };
+};
+
+export const deleteAssetInventory = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    await data.delete(`/assetinventories/${id}`);
+    dispatch({ type: DELETE_ASSETINVENTORY, payload: id });
+    //history.push("/utilities/countries");
+  };
+};
+
+/////////////////////////////////// INVENTORY MEASUREMENT UNIT ACTION CREATORS ////////////////
+
+export const createAssetInventoryMeasurementUnit = (formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+
+  return async (dispatch) => {
+    const response = await data.post(
+      "/assetinventorymeasurementunits",
+      formValues
+    );
+    dispatch({
+      type: CREATE_ASSETINVENTORYMEASUREMENTUNIT,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchAssetInventoryMeasurementUnits = (tokens) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${tokens}`;
+  return async (dispatch) => {
+    const response = await data.get("/assetinventorymeasurementunits");
+
+    dispatch({
+      type: FETCH_ASSETINVENTORYMEASUREMENTUNITS,
+      payload: response.data.data.data,
+    });
+  };
+};
+
+export const fetchAssetInventoryMeasurementUnit = (id, token) => {
+  return async (dispatch) => {
+    const response = await data.get(`/assetinventorymeasurementunits/${id}`);
+    dispatch({
+      type: FETCH_ASSETINVENTORYMEASUREMENTUNIT,
+      payload: response.data,
+    });
+  };
+};
+
+export const editAssetInventoryMeasurementUnit = (id, formValues, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    const response = await data.patch(
+      `/assetinventorymeasurementunits/${id}`,
+      formValues
+    );
+    dispatch({
+      type: EDIT_ASSETINVENTORYMEASUREMENTUNIT,
+      payload: response.data.data.data,
+    });
+    //history.push("/utility/countries");
+  };
+};
+
+export const deleteAssetInventoryMeasurementUnit = (id, token) => {
+  data.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  return async (dispatch) => {
+    await data.delete(`/assetinventorymeasurementunits/${id}`);
+    dispatch({ type: DELETE_ASSETINVENTORYMEASUREMENTUNIT, payload: id });
+    //history.push("/utilities/countries");
   };
 };

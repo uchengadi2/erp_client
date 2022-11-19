@@ -163,7 +163,6 @@ class ProjectsPlanningActivitiesList extends React.Component {
     const columns = [
       { field: "numbering", headerName: "S/n", width: 60 },
       { field: "refNumber", headerName: "Reference Number", width: 150 },
-      { field: "serviceOutlet", headerName: "Service Outlet", width: 150 },
       { field: "task", headerName: "Task", width: 150 },
       { field: "activity", headerName: "Activity", width: 150 },
       { field: "status", headerName: "Status", width: 150 },
@@ -219,7 +218,6 @@ class ProjectsPlanningActivitiesList extends React.Component {
         id: projectPlanningActivity.id,
         refNumber: projectPlanningActivity.refNumber,
         activity: projectPlanningActivity.activity,
-        serviceOutlet: projectPlanningActivity.serviceOutlet,
         project: projectPlanningActivity.project,
         task: projectPlanningActivity.task,
         description: projectPlanningActivity.description,

@@ -78,7 +78,7 @@ class OperationsProcessingsProcessingsList extends React.Component {
           open={this.state.editOpen}
           onClose={() => [
             this.setState({ editOpen: false }),
-            history.push("/operations/processings/processings"),
+            history.push("/operations/processes/processes"),
           ]}
         >
           <DialogContent>
@@ -105,7 +105,7 @@ class OperationsProcessingsProcessingsList extends React.Component {
           open={this.state.deleteOpen}
           onClose={() => [
             this.setState({ deleteOpen: false }),
-            history.push(`/operations/processings/processings`),
+            history.push(`/operations/processes/processes`),
           ]}
         >
           <DialogContent>
@@ -130,7 +130,7 @@ class OperationsProcessingsProcessingsList extends React.Component {
           open={this.state.cancelOpen}
           onClose={() => [
             this.setState({ cancelOpen: false }),
-            history.push(`/operations/processings/processings`),
+            history.push(`/operations/processes/processes`),
           ]}
         >
           <DialogContent>
@@ -150,7 +150,7 @@ class OperationsProcessingsProcessingsList extends React.Component {
           open={this.state.assignOpen}
           onClose={() => [
             this.setState({ assignOpen: false }),
-            history.push(`/operations/processings/processings`),
+            history.push(`/operations/processes/processes`),
           ]}
         ></Dialog>
       </>
@@ -184,7 +184,7 @@ class OperationsProcessingsProcessingsList extends React.Component {
                   params: params.row,
                 }),
                 history.push(
-                  `/operations/processings/processings/edit/${params.id}`
+                  `/operations/processes/processes/edit/${params.id}`
                 ),
               ]}
             />
@@ -205,7 +205,7 @@ class OperationsProcessingsProcessingsList extends React.Component {
               onClick={() => [
                 this.setState({ deleteOpen: true, id: params.id }),
                 history.push(
-                  `/operations/processings/processings/delete/${params.id}`
+                  `/operations/processes/processes/delete/${params.id}`
                 ),
               ]}
             />
@@ -228,12 +228,8 @@ class OperationsProcessingsProcessingsList extends React.Component {
         description: operationProcessing.description,
         comment: operationProcessing.comment,
         dateLastModified: operationProcessing.dateLastModified,
-        processor: operationProcessing.processor,
-        processorType: operationProcessing.processorType,
-        supervisor: operationProcessing.supervisor,
         operation: operationProcessing.operation,
         processingDate: operationProcessing.processingDate,
-        output: operationProcessing.output,
         processingCost: operationProcessing.processingCost,
         currency: operationProcessing.currency,
       };

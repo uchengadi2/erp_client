@@ -113,9 +113,9 @@ function ProjectsProjectsProjectsLayout(props) {
       spacing={2}
     >
       <Grid item container direction="column" sm={width}>
-        <Grid item className={classes.selectField}>
+        {/* <Grid item className={classes.selectField}>
           <ServiceOutletFilters />
-        </Grid>
+        </Grid> */}
         <Grid
           item
           container

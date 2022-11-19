@@ -570,7 +570,6 @@ function ProjectsProjectsProjectsEditForm(props) {
     formValues["currency"] = currency;
     formValues["status"] = status;
     formValues["projectManager"] = projectManager;
-    formValues["serviceOutlet"] = serviceOutlet;
 
     if (formValues) {
       const editForm = async () => {
@@ -637,14 +636,14 @@ function ProjectsProjectsProjectsEditForm(props) {
             <Typography variant="subtitle1"> Update Project</Typography>
           </FormLabel>
         </Grid>
-        <Field
+        {/* <Field
           label=""
           id="serviceOutlet"
           name="serviceOutlet"
           type="text"
           component={renderServiceOutletField}
           style={{ marginTop: 10 }}
-        />
+        /> */}
         <Grid container="row">
           <Grid item style={{ width: "52%" }}>
             <Field

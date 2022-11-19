@@ -568,12 +568,11 @@ function ProjectsProjectsProjectsCreateForm(props) {
     formValues["createdBy"] = props.userId;
     formValues["currency"] = currency;
     formValues["status"] = status;
-    formValues["serviceOutlet"] = serviceOutlet;
     formValues["projectManager"] = projectManager;
     formValues["remainingBudgetedAmount"] = formValues["totalBudget"];
     if (!formValues["refNumber"]) {
       formValues["refNumber"] =
-        "PJ" + "-" + Math.floor(Math.random() * 1000000) + "-" + "PRO";
+        "PJ" + "-" + Math.floor(Math.random() * 100000000) + "-" + "PRO";
     }
 
     if (formValues) {
@@ -633,14 +632,14 @@ function ProjectsProjectsProjectsCreateForm(props) {
             <Typography variant="subtitle1"> Create Project</Typography>
           </FormLabel>
         </Grid>
-        <Field
+        {/* <Field
           label=""
           id="serviceOutlet"
           name="serviceOutlet"
           type="text"
           component={renderServiceOutletField}
           style={{ marginTop: 10 }}
-        />
+        /> */}
         <Grid container="row">
           <Grid item style={{ width: "52%" }}>
             <Field

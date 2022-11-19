@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import history from "../../../../history";
 
 import OperationsOperationsOperationsLayout from "./OperationsOperationsOperationsLayout";
+import OperationsOperationResourcesLayout from "./OperationsOperationResourcesLayout";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -100,10 +101,21 @@ function OperationsOperationLayout({ token }) {
             history.push(`/operations/operations/operations`);
           }}
         />
+        <Tab
+          label="Resources"
+          {...a11yProps(0)}
+          onClick={(event) => {
+            event.preventDefault();
+            history.push(`/operations/operations/resources`);
+          }}
+        />
       </Tabs>
 
       <TabPanel value={value} index={0}>
         <OperationsOperationsOperationsLayout token={token} />
+      </TabPanel>
+      <TabPanel value={value} index={1}>
+        <OperationsOperationResourcesLayout token={token} />
       </TabPanel>
     </div>
   );

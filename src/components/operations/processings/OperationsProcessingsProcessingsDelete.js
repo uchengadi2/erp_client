@@ -22,7 +22,7 @@ class OperationsProcessingsProcessingsDelete extends React.Component {
 
     const handleNoDelete = () => {
       this.props.handleDialogOpenStatus();
-      history.push("/operations/operations/processings");
+      history.push("/operations/operations/processes");
     };
 
     return (
@@ -51,8 +51,8 @@ class OperationsProcessingsProcessingsDelete extends React.Component {
             </Button>,
           ]}
         >
-          <AlertTitle>Delete Processing?</AlertTitle>
-          Are you sure you want to delete this processing?
+          <AlertTitle>Delete Process?</AlertTitle>
+          Are you sure you want to delete this process?
         </Alert>
       </>
     );

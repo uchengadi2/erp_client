@@ -93,11 +93,11 @@ function OperationsProcessingLayout({ token }) {
         className={classes.tabs}
       >
         <Tab
-          label="Processing"
+          label="Processes"
           {...a11yProps(0)}
           onClick={(event) => {
             event.preventDefault();
-            history.push(`/operations/processings/processings`);
+            history.push(`/operations/processes`);
           }}
         />
       </Tabs>

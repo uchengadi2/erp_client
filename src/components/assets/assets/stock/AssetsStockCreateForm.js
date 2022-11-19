@@ -1250,7 +1250,6 @@ function AssetsStockCreateForm(props) {
     fetchData().catch(console.error);
   }, [glSubLedger]);
 
-
   //fetch asset types
   useEffect(() => {
     const fetchData = async () => {
@@ -2680,7 +2679,6 @@ function AssetsStockCreateForm(props) {
     ) {
       formValues["quantity"] = remainingQuantityInBatch;
     }
-
 
     if (formValues) {
       const createForm = async () => {

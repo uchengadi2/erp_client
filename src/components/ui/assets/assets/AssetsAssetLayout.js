@@ -11,6 +11,7 @@ import AssetsAssetStockLayout from "./AssetsAssetStockLayout";
 import AssetsAssetsOtherAssetsLayout from "./AssetsAssetsOtherAssetsLayout";
 import AssetsSetsLayout from "./AssetsSetsLayout";
 import AssetSetBatchesLayout from "./AssetSetBatchesLayout";
+import AssetInventoryLayout from "./AssetInventoryLayout";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -95,11 +96,19 @@ function AssetsAssetLayout({ token, userId }) {
         className={classes.tabs}
       >
         <Tab
-          label="Stocks &  Inventory"
+          label="Sets"
           {...a11yProps(0)}
           onClick={(event) => {
             event.preventDefault();
-            history.push(`/assets/assets/stocks`);
+            history.push(`/assets/assets/sets`);
+          }}
+        />
+        <Tab
+          label="Batches"
+          {...a11yProps(0)}
+          onClick={(event) => {
+            event.preventDefault();
+            history.push(`/assets/assets/batches`);
           }}
         />
         {/* <Tab
@@ -120,34 +129,48 @@ function AssetsAssetLayout({ token, userId }) {
           // }}
         />
         <Tab
-          label="Sets"
+          label="Stocks"
           {...a11yProps(0)}
           onClick={(event) => {
             event.preventDefault();
-            history.push(`/assets/assets/sets`);
+            history.push(`/assets/assets/stocks`);
           }}
         />
+
         <Tab
-          label="Batches"
+          label="=========================================="
+          {...a11yProps(0)}
+          disabled={true}
+          // onClick={(event) => {
+          //   event.preventDefault();
+          //   history.push(`/assets/assets/stocks`);
+          // }}
+        />
+        <Tab
+          label="Inventories"
           {...a11yProps(0)}
           onClick={(event) => {
             event.preventDefault();
-            history.push(`/assets/assets/batches`);
+            history.push(`/assets/assets/inventories`);
           }}
         />
       </Tabs>
-
       <TabPanel value={value} index={0}>
-        <AssetsAssetStockLayout token={token} userId={userId} />
+        <AssetsSetsLayout token={token} userId={userId} />
+      </TabPanel>
+      <TabPanel value={value} index={1}>
+        <AssetSetBatchesLayout token={token} userId={userId} />
       </TabPanel>
       {/* <TabPanel value={value} index={1}>
         <AssetsAssetsOtherAssetsLayout token={token} userId={userId} />
       </TabPanel> */}
-      <TabPanel value={value} index={2}>
-        <AssetsSetsLayout token={token} userId={userId} />
-      </TabPanel>
+
       <TabPanel value={value} index={3}>
-        <AssetSetBatchesLayout token={token} userId={userId} />
+        <AssetsAssetStockLayout token={token} userId={userId} />
+      </TabPanel>
+
+      <TabPanel value={value} index={5}>
+        <AssetInventoryLayout token={token} userId={userId} />
       </TabPanel>
     </div>
   );

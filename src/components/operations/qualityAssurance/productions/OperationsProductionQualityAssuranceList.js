@@ -238,11 +238,33 @@ class OperationsProductionQualityAssuranceList extends React.Component {
           qualityAssuranceDate:
             operationProductionQualityAssurance.qualityAssuranceDate,
           output: operationProductionQualityAssurance.output,
-          qualityAssuranceCost:
-            operationProductionQualityAssurance.qualityAssuranceCost,
-          currency: operationProductionQualityAssurance.currency,
+          extraQualityAssuranceCost:
+            operationProductionQualityAssurance.extraQualityAssuranceCost,
+          extraQualityAssuranceCostCurrency:
+            operationProductionQualityAssurance.extraQualityAssuranceCostCurrency,
           dateLastModified:
             operationProductionQualityAssurance.dateLastModified,
+          processingType: operationProductionQualityAssurance.processingType,
+          process: operationProductionQualityAssurance.process,
+          inventoryType: operationProductionQualityAssurance.inventoryType,
+          inventory: operationProductionQualityAssurance.inventory,
+          availableInventoryQuantity:
+            operationProductionQualityAssurance.availableInventoryQuantity,
+          availableInventoryUnit:
+            operationProductionQualityAssurance.availableInventoryUnit,
+          inventoryCostPerUnit:
+            operationProductionQualityAssurance.inventoryCostPerUnit,
+          inventoryQuantityAllocated:
+            operationProductionQualityAssurance.inventoryQuantityAllocated,
+          inventoryUnitCostCurrency:
+            operationProductionQualityAssurance.inventoryUnitCostCurrency,
+          allocatedInventoryUnit:
+            operationProductionQualityAssurance.allocatedInventoryUnit,
+          inventoryUnitCostCurrency:
+            operationProductionQualityAssurance.inventoryUnitCostCurrency,
+          processorType: operationProductionQualityAssurance.processorType,
+          processor: operationProductionQualityAssurance.processor,
+          supervisor: operationProductionQualityAssurance.supervisor,
         };
         rows.push(row);
       }

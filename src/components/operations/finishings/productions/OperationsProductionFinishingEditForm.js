@@ -27,8 +27,8 @@ const useStyles = makeStyles((theme) => ({
   submitButton: {
     borderRadius: 10,
     height: 40,
-    width: 200,
-    marginLeft: 100,
+    width: 240,
+    marginLeft: 80,
     marginTop: 20,
     marginBottom: 20,
     color: "white",
@@ -103,7 +103,7 @@ const renderReferenceNumberField = ({
   );
 };
 
-const renderFinishingCostField = ({
+const renderExtraFinishingCostField = ({
   input,
   label,
   meta: { touched, error, invalid },
@@ -114,11 +114,11 @@ const renderFinishingCostField = ({
   return (
     <TextField
       //error={touched && invalid}
-      helperText="Finishing Cost"
+      helperText="Extra Finishing Cost"
       variant="outlined"
       label={label}
       id={input.name}
-      defaultValue={input.value}
+      defaultValue={0}
       fullWidth
       //required
       type={type}
@@ -257,20 +257,155 @@ const renderOutputField = ({
   );
 };
 
+const renderInventoryAllocationUnitField = ({
+  input,
+  label,
+  meta: { touched, error, invalid },
+  type,
+  id,
+  ...custom
+}) => {
+  return (
+    <TextField
+      //error={touched && invalid}
+      helperText="Allocated Inventory Quantity"
+      variant="outlined"
+      label={label}
+      id={input.name}
+      defaultValue={input.value}
+      fullWidth
+      //required
+      type={type}
+      {...custom}
+      disabled
+      // {...input}
+      onChange={input.onChange}
+      InputProps={{
+        inputProps: {},
+        style: {
+          height: 38,
+        },
+      }}
+    />
+  );
+};
+
+const renderProcessorField = ({
+  input,
+  label,
+  meta: { touched, error, invalid },
+  type,
+  id,
+  ...custom
+}) => {
+  return (
+    <TextField
+      //error={touched && invalid}
+      helperText="Enter Processor"
+      variant="outlined"
+      label={label}
+      id={input.name}
+      defaultValue={input.value}
+      fullWidth
+      //required
+      type={type}
+      {...custom}
+      // {...input}
+      onChange={input.onChange}
+      InputProps={{
+        inputProps: {},
+        style: {
+          height: 38,
+        },
+      }}
+    />
+  );
+};
+
+const renderSupervisorField = ({
+  input,
+  label,
+  meta: { touched, error, invalid },
+  type,
+  id,
+  ...custom
+}) => {
+  return (
+    <TextField
+      //error={touched && invalid}
+      helperText="Enter Supervisor"
+      variant="outlined"
+      label={label}
+      id={input.name}
+      defaultValue={input.value}
+      fullWidth
+      //required
+      type={type}
+      {...custom}
+      // {...input}
+      onChange={input.onChange}
+      InputProps={{
+        inputProps: {},
+        style: {
+          height: 38,
+        },
+      }}
+    />
+  );
+};
+
 function OperationsProductionFinishingEditForm(props) {
   const { params } = props;
   const classes = useStyles();
+  const [project, setProject] = useState();
+  const [user, setUser] = useState();
   const [status, setStatus] = useState(params.status);
-  const [finishingType, setFinishingType] = useState(params.finishingType);
-  const [currency, setCurrency] = useState(params.currency);
+  const [processingType, setProcessingType] = useState(params.processingType);
+  const [process, setProcess] = useState(params.process);
+  const [maintenanceType, setMaintenanceType] = useState(params.finishingType);
+  const [currency, setCurrency] = useState(params.extraFinishingCostCurrency);
+  const [inventoryUnitCurrency, setInventoryUnitCurrency] = useState(
+    params.inventoryUnitCostCurrency
+  );
   const [serviceOutlet, setServiceOutlet] = useState(params.serviceOutlet);
+  const [inventoryType, setInventoryType] = useState(params.inventoryType);
+  const [inventory, setInventory] = useState(params.inventory);
+  const [task, setTask] = useState();
+  const [activity, setActivity] = useState();
   const [operation, setOperation] = useState(params.operation);
+  const [processorType, setProcessorType] = useState(params.processorType);
+  const [processingTypeList, setProcessingTypeList] = useState([]);
+  const [processList, setProcessList] = useState([]);
+  const [userList, setUserList] = useState([]);
   const [serviceOutletList, setServiceOutList] = useState([]);
+  const [glHeadList, setGlHeadList] = useState([]);
+  const [subGlHeadList, setSubGlHeadList] = useState([]);
   const [currencyList, setCurrencyList] = useState([]);
+  const [inventoryUnitCurrencyList, setInventoryUnitCurrencyList] = useState(
+    []
+  );
+  const [taskList, setTaskList] = useState([]);
+  const [activityList, setActivityList] = useState([]);
   const [operationList, setOperationList] = useState([]);
+  const [inventoryTypeList, setInventoryTypeList] = useState([]);
+  const [inventoryList, setInventoryList] = useState([]);
+  const [processorTypeList, setProcessorTypeList] = useState([]);
 
-  const [finishingTypeList, setFinishingTypeList] = useState([]);
+  const [maintenanceTypeList, setMaintenanceTypeList] = useState([]);
   const [loading, setLoading] = useState(false);
+
+  const [totalAvailableInventory, setTotalAvailableInventory] = useState(
+    params.availableInventoryQuantity
+  );
+  const [availableInventoryUnit, setAvailableInventoryUnit] = useState(
+    params.availableInventoryUnit
+  );
+  const [allocatedInventoryUnit, setAllocatedInventoryUnit] = useState(
+    params.allocatedInventoryUnit
+  );
+  const [inventoryCostPerUnit, setInventoryCostPerUnit] = useState(
+    params.inventoryCostPerUnit
+  );
 
   const dispatch = useDispatch();
 
@@ -310,7 +445,7 @@ function OperationsProductionFinishingEditForm(props) {
           name: `${item.name}`,
         });
       });
-      setFinishingTypeList(allData);
+      setMaintenanceTypeList(allData);
     };
 
     //call the function
@@ -342,6 +477,51 @@ function OperationsProductionFinishingEditForm(props) {
     fetchData().catch(console.error);
   }, [serviceOutlet]);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      let allData = [];
+      api.defaults.headers.common["Authorization"] = `Bearer ${props.token}`;
+      const response = await api.get("/operationprocessingtypes");
+      const workingData = response.data.data.data;
+      workingData.map((item) => {
+        allData.push({
+          id: item._id,
+          name: `${item.name}`,
+        });
+      });
+      setProcessingTypeList(allData);
+    };
+
+    //call the function
+
+    fetchData().catch(console.error);
+  }, [props]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      let allData = [];
+      api.defaults.headers.common["Authorization"] = `Bearer ${props.token}`;
+      const response = await api.get("/operationprocessings", {
+        params: {
+          operation: operation,
+          processingType: processingType,
+        },
+      });
+      const workingData = response.data.data.data;
+      workingData.map((item) => {
+        allData.push({
+          id: item._id,
+          name: `${item.label}`,
+        });
+      });
+      setProcessList(allData);
+    };
+
+    //call the function
+
+    fetchData().catch(console.error);
+  }, [processingType, operation]);
+
   //retrieve currencies
   useEffect(() => {
     const fetchData = async () => {
@@ -363,8 +543,110 @@ function OperationsProductionFinishingEditForm(props) {
     fetchData().catch(console.error);
   }, []);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      let allData = [];
+      api.defaults.headers.common["Authorization"] = `Bearer ${props.token}`;
+      const response = await api.get("/assetinventorytypes");
+      const workingData = response.data.data.data;
+      workingData.map((item) => {
+        allData.push({
+          id: item._id,
+          name: `${item.name}`,
+        });
+      });
+      setInventoryTypeList(allData);
+    };
+
+    //call the function
+
+    fetchData().catch(console.error);
+  }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      let allData = [];
+      api.defaults.headers.common["Authorization"] = `Bearer ${props.token}`;
+      const response = await api.get("/assetinventories", {
+        params: {
+          inventoryType: inventoryType,
+        },
+      });
+      const workingData = response.data.data.data;
+      workingData.map((item) => {
+        allData.push({
+          id: item._id,
+          name: `${item.sku}-${item.name}`,
+        });
+      });
+      setInventoryList(allData);
+    };
+
+    //call the function
+
+    fetchData().catch(console.error);
+  }, [inventoryType]);
+
+  //retrieve inventory unit cost currencies
+  useEffect(() => {
+    const fetchData = async () => {
+      let allData = [];
+      api.defaults.headers.common["Authorization"] = `Bearer ${props.token}`;
+      const response = await api.get("/currencies");
+      const workingData = response.data.data.data;
+      workingData.map((item) => {
+        allData.push({
+          id: item._id,
+          name: `${item.name}`,
+        });
+      });
+      setInventoryUnitCurrencyList(allData);
+    };
+
+    //call the function
+
+    fetchData().catch(console.error);
+  }, []);
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     let allData = [];
+  //     api.defaults.headers.common["Authorization"] = `Bearer ${props.token}`;
+  //     const response = await api.get(`/assetinventories/${inventory}`);
+  //     const item = response.data.data.data;
+  //     allData.push({
+  //       id: item._id,
+  //       name: `${item.sku}-${item.name}`,
+  //       remainingCapacity: item.remainingCapacity,
+  //       capacityUnit: item.capacityUnit,
+  //       costPerUnit: item.costPerUnit,
+  //       currency: item.currency,
+  //     });
+  //     setTotalAvailableInventory(allData[0].remainingCapacity);
+  //     setAvailableInventoryUnit(allData[0].capacityUnit);
+  //     setAllocatedInventoryUnit(allData[0].capacityUnit);
+  //     setInventoryCostPerUnit(allData[0].costPerUnit);
+  //     setInventoryUnitCurrency(allData[0].currency);
+  //     setCurrency(allData[0].currency);
+  //   };
+
+  //   //call the function
+
+  //   fetchData().catch(console.error);
+  // }, [inventory]);
+
   const handleOperationChange = (event) => {
     setOperation(event.target.value);
+    //     props.handleCountryChange(event.target.value);
+  };
+
+  const handleProcessingTypeChange = (event) => {
+    setProcessingType(event.target.value);
+    //     props.handleCountryChange(event.target.value);
+  };
+
+  const handleProcessChange = (event) => {
+    setProcess(event.target.value);
     //     props.handleCountryChange(event.target.value);
   };
 
@@ -373,8 +655,8 @@ function OperationsProductionFinishingEditForm(props) {
     //     props.handleCountryChange(event.target.value);
   };
 
-  const handleFinishingTypeChange = (event) => {
-    setFinishingType(event.target.value);
+  const handleMaintenanceTypeChange = (event) => {
+    setMaintenanceType(event.target.value);
     //     props.handleCountryChange(event.target.value);
   };
 
@@ -385,6 +667,24 @@ function OperationsProductionFinishingEditForm(props) {
 
   const handleCurrencyChange = (event) => {
     setCurrency(event.target.value);
+    //     props.handleCountryChange(event.target.value);
+  };
+
+  const handleInventoryTypeChange = (event) => {
+    setInventoryType(event.target.value);
+  };
+
+  const handleInventoryChange = (event) => {
+    setInventory(event.target.value);
+  };
+
+  const handleProcessorTypeChange = (event) => {
+    setProcessorType(event.target.value);
+    //     props.handleCountryChange(event.target.value);
+  };
+
+  const handleInventoryUnitCostCurrencyChange = (event) => {
+    setInventoryUnitCurrency(event.target.value);
     //     props.handleCountryChange(event.target.value);
   };
 
@@ -410,9 +710,9 @@ function OperationsProductionFinishingEditForm(props) {
     });
   };
 
-  //get the finishing type list
-  const renderFinishingTypeList = () => {
-    return finishingTypeList.map((item) => {
+  //get the processing type list
+  const renderMaintenanceTypeList = () => {
+    return maintenanceTypeList.map((item) => {
       return (
         <MenuItem key={item.id} value={item.id}>
           {item.name}
@@ -430,6 +730,160 @@ function OperationsProductionFinishingEditForm(props) {
         </MenuItem>
       );
     });
+  };
+
+  //get the processing type list
+  const renderProcessingTypeList = () => {
+    return processingTypeList.map((item) => {
+      return (
+        <MenuItem key={item.id} value={item.id}>
+          {item.name}
+        </MenuItem>
+      );
+    });
+  };
+
+  //get the process list
+  const renderProcessList = () => {
+    return processList.map((item) => {
+      return (
+        <MenuItem key={item.id} value={item.id}>
+          {item.name}
+        </MenuItem>
+      );
+    });
+  };
+
+  //get the inventory type list
+  const renderInventoryTypeList = () => {
+    return inventoryTypeList.map((item) => {
+      return (
+        <MenuItem key={item.id} value={item.id}>
+          {item.name}
+        </MenuItem>
+      );
+    });
+  };
+
+  //get the inventory list
+  const renderInventoryList = () => {
+    return inventoryList.map((item) => {
+      return (
+        <MenuItem key={item.id} value={item.id}>
+          {item.name}
+        </MenuItem>
+      );
+    });
+  };
+
+  //get the inventory unit currency list
+  const renderInventoryUnitCurrencyList = () => {
+    return inventoryUnitCurrencyList.map((item) => {
+      return (
+        <MenuItem key={item.id} value={item.id}>
+          {item.name}
+        </MenuItem>
+      );
+    });
+  };
+
+  const renderInventoryUnitCostCurrencyField = ({
+    input,
+    label,
+    meta: { touched, error, invalid },
+    type,
+    id,
+    ...custom
+  }) => {
+    return (
+      <Box>
+        <FormControl variant="outlined">
+          {/* <InputLabel id="vendor_city">City</InputLabel> */}
+
+          <Select
+            labelId="inventoryUnitCurrency"
+            id="inventoryUnitCurrency"
+            //defaultValue={schemeType}
+            value={inventoryUnitCurrency}
+            // onChange={props.handleCountryChange}
+            onChange={handleInventoryUnitCostCurrencyChange}
+            label="Inventory Unit Currency"
+            style={{ width: 210, marginTop: 10, marginLeft: 0, height: 38 }}
+            //{...input}
+            readOnly
+          >
+            {renderInventoryUnitCurrencyList()}
+          </Select>
+          <FormHelperText style={{ marginLeft: 20 }}>Currency</FormHelperText>
+        </FormControl>
+      </Box>
+    );
+  };
+
+  const renderInventoryTypeField = ({
+    input,
+    label,
+    meta: { touched, error, invalid },
+    type,
+    id,
+    ...custom
+  }) => {
+    return (
+      <Box>
+        <FormControl variant="outlined">
+          {/* <InputLabel id="vendor_city">City</InputLabel> */}
+
+          <Select
+            labelId="inventoryType"
+            id="inventoryType"
+            //defaultValue={schemeType}
+            value={inventoryType}
+            // onChange={props.handleCountryChange}
+            onChange={handleInventoryTypeChange}
+            label="Inventory Type"
+            style={{ width: 400, marginTop: 10, marginLeft: 0, height: 38 }}
+            readOnly
+          >
+            {renderInventoryTypeList()}
+          </Select>
+          <FormHelperText style={{ marginLeft: 20 }}>
+            Inventory Type
+          </FormHelperText>
+        </FormControl>
+      </Box>
+    );
+  };
+
+  const renderInventoryField = ({
+    input,
+    label,
+    meta: { touched, error, invalid },
+    type,
+    id,
+    ...custom
+  }) => {
+    return (
+      <Box>
+        <FormControl variant="outlined">
+          {/* <InputLabel id="vendor_city">City</InputLabel> */}
+
+          <Select
+            labelId="inventory"
+            id="inventory"
+            //defaultValue={schemeType}
+            value={inventory}
+            // onChange={props.handleCountryChange}
+            onChange={handleInventoryChange}
+            label="inventory"
+            style={{ width: 400, marginTop: 10, marginLeft: 0, height: 38 }}
+            readOnly
+          >
+            {renderInventoryList()}
+          </Select>
+          <FormHelperText style={{ marginLeft: 20 }}>Inventory</FormHelperText>
+        </FormControl>
+      </Box>
+    );
   };
 
   const renderServiceOutletField = ({
@@ -452,13 +906,13 @@ function OperationsProductionFinishingEditForm(props) {
             value={serviceOutlet}
             // onChange={props.handleCountryChange}
             onChange={handleServiceOutletChange}
-            label="Service Outlet"
+            label="Project Manager"
             style={{ width: 400, marginTop: 10, height: 38 }}
           >
             {renderServiceOutletList()}
           </Select>
           <FormHelperText style={{ marginLeft: 20 }}>
-            Select Service Outlet
+            Service Outlet
           </FormHelperText>
         </FormControl>
       </Box>
@@ -497,6 +951,72 @@ function OperationsProductionFinishingEditForm(props) {
     );
   };
 
+  const renderProcessingTypeField = ({
+    input,
+    label,
+    meta: { touched, error, invalid },
+    type,
+    id,
+    ...custom
+  }) => {
+    return (
+      <Box>
+        <FormControl variant="outlined">
+          {/* <InputLabel id="vendor_city">City</InputLabel> */}
+
+          <Select
+            labelId="processingType"
+            id="processingType"
+            //defaultValue={schemeType}
+            value={processingType}
+            // onChange={props.handleCountryChange}
+            onChange={handleProcessingTypeChange}
+            label="Processing Type"
+            style={{ width: 400, marginTop: 5, marginLeft: 0, height: 38 }}
+            //{...input}
+          >
+            {renderProcessingTypeList()}
+          </Select>
+          <FormHelperText style={{ marginLeft: 20 }}>
+            Processing Type
+          </FormHelperText>
+        </FormControl>
+      </Box>
+    );
+  };
+
+  const renderProcessField = ({
+    input,
+    label,
+    meta: { touched, error, invalid },
+    type,
+    id,
+    ...custom
+  }) => {
+    return (
+      <Box>
+        <FormControl variant="outlined">
+          {/* <InputLabel id="vendor_city">City</InputLabel> */}
+
+          <Select
+            labelId="process"
+            id="process"
+            //defaultValue={schemeType}
+            value={process}
+            // onChange={props.handleCountryChange}
+            onChange={handleProcessChange}
+            label="Process"
+            style={{ width: 400, marginTop: 5, marginLeft: 0, height: 38 }}
+            //{...input}
+          >
+            {renderProcessList()}
+          </Select>
+          <FormHelperText style={{ marginLeft: 20 }}>Process</FormHelperText>
+        </FormControl>
+      </Box>
+    );
+  };
+
   const renderFinishingTypeField = ({
     input,
     label,
@@ -511,17 +1031,17 @@ function OperationsProductionFinishingEditForm(props) {
           {/* <InputLabel id="vendor_city">City</InputLabel> */}
 
           <Select
-            labelId="finishingType"
-            id="finishingType"
+            labelId="maintenanceType"
+            id="maintenanceType"
             //defaultValue={schemeType}
-            value={finishingType}
+            value={maintenanceType}
             // onChange={props.handleCountryChange}
-            onChange={handleFinishingTypeChange}
-            label="Finishing Type"
+            onChange={handleMaintenanceTypeChange}
+            label="Maintenance Type"
             style={{ width: 400, marginTop: 5, marginLeft: 0, height: 38 }}
             //{...input}
           >
-            {renderFinishingTypeList()}
+            {renderMaintenanceTypeList()}
           </Select>
           <FormHelperText style={{ marginLeft: 20 }}>
             Finishing Type
@@ -531,7 +1051,7 @@ function OperationsProductionFinishingEditForm(props) {
     );
   };
 
-  const renderCurrencyField = ({
+  const renderAllocatedUnitCostCurrencyField = ({
     input,
     label,
     meta: { touched, error, invalid },
@@ -552,8 +1072,9 @@ function OperationsProductionFinishingEditForm(props) {
             // onChange={props.handleCountryChange}
             onChange={handleCurrencyChange}
             label="Currency"
-            style={{ width: 180, marginTop: 5, marginLeft: 0, height: 38 }}
+            style={{ width: 210, marginTop: 10, marginLeft: 0, height: 38 }}
             //{...input}
+            readOnly
           >
             {renderCurrencyList()}
           </Select>
@@ -583,7 +1104,7 @@ function OperationsProductionFinishingEditForm(props) {
             value={status}
             // onChange={props.handleCountryChange}
             onChange={handleStatusChange}
-            label="Processing Status"
+            label="Maintenance Status"
             style={{ width: 400, marginTop: 5, marginLeft: 0, height: 38 }}
           >
             <MenuItem value="in-progress">In Progress</MenuItem>
@@ -596,6 +1117,174 @@ function OperationsProductionFinishingEditForm(props) {
           </FormHelperText>
         </FormControl>
       </Box>
+    );
+  };
+
+  const renderProcessorTypeField = ({
+    input,
+    label,
+    meta: { touched, error, invalid },
+    type,
+    id,
+    ...custom
+  }) => {
+    return (
+      <Box>
+        <FormControl variant="outlined">
+          {/* <InputLabel id="vendor_city">City</InputLabel> */}
+
+          <Select
+            labelId="processorType"
+            id="processorType"
+            //defaultValue={schemeType}
+            value={processorType}
+            // onChange={props.handleCountryChange}
+            onChange={handleProcessorTypeChange}
+            label="Processor Type"
+            style={{ width: 200, marginTop: 10, marginLeft: 0, height: 38 }}
+          >
+            <MenuItem value="human">Human</MenuItem>
+            <MenuItem value="machine">Machine</MenuItem>
+          </Select>
+          <FormHelperText style={{ marginLeft: 20 }}>
+            Processor Type
+          </FormHelperText>
+        </FormControl>
+      </Box>
+    );
+  };
+
+  const renderInventoryRemainingCapacityField = ({
+    input,
+    label,
+    meta: { touched, error, invalid },
+    type,
+    id,
+    ...custom
+  }) => {
+    return (
+      <TextField
+        //error={touched && invalid}
+        helperText="Quantity of Available Inventory"
+        variant="outlined"
+        label={label}
+        id={input.name}
+        defaultValue={totalAvailableInventory}
+        fullWidth
+        //required
+        type={type}
+        {...custom}
+        disabled
+        // {...input}
+        onChange={input.onChange}
+        InputProps={{
+          inputProps: {},
+          style: {
+            height: 38,
+          },
+        }}
+      />
+    );
+  };
+
+  const renderInventoryUnitCostField = ({
+    input,
+    label,
+    meta: { touched, error, invalid },
+    type,
+    id,
+    ...custom
+  }) => {
+    return (
+      <TextField
+        //error={touched && invalid}
+        helperText="Inventory Cost Per Unit"
+        variant="outlined"
+        label={label}
+        id={input.name}
+        defaultValue={input.value}
+        fullWidth
+        //required
+        type={type}
+        {...custom}
+        disabled
+        // {...input}
+        onChange={input.onChange}
+        InputProps={{
+          inputProps: {},
+          style: {
+            height: 38,
+          },
+        }}
+      />
+    );
+  };
+
+  const renderAvailableInventoryUnitField = ({
+    input,
+    label,
+    meta: { touched, error, invalid },
+    type,
+    id,
+    ...custom
+  }) => {
+    return (
+      <TextField
+        //error={touched && invalid}
+        helperText="Unit"
+        variant="outlined"
+        label={label}
+        id={input.name}
+        //defaultValue={input.value}
+        fullWidth
+        //required
+        type={type}
+        disabled
+        {...custom}
+        defaultValue={availableInventoryUnit}
+        // {...input}
+        onChange={input.onChange}
+        InputProps={{
+          inputProps: {},
+          style: {
+            height: 38,
+          },
+        }}
+      />
+    );
+  };
+
+  const renderAllocatedInventoryUnitField = ({
+    input,
+    label,
+    meta: { touched, error, invalid },
+    type,
+    id,
+    ...custom
+  }) => {
+    return (
+      <TextField
+        //error={touched && invalid}
+        helperText="Unit"
+        variant="outlined"
+        label={label}
+        id={input.name}
+        //defaultValue={input.value}
+        fullWidth
+        //required
+        type={type}
+        {...custom}
+        disabled
+        defaultValue={allocatedInventoryUnit}
+        // {...input}
+        onChange={input.onChange}
+        InputProps={{
+          inputProps: {},
+          style: {
+            height: 38,
+          },
+        }}
+      />
     );
   };
 
@@ -612,11 +1301,21 @@ function OperationsProductionFinishingEditForm(props) {
     formValues["serviceOutlet"] = serviceOutlet;
     formValues["status"] = status;
     formValues["operation"] = operation;
-    formValues["finishingType"] = finishingType;
-    formValues["currency"] = currency;
+    formValues["finishingType"] = maintenanceType;
+    formValues["extraFinishingCostCurrency"] = currency;
+    formValues["processingType"] = processingType;
+    formValues["process"] = process;
+    formValues["inventoryType"] = inventoryType;
+    formValues["inventory"] = inventory;
+    formValues["processorType"] = processorType;
+    formValues["availableInventoryQuantity"] = totalAvailableInventory;
+    formValues["availableInventoryUnit"] = availableInventoryUnit;
+    formValues["inventoryCostPerUnit"] = inventoryCostPerUnit;
+    formValues["inventoryUnitCostCurrency"] = inventoryUnitCurrency;
+    formValues["allocatedInventoryUnit"] = availableInventoryUnit;
 
     if (formValues) {
-      const editForm = async () => {
+      const createForm = async () => {
         api.defaults.headers.common["Authorization"] = `Bearer ${props.token}`;
         const response = await api.patch(
           `/operationproductionfinishings/${params.id}`,
@@ -640,7 +1339,7 @@ function OperationsProductionFinishingEditForm(props) {
           );
         }
       };
-      editForm().catch((err) => {
+      createForm().catch((err) => {
         props.handleFailedSnackbar();
         console.log("err:", err.message);
       });
@@ -649,7 +1348,7 @@ function OperationsProductionFinishingEditForm(props) {
     }
   };
 
-  const dateOfFinishing = params.finishingDate
+  const dateOfMaintenance = params.finishingDate
     ? new Date(params.finishingDate).toISOString().slice(0, 10)
     : "";
 
@@ -698,6 +1397,22 @@ function OperationsProductionFinishingEditForm(props) {
         />
         <Field
           label=""
+          id="processingType"
+          name="processingType"
+          type="text"
+          component={renderProcessingTypeField}
+          style={{ marginTop: 10 }}
+        />
+        <Field
+          label=""
+          id="process"
+          name="process"
+          type="text"
+          component={renderProcessField}
+          style={{ marginTop: 10 }}
+        />
+        <Field
+          label=""
           id="finishingType"
           name="finishingType"
           type="text"
@@ -714,6 +1429,120 @@ function OperationsProductionFinishingEditForm(props) {
           component={renderLabelField}
           style={{ marginTop: 10 }}
         />
+        <Field
+          label=""
+          id="inventoryType"
+          name="inventoryType"
+          type="text"
+          component={renderInventoryTypeField}
+          style={{ marginTop: 10 }}
+        />
+
+        <Field
+          label=""
+          id="inventory"
+          name="inventory"
+          type="text"
+          component={renderInventoryField}
+          style={{ marginTop: 10 }}
+        />
+
+        <Grid container="row">
+          <Grid item style={{ width: "52%" }}>
+            <Field
+              label=""
+              id="availableInventoryQuantity"
+              name="availableInventoryQuantity"
+              default={totalAvailableInventory}
+              type="number"
+              component={renderInventoryRemainingCapacityField}
+              style={{ marginTop: 10 }}
+            />
+          </Grid>
+          <Grid item style={{ width: "45%", marginLeft: 10 }}>
+            <Field
+              label=""
+              id="availableInventoryUnit"
+              name="availableInventoryUnit"
+              default={availableInventoryUnit}
+              type="text"
+              component={renderAvailableInventoryUnitField}
+              style={{ marginTop: 10 }}
+            />
+          </Grid>
+        </Grid>
+        <Grid container="row">
+          <Grid item style={{ width: "45%" }}>
+            <Field
+              label=""
+              id="inventoryCostPerUnit"
+              name="inventoryCostPerUnit"
+              defaultValue={inventoryCostPerUnit}
+              type="number"
+              component={renderInventoryUnitCostField}
+              style={{ marginTop: 10 }}
+            />
+          </Grid>
+          <Grid item style={{ width: "52%", marginLeft: 10 }}>
+            <Field
+              label=""
+              id="inventoryUnitCostCurrency"
+              name="inventoryUnitCostCurrency"
+              defaultValue={currency}
+              type="text"
+              component={renderAllocatedUnitCostCurrencyField}
+              style={{ marginTop: 10 }}
+            />
+          </Grid>
+        </Grid>
+        <Grid container="row">
+          <Grid item style={{ width: "52%" }}>
+            <Field
+              label=""
+              id="inventoryQuantityAllocated"
+              name="inventoryQuantityAllocated"
+              defaultValue={params.inventoryQuantityAllocated}
+              type="number"
+              component={renderInventoryAllocationUnitField}
+              style={{ marginTop: 10 }}
+            />
+          </Grid>
+          <Grid item style={{ width: "45%", marginLeft: 10 }}>
+            <Field
+              label=""
+              id="allocatedInventoryUnit"
+              name="allocatedInventoryUnit"
+              defaultValue={allocatedInventoryUnit}
+              type="text"
+              component={renderAllocatedInventoryUnitField}
+              style={{ marginTop: 10 }}
+            />
+          </Grid>
+        </Grid>
+        <Grid container="row">
+          <Grid item style={{ width: "45%", marginLeft: 0 }}>
+            <Field
+              label=""
+              id="extraFinishingCost"
+              name="extraFinishingCost"
+              defaultValue={params.extraFinishingCost}
+              type="number"
+              component={renderExtraFinishingCostField}
+              style={{ marginTop: 10 }}
+            />
+          </Grid>
+          <Grid item style={{ width: "52%", marginLeft: 10 }}>
+            <Field
+              label=""
+              id="extraFinishingCostCurrency"
+              name="extraFinishingCostCurrency"
+              defaultValue={params.extraFinishingCostCurrency}
+              type="text"
+              component={renderInventoryUnitCostCurrencyField}
+              style={{ marginTop: 5 }}
+            />
+          </Grid>
+        </Grid>
 
         <Grid container="row">
           <Grid item style={{ width: "45%" }}>
@@ -732,7 +1561,7 @@ function OperationsProductionFinishingEditForm(props) {
               label=""
               id="finishingDate"
               name="finishingDate"
-              defaultValue={dateOfFinishing}
+              defaultValue={dateOfMaintenance}
               type="date"
               component={renderFinishingDateField}
               style={{ marginTop: 10 }}
@@ -744,34 +1573,44 @@ function OperationsProductionFinishingEditForm(props) {
           label=""
           id="status"
           name="status"
-          type="date"
+          type="text"
           component={renderStatusField}
           style={{ marginTop: 10 }}
         />
 
         <Grid container="row">
-          <Grid item style={{ width: "45%" }}>
+          <Grid item style={{ width: "52%" }}>
             <Field
               label=""
-              id="currency"
-              name="currency"
+              id="processorType"
+              name="processorType"
               type="text"
-              component={renderCurrencyField}
-              style={{ marginTop: 5 }}
+              component={renderProcessorTypeField}
+              style={{ marginTop: 10 }}
             />
           </Grid>
-          <Grid item style={{ width: "52%", marginLeft: 10 }}>
+          <Grid item style={{ width: "45%", marginLeft: 10 }}>
             <Field
               label=""
-              id="finishingCost"
-              name="finishingCost"
-              defaultValue={params.finishingCost}
-              type="number"
-              component={renderFinishingCostField}
-              style={{ marginTop: 5 }}
+              id="processor"
+              name="processor"
+              defaultValue={params.processor}
+              type="text"
+              component={renderProcessorField}
+              style={{ marginTop: 10 }}
             />
           </Grid>
         </Grid>
+
+        <Field
+          label=""
+          id="supervisor"
+          name="supervisor"
+          defaultValue={params.supervisor}
+          type="text"
+          component={renderSupervisorField}
+          style={{ marginTop: 10 }}
+        />
 
         <Field
           label=""

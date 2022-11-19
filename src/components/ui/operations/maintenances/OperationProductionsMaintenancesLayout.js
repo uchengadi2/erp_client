@@ -113,9 +113,9 @@ function OperationProductionsMaintenancesLayout(props) {
       spacing={2}
     >
       <Grid item container direction="column" sm={width}>
-        <Grid item className={classes.selectField}>
+        {/* <Grid item className={classes.selectField}>
           <ServiceOutletsAndTransactionTypesFilter />
-        </Grid>
+        </Grid> */}
         <Grid
           item
           container

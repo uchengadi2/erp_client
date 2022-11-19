@@ -99,7 +99,7 @@ function AssetStoresLayout({ token, userId }) {
         className={classes.tabs}
       >
         <Tab
-          label="Stores"
+          label="Stores & Habitations"
           {...a11yProps(0)}
           onClick={(event) => {
             event.preventDefault();

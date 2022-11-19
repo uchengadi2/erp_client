@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: 10,
     height: 40,
     width: 230,
-    marginLeft: 100,
+    marginLeft: 80,
     marginTop: 20,
     marginBottom: 20,
     color: "white",
@@ -146,7 +146,7 @@ const renderProcessingDateField = ({
   return (
     <TextField
       //error={touched && invalid}
-      helperText="Processing Date"
+      helperText="Processing Initiation Date"
       variant="outlined"
       label={label}
       id={input.name}
@@ -327,7 +327,6 @@ function OperationsProcessingsProcessingsEditForm(props) {
   const [project, setProject] = useState(params.project);
   const [user, setUser] = useState();
   const [status, setStatus] = useState(params.status);
-  const [processorType, setProcessorType] = useState(params.processorType);
   const [processingType, setProcessingType] = useState(params.processingType);
   const [serviceOutlet, setServiceOutlet] = useState(params.serviceOutlet);
   const [currency, setCurrency] = useState(params.currency);
@@ -352,9 +351,7 @@ function OperationsProcessingsProcessingsEditForm(props) {
     const fetchData = async () => {
       let allData = [];
       api.defaults.headers.common["Authorization"] = `Bearer ${props.token}`;
-      const response = await api.get("/projects", {
-        params: { serviceOutlet: serviceOutlet },
-      });
+      const response = await api.get("/projects");
       const workingData = response.data.data.data;
       workingData.map((item) => {
         allData.push({
@@ -368,7 +365,7 @@ function OperationsProcessingsProcessingsEditForm(props) {
     //call the function
 
     fetchData().catch(console.error);
-  }, [serviceOutlet]);
+  }, []);
 
   //service outlet
 
@@ -532,11 +529,6 @@ function OperationsProcessingsProcessingsEditForm(props) {
 
   const handleProcessingTypeChange = (event) => {
     setProcessingType(event.target.value);
-    //     props.handleCountryChange(event.target.value);
-  };
-
-  const handleProcessorTypeChange = (event) => {
-    setProcessorType(event.target.value);
     //     props.handleCountryChange(event.target.value);
   };
 
@@ -862,40 +854,6 @@ function OperationsProcessingsProcessingsEditForm(props) {
     );
   };
 
-  const renderProcessorTypeField = ({
-    input,
-    label,
-    meta: { touched, error, invalid },
-    type,
-    id,
-    ...custom
-  }) => {
-    return (
-      <Box>
-        <FormControl variant="outlined">
-          {/* <InputLabel id="vendor_city">City</InputLabel> */}
-
-          <Select
-            labelId="processorType"
-            id="processorType"
-            //defaultValue={schemeType}
-            value={processorType}
-            // onChange={props.handleCountryChange}
-            onChange={handleProcessorTypeChange}
-            label="Processor Type"
-            style={{ width: 190, marginTop: 5, marginLeft: 0, height: 38 }}
-          >
-            <MenuItem value="human">Human</MenuItem>
-            <MenuItem value="machine">Machine</MenuItem>
-          </Select>
-          <FormHelperText style={{ marginLeft: 20 }}>
-            Processor Type
-          </FormHelperText>
-        </FormControl>
-      </Box>
-    );
-  };
-
   const renderCurrencyField = ({
     input,
     label,
@@ -929,7 +887,7 @@ function OperationsProcessingsProcessingsEditForm(props) {
   };
 
   const buttonContent = () => {
-    return <React.Fragment> Update Processing</React.Fragment>;
+    return <React.Fragment> Update Process</React.Fragment>;
   };
 
   const onSubmit = (formValues) => {
@@ -945,13 +903,12 @@ function OperationsProcessingsProcessingsEditForm(props) {
     formValues["task"] = task;
     formValues["activity"] = activity;
     formValues["processingType"] = processingType;
-    formValues["processorType"] = processorType;
     formValues["currency"] = currency;
 
-    if (!formValues["refNumber"]) {
-      formValues["refNumber"] =
-        "OP" + "-" + Math.floor(Math.random() * 1000000) + "-" + "OPS";
-    }
+    // if (!formValues["refNumber"]) {
+    //   formValues["refNumber"] =
+    //     "OP" + "-" + Math.floor(Math.random() * 1000000) + "-" + "OPS";
+    // }
 
     if (formValues) {
       const editForm = async () => {
@@ -1023,7 +980,7 @@ function OperationsProcessingsProcessingsEditForm(props) {
             style={{ color: "blue", fontSize: "1.5em" }}
             component="legend"
           >
-            <Typography variant="subtitle1">Processing</Typography>
+            <Typography variant="subtitle1">Edit Process</Typography>
           </FormLabel>
         </Grid>
         <Field
@@ -1115,30 +1072,6 @@ function OperationsProcessingsProcessingsEditForm(props) {
           <Grid item style={{ width: "52%", marginLeft: 10 }}>
             <Field
               label=""
-              id="processor"
-              name="processor"
-              defaultValue={params.processor}
-              type="text"
-              component={renderProcessorField}
-              style={{ marginTop: 5 }}
-            />
-          </Grid>
-        </Grid>
-
-        <Grid container="row">
-          <Grid item style={{ width: "45%" }}>
-            <Field
-              label=""
-              id="processorType"
-              name="processorType"
-              type="text"
-              component={renderProcessorTypeField}
-              style={{ marginTop: 10 }}
-            />
-          </Grid>
-          <Grid item style={{ width: "52%", marginLeft: 10 }}>
-            <Field
-              label=""
               id="status"
               name="status"
               type="date"
@@ -1147,49 +1080,7 @@ function OperationsProcessingsProcessingsEditForm(props) {
             />
           </Grid>
         </Grid>
-        {/* <Grid container="row">
-          <Grid item style={{ width: "45%" }}>
-            <Field
-              label=""
-              id="currency"
-              name="currency"
-              type="text"
-              component={renderCurrencyField}
-              style={{ marginTop: 5 }}
-            />
-          </Grid>
-          <Grid item style={{ width: "52%", marginLeft: 10 }}>
-            <Field
-              label=""
-              id="processingCost"
-              name="processingCost"
-              defaultValue={params.processingCost}
-              type="number"
-              component={renderProcessingCostField}
-              style={{ marginTop: 5 }}
-            />
-          </Grid>
-        </Grid> */}
 
-        <Field
-          label=""
-          id="supervisor"
-          name="supervisor"
-          defaultValue={params.supervisor}
-          type="text"
-          component={renderSupervisorField}
-          style={{ marginTop: 10 }}
-        />
-
-        <Field
-          label=""
-          id="output"
-          name="output"
-          defaultValue={params.output}
-          type="text"
-          component={renderOutputField}
-          style={{ marginTop: 10 }}
-        />
         <Field
           label=""
           id="comment"

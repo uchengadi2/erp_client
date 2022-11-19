@@ -111,7 +111,6 @@ function App() {
     //setBecomePartnerOpen(true);
   };
 
-
   if (!token) {
     return <UserLogin setToken={setToken} setUserId={setUserId} />;
   }
@@ -220,7 +219,7 @@ function App() {
             <Route path="/operations/utilities">
               <OperationsUtilityLayout token={token} userId={userId} />
             </Route>
-            <Route path="/operations/processings">
+            <Route path="/operations/processes">
               <OperationsProcessingLayout token={token} userId={userId} />
             </Route>
             <Route path="/operations/maintenances">

@@ -10,18 +10,18 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
 import history from "../../../../history";
-import ServiceOutletAndProjectsFilters from "../../headerFilters/ServiceOutletAndProjectsFilters";
-import ProjectsProjectsResourcesList from "../../../projects/projects/resources/ProjectsProjectsResourcesList";
-import ProjectsProjectsResourceCreateForm from "../../../projects/projects/resources/ProjectsProjectsResourceCreateForm";
+
+import AssetInventoryCreateForm from "../../../assets/utilities/inventoryType/AssetInventoryTypeCreateForm";
+import AssetInventoryList from "../../../assets/utilities/inventoryType/AssetInventoryTypeList";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     marginTop: "-80px",
-    width: 1150,
+    width: 1100,
   },
   headerContainer: {
     height: 20,
-    marginTop: 0,
+    marginTop: 10,
     height: 40,
   },
   secondContainer: {
@@ -38,10 +38,10 @@ const useStyles = makeStyles((theme) => ({
   addButton: {
     borderRadius: 10,
     height: 30,
-    width: 180,
+    width: 210,
     marginLeft: 10,
     marginTop: 50,
-    marginBottom: 20,
+    marginBottom: 10,
     fontSize: "0.75rem",
     backgroundColor: theme.palette.common.orange,
     color: "white",
@@ -57,12 +57,9 @@ const useStyles = makeStyles((theme) => ({
     padding: 5,
     margin: -10,
   },
-  selectField: {
-    marginTop: 30,
-  },
 }));
 
-function ProjectsProjectsResourcesLayout(props) {
+function AssetInventoryTypeLayout(props) {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [alert, setAlert] = useState({
@@ -113,7 +110,7 @@ function ProjectsProjectsResourcesLayout(props) {
     >
       <Grid item container direction="column" sm={width}>
         <Grid item className={classes.selectField}>
-          <ServiceOutletAndProjectsFilters />
+          {/* <SchemeTypeFilter /> */}
         </Grid>
         <Grid
           item
@@ -128,22 +125,17 @@ function ProjectsProjectsResourcesLayout(props) {
                 className={classes.addButton}
                 onClick={() => [
                   setOpen(true),
-                  history.push("/projects/projects/resources/new"),
+                  history.push("/assets/utilities/inventorytypes/new"),
                 ]}
               >
-                Add Resource
+                Create an Inventory Type
               </Button>
             </Grid>
             <Grid item></Grid>
           </Toolbar>
         </Grid>
         <Grid item className={classes.contentContainer}>
-          <ProjectsProjectsResourcesList
-            token={props.token}
-            userId={props.userId}
-          />
-          {/* {renderDataList()} */}
-          {/* <DataGridText /> */}
+          <AssetInventoryList token={props.token} userId={props.userId} />
         </Grid>
       </Grid>
       <Dialog
@@ -152,11 +144,11 @@ function ProjectsProjectsResourcesLayout(props) {
         open={open}
         onClose={() => [
           setOpen(false),
-          history.push("/projects/projects/resources"),
+          history.push("/assets/utilities/inventorytypes"),
         ]}
       >
         <DialogContent>
-          <ProjectsProjectsResourceCreateForm
+          <AssetInventoryCreateForm
             token={props.token}
             userId={props.userId}
             handleDialogOpenStatus={handleDialogOpenStatus}
@@ -197,4 +189,4 @@ function ProjectsProjectsResourcesLayout(props) {
   );
 }
 
-export default ProjectsProjectsResourcesLayout;
+export default AssetInventoryTypeLayout;

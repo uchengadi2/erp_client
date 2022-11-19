@@ -10,7 +10,6 @@ import history from "../../../../history";
 
 import ProjectsProjectsBudgetingsLayout from "./ProjectsProjectsBudgetingsLayout";
 import ProjectsProjectsProjectsLayout from "./ProjectsProjectsProjectsLayout";
-import ProjectsProjectsResourcesLayout from "./ProjectsProjectsResourcesLayout";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -102,30 +101,12 @@ function ProjectsProjectsLayout({ token }) {
             history.push(`/projects/projects/projects`);
           }}
         />
-        <Tab
-          label="Resources"
-          {...a11yProps(0)}
-          onClick={(event) => {
-            event.preventDefault();
-            history.push(`/projects/projects/resources`);
-          }}
-        />
-        {/* <Tab
-          label="Budgeting"
-          {...a11yProps(0)}
-          onClick={(event) => {
-            event.preventDefault();
-            history.push(`/projects/projects/budgetings`);
-          }}
-        /> */}
       </Tabs>
 
       <TabPanel value={value} index={0}>
         <ProjectsProjectsProjectsLayout token={token} />
       </TabPanel>
-      <TabPanel value={value} index={1}>
-        <ProjectsProjectsResourcesLayout token={token} />
-      </TabPanel>
+
       {/* <TabPanel value={value} index={2}>
         <ProjectsProjectsBudgetingsLayout token={token} />
       </TabPanel> */}

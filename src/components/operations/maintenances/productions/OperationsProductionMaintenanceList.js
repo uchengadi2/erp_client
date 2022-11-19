@@ -228,9 +228,32 @@ class OperationsProductionMaintenanceList extends React.Component {
           operation: operationProductionMaintenance.operation,
           maintenanceDate: operationProductionMaintenance.maintenanceDate,
           output: operationProductionMaintenance.output,
-          maintenanceCost: operationProductionMaintenance.maintenanceCost,
-          currency: operationProductionMaintenance.currency,
-          dateLastModified:operationProductionMaintenance.dateLastModified,
+          extraMaintenanceCost:
+            operationProductionMaintenance.extraMaintenanceCost,
+          extraMaintenanceCostCurrency:
+            operationProductionMaintenance.extraMaintenanceCostCurrency,
+          dateLastModified: operationProductionMaintenance.dateLastModified,
+          processingType: operationProductionMaintenance.processingType,
+          process: operationProductionMaintenance.process,
+          inventoryType: operationProductionMaintenance.inventoryType,
+          inventory: operationProductionMaintenance.inventory,
+          availableInventoryQuantity:
+            operationProductionMaintenance.availableInventoryQuantity,
+          availableInventoryUnit:
+            operationProductionMaintenance.availableInventoryUnit,
+          inventoryCostPerUnit:
+            operationProductionMaintenance.inventoryCostPerUnit,
+          inventoryQuantityAllocated:
+            operationProductionMaintenance.inventoryQuantityAllocated,
+          inventoryUnitCostCurrency:
+            operationProductionMaintenance.inventoryUnitCostCurrency,
+          allocatedInventoryUnit:
+            operationProductionMaintenance.allocatedInventoryUnit,
+          inventoryUnitCostCurrency:
+            operationProductionMaintenance.inventoryUnitCostCurrency,
+          processorType: operationProductionMaintenance.processorType,
+          processor: operationProductionMaintenance.processor,
+          supervisor: operationProductionMaintenance.supervisor,
         };
         rows.push(row);
       }

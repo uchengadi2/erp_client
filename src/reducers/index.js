@@ -150,6 +150,9 @@ import assetProcurementReducer from "./assetProcurementReducer";
 import assetSetReducer from "./assetSetReducer";
 import assetSetBatchReducer from "./assetSetBatchReducer";
 import stockRequisitionReducer from "./stockRequisitionReducer";
+import assetInventoryTypeReducer from "./assetInventoryTypeReducer";
+import assetInventoryReducer from "./assetInventoryReducer";
+import assetInventoryMeasurementUnitReducer from "./assetInventoryMeasurementUnitReducer";
 
 export default combineReducers({
   auth: authReducer,
@@ -306,4 +309,7 @@ export default combineReducers({
   assetSet: assetSetReducer,
   assetSetBatch: assetSetBatchReducer,
   stockRequisition: stockRequisitionReducer,
+  assetInventoryType: assetInventoryTypeReducer,
+  assetInventory: assetInventoryReducer,
+  assetInventoryMeasurementUnit: assetInventoryMeasurementUnitReducer,
 });

@@ -225,7 +225,7 @@ const Header = (props) => {
     },
 
     {
-      name: "Assets",
+      name: "Stocks & Inventories",
       link: "/assets/assets",
       activeIndex: 1,
       selectedIndex: 11,
@@ -290,8 +290,8 @@ const Header = (props) => {
       selectedIndex: 20,
     },
     {
-      name: "Processings",
-      link: "/operations/processings",
+      name: "Processes",
+      link: "/operations/processes",
       activeIndex: 2,
       selectedIndex: 21,
     },
@@ -648,7 +648,7 @@ const Header = (props) => {
       selectedIndex: 111,
     },
     {
-      name: "Assets",
+      name: "Stocks & Inventories",
       link: "/policies/assets",
       activeIndex: 10,
       selectedIndex: 112,

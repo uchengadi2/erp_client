@@ -113,9 +113,9 @@ function OperationsProcessingProcessingsLayout(props) {
       spacing={2}
     >
       <Grid item container direction="column" sm={width}>
-        <Grid item className={classes.selectField}>
+        {/* <Grid item className={classes.selectField}>
           <ServiceOutletsAndTransactionTypesFilter />
-        </Grid>
+        </Grid> */}
         <Grid
           item
           container
@@ -129,10 +129,10 @@ function OperationsProcessingProcessingsLayout(props) {
                 className={classes.addButton}
                 onClick={() => [
                   setOpen(true),
-                  history.push("/operations/processings/processings/new"),
+                  history.push("/operations/processes/processes/new"),
                 ]}
               >
-                Add Processing
+                Add Process
               </Button>
             </Grid>
             <Grid item></Grid>
@@ -153,7 +153,7 @@ function OperationsProcessingProcessingsLayout(props) {
         open={open}
         onClose={() => [
           setOpen(false),
-          history.push("/operations/processings/processings"),
+          history.push("/operations/processes/processes"),
         ]}
       >
         <DialogContent>

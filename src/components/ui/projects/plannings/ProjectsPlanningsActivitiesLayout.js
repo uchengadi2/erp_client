@@ -112,9 +112,9 @@ function ProjectsPlanningsActivitiesLayout(props) {
       spacing={2}
     >
       <Grid item container direction="column" sm={width}>
-        <Grid item className={classes.selectField}>
+        {/* <Grid item className={classes.selectField}>
           <ServiceOutletProjectAndTaskFilter />
-        </Grid>
+        </Grid> */}
         <Grid
           item
           container

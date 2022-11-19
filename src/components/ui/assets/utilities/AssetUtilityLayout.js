@@ -17,6 +17,8 @@ import AssetMeasurementUnitTypes from "./AssetMeasurementUnitTypes";
 import AssetMovementTypesLayout from "./AssetMovementTypesLayout";
 import AssetStoreMaintenanceTypesLayout from "./AssetStoreMaintenanceTypesLayout";
 import AssetDispositionTypesLayout from "./AssetDispositionTypesLayout";
+import AssetInventoryTypeLayout from "./AssetInventoryTypeLayout";
+import AssetInventoryTypeMeasurementUnitsLayout from "./AssetInventoryTypeMeasurementUnitsLayout";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -174,6 +176,22 @@ function AssetUtilityLayout({ token, userId }) {
             history.push(`/assets/utilities/storemaintenancetypes`);
           }}
         />
+        <Tab
+          label="Inventory Types"
+          {...a11yProps(0)}
+          onClick={(event) => {
+            event.preventDefault();
+            history.push(`/assets/utilities/inventorytypes`);
+          }}
+        />
+        <Tab
+          label="Inventory Measurement Unit"
+          {...a11yProps(0)}
+          onClick={(event) => {
+            event.preventDefault();
+            history.push(`/assets/utilities/inventorytypemeasurementunits`);
+          }}
+        />
       </Tabs>
 
       <TabPanel value={value} index={0}>
@@ -182,9 +200,6 @@ function AssetUtilityLayout({ token, userId }) {
       <TabPanel value={value} index={1}>
         <AssetAssetTypesLayout token={token} userId={userId} />
       </TabPanel>
-      {/* <TabPanel value={value} index={2}>
-        <AssetDepreciationTypesLayout token={token} userId={userId} />
-      </TabPanel> */}
       <TabPanel value={value} index={2}>
         <AssetStoreTypesLayout token={token} userId={userId} />
       </TabPanel>
@@ -202,6 +217,15 @@ function AssetUtilityLayout({ token, userId }) {
       </TabPanel>
       <TabPanel value={value} index={7}>
         <AssetStoreMaintenanceTypesLayout token={token} userId={userId} />
+      </TabPanel>
+      <TabPanel value={value} index={8}>
+        <AssetInventoryTypeLayout token={token} userId={userId} />
+      </TabPanel>
+      <TabPanel value={value} index={9}>
+        <AssetInventoryTypeMeasurementUnitsLayout
+          token={token}
+          userId={userId}
+        />
       </TabPanel>
     </Box>
   );
